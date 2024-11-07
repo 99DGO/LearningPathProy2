@@ -12,8 +12,8 @@ public class DatosEstudianteExamen extends DatosEstudianteActividad {
 		
 	
 	public DatosEstudianteExamen(String loginEstudiante, String estado, Date fechaInicio, Date fechaFinal,
-			double calificacion) {
-		super(loginEstudiante, estado, fechaInicio, fechaFinal);
+			double calificacion,  String id) {
+		super(loginEstudiante, estado, fechaInicio, fechaFinal, id);
 		this.calificacion = calificacion;
 	}
 

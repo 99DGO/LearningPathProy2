@@ -9,18 +9,20 @@ public class ActividadRecurso extends Actividad {
 
 	private String recurso;
 	private String instrucciones;
-	
+
+	//Constructor normal
 	public ActividadRecurso(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
-			int[] fechaLim, boolean obligatoria, String recurso, String instrucciones, String creadorLogin) {
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin);
+			int[] fechaLim, boolean obligatoria, String recurso, String instrucciones, String creadorLogin, CaminoAprendizaje camino) {
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino);
 		this.recurso = recurso;
 		this.instrucciones = instrucciones;
 		this.type=ACTIVIDADRECURSO;
 	}
-	
-	public ActividadRecurso(String creadorLogin, ActividadRecurso ActividadOG)
+
+	//Constructor para clonar
+	public ActividadRecurso(String creadorLogin, ActividadRecurso ActividadOG, CaminoAprendizaje camino)
 	{
-		super(creadorLogin, ActividadOG);
+		super(creadorLogin, ActividadOG, camino);
 		
 		this.recurso = ActividadOG.getRecurso();
 		this.instrucciones = ActividadOG.getInstrucciones();
@@ -29,12 +31,12 @@ public class ActividadRecurso extends Actividad {
 	}
 	
 	
-
+//Constructor para cargar
 	public ActividadRecurso(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double rating, int ratingsTotales, List<String> resenias,
 			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes,
-			String recurso, String instrucciones) {
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, rating, ratingsTotales, resenias, creadorLogin, type, datosEstudiantes);
+			String recurso, String instrucciones, String id) {
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, rating, ratingsTotales, resenias, creadorLogin, type, datosEstudiantes, id);
 		this.recurso = recurso;
 		this.instrucciones = instrucciones;
 	}

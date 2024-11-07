@@ -9,8 +9,8 @@ public class DatosEstudianteAR  extends DatosEstudianteActividad {
 	}
 	
 	
-	public DatosEstudianteAR(String loginEstudiante, String estado, Date fechaInicio, Date fechaFinal) {
-		super(loginEstudiante, estado, fechaInicio, fechaFinal);
+	public DatosEstudianteAR(String loginEstudiante, String estado, Date fechaInicio, Date fechaFinal, String id) {
+		super(loginEstudiante, estado, fechaInicio, fechaFinal, id);
 	}
 
 

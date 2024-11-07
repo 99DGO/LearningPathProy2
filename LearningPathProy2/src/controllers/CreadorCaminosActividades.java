@@ -41,16 +41,6 @@ public class CreadorCaminosActividades {
 		camino.addActividad(tarea);
 	}
 	
-	public static void crearQuizCero(CaminoAprendizaje camino, String nombre, String descripcion,
-			List<String> objetivos, double dificultad, int duracion, int[] fechaLim, boolean obligatoria, 
-			double calificacionMin, List<PreguntaQuiz> preguntas, Profesor profesor)
-	{
-		Quiz quiz= new Quiz(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria,
-				calificacionMin, preguntas, profesor.getLogin());
-		
-		camino.addActividad(quiz);
-	}
-	
 	public static void crearExamenCero(CaminoAprendizaje camino, String nombre, String descripcion,
 			List<String> objetivos, double dificultad, int duracion, int[] fechaLim, boolean obligatoria, 
 			double calificacionMin, List<String> preguntas, Profesor profesor)
@@ -108,11 +98,7 @@ public class CreadorCaminosActividades {
 		camino.addActividad(examen);
 	}
 	
-	public static void clonarQuiz(Quiz quizOG, Profesor profesor, CaminoAprendizaje camino)
-	{
-		Quiz quiz = new Quiz(profesor.getLogin(), quizOG);
-		camino.addActividad(quiz);
-	}
+	
 	
 	public static void clonarEncuesta(Encuesta encuestaOG, Profesor profesor, CaminoAprendizaje camino)
 	{

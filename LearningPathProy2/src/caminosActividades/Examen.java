@@ -10,35 +10,37 @@ import datosEstudiantes.DatosEstudianteActividad;
 public class Examen extends ActividadCalificable{
 	private List<String> preguntasAbiertas;
 	
+	//Constructor normal
 	public Examen(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
-			int[] fechaLim, boolean obligatoria, double calificacionMin, List<String> preguntasAbiertas, String creadorLogin) {
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, calificacionMin, creadorLogin);
+			int[] fechaLim, boolean obligatoria, double calificacionMin, List<String> preguntasAbiertas, String creadorLogin, CaminoAprendizaje camino) {
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, calificacionMin, creadorLogin, camino);
 		this.preguntasAbiertas = preguntasAbiertas;
 		this.type=EXAMEN;
 
 	}
 	
+	//Constructor para clonar
 	public Examen(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double calificacionMin, String creadorLogin,
-			List<String> preguntasAbiertas) {
+			List<String> preguntasAbiertas, CaminoAprendizaje camino) {
 		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, calificacionMin,
-				creadorLogin);
+				creadorLogin, camino);
 		this.preguntasAbiertas = preguntasAbiertas;
 	}
 
-	
+	//Constructor para cargar
 	public Examen(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double rating, int ratingsTotales, List<String> resenias,
 			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes,
-			double calificacionMin, List<Actividad> actividadesSigFracaso, List<String> preguntasAbiertas) {
+			double calificacionMin, List<Actividad> actividadesSigFracaso, List<String> preguntasAbiertas, String id) {
 		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, rating, ratingsTotales, resenias, creadorLogin, type, datosEstudiantes,
-				calificacionMin, actividadesSigFracaso);
+				calificacionMin, actividadesSigFracaso, id);
 		this.preguntasAbiertas = preguntasAbiertas;
 	}
 
-	public Examen(String creadorLogin, Examen ActividadOG)
+	public Examen(String creadorLogin, Examen ActividadOG, CaminoAprendizaje camino)
 	{
-		super(creadorLogin, ActividadOG);
+		super(creadorLogin, ActividadOG, camino);
 		
 		Iterator<String> it1 = ActividadOG.getPreguntasAbiertas().iterator(); 
     	

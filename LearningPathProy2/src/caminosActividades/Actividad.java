@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 import datosEstudiantes.DatosEstudianteActividad;
 
@@ -27,12 +28,14 @@ public abstract class Actividad {
 	private int ratingsTotales;
 	private List<String> resenias;
 	private String creadorLogin;
+	private final String ID;
 	
 	protected String type;
 	protected HashMap<String, DatosEstudianteActividad> datosEstudiantes;
 	
+	//Constructor normal
 	public Actividad(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion, int[] fechaLim,
-			boolean obligatoria, String creadorLogin) 
+			boolean obligatoria, String creadorLogin, CaminoAprendizaje camino) 
 	{
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -45,14 +48,16 @@ public abstract class Actividad {
 		this.datosEstudiantes = new HashMap<>();
 		this.actividadesPrereqs=new ArrayList<Actividad>();
 		this.actividadesSigExitoso=new ArrayList<Actividad>();
+		this.ID="Actividad"+UUID.randomUUID().toString();
+		camino.addActividad(this);
 	}
 	
-	/**
+	/**Constructor para clonar
 	 * No copia actividades prerequisitos o actividades fracasos siguientes
 	 * @param creadorLogin
 	 * @param ActividadOG
 	 */
-	public Actividad(String creadorLogin, Actividad ActividadOG)
+	public Actividad(String creadorLogin, Actividad ActividadOG, CaminoAprendizaje camino)
 	{
 		this.nombre = ActividadOG.getNombre();
 		this.descripcion = ActividadOG.getDescripcion();
@@ -72,15 +77,18 @@ public abstract class Actividad {
     	{
     		this.objetivos.add(it1.next());
     	}
+		this.ID="Actividad"+UUID.randomUUID().toString();
 		
+		camino.addActividad(this);
+
 	}
 	
 
 	
-	
+	//Constructor para cargar?
 	public Actividad(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double rating, int ratingsTotales, List<String> resenias,
-			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes) {
+			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes, String id) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.objetivos = objetivos;
@@ -94,6 +102,7 @@ public abstract class Actividad {
 		this.creadorLogin = creadorLogin;
 		this.type = type;
 		this.datosEstudiantes = datosEstudiantes;
+		this.ID=id;
 	}
 
 	public String getCreadorLogin()
@@ -265,5 +274,11 @@ public abstract class Actividad {
 	public void setActividadesSigExitoso(List<Actividad> actividadesSigExitoso) {
 		this.actividadesSigExitoso = actividadesSigExitoso;
 	}
+
+	public String getId() {
+		return ID;
+	}
+	
+	
 
 }

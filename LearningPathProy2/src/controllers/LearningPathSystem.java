@@ -8,6 +8,7 @@ public class LearningPathSystem {
 	
 	private HashMap<String, Usuario> Usuarios;
 	private HashMap<String, CaminoAprendizaje> Caminos;
+	public final LearningPathSystem LPS;
 	
 	public LearningPathSystem()
 	{

@@ -14,18 +14,7 @@ import usuarios.Profesor;
 
 public class ControladorProfesor {
 
-	public void crearCamino(String titulo, String descripcion, List<String> objetivos, double dificultad, 
-			Profesor profesor, LearningPathSystem LPS)
-	{
-		try 
-		{
-			CreadorCaminosActividades.crearCaminoCero(titulo, descripcion, objetivos, dificultad, profesor, LPS);
-		} catch (Exception e) {
-			System.out.println("No se pudo crear el camino");
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
-	}
+	
 	
 	public void crearTareaCero(CaminoAprendizaje camino, String nombre, String descripcion,
 			List<String> objetivos, double dificultad, int duracion, int[] fechaLim, boolean obligatoria, 
@@ -35,13 +24,7 @@ public class ControladorProfesor {
 				fechaLim, obligatoria, instrucciones, profesor);
 	}
 	
-	public static void crearQuizCero(CaminoAprendizaje camino, String nombre, String descripcion,
-			List<String> objetivos, double dificultad, int duracion, int[] fechaLim, boolean obligatoria, 
-			double calificacionMin, List<PreguntaQuiz> preguntas, Profesor profesor)
-	{
-		CreadorCaminosActividades.crearQuizCero(camino, nombre, descripcion, objetivos, dificultad, duracion,
-				fechaLim, obligatoria, calificacionMin, preguntas, profesor);
-	}
+	
 	
 	public static void crearExamenCero(CaminoAprendizaje camino, String nombre, String descripcion,
 			List<String> objetivos, double dificultad, int duracion, int[] fechaLim, boolean obligatoria, 
@@ -67,20 +50,6 @@ public class ControladorProfesor {
 				fechaLim, obligatoria, recurso, instrucciones, profesor);
 	}
 	
-	public static void clonarCamino(CaminoAprendizaje caminoOG, String tituloCamino, Profesor profesor, 
-			LearningPathSystem LPS) 
-	{
-		try
-		{
-			CreadorCaminosActividades.clonarCamino(caminoOG, tituloCamino, profesor, LPS);
-		}
-		catch (Exception e) 
-		{
-			System.out.println("No se pudo crear el camino");
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
-	}
 	
 	public static void clonarTarea(Tarea tareaOG, Profesor profesor, CaminoAprendizaje camino)
 	{
@@ -92,10 +61,6 @@ public class ControladorProfesor {
 		CreadorCaminosActividades.clonarExamen(examenOG, profesor, camino);
 	}
 	
-	public static void clonarQuiz(Quiz quizOG, Profesor profesor, CaminoAprendizaje camino)
-	{
-		CreadorCaminosActividades.clonarQuiz(quizOG, profesor, camino);
-	}
 	
 	public static void clonarEncuesta(Encuesta encuestaOG, Profesor profesor, CaminoAprendizaje camino)
 	{

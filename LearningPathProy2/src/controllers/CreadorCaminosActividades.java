@@ -14,22 +14,7 @@ import usuarios.Profesor;
 
 public class CreadorCaminosActividades {
 
-	public static void crearCaminoCero(String titulo, String descripcion, List<String> objetivos, double dificultad, 
-			Profesor profesor, LearningPathSystem LPS) throws Exception 
-	{
-		if (!(LPS.getCaminoIndividual(titulo)==null))
-		{
-			throw new Exception ("Ya existe un camino con ese titulo");
-		}
-		else
-		{
-			CaminoAprendizaje camino= new CaminoAprendizaje(titulo, descripcion, objetivos, dificultad, 
-					profesor.getLogin());
-			profesor.addCamino(camino.getTitulo());
-			LPS.addCamino(camino);
-		}
-		
-	}
+	
 	
 	public static void crearTareaCero(CaminoAprendizaje camino, String nombre, String descripcion,
 			List<String> objetivos, double dificultad, int duracion, int[] fechaLim, boolean obligatoria, 
@@ -71,20 +56,6 @@ public class CreadorCaminosActividades {
 		camino.addActividad(AR);
 	}
 	
-	public static void clonarCamino(CaminoAprendizaje caminoOG, String tituloCamino, Profesor profesor, 
-			LearningPathSystem LPS) throws Exception 
-	{
-		if (!(LPS.getCaminoIndividual(tituloCamino).equals(null)) )
-		{
-			throw new Exception ("Ya existe un camino con ese titulo");
-		}
-		else
-		{
-			CaminoAprendizaje camino= new CaminoAprendizaje(caminoOG, tituloCamino, profesor.getLogin());
-			profesor.addCamino(camino.getTitulo());
-			LPS.addCamino(camino);
-		}
-	}
 	
 	public static void clonarTarea(Tarea tareaOG, Profesor profesor, CaminoAprendizaje camino)
 	{

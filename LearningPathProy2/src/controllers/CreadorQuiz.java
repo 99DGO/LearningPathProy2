@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.List;
 
+import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
 import caminosActividades.PreguntaQuiz;
 import caminosActividades.Quiz;
@@ -9,19 +10,36 @@ import usuarios.Profesor;
 
 public class CreadorQuiz {
 	
-	public static void crearActividadCero(CaminoAprendizaje camino, String nombre, String descripcion,
-			List<String> objetivos, double dificultad, int duracion, int[] fechaLim, boolean obligatoria, 
-			double calificacionMin, List<PreguntaQuiz> preguntas, Profesor profesor)
+	public void clonarQuiz(String IDcaminoOG, String IDQuizOG, String IDprofesor, String IDcaminoNuevo) 
 	{
-		Quiz quiz= new Quiz(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria,
-				calificacionMin, preguntas, profesor.getLogin(), camino);
+		LearningPathSystem LPS= LearningPathSystem.getInstance();
+		Profesor profesor=(Profesor) LPS.getUsuarioIndividal(IDprofesor);
+		CaminoAprendizaje caminoOG= LPS.getCaminoIndividual(IDcaminoOG);
+		CaminoAprendizaje caminoNuevo= LPS.getCaminoIndividual(IDcaminoNuevo);
+		Quiz quizOG=null;
 		
-		camino.addActividad(quiz);
+		for (Actividad actividad: caminoOG.getActividades())
+		{
+			if (actividad.getId().equals(IDcaminoOG))
+			{
+				quizOG= (Quiz) actividad;
+			}
+		}
+		
+		Quiz quiz = new Quiz(profesor.getID(), quizOG, caminoNuevo);
+
 	}
 
-	public static void clonarActividad(Quiz quizOG, Profesor profesor, CaminoAprendizaje camino)
+	public void crearActividadCero(String IDcamino, String nombre, String descripcion,
+			List<String> objetivos, double dificultad, int duracion, int[] fechaLim, boolean obligatoria, 
+			double calificacionMin, List<PreguntaQuiz> preguntas, String IDprofesor) 
 	{
-		Quiz quiz = new Quiz(profesor.getLogin(), quizOG, camino);
-		camino.addActividad(quiz);
+		LearningPathSystem LPS= LearningPathSystem.getInstance();
+		Profesor profesor=(Profesor) LPS.getUsuarioIndividal(IDprofesor);
+		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		Quiz quiz= new Quiz(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria,
+				calificacionMin, preguntas, profesor.getID(), camino);
+		
 	}
 }

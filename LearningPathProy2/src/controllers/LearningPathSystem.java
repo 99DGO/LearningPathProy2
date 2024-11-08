@@ -8,20 +8,21 @@ public class LearningPathSystem {
 	
 	private HashMap<String, Usuario> Usuarios;
 	private HashMap<String, CaminoAprendizaje> Caminos;
-	public final LearningPathSystem LPS;
+	private static LearningPathSystem LPS=null;
 	
-	public LearningPathSystem()
+	private LearningPathSystem()
 	{
-		this.Usuarios=new HashMap<String, Usuario>();
-		this.Caminos=new HashMap<String, CaminoAprendizaje>();
+		
 	}
 	
-	public LearningPathSystem(HashMap<String, Usuario> usuarios, HashMap<String, CaminoAprendizaje> caminos) {
-		super();
-		Usuarios = usuarios;
-		Caminos = caminos;
+	public static LearningPathSystem getInstance()
+	{
+		 if (LPS == null)
+	            LPS = new LearningPathSystem();
+	 
+	     return LPS;
+		
 	}
-	
 	public HashMap<String, Usuario> getUsuarios() {
 		return Usuarios;
 	}

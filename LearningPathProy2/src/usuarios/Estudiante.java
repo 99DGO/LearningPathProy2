@@ -11,8 +11,9 @@ public class Estudiante extends Usuario {
 	private List<String> intereses;
 	private boolean actividadActiva=false;
 	
-	public Estudiante(String login, String password, String type) {
-		super(login, password, type);
+	public Estudiante(String login, String password) 
+	{
+		super(login, password, Usuario.ESTUDIANTE);
 		this.historialCaminos=new ArrayList<CaminoAprendizaje>();
 		this.intereses=new ArrayList<String>();
 	}

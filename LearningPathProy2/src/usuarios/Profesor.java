@@ -8,8 +8,8 @@ import caminosActividades.CaminoAprendizaje;
 public class Profesor extends Usuario{
 	private List<CaminoAprendizaje> caminos;
 	
-	public Profesor(String login, String password, String type) {
-		super(login, password, type);
+	public Profesor(String login, String password) {
+		super(login, password, Usuario.PROFESOR);
 		this.caminos=new ArrayList<CaminoAprendizaje>();
 	}
 	

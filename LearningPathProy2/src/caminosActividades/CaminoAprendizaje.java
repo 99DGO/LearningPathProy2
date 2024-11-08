@@ -124,6 +124,11 @@ public class CaminoAprendizaje {
 		this.ID=id;
 	}
 
+	
+	public String getID() {
+		return ID;
+	}
+
 	public void setFechaModificacion(Date fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
 	}

@@ -11,17 +11,17 @@ import usuarios.Profesor;
 
 public class CreadorQuiz {
 	
-	public static void clonarQuiz(String IDcaminoOG, String IDQuizOG, String IDprofesor, String IDcaminoNuevo) 
+	public static void clonarQuiz(String IDcaminoOG, String IDquizOG, String IDprofesor, String IDcaminoNuevo) 
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
-		Profesor profesor=(Profesor) LPS.getUsuarioIndividal(IDprofesor);
+		Profesor profesor= LPS.getProfesorIndividual(IDprofesor);
 		CaminoAprendizaje caminoOG= LPS.getCaminoIndividual(IDcaminoOG);
 		CaminoAprendizaje caminoNuevo= LPS.getCaminoIndividual(IDcaminoNuevo);
 		Quiz quizOG=null;
 		
 		for (Actividad actividad: caminoOG.getActividades())
 		{
-			if (actividad.getId().equals(IDcaminoOG))
+			if (actividad.getId().equals(IDquizOG))
 			{
 				quizOG= (Quiz) actividad;
 			}
@@ -36,7 +36,7 @@ public class CreadorQuiz {
 			double calificacionMin, List<PreguntaQuiz> preguntas, String IDprofesor) 
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
-		Profesor profesor=(Profesor) LPS.getUsuarioIndividal(IDprofesor);
+		Profesor profesor= LPS.getProfesorIndividual(IDprofesor);
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
 		
 		Quiz quiz= new Quiz(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria,

@@ -15,7 +15,7 @@ public class CreadorEncuesta
 	{
 
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
-		Profesor profesor=(Profesor) LPS.getUsuarioIndividal(IDprofesor);
+		Profesor profesor=LPS.getProfesorIndividual(IDprofesor);
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
 		
 		Encuesta encuesta= new Encuesta(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria,

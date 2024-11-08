@@ -12,12 +12,18 @@ import datosEstudiantes.DatosEstudianteQuiz;
 import datosEstudiantes.DatosEstudianteTarea;
 import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
+import caminosActividades.Quiz;
 import usuarios.Estudiante;
+import usuarios.Profesor;
 
 public class Inscriptor {
 
-	public static void inscribirseCamino(CaminoAprendizaje camino, Estudiante estudiante)
+	public static void inscribirseCamino(String IDcamino, String IDestudiante)
 	{
+		LearningPathSystem LPS= LearningPathSystem.getInstance();
+		Estudiante estudiante=LPS.getEstudianteIndividual(IDestudiante);
+		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
 		Iterator<Actividad> it1= camino.getActividades().iterator();
 		DatosEstudianteActividad datoEst;
 		
@@ -26,35 +32,48 @@ public class Inscriptor {
 			Actividad act= it1.next();
 			if (act.getType().equals(Actividad.ENCUESTA))
 			{
-				datoEst= new DatosEstudianteEncuesta(estudiante.getLogin());
+				datoEst= new DatosEstudianteEncuesta(estudiante.getID());
 			}
 			else if (act.getType().equals(Actividad.QUIZ))
 			{
-				datoEst= new DatosEstudianteQuiz(estudiante.getLogin());
+				datoEst= new DatosEstudianteQuiz(estudiante.getID());
 			}
 			else if (act.getType().equals(Actividad.EXAMEN))
 			{
-				datoEst= new DatosEstudianteExamen(estudiante.getLogin());
+				datoEst= new DatosEstudianteExamen(estudiante.getID());
 			}
 			else if (act.getType().equals(Actividad.TAREA))
 			{
-				datoEst= new DatosEstudianteTarea(estudiante.getLogin(), "Sin enviar");
+				datoEst= new DatosEstudianteTarea(estudiante.getID(), "Sin enviar");
 			}
 			else 
 			{
-				datoEst= new DatosEstudianteAR(estudiante.getLogin());
+				datoEst= new DatosEstudianteAR(estudiante.getID());
 			}
 			
 			act.putDatoEstudiante(datoEst);
 			
 		}
 		
-		estudiante.addCamino(camino.getTitulo());
+		estudiante.addCamino(camino);
 	}
 	
-	public static void iniciarActivad(Actividad actividad, Estudiante estudiante) throws
+	public static void iniciarActivad(String IDcamino,String IDactividad, String IDestudiante) throws
 	Exception
 	{
+		LearningPathSystem LPS= LearningPathSystem.getInstance();
+		Estudiante estudiante=LPS.getEstudianteIndividual(IDestudiante);
+		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		Actividad actividad=null;
+		
+		for (Actividad actividadIterator: camino.getActividades())
+		{
+			if (actividadIterator.getId().equals(IDactividad))
+			{
+				actividad= actividadIterator;
+			}
+		}
+		
 		if (!estudiante.isActividadActiva())
 		{
 			estudiante.setActividadActiva(true);
@@ -68,40 +87,5 @@ public class Inscriptor {
 	
 	}
 	
-	/**
-	 * retorna un HashMap<String, String> que contiene como llave el nombre del camino y como valor el porcentaje
-	 * logrado en ese camino
-	 */
-	public static HashMap<String, String> getAvancesCaminos(LearningPathSystem LPS, Estudiante estudiante) 
-	{
-		HashMap<String, String> avances = new HashMap<String, String>();
-		Iterator<String> it1= estudiante.getHistorialCaminos().iterator();
-		CaminoAprendizaje camino;
-		
-		while (it1.hasNext())
-		{
-			camino=LPS.getCaminoIndividual(it1.next());
-			
-			Iterator<Actividad> it2= camino.getActividades().iterator();
-			int actvCompletadas =0;
-			
-			while (it2.hasNext())
-			{
-				DatosEstudianteActividad datoEst = it2.next().getDatoEstudianteIndividual(estudiante.getLogin());
-				
-				if (it2.next().isObligatoria()  && (datoEst.getEstado().equals(DatosEstudianteActividad.EXITOSO)))
-				{
-					actvCompletadas+=1;
-				}
-				
-			}
-			
-			int porcentaje = (actvCompletadas/camino.getNumActividadesObligatorias())*100;
-			
-			avances.put(it1.next(), String.valueOf(porcentaje)+"%");
-
-		}
-		
-		return avances;
-	}
+	
 }

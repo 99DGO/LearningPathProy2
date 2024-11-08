@@ -14,7 +14,7 @@ public class CreadorAR
 			String recurso, String instrucciones, String IDprofesor)
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
-		Profesor profesor=(Profesor) LPS.getUsuarioIndividal(IDprofesor);
+		Profesor profesor=LPS.getProfesorIndividual(IDprofesor);
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
 		
 		ActividadRecurso AR= new ActividadRecurso(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, 

@@ -252,9 +252,9 @@ public abstract class Actividad {
 		this.datosEstudiantes.put(dato.getLoginEstudiante(), dato );
 	}
 	
-	public DatosEstudianteActividad getDatoEstudianteIndividual(String loginEstudiante)
+	public DatosEstudianteActividad getDatoEstudianteIndividual(String IDestudiante)
 	{
-		return this.datosEstudiantes.get(loginEstudiante);
+		return this.datosEstudiantes.get(IDestudiante);
 	}
 	
 	public HashMap<String, DatosEstudianteActividad> getDatosEstudiantes()

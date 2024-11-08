@@ -1,4 +1,4 @@
-package controllers;
+package traductores;
 
 import java.util.HashMap;
 

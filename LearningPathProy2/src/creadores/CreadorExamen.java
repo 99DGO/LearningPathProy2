@@ -15,7 +15,7 @@ public class CreadorExamen
 			double calificacionMin, List<String> preguntas, String IDprofesor)
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
-		Profesor profesor=(Profesor) LPS.getUsuarioIndividal(IDprofesor);
+		Profesor profesor=LPS.getProfesorIndividual(IDprofesor);
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
 		
 		Examen examen= new Examen(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria,

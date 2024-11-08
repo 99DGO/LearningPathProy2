@@ -14,7 +14,7 @@ public class CreadorTarea
 			String instrucciones, String IDprofesor)
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
-		Profesor profesor=(Profesor) LPS.getUsuarioIndividal(IDprofesor);
+		Profesor profesor= LPS.getProfesorIndividual(IDprofesor);
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
 		
 		Tarea tarea= new Tarea(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria,

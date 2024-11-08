@@ -12,7 +12,7 @@ public class CreadorCamino
 			String IDprofesor) throws Exception 
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
-		Profesor profesor=(Profesor) LPS.getUsuarioIndividal(IDprofesor);
+		Profesor profesor= LPS.getProfesorIndividual(IDprofesor);
 		
 		if (!(LPS.getCaminoIndividual(titulo)==null))
 		{
@@ -33,7 +33,7 @@ public class CreadorCamino
 	{
 
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
-		Profesor profesor=(Profesor) LPS.getUsuarioIndividal(IDprofesor);
+		Profesor profesor=LPS.getProfesorIndividual(IDprofesor);
 		CaminoAprendizaje caminoOG= LPS.getCaminoIndividual(IDcaminoOG);
 		
 		if (!(LPS.getCaminoIndividual(tituloCamino).equals(null)) )

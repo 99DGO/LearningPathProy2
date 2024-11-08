@@ -81,9 +81,9 @@ public class LearningPathSystem {
 	}
 	
 	
-	public CaminoAprendizaje getCaminoIndividual(String titulo)
+	public CaminoAprendizaje getCaminoIndividual(String ID)
 	{
-		return this.caminos.get(titulo);
+		return this.caminos.get(ID);
 	}
 	
 	

@@ -19,7 +19,8 @@ public class DatosEstudianteEncuesta extends DatosEstudianteActividad {
 
 
 
-	public void finalizarEncuesta() throws Exception {
+	public void finalizarEncuesta() throws Exception 
+	{
 		finalizarActividad();
 		setEstado(DatosEstudianteActividad.EXITOSO);
 	}

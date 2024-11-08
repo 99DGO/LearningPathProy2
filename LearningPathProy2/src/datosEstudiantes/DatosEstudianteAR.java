@@ -14,7 +14,8 @@ public class DatosEstudianteAR  extends DatosEstudianteActividad {
 	}
 
 
-	public void finalizarAR() throws Exception {
+	public void finalizarAR() throws Exception 
+	{
 		finalizarActividad();
 		setEstado(DatosEstudianteActividad.EXITOSO);
 	}

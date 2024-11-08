@@ -12,8 +12,8 @@ public class DatosEstudianteTarea extends DatosEstudianteActividad {
 	
 	
 	public DatosEstudianteTarea(String loginEstudiante, String estado, Date fechaInicio, Date fechaFinal,
-			String metodoEntrega) {
-		super(loginEstudiante, estado, fechaInicio, fechaFinal);
+			String metodoEntrega,  String id) {
+		super(loginEstudiante, estado, fechaInicio, fechaFinal, id);
 		this.metodoEntrega = metodoEntrega;
 	}
 

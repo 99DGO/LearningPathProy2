@@ -13,13 +13,14 @@ public class DatosEstudianteEncuesta extends DatosEstudianteActividad {
 	}
 	
 	
-	public DatosEstudianteEncuesta(String loginEstudiante, String estado, Date fechaInicio, Date fechaFinal) {
-		super(loginEstudiante, estado, fechaInicio, fechaFinal);
+	public DatosEstudianteEncuesta(String loginEstudiante, String estado, Date fechaInicio, Date fechaFinal,  String id) {
+		super(loginEstudiante, estado, fechaInicio, fechaFinal, id);
 	}
 
 
 
-	public void finalizarEncuesta() throws Exception {
+	public void finalizarEncuesta() throws Exception 
+	{
 		finalizarActividad();
 		setEstado(DatosEstudianteActividad.EXITOSO);
 	}

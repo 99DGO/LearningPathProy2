@@ -10,28 +10,30 @@ public abstract class ActividadCalificable extends Actividad{
 	protected double calificacionMin;
 	protected List<Actividad> actividadesSigFracaso;
 	
+	//Constructor normal
 	public ActividadCalificable(String nombre, String descripcion, List<String> objetivos, double dificultad,
-			int duracion, int[] fechaLim, boolean obligatoria, double calificacionMin, String creadorLogin) {
+			int duracion, int[] fechaLim, boolean obligatoria, double calificacionMin, String creadorLogin,CaminoAprendizaje camino) {
 		
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin);
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino);
 		this.calificacionMin = calificacionMin;
 		this.actividadesSigFracaso=new ArrayList<Actividad>();
 	}
 	
 	
-
+	//Constructor para cargar
 	public ActividadCalificable(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria,  double rating, int ratingsTotales, List<String> resenias,
 			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes,
-			double calificacionMin, List<Actividad> actividadesSigFracaso) {
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, rating, ratingsTotales, resenias, creadorLogin, type, datosEstudiantes);
+			double calificacionMin, List<Actividad> actividadesSigFracaso, String id) {
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, rating, ratingsTotales, resenias, creadorLogin, type, datosEstudiantes, id);
 		this.calificacionMin = calificacionMin;
 		this.actividadesSigFracaso = actividadesSigFracaso;
 	}
 
-	public ActividadCalificable(String creadorLogin, ActividadCalificable ActividadOG)
+	//Constructor clonador
+	public ActividadCalificable(String creadorLogin, ActividadCalificable ActividadOG, CaminoAprendizaje camino)
 	{
-		super(creadorLogin, ActividadOG);
+		super(creadorLogin, ActividadOG, camino);
 		this.calificacionMin=ActividadOG.getCalificacionMin();
 		this.actividadesSigFracaso=new ArrayList<Actividad>();
 

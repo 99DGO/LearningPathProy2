@@ -1,6 +1,7 @@
 package datosEstudiantes;
 
 import java.util.Date;
+import java.util.UUID;
 
 public abstract class DatosEstudianteActividad {
 	public static final String EXITOSO = "Exitoso";
@@ -12,21 +13,25 @@ public abstract class DatosEstudianteActividad {
 	private String estado;
 	private Date fechaInicio;
 	private Date fechaFinal;
+	private final String id;
 
+	//Constructor normal
 	public DatosEstudianteActividad(String loginEstudiante) {
 		this.loginEstudiante = loginEstudiante;
 		this.estado = PENDIENTE;
 		this.fechaFinal = null;  //Se asigna cuando se finalice la actividad
+		this.id="Actividad"+UUID.randomUUID().toString();
 	} 
 	
 	
-	
-	public DatosEstudianteActividad(String loginEstudiante, String estado, Date fechaInicio, Date fechaFinal) {
+	//Constructor para cargar
+	public DatosEstudianteActividad(String loginEstudiante, String estado, Date fechaInicio, Date fechaFinal, String id) {
 		super();
 		this.loginEstudiante = loginEstudiante;
 		this.estado = estado;
 		this.fechaInicio = fechaInicio;
 		this.fechaFinal = fechaFinal;
+		this.id=id;
 	}
 
 
@@ -50,12 +55,16 @@ public abstract class DatosEstudianteActividad {
         return this.fechaFinal;
 	}
 	
-	public void setEstado(String nuevoEstado) throws Exception {
-		if (nuevoEstado.equals(EXITOSO) || nuevoEstado.equals(ENVIADO) || nuevoEstado.equals(PENDIENTE) || nuevoEstado.equals(NOEXITOSO)) {
-	            this.estado = nuevoEstado;
-	        } else {
-	            throw new Exception("Estado no válido. Los estados válidos son: Exitoso, Enviado, Pendiente y No exitoso");
-	        }
+	public void setEstado(String nuevoEstado) throws Exception 
+	{
+		if (nuevoEstado.equals(EXITOSO) || nuevoEstado.equals(ENVIADO) || nuevoEstado.equals(PENDIENTE) || nuevoEstado.equals(NOEXITOSO)) 
+		{
+	        this.estado = nuevoEstado;
+	    } 
+		else 
+		{
+	        throw new Exception("Estado no válido. Los estados válidos son: Exitoso, Enviado, Pendiente y No exitoso");
+	    }
 	}
 	
 	public void finalizarActividad() {

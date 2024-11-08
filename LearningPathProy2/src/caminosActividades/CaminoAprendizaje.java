@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 public class CaminoAprendizaje {
 	
@@ -20,7 +21,9 @@ public class CaminoAprendizaje {
 	private int numActividadesObligatorias;
 	private List<Actividad> actividades; 
 	private String creadorLogin;
-	
+	private final String ID;
+
+//Constructor normal
 	public CaminoAprendizaje(String titulo, String descripcion, List<String> objetivos, double dificultad, String creadorLogin) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
@@ -33,8 +36,11 @@ public class CaminoAprendizaje {
 		this.ratingsTotales=0;
 		this.version=1;
 		this.numActividadesObligatorias=0;
+		this.ID="Actividad"+UUID.randomUUID().toString();
+
 	}
 	
+//Constructor clonador
 	public CaminoAprendizaje(CaminoAprendizaje caminoOG, String creadorLogin, String titulo)
 	{
 		this.titulo= titulo;
@@ -67,39 +73,40 @@ public class CaminoAprendizaje {
     		Actividad act2 = it2.next();
     		if (act2 .getType().equals(Actividad.ENCUESTA))
     		{
-    			actividad=new Encuesta (creadorLogin, (Encuesta) act2 );
+    			actividad=new Encuesta (creadorLogin, (Encuesta) act2 , this);
     		}
     		
     		else if (act2 .getType().equals(Actividad.ACTIVIDADRECURSO))
     		{
-    			actividad=new ActividadRecurso (creadorLogin, (ActividadRecurso) act2 );
+    			actividad=new ActividadRecurso (creadorLogin, (ActividadRecurso) act2, this );
     		}
     		
     		else if (act2 .getType().equals(Actividad.EXAMEN))
     		{
-    			actividad=new Examen (creadorLogin, (Examen) act2 );
+    			actividad=new Examen (creadorLogin, (Examen) act2, this );
     		}
     		
     		else if (act2 .getType().equals(Actividad.QUIZ))
     		{
-    			actividad=new Quiz (creadorLogin, (Quiz) act2 );
+    			actividad=new Quiz (creadorLogin, (Quiz) act2, this );
     		}
     		
     		else
     		{
-    			actividad= new Tarea (creadorLogin, (Tarea) act2 );
+    			actividad= new Tarea (creadorLogin, (Tarea) act2, this );
     		}
     		
     		this.actividades.add(actividad);
     	}
 		
 		this.creadorLogin=creadorLogin;
+		this.ID="Actividad"+UUID.randomUUID().toString();
 	}
 
-	
+//Constructor cargar
 	public CaminoAprendizaje(String titulo, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			Date fechaCreacion, double rating, int ratingsTotales, int version, Date fechaModificacion,
-			int numActividadesObligatorias, List<Actividad> actividades, String creadorLogin) {
+			int numActividadesObligatorias, List<Actividad> actividades, String creadorLogin, String id) {
 		super();
 		this.titulo = titulo;
 		this.descripcion = descripcion;
@@ -114,6 +121,12 @@ public class CaminoAprendizaje {
 		this.numActividadesObligatorias = numActividadesObligatorias;
 		this.actividades = actividades;
 		this.creadorLogin = creadorLogin;
+		this.ID=id;
+	}
+
+	
+	public String getID() {
+		return ID;
 	}
 
 	public void setFechaModificacion(Date fechaModificacion) {

@@ -1,5 +1,7 @@
 package usuarios;
 
+import java.util.UUID;
+
 public abstract class Usuario {
 	public static final String ESTUDIANTE = "Estudiante";
 	public static final String PROFESOR = "Profesor";
@@ -7,11 +9,13 @@ public abstract class Usuario {
 	private String login;
 	private String password;
 	private String type;
+	private final String ID;
 	
 	public Usuario(String login, String password, String type) {
 		this.login = login;
 		this.password = password;
 		this.type = type;
+		this.ID="Actividad"+UUID.randomUUID().toString();
 	}
 
 	public String getLogin() {
@@ -30,5 +34,10 @@ public abstract class Usuario {
 		return type;
 	}
 
+	public String getID() {
+		return ID;
+	}
+
+	
 	
 }

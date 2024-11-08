@@ -7,18 +7,19 @@ import caminosActividades.CaminoAprendizaje;
 
 public class Estudiante extends Usuario {
 	
-	private List<String> historialCaminos;
+	private List<CaminoAprendizaje> historialCaminos;
 	private List<String> intereses;
 	private boolean actividadActiva=false;
 	
-	public Estudiante(String login, String password, String type) {
-		super(login, password, type);
-		this.historialCaminos=new ArrayList<String>();
+	public Estudiante(String login, String password) 
+	{
+		super(login, password, Usuario.ESTUDIANTE);
+		this.historialCaminos=new ArrayList<CaminoAprendizaje>();
 		this.intereses=new ArrayList<String>();
 	}
 	
 	
-	public Estudiante(String login, String password, String type, List<String> historialCaminos, List<String> intereses,
+	public Estudiante(String login, String password, String type, List<CaminoAprendizaje> historialCaminos, List<String> intereses,
 			boolean actividadActiva) {
 		super(login, password, type);
 		this.historialCaminos = historialCaminos;
@@ -27,7 +28,7 @@ public class Estudiante extends Usuario {
 	}
 
 
-	public void addCamino(String camino)
+	public void addCamino(CaminoAprendizaje camino)
 	{
 		this.historialCaminos.add(camino);
 	}
@@ -47,7 +48,7 @@ public class Estudiante extends Usuario {
 		this.actividadActiva=bool;
 	}
 
-	public List<String> getHistorialCaminos() {
+	public List<CaminoAprendizaje> getHistorialCaminos() {
 		return historialCaminos;
 	}
 

@@ -12,23 +12,24 @@ public class Tarea extends Actividad{
 	private String instrucciones;
 	private List<Actividad> actividadesSigFracaso;
 	
+	//Constructor normal
 	public Tarea(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
-			int[] fechaLim, boolean obligatoria, String instrucciones, String creadorLogin) {
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin);
+			int[] fechaLim, boolean obligatoria, String instrucciones, String creadorLogin, CaminoAprendizaje camino) {
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino);
 		this.instrucciones = instrucciones;
 		this.type=TAREA;
 
 		this.actividadesSigFracaso=new ArrayList<Actividad>();
 	}
 	
-	/**
+	/**Constructo clonar 
 	 * No copia actividades siguientes exitososas ni las de fracaso
 	 * @param creadorLogin
 	 * @param ActividadOG
 	 */
-	public Tarea(String creadorLogin, Tarea ActividadOG)
+	public Tarea(String creadorLogin, Tarea ActividadOG, CaminoAprendizaje camino)
 	{
-		super(creadorLogin, ActividadOG);
+		super(creadorLogin, ActividadOG, camino);
 		this.type=TAREA;
 
 		this.actividadesSigFracaso=new ArrayList<Actividad>();
@@ -36,12 +37,13 @@ public class Tarea extends Actividad{
 	}
 	
 	
-	
+	//Constructor para cargar
 	public Tarea(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double rating, int ratingsTotales, List<String> resenias,
 			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes,
-			String instrucciones, List<Actividad> actividadesSigFracaso) {
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria,  rating, ratingsTotales, resenias, creadorLogin, type, datosEstudiantes);
+			String instrucciones, List<Actividad> actividadesSigFracaso, String id) {
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria,  rating, ratingsTotales, resenias, 
+				creadorLogin, type, datosEstudiantes, id);
 		this.instrucciones = instrucciones;
 		this.actividadesSigFracaso = actividadesSigFracaso;
 	}

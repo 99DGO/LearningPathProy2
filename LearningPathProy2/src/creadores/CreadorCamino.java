@@ -1,8 +1,9 @@
-package controllers;
+package creadores;
 
 import java.util.List;
 
 import caminosActividades.CaminoAprendizaje;
+import controllers.LearningPathSystem;
 import usuarios.Profesor;
 
 public class CreadorCamino 

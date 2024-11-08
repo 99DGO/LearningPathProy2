@@ -1,4 +1,4 @@
-package controllers;
+package creadores;
 
 import java.util.List;
 
@@ -6,11 +6,12 @@ import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
 import caminosActividades.PreguntaQuiz;
 import caminosActividades.Quiz;
+import controllers.LearningPathSystem;
 import usuarios.Profesor;
 
 public class CreadorQuiz {
 	
-	public void clonarQuiz(String IDcaminoOG, String IDQuizOG, String IDprofesor, String IDcaminoNuevo) 
+	public static void clonarQuiz(String IDcaminoOG, String IDQuizOG, String IDprofesor, String IDcaminoNuevo) 
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		Profesor profesor=(Profesor) LPS.getUsuarioIndividal(IDprofesor);
@@ -30,7 +31,7 @@ public class CreadorQuiz {
 
 	}
 
-	public void crearActividadCero(String IDcamino, String nombre, String descripcion,
+	public static void crearQuizCero(String IDcamino, String nombre, String descripcion,
 			List<String> objetivos, double dificultad, int duracion, int[] fechaLim, boolean obligatoria, 
 			double calificacionMin, List<PreguntaQuiz> preguntas, String IDprofesor) 
 	{

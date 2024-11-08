@@ -138,6 +138,7 @@ public abstract class Actividad {
 	public void setObjetivos(List<String> objetivos) {
 		this.objetivos = objetivos;
 	}
+	
 
 	public double getDificultad() {
 		return dificultad;

@@ -61,7 +61,7 @@ public class EditorCamino
 	}
 
 
-	public void editDificultad(String idCamino, double dificultad) 
+	public static void editDificultad(String idCamino, double dificultad) 
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino=LPS.getCaminoIndividual(idCamino);
@@ -74,7 +74,7 @@ public class EditorCamino
 		camino.setFechaModificacion(fecha);
 	}
 
-	public void editDuracion(String idCamino, int duracion) 
+	public static void editDuracion(String idCamino, int duracion) 
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino=LPS.getCaminoIndividual(idCamino);
@@ -89,7 +89,7 @@ public class EditorCamino
 	
 
 	
-	public void editAddObjetivo(String idCamino, String objetivo)
+	public static void editAddObjetivo(String idCamino, String objetivo)
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino=LPS.getCaminoIndividual(idCamino);
@@ -103,7 +103,7 @@ public class EditorCamino
 	}
 	
 
-	public void editDelActividad(String idCamino, int pos)
+	public static void editDelActividad(String idCamino, int pos)
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino=LPS.getCaminoIndividual(idCamino);
@@ -116,7 +116,7 @@ public class EditorCamino
 		camino.setFechaModificacion(fecha);
 	}
 	
-	public void editDelObjetivo(String idCamino, int pos)
+	public static void editDelObjetivo(String idCamino, int pos)
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino=LPS.getCaminoIndividual(idCamino);

@@ -66,6 +66,7 @@ public class Inscriptor {
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
 		Actividad actividad=null;
 		
+		//Consigo la actividad del id
 		for (Actividad actividadIterator: camino.getActividades())
 		{
 			if (actividadIterator.getId().equals(IDactividad))

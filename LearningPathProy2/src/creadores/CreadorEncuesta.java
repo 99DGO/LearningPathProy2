@@ -2,8 +2,10 @@ package creadores;
 
 import java.util.List;
 
+import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
 import caminosActividades.Encuesta;
+import caminosActividades.Examen;
 import controllers.LearningPathSystem;
 import usuarios.Profesor;
 
@@ -23,9 +25,14 @@ public class CreadorEncuesta
 		
 	}
 	
-	public static void clonarEncuesta(Encuesta encuestaOG, Profesor profesor, CaminoAprendizaje camino)
+	public static void clonarEncuesta(Actividad encuestaOG, String IDprofesor, String IDcaminoNuevo) 
 	{
+		LearningPathSystem LPS= LearningPathSystem.getInstance();
+		Profesor profesor= LPS.getProfesorIndividual(IDprofesor);
+		CaminoAprendizaje caminoNuevo= LPS.getCaminoIndividual(IDcaminoNuevo);
 		
+		Encuesta encuesta = new Encuesta(profesor.getID(), (Encuesta) encuestaOG, caminoNuevo);
+
 	}
 
 }

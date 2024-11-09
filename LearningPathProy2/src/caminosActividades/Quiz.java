@@ -22,9 +22,9 @@ public class Quiz extends ActividadCalificable{
 	}
 	
 	//Constructor para clonar
-	public Quiz(String creadorLogin, Quiz ActividadOG, CaminoAprendizaje camino)
+	public Quiz(String creadorID, Quiz ActividadOG, CaminoAprendizaje camino)
 	{
-		super(creadorLogin, ActividadOG, camino);
+		super(creadorID, ActividadOG, camino);
 		this.type=QUIZ;
 
 		this.preguntas=new ArrayList<PreguntaQuiz>();

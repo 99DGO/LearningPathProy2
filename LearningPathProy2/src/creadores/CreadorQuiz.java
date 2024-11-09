@@ -11,23 +11,13 @@ import usuarios.Profesor;
 
 public class CreadorQuiz {
 	
-	public static void clonarQuiz(String IDcaminoOG, String IDquizOG, String IDprofesor, String IDcaminoNuevo) 
+	public static void clonarQuiz(Actividad quizOG, String IDprofesor, String IDcaminoNuevo) 
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		Profesor profesor= LPS.getProfesorIndividual(IDprofesor);
-		CaminoAprendizaje caminoOG= LPS.getCaminoIndividual(IDcaminoOG);
 		CaminoAprendizaje caminoNuevo= LPS.getCaminoIndividual(IDcaminoNuevo);
-		Quiz quizOG=null;
 		
-		for (Actividad actividad: caminoOG.getActividades())
-		{
-			if (actividad.getId().equals(IDquizOG))
-			{
-				quizOG= (Quiz) actividad;
-			}
-		}
-		
-		Quiz quiz = new Quiz(profesor.getID(), quizOG, caminoNuevo);
+		Quiz quiz = new Quiz(profesor.getID(), (Quiz) quizOG, caminoNuevo);
 
 	}
 

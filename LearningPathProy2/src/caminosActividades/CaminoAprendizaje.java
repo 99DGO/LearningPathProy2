@@ -15,11 +15,11 @@ public class CaminoAprendizaje {
 	private List<String> objetivos;
 	private double dificultad;
 	private int duracion;
-	private Date fechaCreacion;
+	private String fechaCreacion;
 	private double rating;
 	private int ratingsTotales;
 	private int version;
-	private Date fechaModificacion;
+	private String fechaModificacion;
 	private int numActividadesObligatorias;
 	private List<Actividad> actividades; 
 	private String creadorLogin;
@@ -31,7 +31,7 @@ public class CaminoAprendizaje {
 		this.descripcion = descripcion;
 		this.objetivos = objetivos;
 		this.dificultad = dificultad;
-		this.fechaCreacion= new Date();
+		this.fechaCreacion= new Date().toString();
 		this.creadorLogin=creadorLogin;
 		this.actividades=new ArrayList<Actividad>();
 		
@@ -56,7 +56,7 @@ public class CaminoAprendizaje {
 		this.ratingsTotales=0;
 		this.version=1;
 		
-		this.fechaCreacion= new Date();
+		this.fechaCreacion= new Date().toString();
 
     	Iterator<String> it1 = caminoOG.getObjetivos().iterator(); 
     	
@@ -107,7 +107,7 @@ public class CaminoAprendizaje {
 
 //Constructor cargar
 	public CaminoAprendizaje(String titulo, String descripcion, List<String> objetivos, double dificultad, int duracion,
-			Date fechaCreacion, double rating, int ratingsTotales, int version, Date fechaModificacion,
+			String fechaCreacion, double rating, int ratingsTotales, int version, String fechaModificacion,
 			int numActividadesObligatorias, List<Actividad> actividades, String creadorLogin, String id) {
 		super();
 		this.titulo = titulo;
@@ -131,7 +131,7 @@ public class CaminoAprendizaje {
 		return ID;
 	}
 
-	public void setFechaModificacion(Date fechaModificacion) {
+	public void setFechaModificacion(String fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
 	}
 
@@ -180,7 +180,7 @@ public class CaminoAprendizaje {
 		return duracion;
 	}
 
-	public Date getFechaCreacion() {
+	public String getFechaCreacion() {
 		return fechaCreacion;
 	}
 
@@ -196,7 +196,7 @@ public class CaminoAprendizaje {
 		return version;
 	}
 
-	public Date getFechaModificacion() {
+	public String getFechaModificacion() {
 		return fechaModificacion;
 	}
 
@@ -291,16 +291,20 @@ public class CaminoAprendizaje {
      * Salva este objeto de tipo ClienteCorporativo dentro de un objeto JSONObject para que ese objeto se almacene en un archivo
      * @return El objeto JSON con toda la información del cliente corporativo
      */
-	/*
+	
     public JSONObject salvarEnJSON( )
     {
     	
         JSONObject jobject = new JSONObject( );
-        jobject.put( "nombreEmpresa", this.nombreEmpresa );
-        jobject.put( "tamanoEmpresa", this.tamanoEmpresa );
-        jobject.put( "tipo", CORPORATIVO );
+        jobject.put( "titulo", this.titulo );
+        jobject.put( "descripcion", this.descripcion );
+        jobject.put("dificultad", this.dificultad);
+        jobject.put("duracion", this.duracion);
+        jobject.put("rating", this.rating);
+
+        jobject.put( "objetivos", "ho" );
         return jobject;
         
     }
-    */
+    
 }

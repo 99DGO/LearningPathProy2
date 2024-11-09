@@ -28,7 +28,7 @@ public class EditorAR
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 		
 	}
 
@@ -53,7 +53,7 @@ public class EditorAR
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 
 }

@@ -39,7 +39,7 @@ public class EditorExamen
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	public static void editAddPregunta(String pregunta, String IDcamino, String IDactividad) 
@@ -62,7 +62,7 @@ public class EditorExamen
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	public static void editAddActividadSigFracaso(String IDcamino, String IDactividad, String IDactividadSigFracaso)
@@ -94,7 +94,7 @@ public class EditorExamen
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	
@@ -125,7 +125,7 @@ public class EditorExamen
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	public static void editCalificacionMin(String IDcamino, String IDactividad, double calificacionMin)
@@ -148,7 +148,7 @@ public class EditorExamen
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 

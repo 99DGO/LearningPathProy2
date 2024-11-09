@@ -38,7 +38,7 @@ public class EditorQuiz
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	//TODO
@@ -96,7 +96,7 @@ public class EditorQuiz
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	
@@ -128,7 +128,7 @@ public class EditorQuiz
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	public static void editCalificacionMin(String IDcamino, String IDactividad, double calificacionMin)
@@ -151,7 +151,7 @@ public class EditorQuiz
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 

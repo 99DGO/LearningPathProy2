@@ -30,7 +30,7 @@ public class EditorCamino
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
  	
 	}
 
@@ -45,7 +45,7 @@ public class EditorCamino
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 
 
@@ -60,7 +60,7 @@ public class EditorCamino
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 
 	public static void editDuracion(String idCamino, int duracion) 
@@ -73,7 +73,7 @@ public class EditorCamino
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 
@@ -88,7 +88,7 @@ public class EditorCamino
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 
 	
@@ -110,7 +110,7 @@ public class EditorCamino
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 
@@ -131,7 +131,7 @@ public class EditorCamino
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	public static void editDelObjetivo(String idCamino, int pos) throws Exception
@@ -151,7 +151,7 @@ public class EditorCamino
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 
 }

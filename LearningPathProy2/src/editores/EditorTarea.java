@@ -31,7 +31,7 @@ public class EditorTarea
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	public static void editAddActividadSigFracaso(String IDcamino, String IDactividad, String IDactividadSigFracaso)
@@ -63,7 +63,7 @@ public class EditorTarea
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	
@@ -94,7 +94,7 @@ public class EditorTarea
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 
 

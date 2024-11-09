@@ -37,7 +37,7 @@ public class EditorEncuesta
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	public static void editAddPregunta(String pregunta, String IDcamino, String IDactividad) 
@@ -60,7 +60,7 @@ public class EditorEncuesta
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();
-		camino.setFechaModificacion(fecha);
+		camino.setFechaModificacion(fecha.toString());
 	}
 
 

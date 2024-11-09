@@ -67,7 +67,7 @@ public class EditorTarea
 	}
 	
 	
-	public static void editDelActividadSigFracaso(String IDcamino, String IDactividad, int pos)
+	public static void editDelActividadSigFracaso(String IDcamino, String IDactividad, int pos) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
@@ -82,8 +82,15 @@ public class EditorTarea
 			}
 		}
 		
-		actividad.delActividadSigFracaso(pos);
-		
+		if (pos>=actividad.getActividadesSigFracaso().size() || pos<=0)
+		{
+			throw new Exception ("El número de la actividad no existe");
+		}
+		else
+		{
+			actividad.delActividadSigFracaso(pos);
+		}
+				
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
 		Date fecha = new Date();

@@ -10,7 +10,7 @@ import controllers.LearningPathSystem;
 
 public class EditorQuiz 
 {
-	public static void editDelPregunta(int pos, String IDcamino, String IDactividad) 
+	public static void editDelPregunta(int pos, String IDcamino, String IDactividad) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
@@ -25,7 +25,15 @@ public class EditorQuiz
 			}
 		}
 		
-		actividad.delPregunta(pos);
+		if (pos>=actividad.getPreguntas().size() || pos<=0)
+		{
+			throw new Exception ("El número de la pregunta no existe");
+		}
+		else
+		{
+			actividad.delPregunta(pos);
+		}
+		
 		
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
@@ -92,7 +100,7 @@ public class EditorQuiz
 	}
 	
 	
-	public static void editDelActividadSigFracaso(String IDcamino, String IDactividad, int pos)
+	public static void editDelActividadSigFracaso(String IDcamino, String IDactividad, int pos) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
@@ -107,7 +115,15 @@ public class EditorQuiz
 			}
 		}
 		
-		actividad.delActividadSigFracaso(pos);
+		
+		if (pos>=actividad.getActividadesSigFracaso().size() || pos<=0)
+		{
+			throw new Exception ("El número de la actividad no existe");
+		}
+		else
+		{
+			actividad.delActividadSigFracaso(pos);
+		}
 		
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);

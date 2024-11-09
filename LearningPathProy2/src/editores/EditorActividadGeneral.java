@@ -1,5 +1,6 @@
 package editores;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,6 +30,10 @@ public class EditorActividadGeneral
 		
 		actividad.setNombre(nombre);
 		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha);
 	}
 
 
@@ -48,6 +53,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.setDescripcion(descripcion);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha);
 	}
 
 	
@@ -67,6 +77,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.setDificultad(dificultad);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha);
 	}
 
 
@@ -86,6 +101,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.setDuracion(duracion);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha);
 	
 	}
 
@@ -105,6 +125,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.setFechaLim(fechaLim);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha);
 	
 	}
 
@@ -126,6 +151,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.setObligatoria(oblig);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha);
 	
 	}
 	
@@ -145,6 +175,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.addObjetivo(objetivo);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha);
 	}
 	
 	
@@ -164,6 +199,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.delObjetivo(pos);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha);
 	}
 	
 	
@@ -193,6 +233,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.addActividadSiguienteExitosa(actividadSiguiente);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha);
 	}
 	
 	public static void editAddActividadPrereq(String IDcamino, String IDactividad, String IDactividadPrereq)
@@ -220,6 +265,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.addActividadPrereq(actividadPrereq);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha);
 	}
 	
 	
@@ -240,6 +290,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.delActividadPrereq(pos);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha);
 	}
 	
 	
@@ -259,6 +314,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.delActividadSiguienteExitosa(pos);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha);
 	}
 	
 	

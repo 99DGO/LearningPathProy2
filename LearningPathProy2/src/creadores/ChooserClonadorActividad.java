@@ -8,7 +8,7 @@ import usuarios.Profesor;
 
 public class ChooserClonadorActividad 
 {
-	public void ClonarActividad(String IDcaminoOG, String IDActividadOG, String IDprofesor, String IDcaminoNuevo)
+	public static void ClonarActividad(String IDcaminoOG, String IDActividadOG, String IDprofesor, String IDcaminoNuevo)
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje caminoOG= LPS.getCaminoIndividual(IDcaminoOG);

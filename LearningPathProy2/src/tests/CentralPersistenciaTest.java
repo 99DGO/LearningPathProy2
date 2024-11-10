@@ -1,8 +1,11 @@
 package tests;
-import org.junit.jupiter.api.AfterEach;
+
+import static org.junit.Assert.fail;
+
+import java.util.LinkedList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import caminosActividades.CaminoAprendizaje;
@@ -10,20 +13,11 @@ import controllers.LearningPathSystem;
 import creadores.CreadorCamino;
 import creadores.CreadorProfesor;
 import persistencia.CaminosPersistencia;
-import persistencia.CentralPersistencia;
 import traductores.TraductorCamino;
 import traductores.TraductorProfesor;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.io.File;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-
-public class CaminoTest {
-	
+public class CentralPersistenciaTest 
+{
 	private LearningPathSystem LPS =LearningPathSystem.getInstance();
 
 	@BeforeAll
@@ -70,4 +64,5 @@ public class CaminoTest {
 
 	}
 	
+
 }

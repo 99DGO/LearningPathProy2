@@ -3,7 +3,11 @@ package caminosActividades;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import datosEstudiantes.DatosEstudianteActividad;
 
@@ -75,6 +79,25 @@ public class Tarea extends Actividad{
 	public void delActividadSigFracaso(int pos) 
 	{
 		this.actividadesSigFracaso.remove(pos);
+	}
+	
+	public JSONObject salvarEnJSON()
+	{
+        JSONObject jobject = new JSONObject( );
+        
+        jobject=this.addInfoJSONObject(jobject);
+        
+        jobject.put("instrucciones", this.instrucciones);
+
+        List<String> listaIDsActividadesSigFracaso= new LinkedList<String>();
+        for (Actividad actividad: this.actividadesSigFracaso)
+        {
+        	listaIDsActividadesSigFracaso.add(actividad.getId());
+        }
+        JSONArray actividadesSigFracasoArray = new JSONArray (listaIDsActividadesSigFracaso);
+        jobject.put("actividadesSigFracaso", actividadesSigFracasoArray);
+        
+        return jobject;
 	}
 	
 }

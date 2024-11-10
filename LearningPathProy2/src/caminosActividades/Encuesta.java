@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import datosEstudiantes.DatosEstudianteActividad;
 
 
@@ -61,5 +64,16 @@ public class Encuesta extends Actividad{
 		this.preguntasAbiertas.remove(pos);
 	}
 	
+	public JSONObject salvarEnJSON()
+	{
+        JSONObject jobject = new JSONObject( );
+        
+        jobject=this.addInfoJSONObject(jobject);
+        
+        JSONArray preguntasArray= new JSONArray(this.preguntasAbiertas);
+        jobject.put("preguntasAbiertas", preguntasArray);
+
+        return jobject;
+	}
 
 }

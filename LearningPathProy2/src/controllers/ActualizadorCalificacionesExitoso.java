@@ -21,7 +21,7 @@ import usuarios.Profesor;
 public class ActualizadorCalificacionesExitoso {
 	
 	public static boolean addCalificacionExamen(Examen examen, String loginEst, double calificacion, Profesor profesor, String estado) {
-		if (profesor.getLogin().equals(examen.getCreadorLogin())) {
+		if (profesor.getLogin().equals(examen.getCreadorID())) {
 			DatosEstudianteActividad datosEst = examen.getDatoEstudianteIndividual(loginEst);
 			if (datosEst instanceof DatosEstudianteExamen) {
 				DatosEstudianteExamen datosExamen = (DatosEstudianteExamen) datosEst;
@@ -124,7 +124,7 @@ public class ActualizadorCalificacionesExitoso {
 	}
 	
 	public static boolean calificarTarea(Tarea tarea, String loginEst, Profesor profesor, String estado) {
-		if (profesor.getLogin().equals(tarea.getCreadorLogin())) {
+		if (profesor.getLogin().equals(tarea.getCreadorID())) {
 			DatosEstudianteActividad datosEst = tarea.getDatoEstudianteIndividual(loginEst);
 			if (datosEst instanceof DatosEstudianteTarea) {
 				DatosEstudianteTarea datosTarea = (DatosEstudianteTarea) datosEst;

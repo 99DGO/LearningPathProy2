@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import datosEstudiantes.DatosEstudianteActividad;
 
 
@@ -69,6 +72,20 @@ public class Examen extends ActividadCalificable{
 
 	public List<String> getPreguntasAbiertas() {
 		return preguntasAbiertas;
+	}
+	
+	public JSONObject salvarEnJSON()
+	{
+        JSONObject jobject = new JSONObject( );
+        
+        jobject=this.addInfoJSONObject(jobject);
+        jobject=this.addInfoCalificableJSON(jobject);
+        
+        JSONArray preguntasArray= new JSONArray(this.preguntasAbiertas);
+        jobject.put("preguntasAbiertas", preguntasArray);
+
+
+        return jobject;
 	}
 	
 

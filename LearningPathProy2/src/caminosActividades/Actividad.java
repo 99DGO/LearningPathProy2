@@ -3,8 +3,12 @@ package caminosActividades;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import datosEstudiantes.DatosEstudianteActividad;
 
@@ -27,7 +31,7 @@ public abstract class Actividad {
 	private double rating;
 	private int ratingsTotales;
 	private List<String> resenias;
-	private String creadorLogin;
+	private String creadorID;
 	private final String ID;
 	
 	protected String type;
@@ -35,7 +39,7 @@ public abstract class Actividad {
 	
 	//Constructor normal
 	public Actividad(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion, int[] fechaLim,
-			boolean obligatoria, String creadorLogin, CaminoAprendizaje camino) 
+			boolean obligatoria, String creadorID, CaminoAprendizaje camino) 
 	{
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -44,7 +48,7 @@ public abstract class Actividad {
 		this.fechaLim = fechaLim;
 		this.duracion=duracion;
 		this.obligatoria = obligatoria;
-		this.creadorLogin=creadorLogin;
+		this.creadorID=creadorID;
 		this.datosEstudiantes = new HashMap<>();
 		this.actividadesPrereqs=new ArrayList<Actividad>();
 		this.actividadesSigExitoso=new ArrayList<Actividad>();
@@ -54,10 +58,10 @@ public abstract class Actividad {
 	
 	/**Constructor para clonar
 	 * No copia actividades prerequisitos o actividades fracasos siguientes
-	 * @param creadorLogin
+	 * @param creadorID
 	 * @param ActividadOG
 	 */
-	public Actividad(String creadorLogin, Actividad ActividadOG, CaminoAprendizaje camino)
+	public Actividad(String creadorID, Actividad ActividadOG, CaminoAprendizaje camino)
 	{
 		this.nombre = ActividadOG.getNombre();
 		this.descripcion = ActividadOG.getDescripcion();
@@ -67,7 +71,7 @@ public abstract class Actividad {
 		this.obligatoria = ActividadOG.isObligatoria();
 		this.datosEstudiantes = new HashMap<>();
 		
-		this.creadorLogin=creadorLogin;
+		this.creadorID=creadorID;
 		this.actividadesPrereqs=new ArrayList<Actividad>();
 		this.actividadesSigExitoso=new ArrayList<Actividad>();
 		
@@ -88,7 +92,7 @@ public abstract class Actividad {
 	//Constructor para cargar?
 	public Actividad(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double rating, int ratingsTotales, List<String> resenias,
-			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes, String id) {
+			String creadorID, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes, String id) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.objetivos = objetivos;
@@ -99,15 +103,15 @@ public abstract class Actividad {
 		this.rating = rating;
 		this.ratingsTotales = ratingsTotales;
 		this.resenias = resenias;
-		this.creadorLogin = creadorLogin;
+		this.creadorID = creadorID;
 		this.type = type;
 		this.datosEstudiantes = datosEstudiantes;
 		this.ID=id;
 	}
 
-	public String getCreadorLogin()
+	public String getCreadorID()
 	{
-		return this.creadorLogin;
+		return this.creadorID;
 	}
 	
 	public String getType()
@@ -250,7 +254,7 @@ public abstract class Actividad {
 	 */
 	public void putDatoEstudiante(DatosEstudianteActividad dato)
 	{
-		this.datosEstudiantes.put(dato.getLoginEstudiante(), dato );
+		this.datosEstudiantes.put(dato.getID(), dato );
 	}
 	
 	public DatosEstudianteActividad getDatoEstudianteIndividual(String IDestudiante)
@@ -276,10 +280,56 @@ public abstract class Actividad {
 		this.actividadesSigExitoso = actividadesSigExitoso;
 	}
 
-	public String getId() {
+	public String getId() 
+	{
 		return ID;
 	}
 	
-	
+	public JSONObject addInfoJSONObject(JSONObject jobject)
+	{
+		jobject.put("nombre", this.nombre);
+		jobject.put("descripcion", this.descripcion);
+        jobject.put("dificultad", this.dificultad);
+        jobject.put("duracion", this.duracion);
+        jobject.put("rating", this.rating);
+        jobject.put("obligatoria", this.obligatoria);
+        jobject.put("ratingsTotales", this.ratingsTotales);
+        jobject.put( "creadorID", this.creadorID );
+        jobject.put("id", this.ID);
+        jobject.put("type", this.type);
+        
+        JSONArray objetivosArray= new JSONArray(this.objetivos);
+        jobject.put("objetivos", objetivosArray);
+        
+        JSONArray fechaLimArray= new JSONArray(this.fechaLim);
+        jobject.put("fechaLim", fechaLimArray);
+        
+        JSONArray reseniasArray= new JSONArray(this.resenias);
+        jobject.put("resenias", reseniasArray);
 
+        List<String> listaIDsActividadesPrereqs= new LinkedList<String>();
+        for (Actividad actividad: this.actividadesPrereqs)
+        {
+        	listaIDsActividadesPrereqs.add(actividad.getId());
+        }
+        JSONArray actividadesPrereqsArray = new JSONArray (listaIDsActividadesPrereqs);
+        jobject.put("actividadesPrereqs", actividadesPrereqsArray);
+        
+        
+        List<String> listaIDsActividadesSigExitoso= new LinkedList<String>();
+        for (Actividad actividad: this.actividadesPrereqs)
+        {
+        	listaIDsActividadesSigExitoso.add(actividad.getId());
+        }
+        JSONArray actividadesSigExitosoArray = new JSONArray (listaIDsActividadesSigExitoso);
+        jobject.put("actividadesSigExitoso", actividadesSigExitosoArray);
+        
+        
+        JSONArray datosEstudiantesArray = new JSONArray (this.datosEstudiantes.keySet());
+        jobject.put("actividadesSigExitoso", datosEstudiantesArray);
+   
+		return jobject;
+	}
+
+	public abstract JSONObject salvarEnJSON();
 }

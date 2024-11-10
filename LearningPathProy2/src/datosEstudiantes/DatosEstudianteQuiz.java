@@ -9,8 +9,8 @@ public class DatosEstudianteQuiz extends DatosEstudianteActividad {
 	private double calificacion;
 	private EnvioQuiz envioQuiz;
 	
-	public DatosEstudianteQuiz(String loginEstudiante) {
-		super(loginEstudiante);
+	public DatosEstudianteQuiz(String IDEstudiante) {
+		super(IDEstudiante);
 		this.envioQuiz = new EnvioQuiz();
 		this.calificacion = 0.0;
 
@@ -18,9 +18,9 @@ public class DatosEstudianteQuiz extends DatosEstudianteActividad {
 	
 	
 	
-	public DatosEstudianteQuiz(String loginEstudiante, String estado, Date fechaInicio, Date fechaFinal,
+	public DatosEstudianteQuiz(String IDEstudiante, String estado, String fechaInicio, String fechaFinal,
 			double calificacion, EnvioQuiz envioQuiz, String id) {
-		super(loginEstudiante, estado, fechaInicio, fechaFinal, id);
+		super(IDEstudiante, estado, fechaInicio, fechaFinal, id);
 		this.calificacion = calificacion;
 		this.envioQuiz = envioQuiz;
 	}

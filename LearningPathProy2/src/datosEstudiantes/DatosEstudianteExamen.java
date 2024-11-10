@@ -5,15 +5,15 @@ import java.util.Date;
 public class DatosEstudianteExamen extends DatosEstudianteActividad {
 	private double calificacion;
 	
-	public DatosEstudianteExamen(String loginEstudiante) {
-		super(loginEstudiante);
+	public DatosEstudianteExamen(String IDEstudiante) {
+		super(IDEstudiante);
 		calificacion = 0.0;
 	}
 		
 	
-	public DatosEstudianteExamen(String loginEstudiante, String estado, Date fechaInicio, Date fechaFinal,
+	public DatosEstudianteExamen(String IDEstudiante, String estado, String fechaInicio, String fechaFinal,
 			double calificacion,  String id) {
-		super(loginEstudiante, estado, fechaInicio, fechaFinal, id);
+		super(IDEstudiante, estado, fechaInicio, fechaFinal, id);
 		this.calificacion = calificacion;
 	}
 

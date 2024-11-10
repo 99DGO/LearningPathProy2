@@ -5,15 +5,15 @@ import java.util.Date;
 public class DatosEstudianteTarea extends DatosEstudianteActividad {
 	private String metodoEntrega;
 	
-	public DatosEstudianteTarea(String loginEstudiante,String metodoEntrega) {
-		super(loginEstudiante);
+	public DatosEstudianteTarea(String IDEstudiante,String metodoEntrega) {
+		super(IDEstudiante);
 		this.metodoEntrega = metodoEntrega;
 	}
 	
 	
-	public DatosEstudianteTarea(String loginEstudiante, String estado, Date fechaInicio, Date fechaFinal,
+	public DatosEstudianteTarea(String IDEstudiante, String estado, String fechaInicio, String fechaFinal,
 			String metodoEntrega,  String id) {
-		super(loginEstudiante, estado, fechaInicio, fechaFinal, id);
+		super(IDEstudiante, estado, fechaInicio, fechaFinal, id);
 		this.metodoEntrega = metodoEntrega;
 	}
 

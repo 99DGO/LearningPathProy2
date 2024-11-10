@@ -1,0 +1,19 @@
+{
+ "descripcion": "Un curso para saber los basicos de python",
+ "numActividadesObligatorias": 0,
+ "ratingsTotales": 0,
+ "rating": 0,
+ "titulo": "Python123",
+ "actividades": [],
+ "version": 1,
+ "objetivos": [
+  "Saber diferentes tipos de datos",
+  "Aprender loops",
+  "Aprender estructuras"
+ ],
+ "duracion": 0,
+ "fechaCreacion": "Sat Nov 09 21:53:53 COT 2024",
+ "creadorID": "Actividad8ac39226-cf63-48b4-b68b-fdace813d5db",
+ "id": "Camino00148466-0691-473d-93a5-12ff5f0ed4fb",
+ "dificultad": 2
+}

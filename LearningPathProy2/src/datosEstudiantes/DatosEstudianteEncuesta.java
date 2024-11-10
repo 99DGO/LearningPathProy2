@@ -8,13 +8,13 @@ public class DatosEstudianteEncuesta extends DatosEstudianteActividad {
 	
 	private EnvioEncuesta envio;
 	
-	public DatosEstudianteEncuesta(String loginEstudiante) {
-		super(loginEstudiante);
+	public DatosEstudianteEncuesta(String IDEstudiante) {
+		super(IDEstudiante);
 	}
 	
 	
-	public DatosEstudianteEncuesta(String loginEstudiante, String estado, Date fechaInicio, Date fechaFinal,  String id) {
-		super(loginEstudiante, estado, fechaInicio, fechaFinal, id);
+	public DatosEstudianteEncuesta(String IDEstudiante, String estado, String fechaInicio, String fechaFinal,  String id) {
+		super(IDEstudiante, estado, fechaInicio, fechaFinal, id);
 	}
 
 

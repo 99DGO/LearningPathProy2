@@ -10,6 +10,9 @@ import java.util.UUID;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import persistencia.ActividadesPersistencia;
+
+
 public class CaminoAprendizaje {
 	
 	private String titulo;
@@ -24,17 +27,17 @@ public class CaminoAprendizaje {
 	private String fechaModificacion;
 	private int numActividadesObligatorias;
 	private List<Actividad> actividades; 
-	private String creadorLogin;
+	private String creadorID;
 	private final String ID;
 
 //Constructor normal
-	public CaminoAprendizaje(String titulo, String descripcion, List<String> objetivos, double dificultad, String creadorLogin) {
+	public CaminoAprendizaje(String titulo, String descripcion, List<String> objetivos, double dificultad, String creadorID) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.objetivos = objetivos;
 		this.dificultad = dificultad;
 		this.fechaCreacion= new Date().toString();
-		this.creadorLogin=creadorLogin;
+		this.creadorID=creadorID;
 		this.actividades=new ArrayList<Actividad>();
 		
 		this.ratingsTotales=0;
@@ -45,7 +48,7 @@ public class CaminoAprendizaje {
 	}
 	
 //Constructor clonador
-	public CaminoAprendizaje(CaminoAprendizaje caminoOG, String creadorLogin, String titulo)
+	public CaminoAprendizaje(CaminoAprendizaje caminoOG, String creadorID, String titulo)
 	{
 		this.titulo= titulo;
 		this.descripcion= caminoOG.getDescripcion();
@@ -77,40 +80,40 @@ public class CaminoAprendizaje {
     		Actividad act2 = it2.next();
     		if (act2 .getType().equals(Actividad.ENCUESTA))
     		{
-    			actividad=new Encuesta (creadorLogin, (Encuesta) act2 , this);
+    			actividad=new Encuesta (creadorID, (Encuesta) act2 , this);
     		}
     		
     		else if (act2 .getType().equals(Actividad.ACTIVIDADRECURSO))
     		{
-    			actividad=new ActividadRecurso (creadorLogin, (ActividadRecurso) act2, this );
+    			actividad=new ActividadRecurso (creadorID, (ActividadRecurso) act2, this );
     		}
     		
     		else if (act2 .getType().equals(Actividad.EXAMEN))
     		{
-    			actividad=new Examen (creadorLogin, (Examen) act2, this );
+    			actividad=new Examen (creadorID, (Examen) act2, this );
     		}
     		
     		else if (act2 .getType().equals(Actividad.QUIZ))
     		{
-    			actividad=new Quiz (creadorLogin, (Quiz) act2, this );
+    			actividad=new Quiz (creadorID, (Quiz) act2, this );
     		}
     		
     		else
     		{
-    			actividad= new Tarea (creadorLogin, (Tarea) act2, this );
+    			actividad= new Tarea (creadorID, (Tarea) act2, this );
     		}
     		
     		this.actividades.add(actividad);
     	}
 		
-		this.creadorLogin=creadorLogin;
+		this.creadorID=creadorID;
 		this.ID="Actividad"+UUID.randomUUID().toString();
 	}
 
 //Constructor cargar
 	public CaminoAprendizaje(String titulo, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			String fechaCreacion, double rating, int ratingsTotales, int version, String fechaModificacion,
-			int numActividadesObligatorias, List<Actividad> actividades, String creadorLogin, String id) {
+			int numActividadesObligatorias, List<Actividad> actividades, String creadorID, String id) {
 		super();
 		this.titulo = titulo;
 		this.descripcion = descripcion;
@@ -124,7 +127,7 @@ public class CaminoAprendizaje {
 		this.fechaModificacion = fechaModificacion;
 		this.numActividadesObligatorias = numActividadesObligatorias;
 		this.actividades = actividades;
-		this.creadorLogin = creadorLogin;
+		this.creadorID = creadorID;
 		this.ID=id;
 	}
 
@@ -137,9 +140,9 @@ public class CaminoAprendizaje {
 		this.fechaModificacion = fechaModificacion;
 	}
 
-	public String getCreadorLogin()
+	public String getCreadorID()
 	{
-		return this.creadorLogin;
+		return this.creadorID;
 	}
 	
 	public void setVersion(int version) {
@@ -308,7 +311,7 @@ public class CaminoAprendizaje {
         jobject.put("version", this.version);
         jobject.put("fechaModificacion", this.fechaModificacion);
         jobject.put("numActividadesObligatorias", this.numActividadesObligatorias);
-        jobject.put( "creadorLogin", this.creadorLogin );
+        jobject.put( "creadorID", this.creadorID );
         jobject.put("id", this.ID);
         
      
@@ -328,6 +331,44 @@ public class CaminoAprendizaje {
         
         return jobject;
         
+    }
+    
+    public static CaminoAprendizaje cargarDesdeJSON( JSONObject Jcamino, String pathCarpetaCamino )
+    {
+        String titulo= Jcamino.getString( "titulo" );
+        String descripcion= Jcamino.getString( "descripcion" );
+        double dificultad= Jcamino.getDouble( "dificultad" );
+        int duracion= Jcamino.getInt( "duracion" );
+        String fechaCreacion= Jcamino.getString( "fechaCreacion" );
+        String fechaModificacion= Jcamino.getString( "fechaModificacion" );
+        double rating=Jcamino.getDouble("rating");
+        int ratingsTotales= Jcamino.getInt( "ratingsTotales" );
+        int version= Jcamino.getInt( "version" );
+        int numActividadesObligatorias= Jcamino.getInt( "numActividadesObligatorias" );
+        String creadorID= Jcamino.getString( "creadorID" );
+        String ID= Jcamino.getString( "id" );
+        
+        JSONArray Jobjetivos=Jcamino.getJSONArray("objetivos");
+        List<String> objetivos = new LinkedList<String>();
+        //Iterating JSON array  
+        for (int i=0;i<Jobjetivos.length();i++)
+        {   
+        	objetivos.add((String) Jobjetivos.get(i));  
+        }   
+        
+        
+       JSONArray JactividadesID=Jcamino.getJSONArray("listaIDsActividades");
+       List<Actividad> actividades= new LinkedList<Actividad>();
+       for (int i=0;i<JactividadesID.length();i++)
+       {   
+    	   Actividad actividadToAdd= ActividadesPersistencia.cargarActividadDesdeID((String) Jobjetivos.get(i), pathCarpetaCamino);
+    	   actividades.add(actividadToAdd);  
+       }   
+
+
+        return new CaminoAprendizaje(titulo, descripcion, objetivos, dificultad, duracion, fechaCreacion,
+        		rating, ratingsTotales, version, fechaModificacion, numActividadesObligatorias, actividades, creadorID, 
+        		ID);
     }
     
 }

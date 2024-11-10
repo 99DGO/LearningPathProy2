@@ -2,7 +2,11 @@ package caminosActividades;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import datosEstudiantes.DatosEstudianteActividad;
 
@@ -65,6 +69,21 @@ public abstract class ActividadCalificable extends Actividad{
 	public void delActividadSigFracaso(int pos)
 	{
 		this.actividadesSigFracaso.remove(pos);
+	}
+	
+	public JSONObject addInfoCalificableJSON(JSONObject jobject)
+	{
+        List<String> listaIDsActividadesSigFracaso= new LinkedList<String>();
+        for (Actividad actividad: this.actividadesSigFracaso)
+        {
+        	listaIDsActividadesSigFracaso.add(actividad.getId());
+        }
+        JSONArray actividadesSigFracasoArray = new JSONArray (listaIDsActividadesSigFracaso);
+        jobject.put("actividadesSigFracaso", actividadesSigFracasoArray);
+        
+        jobject.put("calificacionMin", this.calificacionMin);
+        
+		return jobject;
 	}
 
 }

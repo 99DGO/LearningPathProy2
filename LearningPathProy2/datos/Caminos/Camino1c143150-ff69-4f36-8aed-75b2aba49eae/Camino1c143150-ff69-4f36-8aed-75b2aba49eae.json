@@ -1,0 +1,19 @@
+{
+ "descripcion": "Un curso para saber los basicos de java",
+ "numActividadesObligatorias": 0,
+ "ratingsTotales": 0,
+ "rating": 0,
+ "titulo": "Jaca123",
+ "actividades": [],
+ "version": 1,
+ "objetivos": [
+  "Saber diferentes tipos de datos",
+  "Aprender loops",
+  "Aprender estructuras"
+ ],
+ "duracion": 0,
+ "fechaCreacion": "Sat Nov 09 21:53:53 COT 2024",
+ "creadorID": "Actividad8ac39226-cf63-48b4-b68b-fdace813d5db",
+ "id": "Camino1c143150-ff69-4f36-8aed-75b2aba49eae",
+ "dificultad": 3
+}

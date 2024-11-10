@@ -9,15 +9,15 @@ public abstract class DatosEstudianteActividad {
 	public static final String PENDIENTE = "Pendiente";
 	public static final String NOEXITOSO = "No exitoso";
 	
-	private String loginEstudiante;
+	private String IDEstudiante;
 	private String estado;
-	private Date fechaInicio;
-	private Date fechaFinal;
+	private String fechaInicio;
+	private String fechaFinal;
 	private final String id;
 
 	//Constructor normal
-	public DatosEstudianteActividad(String loginEstudiante) {
-		this.loginEstudiante = loginEstudiante;
+	public DatosEstudianteActividad(String IDEstudiante) {
+		this.IDEstudiante = IDEstudiante;
 		this.estado = PENDIENTE;
 		this.fechaFinal = null;  //Se asigna cuando se finalice la actividad
 		this.id="Actividad"+UUID.randomUUID().toString();
@@ -25,9 +25,9 @@ public abstract class DatosEstudianteActividad {
 	
 	
 	//Constructor para cargar
-	public DatosEstudianteActividad(String loginEstudiante, String estado, Date fechaInicio, Date fechaFinal, String id) {
+	public DatosEstudianteActividad(String IDEstudiante, String estado, String fechaInicio, String fechaFinal, String id) {
 		super();
-		this.loginEstudiante = loginEstudiante;
+		this.IDEstudiante = IDEstudiante;
 		this.estado = estado;
 		this.fechaInicio = fechaInicio;
 		this.fechaFinal = fechaFinal;
@@ -36,19 +36,19 @@ public abstract class DatosEstudianteActividad {
 
 
 
-	public String getLoginEstudiante() {
-		return loginEstudiante;
+	public String getIDEstudiante() {
+		return IDEstudiante;
 	}
 	
 	public String getEstado() {
 		return estado;
 	}
 	
-	public Date getFechaInicio() {
+	public String getFechaInicio() {
 		return fechaInicio;
 	}
 	
-	public Date getFechaFinal() throws Exception {
+	public String getFechaFinal() throws Exception {
 		if (this.fechaFinal == null) {
             throw new Exception("No se ha finalizado la actividad todavía.");
         }
@@ -68,15 +68,20 @@ public abstract class DatosEstudianteActividad {
 	}
 	
 	public void finalizarActividad() {
-		this.fechaFinal = new Date();
+		this.fechaFinal = new Date().toString();
 	}
 	
 	public void setFechaFinal() {
-		this.fechaFinal = new Date();
+		this.fechaFinal = new Date().toString();
 	}
 	
 	public void setFechaInicio() {
-		this.fechaInicio = new Date();
+		this.fechaInicio = new Date().toString();
+	}
+	
+	public String getID()
+	{
+		return this.getID();
 	}
 
 }

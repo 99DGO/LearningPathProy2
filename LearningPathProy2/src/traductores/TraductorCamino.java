@@ -8,6 +8,7 @@ import java.util.List;
 import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
 import controllers.LearningPathSystem;
+import usuarios.Profesor;
 
 public class TraductorCamino 
 {
@@ -91,4 +92,29 @@ public class TraductorCamino
 		
 	}
 	
+	public static String getIDfromNombre(String titulo) throws Exception
+	{
+		LearningPathSystem LPS = LearningPathSystem.getInstance();
+		HashMap<String, CaminoAprendizaje> caminos = LPS.getCaminos();
+		String IDtoReturn=null;
+		
+		for (String IDCamino: caminos.keySet())
+		{
+			CaminoAprendizaje caminoIterator=caminos.get(IDCamino);
+			
+			if (caminoIterator.getTitulo().equals(titulo))
+			{
+				IDtoReturn= IDCamino;
+			}
+		}
+		
+		if (IDtoReturn==null)
+		{
+			throw new Exception("No se encontro el camino");
+		}
+		else
+		{
+			return IDtoReturn;
+		}
+	}
 }

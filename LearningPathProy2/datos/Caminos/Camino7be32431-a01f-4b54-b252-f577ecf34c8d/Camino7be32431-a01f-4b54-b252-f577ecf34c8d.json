@@ -4,7 +4,6 @@
  "ratingsTotales": 0,
  "rating": 0,
  "titulo": "Python123",
- "creadorLogin": "Actividad19f020a2-2225-4320-8976-d44f137256cf",
  "actividades": [],
  "version": 1,
  "objetivos": [
@@ -13,7 +12,8 @@
   "Aprender estructuras"
  ],
  "duracion": 0,
- "fechaCreacion": "Sat Nov 09 21:04:39 COT 2024",
- "id": "Camino7fa9014b-dfa5-47dd-a7b4-fa120eab370b",
+ "fechaCreacion": "Sat Nov 09 22:42:36 COT 2024",
+ "creadorID": "Actividad2fca1d09-b11a-40db-a814-56d31b0d44a7",
+ "id": "Camino7be32431-a01f-4b54-b252-f577ecf34c8d",
  "dificultad": 2
 }

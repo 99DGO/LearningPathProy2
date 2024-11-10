@@ -1,7 +1,11 @@
 package caminosActividades;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import datosEstudiantes.DatosEstudianteActividad;
 
@@ -57,5 +61,16 @@ public class ActividadRecurso extends Actividad {
 		this.instrucciones = instrucciones;
 	}
 	
+	public JSONObject salvarEnJSON()
+	{
+        JSONObject jobject = new JSONObject( );
+        
+        jobject=this.addInfoJSONObject(jobject);
+        
+        jobject.put("instrucciones", this.instrucciones);
+        jobject.put("recurso", this.recurso);
+   
+        return jobject;
+	}
 	
 }

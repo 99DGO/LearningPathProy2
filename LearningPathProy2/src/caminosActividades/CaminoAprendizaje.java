@@ -3,9 +3,11 @@ package caminosActividades;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class CaminoAprendizaje {
@@ -38,7 +40,7 @@ public class CaminoAprendizaje {
 		this.ratingsTotales=0;
 		this.version=1;
 		this.numActividadesObligatorias=0;
-		this.ID="Actividad"+UUID.randomUUID().toString();
+		this.ID="Camino"+UUID.randomUUID().toString();
 
 	}
 	
@@ -301,8 +303,29 @@ public class CaminoAprendizaje {
         jobject.put("dificultad", this.dificultad);
         jobject.put("duracion", this.duracion);
         jobject.put("rating", this.rating);
+        jobject.put("fechaCreacion", this.fechaCreacion);
+        jobject.put("ratingsTotales", this.ratingsTotales);
+        jobject.put("version", this.version);
+        jobject.put("fechaModificacion", this.fechaModificacion);
+        jobject.put("numActividadesObligatorias", this.numActividadesObligatorias);
+        jobject.put( "creadorLogin", this.creadorLogin );
+        jobject.put("id", this.ID);
+        
+     
+        List<String> listaIDsActividades= new LinkedList<String>();
+        for (Actividad actividad: this.actividades)
+        {
+        	listaIDsActividades.add(actividad.getId());
+        }
+        
+        JSONArray objetivosArray= new JSONArray(this.objetivos);
+        JSONArray actividadesID= new JSONArray(listaIDsActividades);
 
-        jobject.put( "objetivos", "ho" );
+        
+        jobject.put( "actividades", actividadesID );
+        
+        jobject.put( "objetivos", objetivosArray );
+        
         return jobject;
         
     }

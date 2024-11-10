@@ -10,6 +10,11 @@ import java.util.UUID;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import creadores.CreadorAR;
+import creadores.CreadorEncuesta;
+import creadores.CreadorExamen;
+import creadores.CreadorQuiz;
+import creadores.CreadorTarea;
 import persistencia.ActividadesPersistencia;
 
 
@@ -48,7 +53,7 @@ public class CaminoAprendizaje {
 	}
 	
 //Constructor clonador
-	public CaminoAprendizaje(CaminoAprendizaje caminoOG, String creadorID, String titulo)
+	public CaminoAprendizaje(CaminoAprendizaje caminoOG, String creadorID, String titulo) throws Exception
 	{
 		this.titulo= titulo;
 		this.descripcion= caminoOG.getDescripcion();
@@ -74,36 +79,37 @@ public class CaminoAprendizaje {
     	//Copia de actividades
     	Iterator<Actividad> it2 = caminoOG.getActividades().iterator(); 
     	Actividad actividad;
+    	int i =0;
     	
     	while (it2.hasNext())
     	{
     		Actividad act2 = it2.next();
     		if (act2 .getType().equals(Actividad.ENCUESTA))
     		{
-    			actividad=new Encuesta (creadorID, (Encuesta) act2 , this);
+    			actividad=new Encuesta (creadorID, (Encuesta) act2 , this, i);
     		}
     		
     		else if (act2 .getType().equals(Actividad.ACTIVIDADRECURSO))
     		{
-    			actividad=new ActividadRecurso (creadorID, (ActividadRecurso) act2, this );
+    			actividad=new ActividadRecurso (creadorID, (ActividadRecurso) act2, this, i );
     		}
     		
     		else if (act2 .getType().equals(Actividad.EXAMEN))
     		{
-    			actividad=new Examen (creadorID, (Examen) act2, this );
+    			actividad=new Examen (creadorID, (Examen) act2, this, i );
     		}
     		
     		else if (act2 .getType().equals(Actividad.QUIZ))
     		{
-    			actividad=new Quiz (creadorID, (Quiz) act2, this );
+    			actividad=new Quiz (creadorID, (Quiz) act2, this, i);
     		}
     		
     		else
     		{
-    			actividad= new Tarea (creadorID, (Tarea) act2, this );
+    			actividad= new Tarea (creadorID, (Tarea) act2, this, i);
     		}
     		
-    		this.actividades.add(actividad);
+    		i+=1;
     	}
 		
 		this.creadorID=creadorID;
@@ -236,10 +242,17 @@ public class CaminoAprendizaje {
 	 * Actualiza la duracion del camino en total
 	 * añade al contador de obligatorias si es obligatoria
 	 */
-	public void addActividad(Actividad actividad, int pos)
+	public void addActividad(Actividad actividad, int pos) throws Exception
 	{
-		this.actividades.add(pos, actividad);
-		this.duracion+=actividad.getDuracion();
+		if (pos < 0 || pos > this.actividades.size())
+		{
+			throw new Exception ("La posicion indicada no existe");
+		}
+		else
+		{
+			this.actividades.add(pos, actividad);
+			this.duracion+=actividad.getDuracion();
+		}
 		
 		if (actividad.isObligatoria())
 		{
@@ -274,6 +287,29 @@ public class CaminoAprendizaje {
 		this.objetivos.remove(pos);
 	}
 
+	public void cambiarPosActividad(String idActividad, int newPos) throws Exception
+	{
+		if(newPos>=this.actividades.size() || newPos<0)
+		{
+			Iterator<Actividad> it1 = actividades.iterator();
+			int posIterator=0;
+			
+			while (it1.hasNext())
+			{
+				Actividad actividad=it1.next();
+				
+				if (actividad.getId().equals(idActividad))
+				{
+					actividades.remove(posIterator);
+					actividades.set(newPos, actividad);
+				}
+			}
+		}
+		else
+		{
+			throw new Exception ("La posicion de la actividad no es valida");
+		}
+	}
 
 	/**
      * Crea un nuevo objeto de tipo a partir de un objeto JSON.
@@ -293,8 +329,8 @@ public class CaminoAprendizaje {
 */ 
 	
     /**
-     * Salva este objeto de tipo ClienteCorporativo dentro de un objeto JSONObject para que ese objeto se almacene en un archivo
-     * @return El objeto JSON con toda la información del cliente corporativo
+     * Salva este objeto de tipo camino dentro de un objeto JSONObject para que ese objeto se almacene en un archivo
+     * @return El objeto JSON con toda la información del camino
      */
 	
     public JSONObject salvarEnJSON( )
@@ -350,7 +386,6 @@ public class CaminoAprendizaje {
         
         JSONArray Jobjetivos=Jcamino.getJSONArray("objetivos");
         List<String> objetivos = new LinkedList<String>();
-        //Iterating JSON array  
         for (int i=0;i<Jobjetivos.length();i++)
         {   
         	objetivos.add((String) Jobjetivos.get(i));  

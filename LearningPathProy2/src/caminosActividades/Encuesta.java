@@ -17,17 +17,19 @@ public class Encuesta extends Actividad{
 	
 	//Constructor normal
 	public Encuesta(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
-			int[] fechaLim, boolean obligatoria, List<String> preguntasAbiertas, String creadorLogin, CaminoAprendizaje camino) {
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino);
+			int[] fechaLim, boolean obligatoria, List<String> preguntasAbiertas, String creadorLogin, 
+			CaminoAprendizaje camino, int pos) throws Exception
+	{
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino, pos);
 		this.preguntasAbiertas = preguntasAbiertas;
 		this.type=ENCUESTA;
 
 	}
 	
 	//Constructor para clonar
-	public Encuesta(String creadorLogin, Encuesta ActividadOG, CaminoAprendizaje camino)
+	public Encuesta(String creadorLogin, Encuesta ActividadOG, CaminoAprendizaje camino, int pos) throws Exception
 	{
-		super(creadorLogin, ActividadOG, camino);
+		super(creadorLogin, ActividadOG, camino, pos);
 		this.type=ENCUESTA;
 		this.preguntasAbiertas=new ArrayList<String>();
 

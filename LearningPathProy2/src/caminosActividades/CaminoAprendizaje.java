@@ -3,8 +3,12 @@ package caminosActividades;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class CaminoAprendizaje {
 	
@@ -13,11 +17,11 @@ public class CaminoAprendizaje {
 	private List<String> objetivos;
 	private double dificultad;
 	private int duracion;
-	private Date fechaCreacion;
+	private String fechaCreacion;
 	private double rating;
 	private int ratingsTotales;
 	private int version;
-	private Date fechaModificacion;
+	private String fechaModificacion;
 	private int numActividadesObligatorias;
 	private List<Actividad> actividades; 
 	private String creadorLogin;
@@ -29,14 +33,14 @@ public class CaminoAprendizaje {
 		this.descripcion = descripcion;
 		this.objetivos = objetivos;
 		this.dificultad = dificultad;
-		this.fechaCreacion= new Date();
+		this.fechaCreacion= new Date().toString();
 		this.creadorLogin=creadorLogin;
 		this.actividades=new ArrayList<Actividad>();
 		
 		this.ratingsTotales=0;
 		this.version=1;
 		this.numActividadesObligatorias=0;
-		this.ID="Actividad"+UUID.randomUUID().toString();
+		this.ID="Camino"+UUID.randomUUID().toString();
 
 	}
 	
@@ -54,7 +58,7 @@ public class CaminoAprendizaje {
 		this.ratingsTotales=0;
 		this.version=1;
 		
-		this.fechaCreacion= new Date();
+		this.fechaCreacion= new Date().toString();
 
     	Iterator<String> it1 = caminoOG.getObjetivos().iterator(); 
     	
@@ -105,7 +109,7 @@ public class CaminoAprendizaje {
 
 //Constructor cargar
 	public CaminoAprendizaje(String titulo, String descripcion, List<String> objetivos, double dificultad, int duracion,
-			Date fechaCreacion, double rating, int ratingsTotales, int version, Date fechaModificacion,
+			String fechaCreacion, double rating, int ratingsTotales, int version, String fechaModificacion,
 			int numActividadesObligatorias, List<Actividad> actividades, String creadorLogin, String id) {
 		super();
 		this.titulo = titulo;
@@ -129,7 +133,7 @@ public class CaminoAprendizaje {
 		return ID;
 	}
 
-	public void setFechaModificacion(Date fechaModificacion) {
+	public void setFechaModificacion(String fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
 	}
 
@@ -178,7 +182,7 @@ public class CaminoAprendizaje {
 		return duracion;
 	}
 
-	public Date getFechaCreacion() {
+	public String getFechaCreacion() {
 		return fechaCreacion;
 	}
 
@@ -194,7 +198,7 @@ public class CaminoAprendizaje {
 		return version;
 	}
 
-	public Date getFechaModificacion() {
+	public String getFechaModificacion() {
 		return fechaModificacion;
 	}
 
@@ -266,4 +270,64 @@ public class CaminoAprendizaje {
 	{
 		this.objetivos.remove(pos);
 	}
+
+
+	/**
+     * Crea un nuevo objeto de tipo a partir de un objeto JSON.
+     * 
+     * El objeto JSON debe tener dos atributos: nombreEmpresa (una cadena) y tamanoEmpresa (un número).
+     * @param cliente El objeto JSON que contiene la información
+     * @return El nuevo objeto inicializado con la información
+     */
+	/*
+    public static ClienteCorporativo cargarDesdeJSON( JSONObject cliente )
+    {
+        String nombreEmpresa = cliente.getString( "nombreEmpresa" );
+        int tam = cliente.getInt( "tamanoEmpresa" );
+        return new ClienteCorporativo( nombreEmpresa, tam );
+    }
+
+*/ 
+	
+    /**
+     * Salva este objeto de tipo ClienteCorporativo dentro de un objeto JSONObject para que ese objeto se almacene en un archivo
+     * @return El objeto JSON con toda la información del cliente corporativo
+     */
+	
+    public JSONObject salvarEnJSON( )
+    {
+    	
+        JSONObject jobject = new JSONObject( );
+        jobject.put( "titulo", this.titulo );
+        jobject.put( "descripcion", this.descripcion );
+        jobject.put("dificultad", this.dificultad);
+        jobject.put("duracion", this.duracion);
+        jobject.put("rating", this.rating);
+        jobject.put("fechaCreacion", this.fechaCreacion);
+        jobject.put("ratingsTotales", this.ratingsTotales);
+        jobject.put("version", this.version);
+        jobject.put("fechaModificacion", this.fechaModificacion);
+        jobject.put("numActividadesObligatorias", this.numActividadesObligatorias);
+        jobject.put( "creadorLogin", this.creadorLogin );
+        jobject.put("id", this.ID);
+        
+     
+        List<String> listaIDsActividades= new LinkedList<String>();
+        for (Actividad actividad: this.actividades)
+        {
+        	listaIDsActividades.add(actividad.getId());
+        }
+        
+        JSONArray objetivosArray= new JSONArray(this.objetivos);
+        JSONArray actividadesID= new JSONArray(listaIDsActividades);
+
+        
+        jobject.put( "actividades", actividadesID );
+        
+        jobject.put( "objetivos", objetivosArray );
+        
+        return jobject;
+        
+    }
+    
 }

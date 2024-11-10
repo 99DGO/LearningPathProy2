@@ -56,6 +56,10 @@ public class Encuesta extends Actividad{
 		return preguntasAbiertas;
 	}
 
+	public void delPregunta(int pos)
+	{
+		this.preguntasAbiertas.remove(pos);
+	}
 	
 
 }

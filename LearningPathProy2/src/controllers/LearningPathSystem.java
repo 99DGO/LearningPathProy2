@@ -16,7 +16,9 @@ public class LearningPathSystem {
 	
 	private LearningPathSystem()
 	{
-		
+		profesores = new HashMap<String, Profesor>();
+		estudiantes = new HashMap<String, Estudiante>();
+		caminos = new HashMap<String, CaminoAprendizaje>();
 	}
 	
 	public static LearningPathSystem getInstance()

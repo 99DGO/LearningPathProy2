@@ -1,5 +1,6 @@
 package editores;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,6 +30,10 @@ public class EditorActividadGeneral
 		
 		actividad.setNombre(nombre);
 		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha.toString());
 	}
 
 
@@ -48,6 +53,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.setDescripcion(descripcion);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha.toString());
 	}
 
 	
@@ -67,6 +77,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.setDificultad(dificultad);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha.toString());
 	}
 
 
@@ -86,6 +101,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.setDuracion(duracion);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha.toString());
 	
 	}
 
@@ -105,6 +125,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.setFechaLim(fechaLim);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha.toString());
 	
 	}
 
@@ -126,6 +151,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.setObligatoria(oblig);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha.toString());
 	
 	}
 	
@@ -145,10 +175,15 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.addObjetivo(objetivo);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	
-	public void editDelObjetivo(String IDcamino, String IDactividad, int pos)
+	public void editDelObjetivo(String IDcamino, String IDactividad, int pos) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
@@ -163,7 +198,19 @@ public class EditorActividadGeneral
 			}
 		}
 		
-		actividad.delObjetivo(pos);
+		if (pos>=actividad.getObjetivos().size() || pos<=0)
+		{
+			throw new Exception ("El número del objetivo no existe");
+		}
+		else
+		{
+			actividad.delObjetivo(pos);
+		}
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	
@@ -193,6 +240,11 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.addActividadSiguienteExitosa(actividadSiguiente);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	public static void editAddActividadPrereq(String IDcamino, String IDactividad, String IDactividadPrereq)
@@ -220,11 +272,16 @@ public class EditorActividadGeneral
 		}
 		
 		actividad.addActividadPrereq(actividadPrereq);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	
 	
-	public static void editDelActividadPrereq(String IDcamino, String IDactividad, int pos)
+	public static void editDelActividadPrereq(String IDcamino, String IDactividad, int pos) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
@@ -239,11 +296,24 @@ public class EditorActividadGeneral
 			}
 		}
 		
-		actividad.delActividadPrereq(pos);
+		if (pos>=actividad.getActividadesPrereqs().size() || pos<=0)
+		{
+			throw new Exception ("El número de la actividad no existe");
+		}
+		else
+		{
+			actividad.delActividadPrereq(pos);
+		}
+		
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	
-	public static void editDelActividadSiguienteExitosa(String IDcamino, String IDactividad, int pos)
+	public static void editDelActividadSiguienteExitosa(String IDcamino, String IDactividad, int pos) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
@@ -258,7 +328,20 @@ public class EditorActividadGeneral
 			}
 		}
 		
-		actividad.delActividadSiguienteExitosa(pos);
+		if (pos>=actividad.getActividadesSigExitoso().size() || pos<=0)
+		{
+			throw new Exception ("El número de la actividad no existe");
+		}
+		else
+		{
+			actividad.delActividadSiguienteExitosa(pos);
+		}
+		
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha.toString());
 	}
 	
 	

@@ -11,34 +11,6 @@ import caminosActividades.CaminoAprendizaje;
 
 public class VisualizadorCaminosActividades {
 	
-	public static void verCamino(CaminoAprendizaje camino)
-	{
-		System.out.println("Titulo: "+camino.getTitulo()+"\n");
-		System.out.println("Descripcion: "+camino.getDescripcion()+"\n");
-		System.out.println("Dificultad: "+String.valueOf(camino.getDificultad())+"\n");
-		
-		System.out.println("Objetivos: ");	
-		Iterator<String> it1 = camino.getObjetivos().iterator();
-		
-		while (it1.hasNext())
-		{
-			System.out.println(it1.next());	
-		}
-
-		System.out.println("\n");
-		
-		System.out.println("Rating: "+ String.valueOf(camino.getRating())+"\n");
-		
-		System.out.println("Actividades: ");	
-		Iterator<Actividad> it2 = camino.getActividades().iterator();
-		
-		while (it2.hasNext())
-		{
-			System.out.println(it2.next().getNombre());	
-		}
-
-		System.out.println("\n");
-	}
 	
 	public static void verActividad(Actividad actividad)
 	{

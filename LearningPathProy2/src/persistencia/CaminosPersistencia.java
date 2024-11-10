@@ -29,24 +29,28 @@ public class CaminosPersistencia
 		{
 			CaminoAprendizaje camino = caminosHash.get(caminoID);
 			JSONObject jCamino= camino.salvarEnJSON();
-			
-			FileWriter file;
-			
+		
+			//Creo la carpeta del camino
+		   File pathCarpetaCamino = new File("datos/Caminos/"+caminoID);  
+		   boolean bool = pathCarpetaCamino.mkdir();  
+		      
+			//Creo el archivo con la información del camino
+			FileWriter fileCamino;
 			try 
 			{
-				file = new FileWriter("datos/Caminos/"+caminoID+".json");
+				fileCamino = new FileWriter(pathCarpetaCamino+"/"+caminoID+".json");
 				
 				try 
 				{
-					file.write(jCamino.toString(1));
+					fileCamino.write(jCamino.toString(1));
 				} 
 				catch (JSONException e) 
 				{
 					e.printStackTrace();
 				}
 				
-				file.flush();
-				file.close();
+				fileCamino.flush();
+				fileCamino.close();
 				
 			} 
 			catch (IOException e) 
@@ -54,21 +58,42 @@ public class CaminosPersistencia
 				e.printStackTrace();
 			}
 			
+			//Creo el directorio de actividades dentro la carpeta del camino
+			FileWriter fileDirectorioActividades;
+			try 
+			{
+				fileDirectorioActividades = new FileWriter(pathCarpetaCamino+"/"+"ActividadesDirectorio"+".txt");		
+				fileDirectorioActividades.flush();
+				fileDirectorioActividades.close();
+				
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
 			
+
+			//Añado al directorio de caminos el ID de este camino
 			Writer output;
 			try 
 			{
 				output = new BufferedWriter(new FileWriter("datos/Caminos/CaminosDirectorio.txt", true));
-				output.append(caminoID);
+				output.append(caminoID+"\n");
 				output.close();
 			} 
 			catch (IOException e) 
 			{
 				e.printStackTrace();
 			}
-		
 			
 		}
+		
+	}
+	
+	
+	public static void CargarCaminos()
+	{
+		
 	}
 
 }

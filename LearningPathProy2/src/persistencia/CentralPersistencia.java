@@ -121,42 +121,7 @@ public class CentralPersistencia
 		    	String content = new String(Files.readAllBytes(Paths.get(pathCaminos+line+"/"+line+".json")));
 		    	JSONObject jcamino = new JSONObject(content);
 		    	
-		    	//Saco los objetivos
-		    	JSONArray jObjetivos = jcamino.getJSONArray("objetivos");
-		    	List<String> objetivos = new LinkedList<String>();
-		    	
-		    	for (int i =0; i<jObjetivos.length(); i++)
-		    	{
-		    		String objetivo=jObjetivos.getString(i);
-		    		objetivos.add(objetivo);
-		    	}
-		    	
-		    	//Saco las actividades
-		    	JSONArray jActividades = jcamino.getJSONArray("actividades");
-		    	List<Actividad> actividades = new LinkedList<Actividad>();
-		    	
-		    	for (int i2 =0; i2<jActividades.length(); i2++)
-		    	{
-		    		//Saco el jObject de la actividad
-		    		String idActividad=jActividades.getString(i2);
-		    		String pathActividad= pathCaminos+line+"/"+idActividad+"/";
-		    		
-			    	String contentActividad = new String(Files.readAllBytes(Paths.get(pathActividad+idActividad+".json")));
-			    	
-			    	JSONObject jActividad = new JSONObject(contentActividad);
-			    	
-		    		//Creo la actividad
-			    	Actividad actividad=ActividadesPersistencia.cargarActividad(jActividad, pathActividad);
-			    	actividades.add(actividad);
-		    	}
-		    	
-		    	
-		    	//Creo el camino
-		    	CaminoAprendizaje camino = new CaminoAprendizaje (jcamino.getString("titulo"), jcamino.getString("descripcion"),
-		    			objetivos, jcamino.getDouble("dificultad"), jcamino.getInt("duracion"), jcamino.getString("fechaCreacion"), 
-		    			jcamino.getDouble("rating"), jcamino.getInt("ratingsTotales"), jcamino.getInt("version"), jcamino.getString("fechaModificacion"), 
-		    			jcamino.getInt("numActividadesObligatorias"), actividades, jcamino.getString("creadorID"), jcamino.getString("id"));
-		    	
+		    	CaminoAprendizaje camino = CaminosPersistencia.cargarCamino(jcamino, pathCaminos+line+"/");
 		    	//Añado al LPS
 		    	LPS.addCamino(camino);
 		    }

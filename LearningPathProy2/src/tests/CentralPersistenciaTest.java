@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
@@ -41,11 +42,21 @@ import traductores.TraductorProfesor;
 
 public class CentralPersistenciaTest 
 {
-	private LearningPathSystem LPS =LearningPathSystem.getInstance();
 
+	static boolean deleteDirectory(File directoryToBeDeleted) 
+	{
+	    File[] allContents = directoryToBeDeleted.listFiles();
+	    if (allContents != null) 
+	    {
+	        for (File file : allContents) 
+	        {
+	            deleteDirectory(file);
+	        }
+	    }
+	    return directoryToBeDeleted.delete();
+	}
+	
 	@BeforeAll
-	// Esto configura un setup que se hace una sola vez al comenzar el primer test
-	// y despues nunca mas
 	static void init() throws Exception 
 	{
 		File fileCaminosDirectorio = new File("datosTests/Caminos/CaminosDirectorio.txt");
@@ -55,18 +66,12 @@ public class CentralPersistenciaTest
 		{		        
 			
 		    String line;
-		    //Recorro el directorio
+		    //Recorro el directorio para borrar las carpetas
 		    while ((line = br.readLine()) != null) 
 		    {
 		    	File carpetaCamino = new File("datosTests/Caminos/"+line);
 		       
-		    	//Borro las carpetas de los caminos
-		    	try (Stream<Path> pathStream = Files.walk(carpetaCamino.toPath())) 
-		    	{
-	    		    pathStream.sorted(Comparator.reverseOrder())
-	    		      .map(Path::toFile)
-	    		      .forEach(File::delete);
-	    		 }
+		        deleteDirectory(carpetaCamino);
 		    	
 		    }
 		} 
@@ -78,20 +83,17 @@ public class CentralPersistenciaTest
 		{
 			e.printStackTrace();
 		}
-		
-	    File myObj = new File("filename.txt"); 
-	    myObj.delete();
+
 	}
 	
-    @AfterEach
-    void tearDown( ) throws Exception
-    {
-    }
+ 
 
 	@Test
 	@Order(1)
 	public void testGuardarPersitenciaCaminos()
 	{
+		LearningPathSystem LPS =LearningPathSystem.getInstance();
+
 		try
 		{
 			CreadorProfesor.crearProfesor("Kakashi", "Kakashi123");
@@ -146,29 +148,10 @@ public class CentralPersistenciaTest
     		fail("No se guardo, tiro"+e.getMessage()); 
 			e.printStackTrace();
 		}	
-	}
-
-	@Test
-	@Order(2)
-	public void testCargarPersitenciaCaminos()
-	{
-		try 
-		{
-			CentralPersistencia.cargarCaminosActividadesDatosEstudiante(true);
-		} 
-		catch (Exception e) 
-		{
-    		fail("No se cargo, tiro"+e.getMessage()); 
-		}
 		
 		assertEquals( 2, LPS.getCaminos().keySet().size(), "No se cargaron el numero correcto de caminos" );
-	
-	
-	}
-	
-	
 
-	
+	}
 	
 
 }

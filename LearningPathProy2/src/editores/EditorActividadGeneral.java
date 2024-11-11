@@ -220,7 +220,6 @@ public class EditorActividadGeneral
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
 		Actividad actividad=null;
-		Actividad actividadSiguiente=null;
 		
 		//Consigo la actividad del id
 		for (Actividad actividadIterator: camino.getActividades())
@@ -231,15 +230,7 @@ public class EditorActividadGeneral
 			}
 		}
 		
-		for (Actividad actividadIterator2: camino.getActividades())
-		{
-			if (actividadIterator2.getId().equals(IDactividadSiguiente))
-			{
-				actividadSiguiente= actividadIterator2;
-			}
-		}
-		
-		actividad.addActividadSiguienteExitosa(actividadSiguiente);
+		actividad.addActividadSiguienteExitosa(IDactividadSiguiente);
 		
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
@@ -252,7 +243,6 @@ public class EditorActividadGeneral
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
 		Actividad actividad=null;
-		Actividad actividadPrereq=null;
 		
 		//Consigo la actividad del id
 		for (Actividad actividadIterator: camino.getActividades())
@@ -263,15 +253,7 @@ public class EditorActividadGeneral
 			}
 		}
 		
-		for (Actividad actividadIterator2: camino.getActividades())
-		{
-			if (actividadIterator2.getId().equals(IDactividadPrereq))
-			{
-				actividadPrereq= actividadIterator2;
-			}
-		}
-		
-		actividad.addActividadPrereq(actividadPrereq);
+		actividad.addActividadPrereq(IDactividadPrereq);
 		
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);

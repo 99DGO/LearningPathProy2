@@ -10,20 +10,23 @@ import org.junit.jupiter.api.Test;
 
 import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
+import datosEstudiantes.DatosEstudianteExamen;
+import controllers.Inscriptor;
 import controllers.LearningPathSystem;
 import creadores.CreadorAR;
 import creadores.CreadorCamino;
+import creadores.CreadorEstudiante;
 import creadores.CreadorExamen;
 import creadores.CreadorProfesor;
-import creadores.CreadorTarea;
 import persistencia.ActividadesPersistencia;
-import persistencia.CaminosPersistencia;
+import persistencia.CentralPersistencia;
+import persistencia.DatosEstudiantesPersistencia;
 import traductores.TraductorCamino;
+import traductores.TraductorEstudiante;
 import traductores.TraductorProfesor;
 
-public class ActividadTest {
-	
-	
+public class DatosEstudiantesTest 
+{
 	private LearningPathSystem LPS =LearningPathSystem.getInstance();
 
 	@BeforeAll
@@ -61,6 +64,12 @@ public class ActividadTest {
 		int[] fechaLim= new int[]{0,1,0};
 		CreadorExamen.crearExamenCero(idCamino, "Tipos de variables examen", "Comprobar que el estudiante sabe diferenciar variables numericos", 
 				objetivosActividad, 2.5, 30, fechaLim, true, 3, preguntasExamen, IDprof,1);
+		
+		
+		CreadorEstudiante.crearEstudiante("TreyClover", "Trey123");
+		String IDEstudiante= TraductorEstudiante.getIDfromLogin("TreyClover");
+
+		Inscriptor.inscribirseCamino(idCamino, IDEstudiante);
 
 	}
 
@@ -68,13 +77,17 @@ public class ActividadTest {
 	public void testPersitencia()
 	{
 		String idCamino=null;
+		String IDEstudiante=null;
 		
+
 		try 
 		{
+			IDEstudiante= TraductorEstudiante.getIDfromLogin("TreyClover");
 			idCamino = TraductorCamino.getIDfromNombre("Python123");
+
 		} 
 		catch (Exception e) {
-    		fail("No se encontro el ID del camino con el nombre"); 
+    		fail("No se encontro el ID del estudiante con el login"); 
 		}
 	
     	try
@@ -83,16 +96,18 @@ public class ActividadTest {
     		Actividad actividad;
     		
     		List<Actividad> actividades = camino.getActividades();
+    		DatosEstudianteExamen datosEst = new DatosEstudianteExamen(IDEstudiante);
     		
-    		ActividadesPersistencia.guardarActividad(actividades.get(0), idCamino, "datosTest/Caminos/");
+    		DatosEstudiantesPersistencia.guardarDatosEstudiante(datosEst, idCamino, actividades.getFirst().getId(), "datosTests/Caminos/");
+  
     	}
     	catch (Exception e)
     	{
+    		System.out.println(e);
     		fail("No se creo el objeto del archivo"); 
     	}
     	
 
 	}
-	
 
 }

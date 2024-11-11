@@ -8,6 +8,7 @@ import caminosActividades.CaminoAprendizaje;
 import controllers.LearningPathSystem;
 import datosEstudiantes.DatosEstudianteActividad;
 import usuarios.Estudiante;
+import usuarios.Profesor;
 
 public class TraductorEstudiante 
 {
@@ -48,4 +49,29 @@ public class TraductorEstudiante
 		return avances;
 	}
 
+	public static String getIDfromLogin(String login) throws Exception
+	{
+		LearningPathSystem LPS = LearningPathSystem.getInstance();
+		HashMap<String, Estudiante> estudiantes = LPS.getEstudiantes();
+		String IDtoReturn=null;
+		
+		for (String IDestudiante: estudiantes.keySet())
+		{
+			Estudiante estudianteIterator=estudiantes.get(IDestudiante);
+			
+			if (estudianteIterator.getLogin().equals(login))
+			{
+				IDtoReturn= IDestudiante;
+			}
+		}
+		
+		if (IDtoReturn==null)
+		{
+			throw new Exception("No se encontro el login");
+		}
+		else
+		{
+			return IDtoReturn;
+		}
+	}
 }

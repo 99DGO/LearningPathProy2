@@ -326,7 +326,7 @@ public abstract class Actividad {
         
         
         JSONArray datosEstudiantesArray = new JSONArray (this.datosEstudiantes.keySet());
-        jobject.put("actividadesSigExitoso", datosEstudiantesArray);
+        jobject.put("datosEstudiantes", datosEstudiantesArray);
    
 		return jobject;
 	}

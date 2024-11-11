@@ -1,6 +1,7 @@
 package datosEstudiantes;
 
-import java.util.Date;
+
+import org.json.JSONObject;
 
 import envios.EnvioQuiz;
 import caminosActividades.Quiz;
@@ -13,6 +14,8 @@ public class DatosEstudianteQuiz extends DatosEstudianteActividad {
 		super(IDEstudiante);
 		this.envioQuiz = new EnvioQuiz();
 		this.calificacion = 0.0;
+		this.type=DatosEstudianteActividad.QUIZDATO;
+
 
 	}
 	
@@ -23,6 +26,8 @@ public class DatosEstudianteQuiz extends DatosEstudianteActividad {
 		super(IDEstudiante, estado, fechaInicio, fechaFinal, id);
 		this.calificacion = calificacion;
 		this.envioQuiz = envioQuiz;
+		this.type=DatosEstudianteActividad.QUIZDATO;
+
 	}
 
 
@@ -41,6 +46,17 @@ public class DatosEstudianteQuiz extends DatosEstudianteActividad {
 	
 	public void setCalificacion(double calificacion) {
 		this.calificacion = calificacion;
+	}
+	
+	
+	public JSONObject salvarEnJSON()
+	{
+		JSONObject jDatosEst = new JSONObject();
+		jDatosEst=this.addInfoJSONGeneral(jDatosEst);
+		
+		jDatosEst.put("calificaion", this.calificacion);
+		
+		return jDatosEst;
 	}
 	
 }

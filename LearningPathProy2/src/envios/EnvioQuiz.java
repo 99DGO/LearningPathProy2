@@ -1,7 +1,9 @@
 package envios;
 
 import java.util.HashMap;
-import java.util.List; 
+import java.util.List;
+
+import caminosActividades.OpcionQuiz;
 import caminosActividades.PreguntaQuiz;
 import caminosActividades.Quiz;
 
@@ -37,7 +39,8 @@ public class EnvioQuiz extends Envio<PreguntaQuiz> {
         int respuestasCorrectas = 0;
 
         for (PreguntaQuiz pregunta : preguntasQuiz) {
-            String respuestaCorrecta = pregunta.getRespuesta();
+            OpcionQuiz opcionCorrecta = pregunta.getRespuesta();
+            String respuestaCorrecta = opcionCorrecta.getTexto();
             String respuestaUsuario = respuestas.get(pregunta);
 
             if (respuestaUsuario != null && respuestaUsuario.equals(respuestaCorrecta)) {

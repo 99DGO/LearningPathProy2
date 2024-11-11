@@ -12,23 +12,26 @@ import datosEstudiantes.DatosEstudianteActividad;
 
 public class Quiz extends ActividadCalificable{
 	private List<PreguntaQuiz> preguntas;
+	private boolean verdaderoFalso;
 	
 	//Constructor normal
 	public Quiz(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double calificacionMin, List<PreguntaQuiz> preguntas, 
-			String creadorLogin, CaminoAprendizaje camino) 
+			String creadorLogin, CaminoAprendizaje camino, boolean verdaderoFalso) 
 	{
 		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, calificacionMin, creadorLogin, camino);
 		this.preguntas = preguntas;
 		this.type=QUIZ;
+		this.verdaderoFalso = verdaderoFalso;
 
 	}
 	
 	//Constructor para clonar
-	public Quiz(String creadorID, Quiz ActividadOG, CaminoAprendizaje camino)
+	public Quiz(String creadorID, Quiz ActividadOG, CaminoAprendizaje camino, boolean verdaderoFalso)
 	{
 		super(creadorID, ActividadOG, camino);
 		this.type=QUIZ;
+		this.verdaderoFalso = verdaderoFalso;
 
 		this.preguntas=new ArrayList<PreguntaQuiz>();
 		
@@ -46,10 +49,11 @@ public class Quiz extends ActividadCalificable{
 	public Quiz(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria,  double rating, int ratingsTotales, List<String> resenias,
 			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes,
-			double calificacionMin, List<Actividad> actividadesSigFracaso, List<PreguntaQuiz> preguntas, String id) {
+			double calificacionMin, List<Actividad> actividadesSigFracaso, List<PreguntaQuiz> preguntas, String id, boolean verdaderoFalso) {
 		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria,  rating, ratingsTotales, resenias, creadorLogin, type, datosEstudiantes,
 				calificacionMin, actividadesSigFracaso, id);
 		this.preguntas = preguntas;
+		this.verdaderoFalso = verdaderoFalso;
 	}
 
 	public void addPregunta(PreguntaQuiz pregunta)
@@ -69,6 +73,10 @@ public class Quiz extends ActividadCalificable{
 
 	public List<PreguntaQuiz> getPreguntas() {
 		return preguntas;
+	}
+	
+	public boolean isVerdaderoFalso() {
+		return verdaderoFalso;
 	}
 	
 	//TODO

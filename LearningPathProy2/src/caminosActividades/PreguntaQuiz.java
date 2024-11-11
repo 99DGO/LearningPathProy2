@@ -1,24 +1,33 @@
 package caminosActividades;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PreguntaQuiz {
-	private String[] opciones = new String[4];
+	private int cantidadOpciones;
+	private Map <Integer, OpcionQuiz> opciones;
 	private String textoPregunta;
-	private String[] explicaciones  = new String[4];
-	private String respuesta;
+	private OpcionQuiz respuesta;
 	
-	public PreguntaQuiz(String[] opciones, String textoPregunta, String[] explicaciones, String respuesta) {
-		this.opciones = opciones;
+	public PreguntaQuiz(String textoPregunta, OpcionQuiz respuesta, int cantidadOpciones) {
+		this.opciones = new HashMap<>();
 		this.textoPregunta = textoPregunta;
-		this.explicaciones = explicaciones;
 		this.respuesta = respuesta;
+		this.cantidadOpciones = cantidadOpciones;
 	}
 	
 	public PreguntaQuiz(PreguntaQuiz preguntaOG)
 	{
-		this.opciones = preguntaOG.getOpciones().clone();
+		Map<Integer, OpcionQuiz> opcionesOG = preguntaOG.getOpciones();
+		this.opciones = clonerOpciones(opcionesOG);
 		this.textoPregunta = preguntaOG.getTextoPregunta();
-		this.explicaciones = preguntaOG.getExplicaciones().clone();
 		this.respuesta = preguntaOG.getRespuesta();
+		this.cantidadOpciones = preguntaOG.getCantidadOpciones();
+	}
+
+	private Map<Integer, OpcionQuiz> clonerOpciones(Map<Integer, OpcionQuiz> opcionesOG) {
+		Map<Integer, OpcionQuiz> clonedOpciones = new HashMap<>(opcionesOG);
+		return clonedOpciones;
 	}
 
 	public String getTextoPregunta() {
@@ -29,30 +38,37 @@ public class PreguntaQuiz {
 		this.textoPregunta = textoPregunta;
 	}
 
-	public String getRespuesta() {
+	public OpcionQuiz getRespuesta() {
 		return respuesta;
 	}
 
-	public void setRespuesta(String respuesta) {
-		this.respuesta = respuesta;
+	public void setRespuesta(OpcionQuiz respuesta) {
+		if (this.getOpciones().containsValue(respuesta)) {
+			if (respuesta.isCorrecta() == true)
+				this.respuesta = respuesta;
+			else
+				throw new IllegalArgumentException("La respuesta de la pregunta debe ser correcta");
+		}
+		else
+			throw new IllegalArgumentException("La respuesta de la pregunta debe ser una de las opciones");
 	}
 
-	public String[] getOpciones() {
+	public Map<Integer, OpcionQuiz> getOpciones() {
 		return opciones;
 	}
+	
+	public int getCantidadOpciones() {
+		return cantidadOpciones;
+	}
+	
+	public void setOpcion(int pos, OpcionQuiz opcion)
+	{
+		if (pos < 0 || pos >= this.cantidadOpciones)
+			throw new IllegalArgumentException(
+					"La posición de la opción debe ser mayor o igual a 0 y menor a la cantidad de opciones");
+		else
+			this.opciones.put(pos, opcion);
+	}
 
-	public String[] getExplicaciones() {
-		return explicaciones;
-	}
-	
-	public void setOpcion(int pos, String opcion)
-	{
-		this.opciones[pos]=opcion;
-	}
-	
-	public void setExpliacion(int pos, String explicacion)
-	{
-		this.explicaciones[pos]=explicacion;
-	}
 
 }

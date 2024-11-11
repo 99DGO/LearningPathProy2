@@ -16,17 +16,19 @@ public class ActividadRecurso extends Actividad {
 
 	//Constructor normal
 	public ActividadRecurso(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
-			int[] fechaLim, boolean obligatoria, String recurso, String instrucciones, String creadorLogin, CaminoAprendizaje camino) {
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino);
+			int[] fechaLim, boolean obligatoria, String recurso, String instrucciones, String creadorLogin, 
+			CaminoAprendizaje camino, int pos) throws Exception
+	{
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino, pos);
 		this.recurso = recurso;
 		this.instrucciones = instrucciones;
 		this.type=ACTIVIDADRECURSO;
 	}
 
 	//Constructor para clonar
-	public ActividadRecurso(String creadorLogin, ActividadRecurso ActividadOG, CaminoAprendizaje camino)
+	public ActividadRecurso(String creadorLogin, ActividadRecurso ActividadOG, CaminoAprendizaje camino, int pos) throws Exception
 	{
-		super(creadorLogin, ActividadOG, camino);
+		super(creadorLogin, ActividadOG, camino, pos);
 		
 		this.recurso = ActividadOG.getRecurso();
 		this.instrucciones = ActividadOG.getInstrucciones();

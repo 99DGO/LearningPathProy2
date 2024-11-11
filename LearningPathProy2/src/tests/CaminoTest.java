@@ -60,7 +60,7 @@ public class CaminoTest {
     	try
     	{
     		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
-    		CaminosPersistencia.GuardarCaminoSingular(camino);
+    		CaminosPersistencia.GuardarCaminoSingular(camino, "datosTest/Caminos/");
     	}
     	catch (Exception e)
     	{

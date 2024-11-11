@@ -16,9 +16,11 @@ public abstract class ActividadCalificable extends Actividad{
 	
 	//Constructor normal
 	public ActividadCalificable(String nombre, String descripcion, List<String> objetivos, double dificultad,
-			int duracion, int[] fechaLim, boolean obligatoria, double calificacionMin, String creadorLogin,CaminoAprendizaje camino) {
+			int duracion, int[] fechaLim, boolean obligatoria, double calificacionMin, String creadorLogin,
+			CaminoAprendizaje camino, int pos) throws Exception
+	{
 		
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino);
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino, pos);
 		this.calificacionMin = calificacionMin;
 		this.actividadesSigFracaso=new ArrayList<Actividad>();
 	}
@@ -35,9 +37,9 @@ public abstract class ActividadCalificable extends Actividad{
 	}
 
 	//Constructor clonador
-	public ActividadCalificable(String creadorLogin, ActividadCalificable ActividadOG, CaminoAprendizaje camino)
+	public ActividadCalificable(String creadorLogin, ActividadCalificable ActividadOG, CaminoAprendizaje camino, int pos) throws Exception
 	{
-		super(creadorLogin, ActividadOG, camino);
+		super(creadorLogin, ActividadOG, camino, pos);
 		this.calificacionMin=ActividadOG.getCalificacionMin();
 		this.actividadesSigFracaso=new ArrayList<Actividad>();
 

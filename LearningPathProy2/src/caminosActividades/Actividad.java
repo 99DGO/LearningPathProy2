@@ -39,7 +39,7 @@ public abstract class Actividad {
 	
 	//Constructor normal
 	public Actividad(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion, int[] fechaLim,
-			boolean obligatoria, String creadorID, CaminoAprendizaje camino) 
+			boolean obligatoria, String creadorID, CaminoAprendizaje camino, int pos) throws Exception
 	{
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -53,7 +53,7 @@ public abstract class Actividad {
 		this.actividadesPrereqs=new ArrayList<Actividad>();
 		this.actividadesSigExitoso=new ArrayList<Actividad>();
 		this.ID="Actividad"+UUID.randomUUID().toString();
-		camino.addActividad(this);
+		camino.addActividad(this, pos);
 	}
 	
 	/**Constructor para clonar
@@ -61,7 +61,7 @@ public abstract class Actividad {
 	 * @param creadorID
 	 * @param ActividadOG
 	 */
-	public Actividad(String creadorID, Actividad ActividadOG, CaminoAprendizaje camino)
+	public Actividad(String creadorID, Actividad ActividadOG, CaminoAprendizaje camino, int pos) throws Exception
 	{
 		this.nombre = ActividadOG.getNombre();
 		this.descripcion = ActividadOG.getDescripcion();
@@ -82,8 +82,8 @@ public abstract class Actividad {
     		this.objetivos.add(it1.next());
     	}
 		this.ID="Actividad"+UUID.randomUUID().toString();
-		
-		camino.addActividad(this);
+	
+		camino.addActividad(this, pos);
 
 	}
 	
@@ -326,7 +326,7 @@ public abstract class Actividad {
         
         
         JSONArray datosEstudiantesArray = new JSONArray (this.datosEstudiantes.keySet());
-        jobject.put("actividadesSigExitoso", datosEstudiantesArray);
+        jobject.put("datosEstudiantes", datosEstudiantesArray);
    
 		return jobject;
 	}

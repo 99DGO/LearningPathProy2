@@ -9,11 +9,17 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import caminosActividades.CaminoAprendizaje;
+import controllers.Inscriptor;
 import controllers.LearningPathSystem;
+import creadores.CreadorAR;
 import creadores.CreadorCamino;
+import creadores.CreadorEstudiante;
+import creadores.CreadorExamen;
 import creadores.CreadorProfesor;
 import persistencia.CaminosPersistencia;
+import persistencia.CentralPersistencia;
 import traductores.TraductorCamino;
+import traductores.TraductorEstudiante;
 import traductores.TraductorProfesor;
 
 public class CentralPersistenciaTest 
@@ -35,6 +41,32 @@ public class CentralPersistenciaTest
 		
 		CreadorCamino.crearCaminoCero("Python123", "Un curso para saber los basicos de python", objetivos, 2, IDprof);
 		CreadorCamino.crearCaminoCero("Jaca123", "Un curso para saber los basicos de java", objetivos, 3, IDprof);
+		
+		String idCamino = TraductorCamino.getIDfromNombre("Python123");
+		
+		List<String> objetivosActividad = new LinkedList<String>();
+		objetivosActividad.add("Saber que es un int");
+		objetivosActividad.add("Saber que es un double");
+		objetivosActividad.add("Saber que es un float");
+		
+		List<String> preguntasExamen = new LinkedList<String>();
+		preguntasExamen.add("Cual es la diferencia entre double y float?");
+		preguntasExamen.add("Se puede pasar de un double a un int o de un int a un double? Por que o por que no?");
+		preguntasExamen.add("Diga cual es su tipo de variable favorita y justifique.");
+		
+		int [] fechaLim2= new int[] {0,0,0};
+		CreadorAR.crearARCero(idCamino, "Lectura de variables", "Una lectura para saber los tipos de variable", objetivosActividad, 
+				2, 20, fechaLim2, true, "https://www.w3schools.com/python/python_datatypes.asp", "Lea el articulo", IDprof,0);
+		
+		int[] fechaLim= new int[]{0,1,0};
+		CreadorExamen.crearExamenCero(idCamino, "Tipos de variables examen", "Comprobar que el estudiante sabe diferenciar variables numericos", 
+				objetivosActividad, 2.5, 30, fechaLim, true, 3, preguntasExamen, IDprof,1);
+		
+		
+		CreadorEstudiante.crearEstudiante("TreyClover", "Trey123");
+		String IDEstudiante= TraductorEstudiante.getIDfromLogin("TreyClover");
+
+		Inscriptor.inscribirseCamino(idCamino, IDEstudiante);
 
 	}
 
@@ -45,24 +77,35 @@ public class CentralPersistenciaTest
 		
 		try 
 		{
-			idCamino = TraductorCamino.getIDfromNombre("Python123");
+			CentralPersistencia.guardarCaminosActividadesDatosEstudiante(true);
 		} 
-		catch (Exception e) {
-    		fail("No se encontro el ID del camino con el nombre"); 
+		catch (Exception e) 
+		{
+    		fail("No se guardo"); 
 		}
 	
-    	try
-    	{
-    		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
-    		CaminosPersistencia.GuardarCaminoSingular(camino);
-    	}
-    	catch (Exception e)
-    	{
-    		fail("No se creo el objeto del archivo"); 
-    	}
-    	
 
+    
 	}
+	
+	@Test
+	public void testPersitencia2()
+	{
+		String idCamino=null;
+		
+		try 
+		{
+			CentralPersistencia.guardarCaminosActividadesDatosEstudiante(true);
+		} 
+		catch (Exception e) 
+		{
+    		fail("No se guardo"); 
+		}
+	
+
+    
+	}
+	
 	
 
 }

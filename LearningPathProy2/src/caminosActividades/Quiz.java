@@ -16,9 +16,9 @@ public class Quiz extends ActividadCalificable{
 	//Constructor normal
 	public Quiz(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double calificacionMin, List<PreguntaQuiz> preguntas, 
-			String creadorLogin, CaminoAprendizaje camino, boolean verdaderoFalso) 
+			String creadorLogin, CaminoAprendizaje camino, boolean verdaderoFalso, int pos) throws Exception
 	{
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, calificacionMin, creadorLogin, camino);
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, calificacionMin, creadorLogin, camino, pos);
 		this.preguntas = preguntas;
 		this.type=QUIZ;
 		this.verdaderoFalso = verdaderoFalso;
@@ -26,9 +26,9 @@ public class Quiz extends ActividadCalificable{
 	}
 	
 	//Constructor para clonar
-	public Quiz(String creadorID, Quiz ActividadOG, CaminoAprendizaje camino, boolean verdaderoFalso)
+	public Quiz(String creadorID, Quiz ActividadOG, CaminoAprendizaje camino, boolean verdaderoFalso, int pos)throws Exception
 	{
-		super(creadorID, ActividadOG, camino);
+		super(creadorID, ActividadOG, camino, pos);
 		this.type=QUIZ;
 		this.verdaderoFalso = verdaderoFalso;
 

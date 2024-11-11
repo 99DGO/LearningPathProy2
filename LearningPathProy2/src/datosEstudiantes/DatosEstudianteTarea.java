@@ -1,6 +1,7 @@
 package datosEstudiantes;
 
-import java.util.Date;
+
+import org.json.JSONObject;
 
 public class DatosEstudianteTarea extends DatosEstudianteActividad {
 	private String metodoEntrega;
@@ -8,6 +9,7 @@ public class DatosEstudianteTarea extends DatosEstudianteActividad {
 	public DatosEstudianteTarea(String IDEstudiante,String metodoEntrega) {
 		super(IDEstudiante);
 		this.metodoEntrega = metodoEntrega;
+		this.type=DatosEstudianteActividad.TAREADATO;
 	}
 	
 	
@@ -15,6 +17,7 @@ public class DatosEstudianteTarea extends DatosEstudianteActividad {
 			String metodoEntrega,  String id) {
 		super(IDEstudiante, estado, fechaInicio, fechaFinal, id);
 		this.metodoEntrega = metodoEntrega;
+		this.type=DatosEstudianteActividad.TAREADATO;
 	}
 
 
@@ -26,9 +29,22 @@ public class DatosEstudianteTarea extends DatosEstudianteActividad {
 		this.metodoEntrega = metodoEntrega;
 	}
 	
-	public void finalizarTarea() throws Exception {
+	public void finalizarTarea() throws Exception 
+	{
 		finalizarActividad();
 		setEstado(DatosEstudianteActividad.ENVIADO);
 	}
+	
+	public JSONObject salvarEnJSON()
+	{
+		JSONObject jDatosEst = new JSONObject();
+		jDatosEst=this.addInfoJSONGeneral(jDatosEst);
+		
+		jDatosEst.put("metodoEntrega", this.metodoEntrega);
+		
+		return jDatosEst;
+	}
+
+	
 	
 }

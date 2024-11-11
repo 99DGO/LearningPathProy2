@@ -1,0 +1,27 @@
+{
+ "descripcion": "Una lectura para saber los tipos de variable",
+ "instrucciones": "Lea el articulo",
+ "recurso": "https://www.w3schools.com/python/python_datatypes.asp",
+ "ratingsTotales": 0,
+ "actividadesSigExitoso": ["Actividad2784cca5-4a5f-489a-9ff7-ee13328a5993"],
+ "actividadesPrereqs": [],
+ "rating": 0,
+ "resenias": [],
+ "type": "Actividad recurso",
+ "nombre": "Lectura de variables",
+ "fechaLim": [
+  0,
+  0,
+  0
+ ],
+ "objetivos": [
+  "Saber que es un int",
+  "Saber que es un double",
+  "Saber que es un float"
+ ],
+ "duracion": 20,
+ "obligatoria": true,
+ "creadorID": "Actividadf0ec173a-1c54-4e31-82ec-eeb11f0336da",
+ "id": "Actividad8e034bff-3458-4a68-8979-b93c802f3716",
+ "dificultad": 2
+}

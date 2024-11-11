@@ -13,7 +13,7 @@ public class CreadorEncuesta
 {
 	public static void crearEncuestaCero(String IDcamino, String nombre, String descripcion,
 			List<String> objetivos, double dificultad, int duracion, int[] fechaLim, boolean obligatoria, 
-			List<String> preguntas, String IDprofesor)
+			List<String> preguntas, String IDprofesor, int pos) throws Exception
 	{
 
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
@@ -21,17 +21,17 @@ public class CreadorEncuesta
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
 		
 		Encuesta encuesta= new Encuesta(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria,
-				preguntas, profesor.getID(), camino);
+				preguntas, profesor.getID(), camino, pos);
 		
 	}
 	
-	public static void clonarEncuesta(Actividad encuestaOG, String IDprofesor, String IDcaminoNuevo) 
+	public static void clonarEncuesta(Actividad encuestaOG, String IDprofesor, String IDcaminoNuevo, int pos) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		Profesor profesor= LPS.getProfesorIndividual(IDprofesor);
 		CaminoAprendizaje caminoNuevo= LPS.getCaminoIndividual(IDcaminoNuevo);
 		
-		Encuesta encuesta = new Encuesta(profesor.getID(), (Encuesta) encuestaOG, caminoNuevo);
+		Encuesta encuesta = new Encuesta(profesor.getID(), (Encuesta) encuestaOG, caminoNuevo, pos);
 
 	}
 

@@ -33,13 +33,13 @@ public class ActividadesPersistencia
 		return actividadToReturn;
 	}
 	
-	public static void guardarActividad(Actividad actividad, String caminoID)
+	public static void guardarActividad(Actividad actividad, String caminoID, String pathCaminos)
 	{
 		JSONObject jActividad=actividad.salvarEnJSON();
 		
 
 		//Creo la carpeta de la actividad
-	   File pathCarpetaActividad = new File("datos/Caminos/"+caminoID+"/"+actividad.getId());  
+	   File pathCarpetaActividad = new File(pathCaminos+caminoID+"/"+actividad.getId());  
 	   boolean bool = pathCarpetaActividad.mkdir();  
 	      
 		//Creo el archivo con la información de la actividad
@@ -85,7 +85,7 @@ public class ActividadesPersistencia
 		Writer output;
 		try 
 		{
-			output = new BufferedWriter(new FileWriter("datos/Caminos/"+caminoID+"/ActividadesDirectorio.txt", true));
+			output = new BufferedWriter(new FileWriter(pathCaminos+caminoID+"/ActividadesDirectorio.txt", true));
 			output.append(actividad.getId()+"\n");
 			output.close();
 		} 

@@ -153,5 +153,18 @@ public class EditorCamino
 		Date fecha = new Date();
 		camino.setFechaModificacion(fecha.toString());
 	}
+	
+	public static void cambiarPosActividad(String idCamino, String idActividad, int newPos) throws Exception
+	{
+		LearningPathSystem LPS= LearningPathSystem.getInstance();
+		CaminoAprendizaje camino=LPS.getCaminoIndividual(idCamino);
+		
+		camino.cambiarPosActividad(idActividad, newPos);
+		
+		int version=camino.getVersion();
+		camino.setVersion(version+=1);
+		Date fecha = new Date();
+		camino.setFechaModificacion(fecha.toString());
+	}
 
 }

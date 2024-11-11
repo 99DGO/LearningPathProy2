@@ -18,8 +18,10 @@ public class Tarea extends Actividad{
 	
 	//Constructor normal
 	public Tarea(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
-			int[] fechaLim, boolean obligatoria, String instrucciones, String creadorLogin, CaminoAprendizaje camino) {
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino);
+			int[] fechaLim, boolean obligatoria, String instrucciones, String creadorLogin, 
+			CaminoAprendizaje camino, int pos)throws Exception
+	{
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino, pos);
 		this.instrucciones = instrucciones;
 		this.type=TAREA;
 
@@ -31,9 +33,9 @@ public class Tarea extends Actividad{
 	 * @param creadorLogin
 	 * @param ActividadOG
 	 */
-	public Tarea(String creadorLogin, Tarea ActividadOG, CaminoAprendizaje camino)
+	public Tarea(String creadorLogin, Tarea ActividadOG, CaminoAprendizaje camino, int pos)throws Exception
 	{
-		super(creadorLogin, ActividadOG, camino);
+		super(creadorLogin, ActividadOG, camino, pos);
 		this.type=TAREA;
 
 		this.actividadesSigFracaso=new ArrayList<Actividad>();

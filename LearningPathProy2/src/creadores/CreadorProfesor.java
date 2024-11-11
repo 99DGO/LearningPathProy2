@@ -7,8 +7,11 @@ import usuarios.Profesor;
 
 public class CreadorProfesor
 {
-	public static void crearProfesor(LearningPathSystem LPS, String login, String password, String nombre) throws Exception
+	//public static void crearProfesor(LearningPathSystem LPS, String login, String password, String nombre) throws Exception
+	public static void crearProfesor(String login, String password, String nombre) throws Exception
+
 	{
+		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		HashMap<String, Profesor> profesores=LPS.getProfesores();
 		
 		for (Profesor profesor: profesores.values())
@@ -24,7 +27,8 @@ public class CreadorProfesor
             
 	}
 	
-	public static void eliminarProfesor(LearningPathSystem LPS, String IDprofesor) throws Exception {
+	public static void eliminarProfesor(String IDprofesor) throws Exception {
+		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		HashMap<String, Profesor> profesores = LPS.getProfesores();
 
 		if (profesores.containsKey(IDprofesor)) {

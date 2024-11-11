@@ -44,7 +44,7 @@ public class Autentificador {
 		if (usuario.getType() == "Estudiante") {
 			if (LPS.getEstudianteIndividual(usuario.getID()) == null) {
 				try {
-					CreadorEstudiante.crearEstudiante(LPS, usuario.getLogin(), usuario.getPassword(),
+					CreadorEstudiante.crearEstudiante(usuario.getLogin(), usuario.getPassword(),
 							usuario.getNombre());
 					if (LPS.getEstudianteIndividual(usuario.getID()) != null) {
 						return true;
@@ -58,7 +58,7 @@ public class Autentificador {
 		} else if (usuario.getType() == "Profesor") {
 			if (LPS.getProfesorIndividual(usuario.getID()) == null) {
 				try {
-					CreadorProfesor.crearProfesor(LPS, usuario.getLogin(), usuario.getPassword(), usuario.getNombre());
+					CreadorProfesor.crearProfesor(usuario.getLogin(), usuario.getPassword(), usuario.getNombre());
 					if (LPS.getProfesorIndividual(usuario.getID()) != null) {
 						return true;
 					} else
@@ -76,14 +76,14 @@ public class Autentificador {
 	public void eliminarUsuario(String ID) {
 		if (LPS.getEstudianteIndividual(ID) != null) {
 			try {
-				CreadorEstudiante.eliminarEstudiante(LPS, ID);
+				CreadorEstudiante.eliminarEstudiante(ID);
 			} catch (Exception e) {
 				e.getMessage();
 				e.printStackTrace();
 			}
 		} else if (LPS.getProfesorIndividual(ID) != null) {
 			try {
-				CreadorProfesor.eliminarProfesor(LPS, ID);
+				CreadorProfesor.eliminarProfesor(ID);
 			} catch (Exception e) {
 				e.getMessage();
 				e.printStackTrace();

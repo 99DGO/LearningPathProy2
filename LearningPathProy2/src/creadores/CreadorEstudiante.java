@@ -7,8 +7,9 @@ import usuarios.Estudiante;
 
 public class CreadorEstudiante 
 {
-	public static void crearEstudiante(LearningPathSystem LPS, String login, String password, String nombre) throws Exception
+	public static void crearEstudiante(String login, String password, String nombre) throws Exception
 	{
+		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		HashMap<String, Estudiante> estudiantes=LPS.getEstudiantes();
 		
 		for (Estudiante estudiante: estudiantes.values())
@@ -25,7 +26,8 @@ public class CreadorEstudiante
             
 	}
 	
-	public static void eliminarEstudiante(LearningPathSystem LPS, String ID) throws Exception {
+	public static void eliminarEstudiante(String ID) throws Exception {
+		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		HashMap<String, Estudiante> estudiantes = LPS.getEstudiantes();
 
 		if (estudiantes.get(ID) == null) {

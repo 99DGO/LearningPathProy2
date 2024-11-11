@@ -12,7 +12,7 @@ import datosEstudiantes.DatosEstudianteActividad;
 
 public class Quiz extends ActividadCalificable{
 	private List<PreguntaQuiz> preguntas;
-	private boolean verdaderoFalso;
+	private boolean verdaderoFalso; //true si es un quiz de verdadero o falso, false si es de opcion multiple
 	
 	//Constructor normal
 	public Quiz(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,

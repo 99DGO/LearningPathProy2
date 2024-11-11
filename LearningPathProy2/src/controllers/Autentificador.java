@@ -8,7 +8,7 @@ import usuarios.Usuario;
 
 public class Autentificador {
 	private static Autentificador autentificador = null;
-    private LearningPathSystem LPS;
+	private LearningPathSystem LPS;
 
 	private Autentificador(LearningPathSystem LPS) {
 		this.LPS = LPS;
@@ -22,39 +22,52 @@ public class Autentificador {
 
 	public Usuario autentificar(String ID, String contrasena) throws Exception {
 		Usuario usuario = null;
-		usuario = LPS.getEstudianteIndividual(ID);
-		if (usuario == null)
-			usuario = LPS.getProfesorIndividual(ID);
+		usuario = LPS.getEstudianteIndividual("Estudiante-"+ID);
+		if (usuario == null) {
+			usuario = LPS.getProfesorIndividual("Profesor-"+ID);
+		}
+		
 		if (usuario != null) {
-			if (usuario.getPassword().equals(contrasena))
+			String psswrd = usuario.getPassword();
+			if (psswrd.equals(contrasena)) {
 				return usuario;
-			else
+			} else {
 				throw new Exception("Usuario o contraseña incorrecta. \n");
-		} else
+			}
+		} else {
 			throw new Exception("Usuario no encontrado. \n");
+		}
+
 	}
 
-	public boolean registrarUsuario(Usuario usuario) {
-		if (usuario instanceof Estudiante) {
+	public boolean registrarUsuario(Usuario usuario) throws Exception{
+		if (usuario.getType() == "Estudiante") {
 			if (LPS.getEstudianteIndividual(usuario.getID()) == null) {
 				try {
-					CreadorEstudiante.crearEstudiante(LPS, usuario.getLogin(), usuario.getPassword(), usuario.getNombre());
+					CreadorEstudiante.crearEstudiante(LPS, usuario.getLogin(), usuario.getPassword(),
+							usuario.getNombre());
+					if (LPS.getEstudianteIndividual(usuario.getID()) != null) {
+						return true;
+					} else
+						return false;
 				} catch (Exception e) {
 					e.getMessage();
 					e.printStackTrace();
 				}
-				return true;
 			}
-		} else if (usuario instanceof Profesor) {
+		} else if (usuario.getType() == "Profesor") {
 			if (LPS.getProfesorIndividual(usuario.getID()) == null) {
 				try {
 					CreadorProfesor.crearProfesor(LPS, usuario.getLogin(), usuario.getPassword(), usuario.getNombre());
+					if (LPS.getProfesorIndividual(usuario.getID()) != null) {
+						return true;
+					} else
+						return false;
 				} catch (Exception e) {
 					e.getMessage();
 					e.printStackTrace();
 				}
 
-				return true;
 			}
 		}
 		return false;
@@ -70,11 +83,11 @@ public class Autentificador {
 			}
 		} else if (LPS.getProfesorIndividual(ID) != null) {
 			try {
-                CreadorProfesor.eliminarProfesor(LPS, ID);
-            } catch (Exception e) {
-                e.getMessage();
-                e.printStackTrace();
-            }
+				CreadorProfesor.eliminarProfesor(LPS, ID);
+			} catch (Exception e) {
+				e.getMessage();
+				e.printStackTrace();
+			}
 		}
 	}
 

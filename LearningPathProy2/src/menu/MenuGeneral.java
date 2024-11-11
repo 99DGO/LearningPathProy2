@@ -73,14 +73,14 @@ public class MenuGeneral {
 		try {
 			Usuario usuario = autentificador.autentificar(login, password);
 			if (usuario != null) {
-				if (usuario.getType().equals("profesor")) {
-					System.out.println("Bienvenido profesor " + login);
+				if (usuario.getType().equals("Profesor")) {
+					System.out.println("Bienvenido Profesor " + usuario.getNombre());
 					MenuEstudiante.mostarMenuEstudiante();
-				} else if (usuario.getType().equals("estudiante")) {
-					System.out.println("Bienvenido estudiante " + login);
+				} else if (usuario.getType().equals("Estudiante")) {
+					System.out.println("Bienvenido Estudiante " + usuario.getNombre());
 					MenuProfesor.mostrarMenuProfesor();
 				} else {
-					System.out.println("Usuario no encontrado. \n");
+					System.out.println("Usuario no encontrado en la base de datos. \n");
 				}
 			}
 		} catch (Exception e) {
@@ -119,11 +119,16 @@ public class MenuGeneral {
 		}
 
 		if (newUsuario != null) {
-			if (autentificador.registrarUsuario(newUsuario)) {
-				System.out.println( LPS.getEstudiantes().get(login));
-				System.out.println("Usuario registrado exitosamente. \n");
-			} else {
-				System.out.println("Error en el proceso de registro. \n");
+			try {
+				if (autentificador.registrarUsuario(newUsuario)== true) {
+					System.out.println("Usuario registrado exitosamente. \n");
+				} else {
+					System.out.println("Error en el proceso de registro. \n");
+					
+				}
+			} catch (Exception e) {
+				e.getMessage();
+				e.printStackTrace();
 			}
 		}
 

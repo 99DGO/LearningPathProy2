@@ -12,23 +12,26 @@ import datosEstudiantes.DatosEstudianteActividad;
 
 public class Quiz extends ActividadCalificable{
 	private List<PreguntaQuiz> preguntas;
+	private boolean verdaderoFalso; //true si es un quiz de verdadero o falso, false si es de opcion multiple
 	
 	//Constructor normal
 	public Quiz(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double calificacionMin, List<PreguntaQuiz> preguntas, 
-			String creadorLogin, CaminoAprendizaje camino, int pos) throws Exception
+			String creadorLogin, CaminoAprendizaje camino, boolean verdaderoFalso, int pos) throws Exception
 	{
 		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, calificacionMin, creadorLogin, camino, pos);
 		this.preguntas = preguntas;
 		this.type=QUIZ;
+		this.verdaderoFalso = verdaderoFalso;
 
 	}
 	
 	//Constructor para clonar
-	public Quiz(String creadorID, Quiz ActividadOG, CaminoAprendizaje camino, int pos)throws Exception
+	public Quiz(String creadorID, Quiz ActividadOG, CaminoAprendizaje camino, boolean verdaderoFalso, int pos)throws Exception
 	{
 		super(creadorID, ActividadOG, camino, pos);
 		this.type=QUIZ;
+		this.verdaderoFalso = verdaderoFalso;
 
 		this.preguntas=new ArrayList<PreguntaQuiz>();
 		
@@ -46,10 +49,11 @@ public class Quiz extends ActividadCalificable{
 	public Quiz(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria,  double rating, int ratingsTotales, List<String> resenias,
 			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes,
-			double calificacionMin, List<Actividad> actividadesSigFracaso, List<PreguntaQuiz> preguntas, String id) {
+			double calificacionMin, List<Actividad> actividadesSigFracaso, List<PreguntaQuiz> preguntas, String id, boolean verdaderoFalso) {
 		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria,  rating, ratingsTotales, resenias, creadorLogin, type, datosEstudiantes,
 				calificacionMin, actividadesSigFracaso, id);
 		this.preguntas = preguntas;
+		this.verdaderoFalso = verdaderoFalso;
 	}
 
 	public void addPregunta(PreguntaQuiz pregunta)
@@ -69,6 +73,10 @@ public class Quiz extends ActividadCalificable{
 
 	public List<PreguntaQuiz> getPreguntas() {
 		return preguntas;
+	}
+	
+	public boolean isVerdaderoFalso() {
+		return verdaderoFalso;
 	}
 	
 	//TODO

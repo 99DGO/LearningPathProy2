@@ -9,7 +9,7 @@ public class Profesor extends Usuario{
 	private List<CaminoAprendizaje> caminos;
 	
 	public Profesor(String login, String password) {
-		super(login, password, Usuario.PROFESOR);
+		super(login, password, Usuario.PROFESOR+"-"+login);
 		this.caminos=new ArrayList<CaminoAprendizaje>();
 	}
 	

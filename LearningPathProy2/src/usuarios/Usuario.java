@@ -15,7 +15,7 @@ public abstract class Usuario {
 		this.login = login;
 		this.password = password;
 		this.type = type;
-		this.ID="Actividad"+UUID.randomUUID().toString();
+		this.ID=type;
 	}
 
 	public String getLogin() {

@@ -13,7 +13,7 @@ public class Estudiante extends Usuario {
 	
 	public Estudiante(String login, String password) 
 	{
-		super(login, password, Usuario.ESTUDIANTE);
+		super(login, password, Usuario.ESTUDIANTE+"-"+login);
 		this.historialCaminos=new ArrayList<CaminoAprendizaje>();
 		this.intereses=new ArrayList<String>();
 	}

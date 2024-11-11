@@ -55,6 +55,7 @@ public class CargarJSONtest {
 		} 
 		catch (Exception e) 
 		{
+			e.printStackTrace();
     		fail("No se cargo, tiro"+e.getMessage()); 
 		}
 		

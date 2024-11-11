@@ -21,7 +21,7 @@ import controllers.LearningPathSystem;
 
 public class CaminosPersistencia 
 {
-	public static void GuardarCaminoSingular(CaminoAprendizaje camino, String pathCaminos)
+	public static void GuardarCaminoSingular(CaminoAprendizaje camino, String pathCaminos, File fileCaminosDirectorio)
 	{
 		String caminoID = camino.getID();
 		JSONObject jCamino= camino.salvarEnJSON();
@@ -73,7 +73,7 @@ public class CaminosPersistencia
 		Writer output;
 		try 
 		{
-			output = new BufferedWriter(new FileWriter(pathCaminos+"CaminosDirectorio.txt", true));
+			output = new BufferedWriter(new FileWriter(fileCaminosDirectorio, true));
 			output.append(caminoID+"\n");
 			output.close();
 		} 

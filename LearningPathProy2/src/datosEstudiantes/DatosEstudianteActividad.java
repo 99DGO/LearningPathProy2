@@ -28,7 +28,8 @@ public abstract class DatosEstudianteActividad {
 	public DatosEstudianteActividad(String IDEstudiante) {
 		this.IDEstudiante = IDEstudiante;
 		this.estado = PENDIENTE;
-		this.fechaFinal = null;  //Se asigna cuando se finalice la actividad
+		this.fechaFinal = "No finalizada";  //Se asigna cuando se finalice la actividad
+		this.fechaInicio="No iniciada";
 		this.id="DatoEstudiante_"+UUID.randomUUID().toString();
 	} 
 	

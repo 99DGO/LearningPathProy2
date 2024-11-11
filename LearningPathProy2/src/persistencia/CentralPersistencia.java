@@ -60,7 +60,7 @@ public class CentralPersistencia
 		for (String caminoID: caminosHash.keySet())
 		{
 			CaminoAprendizaje camino = caminosHash.get(caminoID);
-			CaminosPersistencia.GuardarCaminoSingular(camino, pathCaminos);
+			CaminosPersistencia.GuardarCaminoSingular(camino, pathCaminos, fileCaminosDirectorio);
 
 		}
 		

@@ -14,7 +14,7 @@ public class DatosEstudianteExamen extends DatosEstudianteActividad {
 	
 	public DatosEstudianteExamen(String IDEstudiante) {
 		super(IDEstudiante);
-		calificacion = 0.0;
+		this.calificacion = 0.0;
 		this.type=DatosEstudianteActividad.EXAMENDATO;
 		this.envio=new EnvioExamen();
 	}
@@ -64,7 +64,7 @@ public class DatosEstudianteExamen extends DatosEstudianteActividad {
 		
 		jRespuestas= new JSONArray(preguntasRespuestas);
 		jDatosEst.put("envio", jRespuestas);
-		jDatosEst.put("calificacionEnvio", this.envio.getCalificacion());
+		jDatosEst.put("calificacion", this.envio.getCalificacion());
 
 		
 		return jDatosEst;

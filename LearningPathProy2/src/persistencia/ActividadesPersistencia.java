@@ -148,7 +148,7 @@ public class ActividadesPersistencia
     	}
     	
     	//Saco los datosEstudiantes
-    	JSONArray jDatosEstIDs = jActividad.getJSONArray("resenias");
+    	JSONArray jDatosEstIDs = jActividad.getJSONArray("datosEstudiantes");
     	HashMap<String, DatosEstudianteActividad> datosEstHash = new HashMap<String, DatosEstudianteActividad>();
     	
     	for (int i3 =0; i3<jDatosEstIDs.length(); i3++)

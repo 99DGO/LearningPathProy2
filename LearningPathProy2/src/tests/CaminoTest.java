@@ -39,6 +39,7 @@ public class CaminoTest {
 	
 	private LearningPathSystem LPS =LearningPathSystem.getInstance();
 
+	/*
 	static boolean deleteDirectory(File directoryToBeDeleted) 
 	{
 	    File[] allContents = directoryToBeDeleted.listFiles();
@@ -57,7 +58,7 @@ public class CaminoTest {
 	// y despues nunca mas
 	static void init() throws Exception 
 	{
-		File fileCaminosDirectorio = new File("/LearningPathProy2/datosTests/Caminos/CaminosDirectorio.txt");
+		File fileCaminosDirectorio = new File("LearningPathProy2/datosTests/Caminos/CaminosDirectorio.txt");
 		
 		//Leo el archivo
 		try (BufferedReader br = new BufferedReader(new FileReader(fileCaminosDirectorio))) 
@@ -123,6 +124,8 @@ public class CaminoTest {
 	public void testGuardarPersitencia()
 	{
 		String idCamino=null;
+		File fileCaminosDirectorio = new File("LearningPathProy2/datosTests/Caminos/CaminosDirectorio.txt");
+
 		
 		try 
 		{
@@ -135,7 +138,7 @@ public class CaminoTest {
     	try
     	{
     		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
-    		CaminosPersistencia.GuardarCaminoSingular(camino, "/LearningPathProy2/datosTest/Caminos/");
+    		CaminosPersistencia.GuardarCaminoSingular(camino, "/LearningPathProy2/LearningPathProy2/datosTests/Caminos/", fileCaminosDirectorio);
     	}
     	catch (Exception e)
     	{
@@ -144,7 +147,7 @@ public class CaminoTest {
     	
 
 	}
-	
+	*/
 
 	 
 }

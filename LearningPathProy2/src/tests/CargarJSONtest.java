@@ -1,6 +1,7 @@
 package tests;
 
 import static org.junit.Assert.fail;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedReader;
@@ -13,7 +14,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test; 
 
 import controllers.Inscriptor;
 import controllers.LearningPathSystem;

@@ -8,13 +8,13 @@ import caminosActividades.CaminoAprendizaje;
 public class Profesor extends Usuario{
 	private List<CaminoAprendizaje> caminos;
 	
-	public Profesor(String login, String password) {
-		super(login, password, Usuario.PROFESOR);
+	public Profesor(String login, String password, String nombre) {
+		super(login, password, Usuario.PROFESOR ,Usuario.PROFESOR+"-"+login, nombre);
 		this.caminos=new ArrayList<CaminoAprendizaje>();
 	}
 	
-	public Profesor(String login, String password, String type, List<CaminoAprendizaje> caminos) {
-		super(login, password, type);
+	public Profesor(String login, String password, String type, List<CaminoAprendizaje> caminos, String nombre) {
+		super(login, password, type, Usuario.PROFESOR+"-"+login, nombre);
 		this.caminos = caminos;
 	}
 

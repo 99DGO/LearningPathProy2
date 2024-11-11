@@ -19,6 +19,6 @@ public abstract class Envio<K> {
 
 	public abstract HashMap<K, String> getRespuestas();
 	 
-	 public abstract void agregarRespuesta(K pregunta, String respuesta);
+	public abstract void agregarRespuesta(K pregunta, String respuesta);
 	   
 }

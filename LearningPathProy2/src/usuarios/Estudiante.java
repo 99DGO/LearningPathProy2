@@ -11,17 +11,17 @@ public class Estudiante extends Usuario {
 	private List<String> intereses;
 	private boolean actividadActiva=false;
 	
-	public Estudiante(String login, String password) 
+	public Estudiante(String login, String password, String nombre) 
 	{
-		super(login, password, Usuario.ESTUDIANTE);
+		super(login, password, Usuario.ESTUDIANTE, Usuario.ESTUDIANTE+"-"+login, nombre);
 		this.historialCaminos=new ArrayList<CaminoAprendizaje>();
 		this.intereses=new ArrayList<String>();
 	}
 	
 	
 	public Estudiante(String login, String password, String type, List<CaminoAprendizaje> historialCaminos, List<String> intereses,
-			boolean actividadActiva) {
-		super(login, password, type);
+			boolean actividadActiva, String nombre) {
+		super(login, password, type, Usuario.ESTUDIANTE+"-"+login, nombre);
 		this.historialCaminos = historialCaminos;
 		this.intereses = intereses;
 		this.actividadActiva = actividadActiva;

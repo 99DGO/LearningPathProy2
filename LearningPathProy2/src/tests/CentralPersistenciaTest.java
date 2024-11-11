@@ -96,7 +96,7 @@ public class CentralPersistenciaTest
 
 		try
 		{
-			CreadorProfesor.crearProfesor("Kakashi", "Kakashi123");
+			CreadorProfesor.crearProfesor("Kakashi", "Kakashi123", "Kakashi Hatake");
 			String IDprof = TraductorProfesor.getIDfromLogin("Kakashi");
 			
 			List<String> objetivos = new LinkedList<String>();
@@ -128,7 +128,7 @@ public class CentralPersistenciaTest
 					objetivosActividad, 2.5, 30, fechaLim, true, 3, preguntasExamen, IDprof,1);
 			
 			
-			CreadorEstudiante.crearEstudiante("TreyClover", "Trey123");
+			CreadorEstudiante.crearEstudiante("Trey", "Trey123", "Trey Clover");
 			String IDEstudiante= TraductorEstudiante.getIDfromLogin("TreyClover");
 	
 			Inscriptor.inscribirseCamino(idCamino, IDEstudiante);

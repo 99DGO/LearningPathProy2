@@ -6,16 +6,18 @@ public abstract class Usuario {
 	public static final String ESTUDIANTE = "Estudiante";
 	public static final String PROFESOR = "Profesor";
 	
+	private String nombre;
 	private String login;
 	private String password;
 	private String type;
 	private final String ID;
 	
-	public Usuario(String login, String password, String type) {
+	public Usuario(String login, String password, String type, String ID, String nombre) {
+		this.nombre = nombre;
 		this.login = login;
 		this.password = password;
 		this.type = type;
-		this.ID="Actividad"+UUID.randomUUID().toString();
+		this.ID=ID;
 	}
 
 	public String getLogin() {
@@ -38,6 +40,12 @@ public abstract class Usuario {
 		return ID;
 	}
 
+	public String getNombre() {
+		return nombre;
+	}
 	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 	
 }

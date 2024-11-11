@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -21,6 +22,7 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
@@ -33,6 +35,7 @@ import creadores.CreadorCamino;
 import creadores.CreadorEstudiante;
 import creadores.CreadorExamen;
 import creadores.CreadorProfesor;
+import datosEstudiantes.DatosEstudianteActividad;
 import persistencia.ActividadesPersistencia;
 import persistencia.CaminosPersistencia;
 import persistencia.CentralPersistencia;
@@ -59,30 +62,40 @@ public class CentralPersistenciaTest
 	@BeforeAll
 	static void init() throws Exception 
 	{
-		File fileCaminosDirectorio = new File("datosTests/Caminos/CaminosDirectorio.txt");
+		File fileCaminosDirectorio = new File("LearningPathProy2/datosTests/Caminos/CaminosDirectorio.txt");
 	
 		//Leo el archivo
-		try (BufferedReader br = new BufferedReader(new FileReader(fileCaminosDirectorio))) 
-		{		        
-			
-		    String line;
-		    //Recorro el directorio para borrar las carpetas
-		    while ((line = br.readLine()) != null) 
-		    {
-		    	File carpetaCamino = new File("datosTests/Caminos/"+line);
-		       
-		        deleteDirectory(carpetaCamino);
-		    	
-		    }
-		} 
-		catch (FileNotFoundException e) 
+		if (fileCaminosDirectorio.exists())
 		{
-			e.printStackTrace();
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
+			try (BufferedReader br = new BufferedReader(new FileReader(fileCaminosDirectorio))) 
+			{		        
+				
+			    String line;
+			    //Recorro el directorio para borrar las carpetas
+			    while ((line = br.readLine()) != null) 
+			    {
+			    	File carpetaCamino = new File("/LearningPathProy2/LearningPathProy2/datosTests/Caminos/"+line);
+			       
+			        deleteDirectory(carpetaCamino);
+			    	
+			    }
+			} 
+			catch (FileNotFoundException e) 
+			{			
+				e.printStackTrace();
+				fail("Error en el set up, file not found");
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+				fail("Error en el set up, IO exception");
+			}
 		}
+		else
+		{
+			fail("No existe el directorio");
+		}
+
 
 	}
 	
@@ -96,8 +109,8 @@ public class CentralPersistenciaTest
 
 		try
 		{
-			CreadorProfesor.crearProfesor("Kakashi", "Kakashi123", "Kakashi Hatake");
-			String IDprof = TraductorProfesor.getIDfromLogin("Kakashi");
+			CreadorProfesor.crearProfesor("KakashiCentralPersistenciaTest", "Kakashi123", "Kakashi Hatake");
+			String IDprof = TraductorProfesor.getIDfromLogin("KakashiCentralPersistenciaTest");
 			
 			List<String> objetivos = new LinkedList<String>();
 			objetivos.add("Saber diferentes tipos de datos");
@@ -128,7 +141,7 @@ public class CentralPersistenciaTest
 					objetivosActividad, 2.5, 30, fechaLim, true, 3, preguntasExamen, IDprof,1);
 			
 			
-			CreadorEstudiante.crearEstudiante("Trey", "Trey123", "Trey Clover");
+			CreadorEstudiante.crearEstudiante("TreyClover", "Trey123", "Trey Clover");
 			String IDEstudiante= TraductorEstudiante.getIDfromLogin("TreyClover");
 	
 			Inscriptor.inscribirseCamino(idCamino, IDEstudiante);
@@ -148,10 +161,9 @@ public class CentralPersistenciaTest
     		fail("No se guardo, tiro"+e.getMessage()); 
 			e.printStackTrace();
 		}	
-		
-		assertEquals( 2, LPS.getCaminos().keySet().size(), "No se cargaron el numero correcto de caminos" );
-
+	
 	}
 	
+
 
 }

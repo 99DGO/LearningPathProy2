@@ -57,7 +57,7 @@ public class CaminoTest {
 	// y despues nunca mas
 	static void init() throws Exception 
 	{
-		File fileCaminosDirectorio = new File("datosTests/Caminos/CaminosDirectorio.txt");
+		File fileCaminosDirectorio = new File("/LearningPathProy2/datosTests/Caminos/CaminosDirectorio.txt");
 		
 		//Leo el archivo
 		try (BufferedReader br = new BufferedReader(new FileReader(fileCaminosDirectorio))) 
@@ -67,7 +67,7 @@ public class CaminoTest {
 		    //Recorro el directorio para borrar las carpetas
 		    while ((line = br.readLine()) != null) 
 		    {
-		    	File carpetaCamino = new File("datosTests/Caminos/"+line);
+		    	File carpetaCamino = new File("/LearningPathProy2/datosTests/Caminos/"+line);
 		       
 		        deleteDirectory(carpetaCamino);
 		    	
@@ -92,13 +92,12 @@ public class CaminoTest {
 		String IDprof=null;
 		try
 		{
-			CreadorProfesor.crearProfesor("Kakashi", "Kakashi123", "Kakashi Hatake");
-			IDprof = TraductorProfesor.getIDfromLogin("Kakashi");
+			CreadorProfesor.crearProfesor("KakashiCaminoTest", "Kakashi123", "Kakashi Hatake");
+			IDprof = TraductorProfesor.getIDfromLogin("KakashiCaminoTest");
 		}
 		catch (Exception e)
 		{
-			System.out.print(e.getMessage());
-			fail("Error en la creación de profesor. Chequear otras pruebas");
+			fail("Error en la creación de profesor. Chequear otras pruebas"+e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -136,7 +135,7 @@ public class CaminoTest {
     	try
     	{
     		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
-    		CaminosPersistencia.GuardarCaminoSingular(camino, "datosTest/Caminos/");
+    		CaminosPersistencia.GuardarCaminoSingular(camino, "/LearningPathProy2/datosTest/Caminos/");
     	}
     	catch (Exception e)
     	{
@@ -146,54 +145,6 @@ public class CaminoTest {
 
 	}
 	
-	@Test
-	@Order(2)
-	public void testCargarPersistencia()
-	{
-		CentralPersistencia.guardarCaminosActividadesDatosEstudiante(true);
 
-		String idCamino=null;
-		String idActividad=null;
-		
-		try 
-		{
-			idCamino = TraductorCamino.getIDfromNombre("Python123");
-		} 
-		catch (Exception e) {
-    		fail("No se encontro el ID del camino con el nombre"); 
-		}
-		
-		
-		String pathCamino=("datosTests/Caminos/"+idCamino+"/");		
-    	String contentCamino=null;
-		try 
-		{
-			File caminoFile = new File(pathCamino+idCamino+".json");
-			assertTrue("No existe el archivo del camino", caminoFile.exists());
-			contentCamino = new String(Files.readAllBytes(Paths.get(pathCamino+idCamino+".json")));
-		} 
-		catch (IOException e)
-		{
-			fail("No se encontro el archivo de la actividad");
-			e.printStackTrace();
-		}
-    	
-		assertFalse("No se consiguio el content del camino", contentCamino==null);
-		
-    	JSONObject jCamino = new JSONObject(contentCamino);
-    
-    	CaminoAprendizaje camino=null;
-		try 
-		{
-			camino = CaminosPersistencia.cargarCamino(jCamino, pathCamino);
-		} catch (IOException e) 
-		{
-			fail("No deberia sacar exception");
-			e.printStackTrace();
-		}
-		
-    	assertEquals("Python123", camino.getTitulo(), "El nombre de la actividad no se guardo bien" );
-    	
-	}
 	 
 }

@@ -20,24 +20,25 @@ import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
 import controllers.LearningPathSystem;
 import datosEstudiantes.DatosEstudianteActividad;
+import usuarios.Estudiante;
 
 public class CentralPersistencia 
 {
 	
-	public static void guardarCaminosActividadesDatosEstudiante(boolean test)
+	public static void guardarCaminosActividadesDatosEstudiante(boolean test) throws Exception
 	{
 		String pathCaminosDirectorio;
 		String pathCaminos;
 		
 		if (test)
 		{
-			pathCaminosDirectorio = "datosTests/Caminos/CaminosDirectorio.txt";
-			pathCaminos="datosTests/Caminos/";
+			pathCaminosDirectorio = "LearningPathProy2/datosTests/Caminos/CaminosDirectorio.txt";
+			pathCaminos="LearningPathProy2/datosTests/Caminos/";
 		}
 		else
 		{
-			pathCaminosDirectorio = "datos/Caminos/CaminosDirectorio.txt";
-			pathCaminos="datos/Caminos/";
+			pathCaminosDirectorio = "LearningPathProy2/datos/Caminos/CaminosDirectorio.txt";
+			pathCaminos="LearningPathProy2/datos/Caminos/";
 
 		}
 
@@ -60,23 +61,24 @@ public class CentralPersistencia
 		{
 			CaminoAprendizaje camino = caminosHash.get(caminoID);
 			CaminosPersistencia.GuardarCaminoSingular(camino, pathCaminos);
-			
-			//Limpio el directorio para que no queden dobles nombres
-			String pathActividadesDirectorio = pathCaminos+caminoID+"/ActividadesDirectorio.txt";
-			File fileActividadesDirectorio = new File(pathActividadesDirectorio);
-			try(PrintWriter pwActividadesDirectorio = new PrintWriter(fileActividadesDirectorio))
-			{
-			} 
-			catch (FileNotFoundException e) 
-			{
-			  e.printStackTrace();
-			}
+
+		}
+		
+		//Recorro cada camino para guardarlo
+		//Toca aparte para que las actividades no pongan problemas por el directorio
+		for (String caminoID: caminosHash.keySet())
+		{
+			CaminoAprendizaje camino = caminosHash.get(caminoID);
 			
 			//Recorro las actividades para guardarlas
 			for (Actividad actividadIterator: camino.getActividades())
 			{
 				ActividadesPersistencia.guardarActividad(actividadIterator, caminoID, pathCaminos);
-				
+			}
+			
+			//Recorro las actividades para guardarlas
+			for (Actividad actividadIterator: camino.getActividades())
+			{
 				//Recorro los datos de estudiantes para guardarlos
 				for (DatosEstudianteActividad datosEstIterator: actividadIterator.getDatosEstudiantes().values())
 				{
@@ -87,7 +89,7 @@ public class CentralPersistencia
 		}
 	}
 	
-	public static void cargarCaminosActividadesDatosEstudiante(boolean test)
+	public static void cargarCaminosActividadesDatosEstudiante(boolean test) throws Exception
 	{
 
     	LearningPathSystem LPS = LearningPathSystem.getInstance();
@@ -97,13 +99,13 @@ public class CentralPersistencia
 		
 		if (test)
 		{
-			pathCaminosDirectorio = "datosTests/Caminos/CaminosDirectorio.txt";
-			pathCaminos="datosTests/Caminos/";
+			pathCaminosDirectorio = "LearningPathProy2/datosTests/Caminos/CaminosDirectorio.txt";
+			pathCaminos="LearningPathProy2/datosTests/Caminos/";
 		}
 		else
 		{
-			pathCaminosDirectorio = "datos/Caminos/CaminosDirectorio.txt";
-			pathCaminos="datos/Caminos/";
+			pathCaminosDirectorio = "LearningPathProy2/datos/Caminos/CaminosDirectorio.txt";
+			pathCaminos="LearningPathProy2/datos/Caminos/";
 		}
 		
 		File fileCaminosDirectorio = new File(pathCaminosDirectorio);
@@ -133,6 +135,45 @@ public class CentralPersistencia
 		catch (IOException e) 
 		{
 			e.printStackTrace();
+		}
+	}
+	
+	public static void guardarEstudiantes(boolean test)
+	{
+    	LearningPathSystem LPS = LearningPathSystem.getInstance();
+		HashMap<String, Estudiante> estudiantesHash=LPS.getEstudiantes();
+		
+		String pathEstudiantesDirectorio;
+		String pathEstudiantes;
+		
+		if (test)
+		{
+			pathEstudiantesDirectorio = "LearningPathProy2/datosTests/estudiantes/estudiantesDirectorio.txt";
+			pathEstudiantes="LearningPathProy2/datosTests/estudiantes/";
+		}
+		else
+		{
+			pathEstudiantesDirectorio = "LearningPathProy2/datos/estudiantes/estudiantesDirectorio.txt";
+			pathEstudiantes="LearningPathProy2/datos/estudiantes/";
+
+		}
+
+		File fileEstudidantesDirectorio = new File(pathEstudiantesDirectorio);
+
+		//Limpio el directorio para que no queden dobles nombres
+		try(PrintWriter pwCaminosDirectorio = new PrintWriter(fileEstudidantesDirectorio))
+		{
+		} 
+		catch (FileNotFoundException e) 
+		{
+		  e.printStackTrace();
+		}
+		
+		
+		for (Estudiante estudiante : estudiantesHash.values())
+		{
+			EstudiantesPersistencia.guardarEstudianteSingular(estudiante, pathEstudiantes);
+			
 		}
 	}
 

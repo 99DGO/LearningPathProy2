@@ -23,7 +23,7 @@ import envios.EnvioExamen;
 
 public class DatosEstudiantesPersistencia 
 {
-	public static void guardarDatosEstudiante(DatosEstudianteActividad datosEst, String caminoID, String actividadID, String pathCaminos)
+	public static void guardarDatosEstudiante(DatosEstudianteActividad datosEst, String caminoID, String actividadID, String pathCaminos) throws Exception
 	{
 		JSONObject jDatosEst=datosEst.salvarEnJSON();
 		
@@ -33,27 +33,13 @@ public class DatosEstudiantesPersistencia
 	      
 		//Creo el archivo con la información del dato del estudiante
 		FileWriter fileDatoEst;
-		try 
-		{
 			fileDatoEst = new FileWriter(pathCarpetaActividad+"/"+datosEst.getID()+".json");
 			
-			try 
-			{
-				fileDatoEst.write(jDatosEst.toString(1));
-			} 
-			catch (JSONException e) 
-			{
-				e.printStackTrace();
-			}
+			fileDatoEst.write(jDatosEst.toString(1));
 			
 			fileDatoEst.flush();
 			fileDatoEst.close();
 			
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
 		
 
 		//Añado al directorio de actividades el ID de esta actividad

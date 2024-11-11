@@ -84,7 +84,7 @@ public class CaminosPersistencia
 		
 	}
 	
-	public static CaminoAprendizaje cargarCamino(JSONObject jcamino, String pathCarpeta) throws IOException
+	public static CaminoAprendizaje cargarCamino(JSONObject jcamino, String pathCarpeta) throws IOException, Exception
 	    {
 	    	//Saco los objetivos
 	    	JSONArray jObjetivos = jcamino.getJSONArray("objetivos");

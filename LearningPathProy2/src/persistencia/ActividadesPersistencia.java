@@ -93,7 +93,7 @@ public class ActividadesPersistencia
 		
 	}
 	
-	public static Actividad cargarActividad(JSONObject jActividad, String pathActividad)
+	public static Actividad cargarActividad(JSONObject jActividad, String pathActividad) throws Exception
 	{
 		
 		Actividad actividad=null;
@@ -158,18 +158,16 @@ public class ActividadesPersistencia
     		
 	    	String contentDatoEst=null;
 	    	
-			try
-			{
-				contentDatoEst = new String(Files.readAllBytes(Paths.get(pathActividad+idDatoEst+".json")));
-			} 
-			catch (IOException e) 
-			{
-				e.printStackTrace();
-			}
+	    	contentDatoEst = new String(Files.readAllBytes(Paths.get(pathActividad+idDatoEst+".json")));
 	    	
 	    	JSONObject jDatosEst = new JSONObject(contentDatoEst);
 	    			
     		DatosEstudianteActividad datosEstInd= DatosEstudiantesPersistencia.cargarDatosEstudiante(jDatosEst);
+    		
+    		if (datosEstInd==null)
+    		{
+    			throw new Exception ("No se esta creando el datoEstInd");
+    		}
     		
     		datosEstHash.put(idDatoEst, datosEstInd);
     	}

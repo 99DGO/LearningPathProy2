@@ -2,6 +2,11 @@ package tests;
 
 import static org.junit.Assert.fail;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,14 +33,49 @@ import traductores.TraductorProfesor;
 public class DatosEstudiantesTest 
 {
 	private LearningPathSystem LPS =LearningPathSystem.getInstance();
-
+	static boolean deleteDirectory(File directoryToBeDeleted) 
+	{
+	    File[] allContents = directoryToBeDeleted.listFiles();
+	    if (allContents != null) 
+	    {
+	        for (File file : allContents) 
+	        {
+	            deleteDirectory(file);
+	        }
+	    }
+	    return directoryToBeDeleted.delete();
+	}
+	
 	@BeforeAll
-	// Esto configura un setup que se hace una sola vez al comenzar el primer test
-	// y despues nunca mas
 	static void init() throws Exception 
 	{
-		CreadorProfesor.crearProfesor("Kakashi", "Kakashi123", "Kakashi Hatake");
-		String IDprof = TraductorProfesor.getIDfromLogin("Kakashi");
+		File fileCaminosDirectorio = new File("/LearningPathProy2/datosTests/Caminos/CaminosDirectorio.txt");
+	
+		//Leo el archivo
+		try (BufferedReader br = new BufferedReader(new FileReader(fileCaminosDirectorio))) 
+		{		        
+			
+		    String line;
+		    //Recorro el directorio para borrar las carpetas
+		    while ((line = br.readLine()) != null) 
+		    {
+		    	File carpetaCamino = new File("LearningPathProy2/datosTests/Caminos/"+line);
+		       
+		        deleteDirectory(carpetaCamino);
+		    	
+		    }
+		} 
+		catch (FileNotFoundException e) 
+		{
+			e.printStackTrace();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+
+		CreadorProfesor.crearProfesor("KakashiDatosEstudiante", "Kakashi123", "Kakashi Hatake");
+		String IDprof = TraductorProfesor.getIDfromLogin("KakashiDatosEstudiante");
 		
 		List<String> objetivos = new LinkedList<String>();
 		objetivos.add("Saber diferentes tipos de datos");
@@ -66,15 +106,15 @@ public class DatosEstudiantesTest
 				objetivosActividad, 2.5, 30, fechaLim, true, 3, preguntasExamen, IDprof,1);
 		
 		
-		CreadorEstudiante.crearEstudiante("Trey", "Trey123", "Trey Clover");
-		String IDEstudiante= TraductorEstudiante.getIDfromLogin("TreyClover");
+		CreadorEstudiante.crearEstudiante("TreyCloverDatosEstudiante", "Trey123", "Trey Clover");
+		String IDEstudiante= TraductorEstudiante.getIDfromLogin("TreyCloverDatosEstudiante");
 
 		Inscriptor.inscribirseCamino(idCamino, IDEstudiante);
 
 	}
 
 	@Test
-	public void testPersitencia()
+	public void testGuardarPersitencia()
 	{
 		String idCamino=null;
 		String IDEstudiante=null;
@@ -82,12 +122,13 @@ public class DatosEstudiantesTest
 
 		try 
 		{
-			IDEstudiante= TraductorEstudiante.getIDfromLogin("TreyClover");
+			IDEstudiante= TraductorEstudiante.getIDfromLogin("TreyCloverDatosEstudiante");
 			idCamino = TraductorCamino.getIDfromNombre("Python123");
 
 		} 
 		catch (Exception e) {
-    		fail("No se encontro el ID del estudiante con el login"); 
+    		fail("No se encontro el ID del estudiante con el login"+e.getMessage()); 
+    		e.printStackTrace();
 		}
 	
     	try
@@ -98,13 +139,13 @@ public class DatosEstudiantesTest
     		List<Actividad> actividades = camino.getActividades();
     		DatosEstudianteExamen datosEst = new DatosEstudianteExamen(IDEstudiante);
     		
-    		DatosEstudiantesPersistencia.guardarDatosEstudiante(datosEst, idCamino, actividades.getFirst().getId(), "datosTests/Caminos/");
+    		DatosEstudiantesPersistencia.guardarDatosEstudiante(datosEst, idCamino, actividades.getFirst().getId(), "/LearningPathProy2/datosTests/Caminos/");
   
     	}
     	catch (Exception e)
     	{
-    		System.out.println(e);
-    		fail("No se creo el objeto del archivo"); 
+    		fail("No se creo el objeto del archivo"+e.getMessage()); 
+    		e.printStackTrace();
     	}
     	
 

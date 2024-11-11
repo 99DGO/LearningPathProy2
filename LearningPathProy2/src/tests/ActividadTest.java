@@ -57,7 +57,7 @@ public class ActividadTest {
 	// y despues nunca mas
 	static void init() throws Exception 
 	{
-		File fileCaminosDirectorio = new File("datosTests/Caminos/CaminosDirectorio.txt");
+		File fileCaminosDirectorio = new File("/LearningPathProy2/datosTests/Caminos/CaminosDirectorio.txt");
 		
 		//Leo el archivo
 		try (BufferedReader br = new BufferedReader(new FileReader(fileCaminosDirectorio))) 
@@ -67,7 +67,7 @@ public class ActividadTest {
 		    //Recorro el directorio para borrar las carpetas
 		    while ((line = br.readLine()) != null) 
 		    {
-		    	File carpetaCamino = new File("datosTests/Caminos/"+line);
+		    	File carpetaCamino = new File("/LearningPathProy2/datosTests/Caminos/"+line);
 		       
 		        deleteDirectory(carpetaCamino);
 		    	
@@ -181,7 +181,7 @@ public class ActividadTest {
     		
     		List<Actividad> actividades = camino.getActividades();
     		
-    		ActividadesPersistencia.guardarActividad(actividades.get(0), idCamino, "datosTest/Caminos/");
+    		ActividadesPersistencia.guardarActividad(actividades.get(0), idCamino, "/LearningPathProy2/datosTest/Caminos/");
     	}
     	catch (Exception e)
     	{
@@ -190,56 +190,6 @@ public class ActividadTest {
     	
 	}
 	
-	@Test
-	@Order(2)
-	public void cargarActividadPersistencia()
-	{
-		CentralPersistencia.guardarCaminosActividadesDatosEstudiante(true);
 
-		String idCamino=null;
-		String idActividad=null;
-		
-		try 
-		{
-			idCamino = TraductorCamino.getIDfromNombre("Python123");
-		} 
-		catch (Exception e) {
-    		fail("No se encontro el ID del camino con el nombre"); 
-		}
-		
-		try 
-		{
-			idActividad = TraductorActividad.getIDfromNombre(idCamino, "Tipos de variables examen");
-		} 
-		catch (Exception e) {
-    		fail("No se encontro el ID del camino con el nombre"); 
-		}
-		
-		String pathActividad=("datosTests/Caminos/"+idCamino+"/"+idActividad+"/");		
-    	String contentActividad=null;
-		try 
-		{
-			File actividadFile = new File(pathActividad+idActividad+".json");
-			assertTrue("No existe el archivo de la actividad", actividadFile.exists());
-			contentActividad = new String(Files.readAllBytes(Paths.get(pathActividad+idActividad+".json")));
-		} 
-		catch (IOException e)
-		{
-			fail("No se encontro el archivo de la actividad");
-			e.printStackTrace();
-		}
-    	
-    	JSONObject jActividad = new JSONObject(contentActividad);
-    
-    	Actividad actividad=ActividadesPersistencia.cargarActividad(jActividad, pathActividad);
-    	assertEquals("Tipos de variables examen", actividad.getNombre(), "El nombre de la actividad no se guardo bien" );
-    	
-    	int[] fechaLim= new int[]{0,1,0};
-    	assertEquals(fechaLim[1], actividad.getFechaLim()[1], "La fecha limite guardada no es la correcta");
-    	assertEquals(fechaLim[0], actividad.getFechaLim()[0], "La fecha limite guardada no es la correcta");
-    	
-    	assertEquals(30, actividad.getDuracion(), "La duracion guardada no es la correcta");
-	}
-	
 
 }

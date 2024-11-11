@@ -1,5 +1,8 @@
 package caminosActividades;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -42,6 +45,7 @@ public class CaminoAprendizaje {
 		this.objetivos = objetivos;
 		this.dificultad = dificultad;
 		this.fechaCreacion= new Date().toString();
+		this.fechaModificacion=new Date().toString();
 		this.creadorID=creadorID;
 		this.actividades=new ArrayList<Actividad>();
 		
@@ -60,6 +64,7 @@ public class CaminoAprendizaje {
 		this.dificultad= caminoOG.getDificultad();
 		this.duracion=caminoOG.getDuracion();
 		this.numActividadesObligatorias=caminoOG.getNumActividadesObligatorias();
+		this.fechaModificacion=new Date().toString();
 
 		this.actividades=new ArrayList<Actividad>();
 
@@ -372,42 +377,5 @@ public class CaminoAprendizaje {
         return jobject;
         
     }
-    
-    public static CaminoAprendizaje cargarDesdeJSON( JSONObject Jcamino, String pathCarpetaCamino )
-    {
-        String titulo= Jcamino.getString( "titulo" );
-        String descripcion= Jcamino.getString( "descripcion" );
-        double dificultad= Jcamino.getDouble( "dificultad" );
-        int duracion= Jcamino.getInt( "duracion" );
-        String fechaCreacion= Jcamino.getString( "fechaCreacion" );
-        String fechaModificacion= Jcamino.getString( "fechaModificacion" );
-        double rating=Jcamino.getDouble("rating");
-        int ratingsTotales= Jcamino.getInt( "ratingsTotales" );
-        int version= Jcamino.getInt( "version" );
-        int numActividadesObligatorias= Jcamino.getInt( "numActividadesObligatorias" );
-        String creadorID= Jcamino.getString( "creadorID" );
-        String ID= Jcamino.getString( "id" );
-        
-        JSONArray Jobjetivos=Jcamino.getJSONArray("objetivos");
-        List<String> objetivos = new LinkedList<String>();
-        for (int i=0;i<Jobjetivos.length();i++)
-        {   
-        	objetivos.add((String) Jobjetivos.get(i));  
-        }   
-        
-        
-       JSONArray JactividadesID=Jcamino.getJSONArray("listaIDsActividades");
-       List<Actividad> actividades= new LinkedList<Actividad>();
-       for (int i=0;i<JactividadesID.length();i++)
-       {   
-    	   Actividad actividadToAdd= ActividadesPersistencia.cargarActividadDesdeID((String) Jobjetivos.get(i), pathCarpetaCamino);
-    	   actividades.add(actividadToAdd);  
-       }   
-
-
-        return new CaminoAprendizaje(titulo, descripcion, objetivos, dificultad, duracion, fechaCreacion,
-        		rating, ratingsTotales, version, fechaModificacion, numActividadesObligatorias, actividades, creadorID, 
-        		ID);
-    }
-    
+  
 }

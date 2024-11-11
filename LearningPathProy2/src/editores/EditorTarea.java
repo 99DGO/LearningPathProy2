@@ -50,15 +50,7 @@ public class EditorTarea
 			}
 		}
 		
-		for (Actividad actividadIterator2: camino.getActividades())
-		{
-			if (actividadIterator2.getId().equals(IDactividadSigFracaso))
-			{
-				actividadSigFracaso= actividadIterator2;
-			}
-		}
-		
-		actividad.addActividadSigFracaso(actividadSigFracaso);
+		actividad.addActividadSigFracaso(IDactividadSigFracaso);
 		
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);

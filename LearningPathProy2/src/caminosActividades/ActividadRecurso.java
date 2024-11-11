@@ -41,8 +41,10 @@ public class ActividadRecurso extends Actividad {
 	public ActividadRecurso(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double rating, int ratingsTotales, List<String> resenias,
 			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes,
-			String recurso, String instrucciones, String id) {
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, rating, ratingsTotales, resenias, creadorLogin, type, datosEstudiantes, id);
+			String recurso, String instrucciones, String id, List<String> actividadesPrereqs, List<String> actividadesSigExitoso) 
+	{
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, rating, ratingsTotales, resenias, 
+				creadorLogin, type, datosEstudiantes, id, actividadesPrereqs, actividadesSigExitoso);
 		this.recurso = recurso;
 		this.instrucciones = instrucciones;
 	}

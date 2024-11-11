@@ -38,9 +38,11 @@ public class Examen extends ActividadCalificable{
 	public Examen(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double rating, int ratingsTotales, List<String> resenias,
 			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes,
-			double calificacionMin, List<Actividad> actividadesSigFracaso, List<String> preguntasAbiertas, String id) {
+			double calificacionMin, List<String> actividadesSigFracaso, List<String> preguntasAbiertas, String id,
+			List<String> actividadesPrereqs, List<String> actividadesSigExitoso) 
+	{
 		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, rating, ratingsTotales, resenias, creadorLogin, type, datosEstudiantes,
-				calificacionMin, actividadesSigFracaso, id);
+				calificacionMin, actividadesSigFracaso, id, actividadesPrereqs, actividadesSigExitoso);
 		this.preguntasAbiertas = preguntasAbiertas;
 	}
 	

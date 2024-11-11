@@ -6,7 +6,7 @@
  "actividadesSigExitoso": [],
  "actividadesPrereqs": [],
  "rating": 0,
- "datosEstudiantes": ["DatoEstudiante_1d754c72-848b-4b6c-86b6-04c88ce6ace7"],
+ "datosEstudiantes": ["DatoEstudiante_51dbe2cb-cce2-4fe1-abe4-e8d2a3a3706b"],
  "resenias": [],
  "type": "Actividad recurso",
  "nombre": "Lectura de variables",
@@ -22,7 +22,7 @@
  ],
  "duracion": 20,
  "obligatoria": true,
- "creadorID": "Actividad8c98785a-4f81-43ba-8449-17246d978f22",
- "id": "Actividad0bb1554c-4d9c-40e7-bbf2-ded4d382a4a1",
+ "creadorID": "Actividad57372a5f-e3f7-4d72-915c-5f7fafbaea97",
+ "id": "Actividada7e92082-d8fe-415e-b478-781eb6cbbdbd",
  "dificultad": 2
 }

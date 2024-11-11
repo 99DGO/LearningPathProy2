@@ -46,9 +46,10 @@ public class Encuesta extends Actividad{
 	public Encuesta(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double rating, int ratingsTotales, List<String> resenias,
 			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes,
-			List<String> preguntasAbiertas, String id) {
+			List<String> preguntasAbiertas, String id, List<String> actividadesPrereqs, List<String> actividadesSigExitoso) 
+	{
 		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, rating, ratingsTotales, resenias, 
-				creadorLogin, type, datosEstudiantes, id);
+				creadorLogin, type, datosEstudiantes, id, actividadesPrereqs, actividadesSigExitoso);
 		this.preguntasAbiertas = preguntasAbiertas;
 	}
 

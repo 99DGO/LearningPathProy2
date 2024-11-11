@@ -48,9 +48,11 @@ public class Quiz extends ActividadCalificable{
 	public Quiz(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria,  double rating, int ratingsTotales, List<String> resenias,
 			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes,
-			double calificacionMin, List<Actividad> actividadesSigFracaso, List<PreguntaQuiz> preguntas, String id, boolean verdaderoFalso) {
+			double calificacionMin, List<String> actividadesSigFracaso, List<PreguntaQuiz> preguntas, String id, 
+			boolean verdaderoFalso, List<String> actividadesPrereqs, List<String> actividadesSigExitoso)
+	{
 		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria,  rating, ratingsTotales, resenias, creadorLogin, type, datosEstudiantes,
-				calificacionMin, actividadesSigFracaso, id);
+				calificacionMin, actividadesSigFracaso, id, actividadesPrereqs, actividadesSigExitoso);
 		this.preguntas = preguntas;
 		this.verdaderoFalso = verdaderoFalso;
 	}

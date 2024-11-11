@@ -2,6 +2,8 @@ package persistencia;
 
 import caminosActividades.Actividad;
 import caminosActividades.ActividadRecurso;
+import caminosActividades.Encuesta;
+import caminosActividades.Examen;
 import caminosActividades.Tarea;
 import creadores.CreadorAR;
 import creadores.CreadorEncuesta;
@@ -107,7 +109,7 @@ public class ActividadesPersistencia
     	}
     	
     	//Saco la fecha lim
-    	JSONArray jFechaLim = jActividad.getJSONArray("objetivos");
+    	JSONArray jFechaLim = jActividad.getJSONArray("fechaLim");
     	int[] fechaLim = new int[3];
     	
     	for (int i2 =0; i2<jFechaLim.length(); i2++)
@@ -123,6 +125,26 @@ public class ActividadesPersistencia
     	{
     		String resenia=jResenias.getString(i);
     		resenias.add(resenia);
+    	}
+    	
+       	//Saco las actividades siguientes
+    	JSONArray jActividadesSigExitoso = jActividad.getJSONArray("actividadesSigExitoso");
+    	List<String> actividadesSigExitoso = new LinkedList<String>();
+    	
+    	for (int i =0; i<jActividadesSigExitoso.length(); i++)
+    	{
+    		String actividadSigExitoso=jActividadesSigExitoso.getString(i);
+    		actividadesSigExitoso.add(actividadSigExitoso);
+    	}
+    	
+       	//Saco las actividades prerequisitos
+    	JSONArray jActividadesPrereqs = jActividad.getJSONArray("actividadesPrereqs");
+    	List<String> actividadesPrereqs = new LinkedList<String>();
+    	
+    	for (int i =0; i<jActividadesPrereqs.length(); i++)
+    	{
+    		String actividadPrereqs=jActividadesPrereqs.getString(i);
+    		actividadesPrereqs.add(actividadPrereqs);
     	}
     	
     	//Saco los datosEstudiantes
@@ -157,9 +179,82 @@ public class ActividadesPersistencia
 		{
 			actividad = new ActividadRecurso(jActividad.getString("nombre"), jActividad.getString("descripcion"), objetivos,
 					jActividad.getDouble("dificultad"), jActividad.getInt("duracion"), fechaLim, jActividad.getBoolean("obligatoria"),
-					jActividad.getDouble("rating"), jActividad.getInt("ratingsTotales"), resenias, jActividad.getString("creadorLogin"),
+					jActividad.getDouble("rating"), jActividad.getInt("ratingsTotales"), resenias, jActividad.getString("creadorID"),
 					jActividad.getString("type"), datosEstHash, jActividad.getString("recurso"), jActividad.getString("instrucciones"),
-					jActividad.getString("id"));
+					jActividad.getString("id"), actividadesPrereqs, actividadesSigExitoso);
+		}
+		
+		else if (jActividad.getString("type").equals(Actividad.ENCUESTA))
+		{
+	       	//Saco las preguntas
+	    	JSONArray jPreguntas = jActividad.getJSONArray("preguntasAbiertas");
+	    	List<String> preguntasAbiertas = new LinkedList<String>();
+	    	
+	    	for (int i =0; i<jPreguntas.length(); i++)
+	    	{
+	    		String pregunta=jPreguntas.getString(i);
+	    		preguntasAbiertas.add(pregunta);
+	    	}
+	    	
+			actividad= new Encuesta(jActividad.getString("nombre"), jActividad.getString("descripcion"), objetivos,
+					jActividad.getDouble("dificultad"), jActividad.getInt("duracion"), fechaLim, jActividad.getBoolean("obligatoria"),
+					jActividad.getDouble("rating"), jActividad.getInt("ratingsTotales"), resenias, jActividad.getString("creadorID"),
+					jActividad.getString("type"), datosEstHash, preguntasAbiertas, jActividad.getString("id"), actividadesPrereqs,
+					actividadesSigExitoso);
+		}
+		
+		else if (jActividad.getString("type").equals(Actividad.EXAMEN))
+		{
+	       	//Saco las preguntas
+	    	JSONArray jPreguntas = jActividad.getJSONArray("preguntasAbiertas");
+	    	List<String> preguntasAbiertas = new LinkedList<String>();
+	    	
+	    	for (int i =0; i<jPreguntas.length(); i++)
+	    	{
+	    		String pregunta=jPreguntas.getString(i);
+	    		preguntasAbiertas.add(pregunta);
+	    	}
+	    	
+	       	//Saco las actividades fracaso
+	    	JSONArray jActividadesSigFracaso = jActividad.getJSONArray("actividadesSigFracaso");
+	    	List<String> actividadesSigFracaso = new LinkedList<String>();
+	    	
+	    	for (int i =0; i<jActividadesSigFracaso.length(); i++)
+	    	{
+	    		String IDactividadesSigFracaso=jActividadesSigFracaso.getString(i);
+	    		actividadesSigFracaso.add(IDactividadesSigFracaso);
+	    	}
+	    	
+			actividad= new Examen(jActividad.getString("nombre"), jActividad.getString("descripcion"), objetivos,
+					jActividad.getDouble("dificultad"), jActividad.getInt("duracion"), fechaLim, jActividad.getBoolean("obligatoria"),
+					jActividad.getDouble("rating"), jActividad.getInt("ratingsTotales"), resenias, jActividad.getString("creadorID"),
+					jActividad.getString("type"), datosEstHash, jActividad.getDouble("calificacionMin"), actividadesSigFracaso,
+					preguntasAbiertas, jActividad.getString("id"), actividadesPrereqs, actividadesSigExitoso);
+		}
+		
+		else if (jActividad.getString("type").equals(Actividad.TAREA))
+		{
+	
+	       	//Saco las actividades fracaso
+	    	JSONArray jActividadesSigFracaso = jActividad.getJSONArray("actividadesSigFracaso");
+	    	List<String> actividadesSigFracaso = new LinkedList<String>();
+	    	
+	    	for (int i =0; i<jActividadesSigFracaso.length(); i++)
+	    	{
+	    		String IDactividadesSigFracaso=jActividadesSigFracaso.getString(i);
+	    		actividadesSigFracaso.add(IDactividadesSigFracaso);
+	    	}
+	    	
+			actividad= new Tarea(jActividad.getString("nombre"), jActividad.getString("descripcion"), objetivos,
+					jActividad.getDouble("dificultad"), jActividad.getInt("duracion"), fechaLim, jActividad.getBoolean("obligatoria"),
+					jActividad.getDouble("rating"), jActividad.getInt("ratingsTotales"), resenias, jActividad.getString("creadorID"),
+					jActividad.getString("type"), datosEstHash, jActividad.getString("instrucciones"), actividadesSigFracaso,
+					jActividad.getString("id"), actividadesPrereqs, actividadesSigExitoso);
+		}
+		
+		else if (jActividad.getString("type").equals(Actividad.QUIZ))
+		{
+			
 		}
 		
 		return actividad;

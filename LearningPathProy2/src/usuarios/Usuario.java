@@ -11,11 +11,11 @@ public abstract class Usuario {
 	private String type;
 	private final String ID;
 	
-	public Usuario(String login, String password, String type) {
+	public Usuario(String login, String password, String type, String ID) {
 		this.login = login;
 		this.password = password;
 		this.type = type;
-		this.ID=type;
+		this.ID=ID;
 	}
 
 	public String getLogin() {

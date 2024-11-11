@@ -13,7 +13,7 @@ public class Estudiante extends Usuario {
 	
 	public Estudiante(String login, String password) 
 	{
-		super(login, password, Usuario.ESTUDIANTE+"-"+login);
+		super(login, password, Usuario.ESTUDIANTE, Usuario.ESTUDIANTE+"-"+login);
 		this.historialCaminos=new ArrayList<CaminoAprendizaje>();
 		this.intereses=new ArrayList<String>();
 	}
@@ -21,7 +21,7 @@ public class Estudiante extends Usuario {
 	
 	public Estudiante(String login, String password, String type, List<CaminoAprendizaje> historialCaminos, List<String> intereses,
 			boolean actividadActiva) {
-		super(login, password, type);
+		super(login, password, type, Usuario.ESTUDIANTE+"-"+login);
 		this.historialCaminos = historialCaminos;
 		this.intereses = intereses;
 		this.actividadActiva = actividadActiva;

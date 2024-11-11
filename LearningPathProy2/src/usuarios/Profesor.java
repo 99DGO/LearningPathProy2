@@ -9,12 +9,12 @@ public class Profesor extends Usuario{
 	private List<CaminoAprendizaje> caminos;
 	
 	public Profesor(String login, String password) {
-		super(login, password, Usuario.PROFESOR+"-"+login);
+		super(login, password, Usuario.PROFESOR ,Usuario.PROFESOR+"-"+login);
 		this.caminos=new ArrayList<CaminoAprendizaje>();
 	}
 	
 	public Profesor(String login, String password, String type, List<CaminoAprendizaje> caminos) {
-		super(login, password, type);
+		super(login, password, type, Usuario.PROFESOR+"-"+login);
 		this.caminos = caminos;
 	}
 

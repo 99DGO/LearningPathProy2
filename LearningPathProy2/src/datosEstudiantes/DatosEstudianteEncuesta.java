@@ -18,9 +18,10 @@ public class DatosEstudianteEncuesta extends DatosEstudianteActividad {
 	}
 	
 	
-	public DatosEstudianteEncuesta(String IDEstudiante, String estado, String fechaInicio, String fechaFinal,  String id) {
+	public DatosEstudianteEncuesta(String IDEstudiante, String estado, String fechaInicio, String fechaFinal,  String id, EnvioEncuesta envio) {
 		super(IDEstudiante, estado, fechaInicio, fechaFinal, id);
 		this.type=DatosEstudianteActividad.ENCUESTADATO;
+		this.envio=envio;
 
 	}
 

@@ -19,9 +19,15 @@ public class EnvioExamen extends Envio<String>{
 		return respuestas;
 	}
 	
-	
-	
-    public void agregarRespuesta(String pregunta, String respuesta) {
+    public double getCalificacion() {
+		return calificacion;
+	}
+
+	public void setCalificacion(double calificacion) {
+		this.calificacion = calificacion;
+	}
+
+	public void agregarRespuesta(String pregunta, String respuesta) {
         respuestas.put(pregunta, respuesta);
     }
 

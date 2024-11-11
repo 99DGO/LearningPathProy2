@@ -29,7 +29,7 @@ public abstract class DatosEstudianteActividad {
 		this.IDEstudiante = IDEstudiante;
 		this.estado = PENDIENTE;
 		this.fechaFinal = null;  //Se asigna cuando se finalice la actividad
-		this.id="Actividad"+UUID.randomUUID().toString();
+		this.id="DatoEstudiante_"+UUID.randomUUID().toString();
 	} 
 	
 	

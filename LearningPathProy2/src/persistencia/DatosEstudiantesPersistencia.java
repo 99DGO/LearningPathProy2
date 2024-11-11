@@ -25,7 +25,7 @@ public class DatosEstudiantesPersistencia
 		FileWriter fileDatoEst;
 		try 
 		{
-			fileDatoEst = new FileWriter("/"+datosEst.getID()+".json");
+			fileDatoEst = new FileWriter(pathCarpetaActividad+"/"+datosEst.getID()+".json");
 			
 			try 
 			{

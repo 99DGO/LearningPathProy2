@@ -32,4 +32,4 @@ public class CreadorQuiz {
 				calificacionMin, preguntas, profesor.getID(), camino, verdaderoFalso, pos);
 		
 	}
-}
+} 

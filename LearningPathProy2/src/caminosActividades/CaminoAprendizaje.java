@@ -102,9 +102,9 @@ public class CaminoAprendizaje {
     		else if (act2 .getType().equals(Actividad.QUIZ))
     		{
 				if (((Quiz) act2).isVerdaderoFalso()) {
-					actividad = new Quiz(creadorID, (Quiz) act2, this, true);
+					actividad = new Quiz(creadorID, (Quiz) act2, this, true, i);
 				} else {
-					actividad = new Quiz(creadorID, (Quiz) act2, this, false);
+					actividad = new Quiz(creadorID, (Quiz) act2, this, false, i);
 				}
     		}
     		

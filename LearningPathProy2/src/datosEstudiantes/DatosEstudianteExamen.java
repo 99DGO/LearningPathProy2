@@ -16,14 +16,16 @@ public class DatosEstudianteExamen extends DatosEstudianteActividad {
 		super(IDEstudiante);
 		calificacion = 0.0;
 		this.type=DatosEstudianteActividad.EXAMENDATO;
+		this.envio=new EnvioExamen();
 	}
 		
 	
 	public DatosEstudianteExamen(String IDEstudiante, String estado, String fechaInicio, String fechaFinal,
-			double calificacion,  String id) {
+			double calificacion,  String id, EnvioExamen envio) {
 		super(IDEstudiante, estado, fechaInicio, fechaFinal, id);
 		this.calificacion = calificacion;
 		this.type=DatosEstudianteActividad.EXAMENDATO;
+		this.envio=envio;
 
 	}
 
@@ -41,7 +43,10 @@ public class DatosEstudianteExamen extends DatosEstudianteActividad {
 		this.calificacion = calificacion;
 	}
 	
-	
+	public EnvioExamen getEnvio()
+	{
+		return this.envio;
+	}
 	
 	public JSONObject salvarEnJSON()
 	{
@@ -59,6 +64,8 @@ public class DatosEstudianteExamen extends DatosEstudianteActividad {
 		
 		jRespuestas= new JSONArray(preguntasRespuestas);
 		jDatosEst.put("envio", jRespuestas);
+		jDatosEst.put("calificacionEnvio", this.envio.getCalificacion());
+
 		
 		return jDatosEst;
 	}

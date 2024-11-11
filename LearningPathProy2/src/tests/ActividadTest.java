@@ -82,7 +82,7 @@ public class ActividadTest {
 			e.printStackTrace();
 		}
 		
-		CreadorProfesor.crearProfesor("Kakashi", "Kakashi123");
+		CreadorProfesor.crearProfesor("Kakashi", "Kakashi123", "Kakashi Hatake");
 		String IDprof = TraductorProfesor.getIDfromLogin("Kakashi");
 
 		List<String> objetivos = new LinkedList<String>();

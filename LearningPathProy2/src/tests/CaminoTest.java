@@ -92,7 +92,7 @@ public class CaminoTest {
 		String IDprof=null;
 		try
 		{
-			CreadorProfesor.crearProfesor("Kakashi", "Kakashi123");
+			CreadorProfesor.crearProfesor("Kakashi", "Kakashi123", "Kakashi Hatake");
 			IDprof = TraductorProfesor.getIDfromLogin("Kakashi");
 		}
 		catch (Exception e)

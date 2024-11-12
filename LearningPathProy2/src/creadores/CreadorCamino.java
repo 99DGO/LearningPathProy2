@@ -36,7 +36,7 @@ public class CreadorCamino
 		Profesor profesor=LPS.getProfesorIndividual(IDprofesor);
 		CaminoAprendizaje caminoOG= LPS.getCaminoIndividual(IDcaminoOG);
 		
-		if (!(LPS.getCaminoIndividual(tituloCamino).equals(null)) )
+		if (!(LPS.getCaminoIndividual(IDcaminoOG).equals(null)) )
 		{
 			throw new Exception ("Ya existe un camino con ese titulo");
 		}

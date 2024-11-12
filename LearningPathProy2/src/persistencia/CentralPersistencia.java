@@ -27,17 +27,13 @@ import usuarios.Profesor;
 
 public class CentralPersistencia 
 {
-	static boolean deleteDirectory(File directoryToBeDeleted) 
+
+	
+	public static void cargarTodo(boolean test) throws Exception
 	{
-	    File[] allContents = directoryToBeDeleted.listFiles();
-	    if (allContents != null) 
-	    {
-	        for (File file : allContents) 
-	        {
-	            deleteDirectory(file);
-	        }
-	    }
-	    return directoryToBeDeleted.delete();
+		cargarCaminosActividadesDatosEstudiante(test);
+		cargarEstudiantes(test);
+		cargarProfesores(test);
 	}
 	
 	public static void guardarCaminosActividadesDatosEstudiante(boolean test) throws Exception
@@ -58,7 +54,7 @@ public class CentralPersistencia
 		}
 
 		File fileCaminosDirectorio = new File(pathCaminosDirectorio);
-		cleanDatos(test);
+		metodosAuxPersistencia.cleanDatos(test);
 
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		HashMap<String, CaminoAprendizaje> caminosHash =LPS.getCaminos();
@@ -96,46 +92,6 @@ public class CentralPersistencia
 		}
 	}
 	
-	//Borra todas las carpetas de caminos y limpia el directorio
-	public static void cleanDatos(boolean test) throws Exception
-	{
-		String pathCaminosDirectorio;
-		String pathCaminos;
-		
-		if (test)
-		{
-			pathCaminosDirectorio = "LearningPathProy2/datosTests/Caminos/CaminosDirectorio.txt";
-			pathCaminos="LearningPathProy2/datosTests/Caminos/";
-		}
-		else
-		{
-			pathCaminosDirectorio = "LearningPathProy2/datos/Caminos/CaminosDirectorio.txt";
-			pathCaminos="LearningPathProy2/datos/Caminos/";
-
-		}
-
-		File fileCaminosDirectorio = new File(pathCaminosDirectorio);
-		//Limpio las carpetas
-		BufferedReader br = new BufferedReader(new FileReader(fileCaminosDirectorio));
-		String line;
-	    //Recorro el directorio para borrar las carpetas
-	    while ((line = br.readLine()) != null) 
-	    {
-	    	File carpetaCamino = new File(pathCaminos+line);
-	       
-	        deleteDirectory(carpetaCamino);
-	    	
-	    }
-        
-		//Limpio el directorio para que no queden dobles nombres
-		PrintWriter pwCaminosDirectorio = new PrintWriter(fileCaminosDirectorio);
-		pwCaminosDirectorio.print("");
-		pwCaminosDirectorio.close();
-		
-
-	
-		
-	}
 	
 	public static void cargarCaminosActividadesDatosEstudiante(boolean test) throws Exception
 	{
@@ -161,30 +117,65 @@ public class CentralPersistencia
 		
 
 		//Leo el archivo
-		try (BufferedReader br = new BufferedReader(new FileReader(fileCaminosDirectorio))) 
-		{		        
+		BufferedReader br = new BufferedReader(new FileReader(fileCaminosDirectorio)); 		        
 			
-		    String line;
-		    //Recorro el directorio
-		    while ((line = br.readLine()) != null) 
-		    {
-		       // Saco el objeto JSON del camino por cada archivo que hay
-		    	String content = new String(Files.readAllBytes(Paths.get(pathCaminos+line+"/"+line+".json")));
-		    	JSONObject jcamino = new JSONObject(content);
-		    	
-		    	CaminoAprendizaje camino = CaminosPersistencia.cargarCamino(jcamino, pathCaminos+line+"/");
-		    	//Añado al LPS
-		    	LPS.addCamino(camino);
-		    }
-		} 
-		catch (FileNotFoundException e) 
+	    String line;
+	    //Recorro el directorio
+	    while ((line = br.readLine()) != null) 
+	    {
+	       // Saco el objeto JSON del camino por cada archivo que hay
+	    	String content = new String(Files.readAllBytes(Paths.get(pathCaminos+line+"/"+line+".json")));
+	    	JSONObject jcamino = new JSONObject(content);
+	    	
+	    	CaminoAprendizaje camino = CaminosPersistencia.cargarCamino(jcamino, pathCaminos+line+"/");
+	    	//Añado al LPS
+	    	LPS.addCamino(camino);
+	    }
+
+	}
+
+	public static void cargarEstudiantes(boolean test) throws Exception
+	{
+
+    	LearningPathSystem LPS = LearningPathSystem.getInstance(); 
+    	
+		String pathEstudiantesDirectorio;
+		String pathEstudiantes;
+		
+		if (test)
 		{
-			e.printStackTrace();
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
+			pathEstudiantesDirectorio = "LearningPathProy2/datosTests/estudiantes/estudiantesDirectorio.txt";
+			pathEstudiantes="LearningPathProy2/datosTests/estudiantes/";
 		}
+		else
+		{
+			pathEstudiantesDirectorio = "LearningPathProy2/datos/Caminos/estudiantesDirectorio.txt";
+			pathEstudiantes="LearningPathProy2/datos/estudiantes/";
+		}
+		
+
+		File fileEstudiantesDirectorio = new File(pathEstudiantesDirectorio);
+		
+		if (!fileEstudiantesDirectorio.exists())
+		{
+			throw new Exception ("No se encontro el directorio");
+		}
+
+		//Leo el archivo
+		BufferedReader br = new BufferedReader(new FileReader(fileEstudiantesDirectorio)); 		        
+			
+	    String line;
+	    //Recorro el directorio
+	    while ((line = br.readLine()) != null) 
+	    {
+	       // Saco el objeto JSON del estudiante por cada archivo que hay
+	    	String content = new String(Files.readAllBytes(Paths.get(pathEstudiantes+"/"+line+".json")));
+	    	JSONObject jEstudiante = new JSONObject(content);
+	    	
+	    	Estudiante estudiante = EstudiantesPersistencia.cargarEstudiante(jEstudiante);
+	    	//Añado al LPS
+	    	LPS.addEstudiante(estudiante);
+	    }
 	}
 	
 
@@ -208,17 +199,21 @@ public class CentralPersistencia
 			pathEstudiantes="LearningPathProy2/datos/estudiantes/";
 
 		}
+		
+		metodosAuxPersistencia.cleanDatosEstudiantes(test);
 
 		File fileEstudidantesDirectorio = new File(pathEstudiantesDirectorio);
 
+		
 		//Limpio el directorio para que no queden dobles nombres
 		PrintWriter pwEstudiantesDirectorio = new PrintWriter(fileEstudidantesDirectorio);
 		pwEstudiantesDirectorio.print("");
 		pwEstudiantesDirectorio.close();
 		
+
 		for (Estudiante estudiante : estudiantesHash.values())
 		{
-			EstudiantesPersistencia.guardarEstudianteSingular(estudiante, pathEstudiantes);
+			EstudiantesPersistencia.guardarEstudianteSingular(estudiante, pathEstudiantes, pathEstudiantesDirectorio);
 			
 		}
 	}
@@ -254,50 +249,16 @@ public class CentralPersistencia
 			
 			for (Profesor profesor : profesoresHash.values())
 			{
-				ProfesoresPersistencia.guardarProfesorSingular(profesor, pathProfesores);
+				ProfesoresPersistencia.guardarProfesorSingular(profesor, pathProfesores, pathProfesoresDirectorio);
 				
 			}		
 	}
 	
 
-	public static int contadorLineasCaminosDirectorio(boolean test) throws Exception
+	public static void cargarProfesores(boolean test) throws Exception
 	{
-		String pathCaminosDirectorio;
-
-		if (test)
-		{
-			pathCaminosDirectorio = "LearningPathProy2/datosTests/Caminos/CaminosDirectorio.txt";
-		}
-		else
-		{
-			pathCaminosDirectorio = "LearningPathProy2/datos/Caminos/CaminosDirectorio.txt";
-		}
-		
-		BufferedReader reader = null;
-		reader = new BufferedReader(new FileReader(pathCaminosDirectorio));
-
-		
-		int lines = 0;
-		while (reader.readLine() != null) lines++;
-		reader.close();
-		
-		return lines;
 		
 	}
 	
-	public static int contadorFoldersCaminos(boolean test) throws Exception
-	{
-		String pathCaminos;
-
-		if (test)
-		{
-			pathCaminos = "LearningPathProy2/datosTests/Caminos/";
-		}
-		else
-		{
-			pathCaminos = "LearningPathProy2/datos/Caminos/";
-		}
-		return new File(pathCaminos).listFiles().length;
-	}
 
 }

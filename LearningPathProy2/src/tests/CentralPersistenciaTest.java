@@ -40,6 +40,7 @@ import datosEstudiantes.DatosEstudianteActividad;
 import persistencia.ActividadesPersistencia;
 import persistencia.CaminosPersistencia;
 import persistencia.CentralPersistencia;
+import persistencia.metodosAuxPersistencia;
 import traductores.TraductorCamino;
 import traductores.TraductorEstudiante;
 import traductores.TraductorProfesor;
@@ -50,7 +51,7 @@ public class CentralPersistenciaTest
 	@BeforeAll
     static void setup( ) throws Exception
     {
-		CentralPersistencia.cleanDatos(true);
+		metodosAuxPersistencia.cleanDatos(true);
 		LearningPathSystem.resetLPS();
     }
 
@@ -65,7 +66,7 @@ public class CentralPersistenciaTest
 	{
 		try 
 		{
-			CentralPersistencia.cleanDatos(true);
+			metodosAuxPersistencia.cleanDatos(true);
 		} 
 		catch (Exception e) 
 		{
@@ -77,7 +78,7 @@ public class CentralPersistenciaTest
 		int lines=999;
 		try 
 		{
-			lines = CentralPersistencia.contadorLineasCaminosDirectorio(true);
+			lines = metodosAuxPersistencia.contadorLineasCaminosDirectorio(true);
 		} 
 		catch (Exception e) 
 		{
@@ -88,7 +89,7 @@ public class CentralPersistenciaTest
 		int numFolders=999;
 		try
 		{
-			numFolders=CentralPersistencia.contadorFoldersCaminos(true);
+			numFolders=metodosAuxPersistencia.contadorFoldersCaminos(true);
 		}
 		catch (Exception e)
 		{

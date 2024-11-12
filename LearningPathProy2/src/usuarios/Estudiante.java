@@ -76,7 +76,7 @@ public class Estudiante extends Usuario {
 		jEstudiante.put("actividadActiva", this.actividadActiva);
 		
 		JSONArray intereses = new JSONArray(this.intereses);
-		jEstudiante.put("interes", intereses);
+		jEstudiante.put("intereses", intereses);
 		
 		List<String> idsCaminos = new LinkedList<String>();
 		for (CaminoAprendizaje camino : this.historialCaminos)

@@ -41,6 +41,7 @@ import traductores.TraductorActividad;
 import traductores.TraductorCamino;
 import traductores.TraductorEstudiante;
 import traductores.TraductorProfesor;
+import usuarios.Estudiante;
 
 public class CargarJSONtest {
 
@@ -90,6 +91,41 @@ public class CargarJSONtest {
     	HashMap<String, DatosEstudianteActividad>  hashDatosEst= actividad.getDatosEstudiantes();
     	assertEquals(1, hashDatosEst.size(), "Los datos del estudiante no se guardaron bien" );
 
+	
+	}
+	
+	@Test
+	public void testCargarPersitenciaEstudiantes()
+	{
+		LearningPathSystem LPS =LearningPathSystem.getInstance();
+		try 
+		{
+			CentralPersistencia.cargarEstudiantes(true);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+    		fail("No se cargo, tiro"+e.getMessage()); 
+		}
+		
+		assertEquals( 2, LPS.getEstudiantes().keySet().size(), "No se cargaron el numero correcto de estudiantes" );
+		
+		String idEstudiante=null;
+		try 
+		{
+			idEstudiante = TraductorEstudiante.getIDfromLogin("Cater999");
+		} 
+		catch (Exception e) {
+    		fail("No se encontro el ID del camino con el nombre"); 
+		}
+		
+		Estudiante estudiante= LPS.getEstudianteIndividual(idEstudiante);
+    	assertEquals("Cater Diamond", estudiante.getNombre(), "El nombre del estudainte no se guardo bien" );
+    	assertEquals("Cater123", estudiante.getPassword(), "La contraseña del estudainte no se guardo bien" );
+
+    	
+    	List<CaminoAprendizaje> caminos = estudiante.getHistorialCaminos();
+    	assertEquals(1, caminos.size(), "Los caminos no se guardaron bien" );
 	
 	}
 	

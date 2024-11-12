@@ -36,6 +36,7 @@ import creadores.CreadorCamino;
 import creadores.CreadorEstudiante;
 import creadores.CreadorExamen;
 import creadores.CreadorProfesor;
+import creadores.CreadorQuiz;
 import datosEstudiantes.DatosEstudianteActividad;
 import persistencia.ActividadesPersistencia;
 import persistencia.CaminosPersistencia;
@@ -136,6 +137,9 @@ public class CentralPersistenciaTest
 			int[] fechaLim= new int[]{0,1,0};
 			CreadorExamen.crearExamenCero(idCamino, "Tipos de variables examen", "Comprobar que el estudiante sabe diferenciar variables numericos", 
 					objetivosActividad, 2.5, 30, fechaLim, true, 3, preguntasExamen, IDprof,1);
+			
+			CreadorQuiz.crearQuizCero(idCamino, idCamino, idCamino, objetivosActividad, 0, 0, 
+					fechaLim, false, 0, null, IDprof, false, 0);
 			
 			
 			CreadorEstudiante.crearEstudiante("TreyClover", "Trey123", "Trey Clover");

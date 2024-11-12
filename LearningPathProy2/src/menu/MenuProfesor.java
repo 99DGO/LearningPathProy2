@@ -14,12 +14,14 @@ import usuarios.Usuario;
 import traductores.TraductorCamino;
 import editores.EditorCamino;
 
-public class MenuProfesor {
+public class MenuProfesor
+{
 	public static LearningPathSystem LPS = null;
 	public static Autentificador autentificador = null;
 	private static Usuario profesor;
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		if (LPS == null)
 			LPS = LearningPathSystem.getInstance();
 
@@ -29,7 +31,8 @@ public class MenuProfesor {
 		mostrarMenuInicioSesion();
 	}
 
-	public static void mostrarMenuInicioSesion() {
+	public static void mostrarMenuInicioSesion()
+	{
 		Profesor testProfesor = new Profesor("profesor", "1234", "Profesor");
 		LPS.addProfesor(testProfesor); // Profesor de prueba, solo para probar interfaz directa de inicio de sesion de
 										// profesor
@@ -41,18 +44,23 @@ public class MenuProfesor {
 		String ID = scanner.nextLine();
 		System.out.println("Contraseña: ");
 		String contrasena = scanner.nextLine();
-		try {
+		try
+		{
 			profesor = autentificador.autentificar(ID, contrasena);
-			while (profesor != null) {
+			while (profesor != null)
+			{
 				mostrarMenuProfesor((Profesor) profesor);
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			System.out.println(e.getMessage());
 		}
 
 	}
 
-	public static void mostrarMenuProfesor(Profesor profesor) {
+	public static void mostrarMenuProfesor(Profesor profesor)
+	{
 		System.out.println("Bienvenido, " + profesor.getNombre() + "\n");
 		System.out.println("Seleccione una opción: ");
 		System.out.println("1. Crear camino de aprendizaje");
@@ -67,7 +75,8 @@ public class MenuProfesor {
 		Scanner scanner = new Scanner(System.in);
 		Integer opcion = scanner.nextInt();
 
-		switch (opcion) {
+		switch (opcion)
+		{
 		case 1:
 			// Crear camino de aprendizaje
 			mostrarMenuCreacionCamino();
@@ -81,7 +90,8 @@ public class MenuProfesor {
 		case 3:
 			// Ver todos los caminos de aprendizaje
 			HashMap<String, String> allCaminos = TraductorCamino.verTodosCaminos();
-			for (String ID : allCaminos.keySet()) {
+			for (String ID : allCaminos.keySet())
+			{
 				System.out.println("ID: " + ID + ", Nombre: " + allCaminos.get(ID));
 			}
 			break;
@@ -91,17 +101,23 @@ public class MenuProfesor {
 			System.out.println("Ingrese el ID del camino de aprendizaje que desea ver: ");
 			scanner.nextLine();
 			String IDCamino = scanner.nextLine();
-			try {
+			try
+			{
 				HashMap<String, String> infoCamino = TraductorCamino.verInfoGeneralCamino(IDCamino);
-				for (String key : infoCamino.keySet()) {
-					System.out.println(key + ": " + infoCamino.get(key));
-					if (key.equals("Objetivos")) {
+				for (String key : infoCamino.keySet())
+				{
+					if (key.equals("Objetivos"))
+					{						
 						System.out.println("Objetivos: ");
-						String[] objetivos = infoCamino.get(key).split("\n");
-						for (String objetivo : objetivos) {
-							System.out.println(objetivo);
-						}
-					}	
+						String[] objetivosArr = infoCamino.get(key).split("\n");
+						for (String objetivoActual : objetivosArr) {
+		                    System.out.println(objetivoActual);
+		                }
+					}
+					else
+					{
+						System.out.println(key + ": " + infoCamino.get(key));
+					}
 				}
 				System.out.println("Desea clonar este camino?");
 				System.out.println("1. Quiero clonar todo el camino");
@@ -109,12 +125,19 @@ public class MenuProfesor {
 				System.out.println("0. No deseo clonar el camino");
 				int clonar = scanner.nextInt();
 				scanner.nextLine();
-				switch (clonar) {
+				switch (clonar)
+				{
 				case 1:
 					// Clonar todo el camino
-					try {
-						CreadorCamino.clonarCamino(IDCamino, infoCamino.get("Titulo"), profesor.getID());
-					} catch (Exception e) {
+					try
+					{
+						System.out.println("Ingrese el nuevo nombre del camino: ");
+						String nuevoNombre = scanner.nextLine();
+						CreadorCamino.clonarCamino(IDCamino, nuevoNombre, profesor.getID());
+						System.out.println("Camino clonado exitosamente.");
+					}
+					catch (Exception e)
+					{
 						System.out.println("Ocurrió un error al clonar el camino.");
 						e.getMessage();
 						e.printStackTrace();
@@ -129,7 +152,9 @@ public class MenuProfesor {
 					System.out.println("Volviendo al menu principal. \n");
 				}
 
-			} catch (Exception e) {
+			}
+			catch (Exception e)
+			{
 				e.getMessage();
 				e.printStackTrace();
 			}
@@ -139,7 +164,8 @@ public class MenuProfesor {
 			// Ver caminos de aprendizaje creados
 			List<CaminoAprendizaje> caminosCreados = profesor.getCaminos();
 
-			for (CaminoAprendizaje camino : caminosCreados) {
+			for (CaminoAprendizaje camino : caminosCreados)
+			{
 				System.out.println("ID: " + camino.getID() + ", Nombre: " + camino.getTitulo());
 			}
 
@@ -165,12 +191,17 @@ public class MenuProfesor {
 			System.out.println("1. Si");
 			System.out.println("2. No");
 			int cerrar = scanner.nextInt();
-			if (cerrar == 1) {
+			if (cerrar == 1)
+			{
 				System.out.println("Gracias por usar el sistema. \n¡Hasta luego!");
 				System.exit(0);
-			} else if (cerrar == 2) {
+			}
+			else if (cerrar == 2)
+			{
 				System.out.println("Volviendo al menu. \n");
-			} else {
+			}
+			else
+			{
 				System.out.println("Opcion no valida. Volviendo al menu principal. \n");
 			}
 			break;
@@ -180,32 +211,37 @@ public class MenuProfesor {
 		}
 	}
 
-	public static void mostrarMenuCreacionCamino() {
+	public static void mostrarMenuCreacionCamino()
+	{
 		System.out.println("Creacion de camino de aprendizaje");
 		System.out.println("Ingrese el titulo del camino: ");
 		Scanner scanner = new Scanner(System.in);
 		String titulo = scanner.nextLine();
 		System.out.println("Ingrese la descripcion del camino: ");
 		String descripcion = scanner.nextLine();
-		System.out.println("Ingrese la dificultad del camino (en una escala del 1 al 10): ");
-		double dificultad = scanner.nextInt();
+		System.out.println(
+				"Ingrese la dificultad del camino (en una escala del 1.0 al 10.0, puede ingresar un numero decimal utilizando el .): ");
+		double dificultad = scanner.nextDouble();
 		System.out.println("Ingrese la duración estimada del camino (en horas): ");
 		int duracion = scanner.nextInt();
 		System.out.println("Cuantos objetivos tiene el camino?");
 		int numObjetivos = scanner.nextInt();
 		scanner.nextLine();
-		List<String> objetivos = new ArrayList<>();
-		for (int i = 0; i < numObjetivos; i++) {
+		List<String> objetivos = new ArrayList<String>();
+		for (int i = 0; i < numObjetivos; i++)
+		{
 			System.out.println("Ingrese el objetivo " + (i + 1) + ": ");
 			String objetivo = scanner.nextLine();
 			objetivos.add(objetivo);
 		}
-
 		System.out.println("Creando camino...");
-		try {
+		try
+		{
 			CreadorCamino.crearCaminoCero(titulo, descripcion, objetivos, dificultad, duracion, profesor.getID());
 			System.out.println("Camino creado exitosamente.");
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			System.out.println("Ocurrió un error al crear el camino.");
 			e.getMessage();
 			e.printStackTrace();
@@ -213,27 +249,35 @@ public class MenuProfesor {
 
 	}
 
-	public static void mostrarMenuCreacionActividad() {
+	public static void mostrarMenuCreacionActividad()
+	{
 		// TODO Crear menu de creacion de actividad
 
 	}
 
-	public static void mostrarMenuEdicionCamino() {
+	public static void mostrarMenuEdicionCamino()
+	{
 		System.out.println("Edicion de camino de aprendizaje");
 		System.out.println("Ingrese el ID del camino que desea editar: ");
 		Scanner scanner = new Scanner(System.in);
 		String IDCamino = scanner.nextLine();
-		try {
+		try
+		{
 			HashMap<String, String> infoCamino = TraductorCamino.verInfoGeneralCamino(IDCamino);
-			for (String key : infoCamino.keySet()) {
-				System.out.println(key + ": " + infoCamino.get(key));
-				if (key.equals("Objetivos")) {
+			for (String key : infoCamino.keySet())
+			{
+				if (key.equals("Objetivos"))
+				{						
 					System.out.println("Objetivos: ");
-					String[] objetivos = infoCamino.get(key).split("\n");
-					for (String objetivo : objetivos) {
-						System.out.println(objetivo);
-					}
-					}
+					String[] objetivosArr = infoCamino.get(key).split("\n");
+					for (String objetivoActual : objetivosArr) {
+	                    System.out.println(objetivoActual);
+	                }
+				}
+				else
+				{
+					System.out.println(key + ": " + infoCamino.get(key));
+				}
 			}
 
 			System.out.println("Seleccione una opcion: ");
@@ -248,16 +292,20 @@ public class MenuProfesor {
 			System.out.println("9. Cambiar orden de actividades");
 			System.out.println("0. Salir");
 			int opcion = scanner.nextInt();
-			switch (opcion) {
+			switch (opcion)
+			{
 			case 1:
 				// Editar titulo
 				System.out.println("Ingrese el nuevo titulo: ");
-				String nuevoTitulo = scanner.nextLine();
 				scanner.nextLine();
-				try {
+				String nuevoTitulo = scanner.nextLine();
+				try
+				{
 					EditorCamino.editTitulo(IDCamino, nuevoTitulo);
 					System.out.println("Titulo editado exitosamente.\nNuevo titulo: " + nuevoTitulo + "\n");
-				} catch (Exception e) {
+				}
+				catch (Exception e)
+				{
 					System.out.println("Ocurrió un error al editar el titulo.");
 					e.getMessage();
 					e.printStackTrace();
@@ -267,12 +315,16 @@ public class MenuProfesor {
 			case 2:
 				// Editar descripcion
 				System.out.println("Ingrese la nueva descripcion: ");
-				String nuevaDescripcion = scanner.nextLine();
 				scanner.nextLine();
-				try {
+				String nuevaDescripcion = scanner.nextLine();
+				try
+				{
 					EditorCamino.editDescripcion(IDCamino, nuevaDescripcion);
-					System.out.println("Descripcion editada exitosamente.\nNueva descripcion: " + nuevaDescripcion + "\n");
-				} catch (Exception e) {
+					System.out.println(
+							"Descripcion editada exitosamente.\nNueva descripcion: " + nuevaDescripcion + "\n");
+				}
+				catch (Exception e)
+				{
 					System.out.println("Ocurrió un error al editar la descripcion.");
 					e.getMessage();
 					e.printStackTrace();
@@ -282,12 +334,15 @@ public class MenuProfesor {
 			case 3:
 				// Editar dificultad
 				System.out.println("Ingrese la nueva dificultad: ");
-				Float nuevaDificultad = scanner.nextFloat();
 				scanner.nextLine();
-				try {
+				Float nuevaDificultad = scanner.nextFloat();
+				try
+				{
 					EditorCamino.editDificultad(IDCamino, nuevaDificultad);
 					System.out.println("Dificultad editada exitosamente.\nNueva dificultad: " + nuevaDificultad + "\n");
-				} catch (Exception e) {
+				}
+				catch (Exception e)
+				{
 					System.out.println("Ocurrió un error al editar la dificultad.");
 					e.getMessage();
 					e.printStackTrace();
@@ -297,12 +352,15 @@ public class MenuProfesor {
 			case 4:
 				// Editar duracion
 				System.out.println("Ingrese la nueva duracion: ");
-				int nuevaDuracion = scanner.nextInt();
 				scanner.nextLine();
-				try {
+				int nuevaDuracion = scanner.nextInt();
+				try
+				{
 					EditorCamino.editDuracion(IDCamino, nuevaDuracion);
 					System.out.println("Duracion editada exitosamente.\nNueva duracion: " + nuevaDuracion + "\n");
-				} catch (Exception e) {
+				}
+				catch (Exception e)
+				{
 					System.out.println("Ocurrió un error al editar la duracion.");
 					e.getMessage();
 					e.printStackTrace();
@@ -312,12 +370,15 @@ public class MenuProfesor {
 			case 5:
 				// Añadir objetivos
 				System.out.println("Ingrese el nuevo objetivo: ");
-				String nuevoObjetivo = scanner.nextLine();
 				scanner.nextLine();
-				try {
+				String nuevoObjetivo = scanner.nextLine();
+				try
+				{
 					EditorCamino.editAddObjetivo(IDCamino, nuevoObjetivo);
 					System.out.println("Objetivo añadido exitosamente.\nObjetivo añadido: " + nuevoObjetivo + "\n");
-				} catch (Exception e) {
+				}
+				catch (Exception e)
+				{
 					System.out.println("Ocurrió un error al añadir el objetivo.");
 					e.getMessage();
 					e.printStackTrace();
@@ -327,12 +388,15 @@ public class MenuProfesor {
 			case 6:
 				// Eliminar objetivos
 				System.out.println("Ingrese la posición del objetivo que desea eliminar: ");
-				int objetivoEliminar = scanner.nextInt();
 				scanner.nextLine();
-				try {
+				int objetivoEliminar = scanner.nextInt();
+				try
+				{
 					EditorCamino.editDelObjetivo(IDCamino, objetivoEliminar);
 					System.out.println("Objetivo eliminado exitosamente.");
-				} catch (Exception e) {
+				}
+				catch (Exception e)
+				{
 					System.out.println("Ocurrió un error al eliminar el objetivo.");
 					e.getMessage();
 					e.printStackTrace();
@@ -346,12 +410,15 @@ public class MenuProfesor {
 			case 8:
 				// Eliminar actividad
 				System.out.println("Ingrese la posicion de la actividad que desea eliminar: ");
-				int posActividad = scanner.nextInt();
 				scanner.nextLine();
-				try {
+				int posActividad = scanner.nextInt();
+				try
+				{
 					EditorCamino.editDelActividad(IDCamino, posActividad);
 					System.out.println("Actividad eliminada exitosamente.");
-				} catch (Exception e) {
+				}
+				catch (Exception e)
+				{
 					System.out.println("Ocurrió un error al eliminar la actividad.");
 					e.getMessage();
 					e.printStackTrace();
@@ -361,22 +428,28 @@ public class MenuProfesor {
 				// Cambiar orden de actividades
 				System.out.println(
 						"Advertencia \nAl cambiar el orden de las actividades, se perderá la información de la actividad en dicha posicion. \nDesea continuar? \n1. Si \n2. No");
-				int confirmacion = scanner.nextInt();
 				scanner.nextLine();
-				if (confirmacion == 1) {
+				int confirmacion = scanner.nextInt();
+				if (confirmacion == 1)
+				{
 					System.out.println("Continuando con el cambio de orden de actividades. \n");
-				} else {
+				}
+				else
+				{
 					System.out.println("Volviendo al menu principal. \n");
 					break;
 				}
 				System.out.println("Ingrese el ID de la actividad que desea mover: ");
 				String actividadMover = scanner.nextLine();
 				System.out.println("Ingrese la nueva posicion de la actividad: ");
-				int nuevaPosicion = scanner.nextInt();
 				scanner.nextLine();
-				try {
+				int nuevaPosicion = scanner.nextInt();
+				try
+				{
 					EditorCamino.cambiarPosActividad(IDCamino, actividadMover, nuevaPosicion);
-				} catch (Exception e) {
+				}
+				catch (Exception e)
+				{
 					System.out.println("Ocurrió un error al mover la actividad.");
 					e.getMessage();
 					e.printStackTrace();
@@ -386,13 +459,16 @@ public class MenuProfesor {
 				System.out.println("Volviendo al menu principal. \n");
 				break;
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			e.getMessage();
 			e.printStackTrace();
 		}
 	}
 
-	public static void mostrarMenuEdicionActividad() {
+	public static void mostrarMenuEdicionActividad()
+	{
 		// TODO Crear menu de edicion de actividad
 	}
 }

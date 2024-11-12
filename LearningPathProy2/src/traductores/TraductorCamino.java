@@ -57,7 +57,7 @@ public class TraductorCamino
 		
 		while (it1.hasNext())
 		{
-			objetivos.concat(String.valueOf(numObjetivo)+")"+it1.next()+"\n");
+			objetivos += String.valueOf(numObjetivo)+")"+it1.next()+"\n";
 			numObjetivo+=1;
 		}
 		

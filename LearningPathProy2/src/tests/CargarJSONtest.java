@@ -42,6 +42,7 @@ import traductores.TraductorCamino;
 import traductores.TraductorEstudiante;
 import traductores.TraductorProfesor;
 import usuarios.Estudiante;
+import usuarios.Profesor;
 
 public class CargarJSONtest {
 
@@ -126,6 +127,41 @@ public class CargarJSONtest {
     	
     	List<CaminoAprendizaje> caminos = estudiante.getHistorialCaminos();
     	assertEquals(1, caminos.size(), "Los caminos no se guardaron bien" );
+	
+	}
+	
+	@Test
+	public void testCargarPersitenciaProfesores()
+	{
+		LearningPathSystem LPS =LearningPathSystem.getInstance();
+		try 
+		{
+			CentralPersistencia.cargarProfesores(true);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+    		fail("No se cargo, tiro"+e.getMessage()); 
+		}
+		
+		assertEquals( 2, LPS.getProfesores().keySet().size(), "No se cargaron el numero correcto de profesores" );
+		
+		String idProfesor=null;
+		try 
+		{
+			idProfesor = TraductorProfesor.getIDfromLogin("Divus999");
+		} 
+		catch (Exception e) {
+    		fail("No se encontro el ID del camino con el nombre"); 
+		}
+		
+		Profesor profesor= LPS.getProfesorIndividual(idProfesor);
+    	assertEquals("Divus Crewel", profesor.getNombre(), "El nombre del profesor no se guardo bien" );
+    	assertEquals("Divus123", profesor.getPassword(), "La contraseña del profesor no se guardo bien" );
+
+    	
+    	List<CaminoAprendizaje> caminos = profesor.getCaminos();
+    	assertEquals(2, caminos.size(), "Los caminos no se guardaron bien" );
 	
 	}
 	

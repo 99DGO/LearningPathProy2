@@ -149,7 +149,7 @@ public class CentralPersistencia
 		}
 		else
 		{
-			pathEstudiantesDirectorio = "LearningPathProy2/datos/Caminos/estudiantesDirectorio.txt";
+			pathEstudiantesDirectorio = "LearningPathProy2/datos/estudiantes/estudiantesDirectorio.txt";
 			pathEstudiantes="LearningPathProy2/datos/estudiantes/";
 		}
 		
@@ -257,7 +257,45 @@ public class CentralPersistencia
 
 	public static void cargarProfesores(boolean test) throws Exception
 	{
+	  	LearningPathSystem LPS = LearningPathSystem.getInstance(); 
+    	
+		String pathProfesoresDirectorio;
+		String pathProfesores;
 		
+		if (test)
+		{
+			pathProfesoresDirectorio = "LearningPathProy2/datosTests/profesores/profesoresDirectorio.txt";
+			pathProfesores="LearningPathProy2/datosTests/profesores/";
+		}
+		else
+		{
+			pathProfesoresDirectorio = "LearningPathProy2/datos/profesores/profesoresDirectorio.txt";
+			pathProfesores="LearningPathProy2/datos/profesores/";
+		}
+		
+
+		File fileProfesoresDirectorio = new File(pathProfesoresDirectorio);
+		
+		if (!fileProfesoresDirectorio.exists())
+		{
+			throw new Exception ("No se encontro el directorio");
+		}
+
+		//Leo el archivo
+		BufferedReader br = new BufferedReader(new FileReader(fileProfesoresDirectorio)); 		        
+			
+	    String line;
+	    //Recorro el directorio
+	    while ((line = br.readLine()) != null) 
+	    {
+	       // Saco el objeto JSON del estudiante por cada archivo que hay
+	    	String content = new String(Files.readAllBytes(Paths.get(pathProfesores+"/"+line+".json")));
+	    	JSONObject jProfesor = new JSONObject(content);
+	    	
+	    	Profesor profesor =ProfesoresPersistencia.cargarProfesor(jProfesor);
+	    	//Añado al LPS
+	    	LPS.addProfesor(profesor);
+	    }
 	}
 	
 

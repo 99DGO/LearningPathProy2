@@ -60,7 +60,8 @@ public class EstudiantesPersistencia {
 		return caminos;
 	}
 
-	public static Estudiante cargarEstudiante(JSONObject jEstudiante) {
+	public static Estudiante cargarEstudiante(JSONObject jEstudiante) 
+	{
 		
     	//Saco los intereses
     	JSONArray jIntereses = jEstudiante.getJSONArray("intereses");

@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import caminosActividades.CaminoAprendizaje;
+import caminosActividades.OpcionQuiz;
+import caminosActividades.PreguntaQuiz;
 import controllers.Autentificador;
 import controllers.LearningPathSystem;
-import creadores.CreadorCamino;
+import creadores.*;
 import usuarios.Profesor;
 import usuarios.Usuario;
 import traductores.TraductorCamino;
@@ -107,12 +109,13 @@ public class MenuProfesor
 				for (String key : infoCamino.keySet())
 				{
 					if (key.equals("Objetivos"))
-					{						
+					{
 						System.out.println("Objetivos: ");
 						String[] objetivosArr = infoCamino.get(key).split("\n");
-						for (String objetivoActual : objetivosArr) {
-		                    System.out.println(objetivoActual);
-		                }
+						for (String objetivoActual : objetivosArr)
+						{
+							System.out.println(objetivoActual);
+						}
 					}
 					else
 					{
@@ -252,6 +255,223 @@ public class MenuProfesor
 	public static void mostrarMenuCreacionActividad()
 	{
 		// TODO Crear menu de creacion de actividad
+		System.out.println("Creacion de actividad");
+		System.out.println("Seleccione el tipo de actividad que desea crear: ");
+		System.out.println("1. Quiz");
+		System.out.println("2. Tarea");
+		System.out.println("3. Examen");
+		System.out.println("4. Encuesta");
+		System.out.println("5. Recurso educativo");
+		System.out.println("0. Salir");
+		Scanner scanner = new Scanner(System.in);
+		scanner.nextLine();
+		int tipoActividad = scanner.nextInt();
+		switch (tipoActividad)
+		{
+		case 1:
+			// Quiz
+			System.out.println("Creacion de quiz");
+			System.out.println("Ingrese el ID del camino al que pertenece el quiz: ");
+			String IDCamino = scanner.nextLine();
+			System.out.println("Ingrese el titulo del quiz: ");
+			String titulo = scanner.nextLine();
+			System.out.println("Ingrese la descripcion del quiz: ");
+			String descripcion = scanner.nextLine();
+			System.out.println("Cuantos objetivos tiene el quiz?");
+			int numObjetivos = scanner.nextInt();
+			scanner.nextLine();
+			List<String> objetivos = new ArrayList<String>();
+			for (int i = 0; i < numObjetivos; i++)
+			{
+				System.out.println("Ingrese el objetivo " + (i + 1) + ": ");
+				String objetivo = scanner.nextLine();
+				objetivos.add(objetivo);
+			}
+			System.out.println("Ingrese la dificultad del quiz: ");
+			double dificultad = scanner.nextDouble();
+			System.out.println("Ingrese la duracion estimada del quiz (en minutos): ");
+			int duracion = scanner.nextInt();
+			System.out.println("Ingrese la fecha de entrega del quiz: ");
+			System.out.println("Dia: ");
+			int dia = scanner.nextInt();
+			System.out.println("Mes: ");
+			int mes = scanner.nextInt();
+			System.out.println("Año: ");
+			int anio = scanner.nextInt();
+			int[] fechaLimite = { dia, mes, anio };
+			System.out.println("Es obligatorio realizar este quiz? (true/false): ");
+			boolean obligatoria = scanner.nextBoolean();
+			System.out.println("Ingrese la calificacion minima para aprobar el quiz: ");
+			double calificacionMin = scanner.nextDouble();
+			System.out.println("El quiz es de verdadero o falso? (true/false): ");
+			boolean verdaderoFalso = scanner.nextBoolean();
+			System.out.println("Ingrese la posición de la actividad dentro del camino: ");
+			int pos = scanner.nextInt();
+			int cantidadOpciones = 0;
+			if (verdaderoFalso)
+			{
+				cantidadOpciones = 2; // Quiz de verdadero o falso
+			}
+			else
+			{
+				cantidadOpciones = 4; // Quiz de opcion múltiple
+			}
+			System.out.println("Ingrese la cantidad de preguntas que tendra el quiz: ");
+			int numPreguntas = scanner.nextInt();
+			List<PreguntaQuiz> preguntas = new ArrayList<PreguntaQuiz>();
+			for (int i = 0; i < numPreguntas; i++)
+			{
+				System.out.println("Ingrese el texto de la pregunta " + (i + 1) + ": ");
+				String texto = scanner.nextLine();
+				if (cantidadOpciones == 2) // Quiz de verdadero o falso
+				{
+					System.out.println("Ingrese la primera opcion de respuesta: ");
+					String respuesta1 = scanner.nextLine();
+					System.out.println("La primera opción es correcta? (true/false): ");
+					boolean correcta1 = scanner.nextBoolean();
+					System.out.println("Ingrese la explicacion de la respuesta: ");
+					String explicacion1 = scanner.nextLine();
+					OpcionQuiz opcion1 = new OpcionQuiz(respuesta1, explicacion1, correcta1);
+
+					System.out.println("Ingrese la segunda opcion de respuesta: ");
+					String respuesta2 = scanner.nextLine();
+					System.out.println("La segunda opción es correcta? (true/false): ");
+					boolean correcta2 = scanner.nextBoolean();
+					System.out.println("Ingrese la explicacion de la respuesta: ");
+					String explicacion2 = scanner.nextLine();
+					
+					if (correcta1 && correcta2)
+					{
+						System.out.println("Solo una de las opciones puede ser correcta.");
+						i--;
+					}
+					else if (!correcta1 && !correcta2)
+					{
+						System.out.println("Al menos una de las opciones debe ser correcta.");
+						i--;
+					}
+					OpcionQuiz opcion2 = new OpcionQuiz(respuesta2, explicacion2, correcta2);
+					
+					OpcionQuiz correcta = null;
+					if (opcion1.isCorrecta())
+					{
+						correcta = opcion1;
+					}
+					else
+					{
+						correcta = opcion2;
+					}
+					PreguntaQuiz pregunta = new PreguntaQuiz(texto, correcta, cantidadOpciones);
+					pregunta.setOpcion(1, opcion1);
+					pregunta.setOpcion(2, opcion2);
+					preguntas.add(pregunta);
+				}
+				else // Quiz de opcion multiple
+                {
+                    System.out.println("Ingrese la primera opcion de respuesta: ");
+                    String respuesta1 = scanner.nextLine();
+                    System.out.println("La primera opción es correcta? (true/false): ");
+                    boolean correcta1 = scanner.nextBoolean();
+                    System.out.println("Ingrese la explicacion de la respuesta: ");
+                    String explicacion1 = scanner.nextLine();
+                    OpcionQuiz opcion1 = new OpcionQuiz(respuesta1, explicacion1, correcta1);
+
+                    System.out.println("Ingrese la segunda opcion de respuesta: ");
+                    String respuesta2 = scanner.nextLine();
+                    System.out.println("La segunda opción es correcta? (true/false): ");
+                    boolean correcta2 = scanner.nextBoolean();
+                    System.out.println("Ingrese la explicacion de la respuesta: ");
+                    String explicacion2 = scanner.nextLine();
+                    OpcionQuiz opcion2 = new OpcionQuiz(respuesta2, explicacion2, correcta2);
+
+                    System.out.println("Ingrese la tercera opcion de respuesta: ");
+                    String respuesta3 = scanner.nextLine();
+                    System.out.println("La tercera opción es correcta? (true/false): ");
+                    boolean correcta3 = scanner.nextBoolean();
+                    System.out.println("Ingrese la explicacion de la respuesta: ");
+                    String explicacion3 = scanner.nextLine();
+                    OpcionQuiz opcion3 = new OpcionQuiz(respuesta3, explicacion3, correcta3);
+
+                    System.out.println("Ingrese la cuarta opcion de respuesta: ");
+                    String respuesta4 = scanner.nextLine();
+                    System.out.println("La cuarta opción es correcta? (true/false): ");
+                    boolean correcta4 = scanner.nextBoolean();
+                    System.out.println("Ingrese la explicacion de la respuesta: ");
+                    String explicacion4 = scanner.nextLine();
+                    OpcionQuiz opcion4 = new OpcionQuiz(respuesta4, explicacion4, correcta4);
+
+                    OpcionQuiz correcta = null;
+                    if (correcta1 && correcta2 && correcta3 && correcta4)
+                    {
+                        System.out.println("Solo una de las opciones puede ser correcta.");
+                        i--;
+                    }
+                    else if (!correcta1 && !correcta2 && !correcta3 && !correcta4)
+                    {
+                        System.out.println("Al menos una de las opciones debe ser correcta.");
+                        i--;
+                    }
+                    else
+                    {
+                        if (correcta1)
+                        {
+                            correcta = opcion1;
+                        }
+                        else if (correcta2)
+                        {
+                            correcta = opcion2;
+                        }
+                        else if (correcta3)
+                        {
+                            correcta = opcion3;
+                        }
+                        else
+                        {
+                            correcta = opcion4;
+                        }
+                    }
+                    PreguntaQuiz pregunta = new PreguntaQuiz(texto, correcta, cantidadOpciones);
+                    pregunta.setOpcion(1, opcion1);
+                    pregunta.setOpcion(2, opcion2);
+                    pregunta.setOpcion(3, opcion3);
+                    pregunta.setOpcion(4, opcion4);
+                    preguntas.add(pregunta);
+                }
+			}
+			System.out.println("Creando quiz...");
+			try
+			{
+				CreadorQuiz.crearQuizCero(IDCamino, titulo, descripcion, objetivos, dificultad, duracion, fechaLimite,
+						obligatoria, calificacionMin, preguntas, profesor.getID(), verdaderoFalso, pos);
+				System.out.println("Quiz creado exitosamente.");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al crear el quiz.");
+				e.getMessage();
+				e.printStackTrace();
+			}
+			break;
+
+		case 2:
+			// Tarea
+			break;
+
+		case 3:
+			// Examen
+			break;
+
+		case 4:
+			// Encuesta
+			break;
+
+		case 5:
+			// Recurso educativo
+			break;
+
+		default:
+			System.out.println("Volviendo al menu principal. \n");
+		}
 
 	}
 
@@ -267,12 +487,13 @@ public class MenuProfesor
 			for (String key : infoCamino.keySet())
 			{
 				if (key.equals("Objetivos"))
-				{						
+				{
 					System.out.println("Objetivos: ");
 					String[] objetivosArr = infoCamino.get(key).split("\n");
-					for (String objetivoActual : objetivosArr) {
-	                    System.out.println(objetivoActual);
-	                }
+					for (String objetivoActual : objetivosArr)
+					{
+						System.out.println(objetivoActual);
+					}
 				}
 				else
 				{

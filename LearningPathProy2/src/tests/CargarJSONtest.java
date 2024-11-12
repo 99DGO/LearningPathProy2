@@ -20,6 +20,7 @@ import java.util.List;
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
@@ -43,12 +44,21 @@ import traductores.TraductorProfesor;
 
 public class CargarJSONtest {
 
+    @BeforeEach
+    void setUp()
+    {
+    	LearningPathSystem.resetLPS();
+    }
     
+    @AfterEach
+    void tearDown( ) throws Exception
+    {
+    }
+
 	@Test
 	public void testCargarPersitenciaCaminos()
 	{
 		LearningPathSystem LPS =LearningPathSystem.getInstance();
-		
 		try 
 		{
 			CentralPersistencia.cargarCaminosActividadesDatosEstudiante(true);

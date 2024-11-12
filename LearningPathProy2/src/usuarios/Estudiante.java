@@ -1,7 +1,11 @@
 package usuarios;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import caminosActividades.CaminoAprendizaje;
 
@@ -16,6 +20,7 @@ public class Estudiante extends Usuario {
 		super(login, password, Usuario.ESTUDIANTE, Usuario.ESTUDIANTE+"-"+login, nombre);
 		this.historialCaminos=new ArrayList<CaminoAprendizaje>();
 		this.intereses=new ArrayList<String>();
+		intereses.add("_");
 	}
 	
 	
@@ -36,6 +41,7 @@ public class Estudiante extends Usuario {
 	public void addInteres(String interes)
 	{
 		this.intereses.add(interes);
+		this.intereses.remove("_");
 	}
 	
 	public void delInteres(String interes)
@@ -58,6 +64,29 @@ public class Estudiante extends Usuario {
 
 	public boolean isActividadActiva() {
 		return actividadActiva;
+	}
+
+
+	public JSONObject salvarJSON() 
+	{
+		JSONObject jEstudiante = new JSONObject();
+		
+		jEstudiante=addInfoGeneralJSON(jEstudiante);
+		
+		jEstudiante.put("actividadActiva", this.actividadActiva);
+		
+		JSONArray intereses = new JSONArray(this.intereses);
+		jEstudiante.put("interes", intereses);
+		
+		List<String> idsCaminos = new LinkedList<String>();
+		for (CaminoAprendizaje camino : this.historialCaminos)
+		{
+			idsCaminos.add(camino.getID());
+		}
+		
+		jEstudiante.put("historialCaminos", new JSONArray(idsCaminos));
+		
+		return jEstudiante;
 	}
 	
 	

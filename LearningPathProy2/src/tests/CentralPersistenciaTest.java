@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -46,63 +47,58 @@ import traductores.TraductorProfesor;
 public class CentralPersistenciaTest 
 {
 
-	static boolean deleteDirectory(File directoryToBeDeleted) 
-	{
-	    File[] allContents = directoryToBeDeleted.listFiles();
-	    if (allContents != null) 
-	    {
-	        for (File file : allContents) 
-	        {
-	            deleteDirectory(file);
-	        }
-	    }
-	    return directoryToBeDeleted.delete();
-	}
-	
 	@BeforeAll
-	static void init() throws Exception 
-	{
-		File fileCaminosDirectorio = new File("LearningPathProy2/datosTests/Caminos/CaminosDirectorio.txt");
-	
-		//Leo el archivo
-		if (fileCaminosDirectorio.exists())
-		{
-			try (BufferedReader br = new BufferedReader(new FileReader(fileCaminosDirectorio))) 
-			{		        
-				
-			    String line;
-			    //Recorro el directorio para borrar las carpetas
-			    while ((line = br.readLine()) != null) 
-			    {
-			    	File carpetaCamino = new File("/LearningPathProy2/LearningPathProy2/datosTests/Caminos/"+line);
-			       
-			        deleteDirectory(carpetaCamino);
-			    	
-			    }
-			} 
-			catch (FileNotFoundException e) 
-			{			
-				e.printStackTrace();
-				fail("Error en el set up, file not found");
-			} 
-			catch (IOException e) 
-			{
-				e.printStackTrace();
-				fail("Error en el set up, IO exception");
-			}
-		}
-		else
-		{
-			fail("No existe el directorio");
-		}
+    static void setup( ) throws Exception
+    {
+		CentralPersistencia.cleanDatos(true);
+		LearningPathSystem.resetLPS();
+    }
 
-
-	}
+    @AfterEach
+    void tearDown( ) throws Exception
+    {
+    }
 	
  
+	@Test
+	public void testCleanDatos() 
+	{
+		try 
+		{
+			CentralPersistencia.cleanDatos(true);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			fail("Saco error la función clean datos"+e.getMessage());
+		}
+		
+
+		int lines=999;
+		try 
+		{
+			lines = CentralPersistencia.contadorLineasCaminosDirectorio(true);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			fail("Saco error la función contar lineas"+e.getMessage());
+		}
+		
+		int numFolders=999;
+		try
+		{
+			numFolders=CentralPersistencia.contadorFoldersCaminos(true);
+		}
+		catch (Exception e)
+		{
+			
+		}
+		assertEquals(0, lines, "No se borro el directorio");
+		assertEquals(2, numFolders, "No se borraron las carpetas");
+	}
 
 	@Test
-	@Order(1)
 	public void testGuardarPersitenciaCaminos()
 	{
 		LearningPathSystem LPS =LearningPathSystem.getInstance();

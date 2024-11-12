@@ -1,5 +1,7 @@
 package caminosActividades;
 
+import org.json.JSONObject;
+
 public class OpcionQuiz {
 	private String texto;
 	private String explicacion;
@@ -33,6 +35,17 @@ public class OpcionQuiz {
 
 	public void setCorrecta(boolean correcta) {
 		this.correcta = correcta;
+	}
+
+	public JSONObject getJSONObject() 
+	{
+		JSONObject jRespuesta = new JSONObject();
+		
+		jRespuesta.put("texto", this.texto);
+		jRespuesta.put("explicacion", this.explicacion);
+		jRespuesta.put("correcta", this.correcta);
+		
+		return jRespuesta;
 	}
 
 }

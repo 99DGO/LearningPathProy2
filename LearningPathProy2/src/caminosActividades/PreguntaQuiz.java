@@ -1,7 +1,12 @@
 package caminosActividades;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class PreguntaQuiz {
 	private int cantidadOpciones;
@@ -68,6 +73,33 @@ public class PreguntaQuiz {
 					"La posición de la opción debe ser mayor o igual a 0 y menor a la cantidad de opciones");
 		else
 			this.opciones.put(pos, opcion);
+	}
+
+	public JSONObject getJSONObject() 
+	{
+		JSONObject jPregunta = new JSONObject();
+		
+		jPregunta.put("cantidadOpciones", this.cantidadOpciones);
+		jPregunta.put("textoPregunta", this.textoPregunta);
+		
+		JSONObject jRespuesta = this.respuesta.getJSONObject();
+		
+		jPregunta.put("respuesta", jRespuesta);
+	
+		List<JSONObject> listJOpciones= new LinkedList<JSONObject>();
+		for (int numOpcion: this.opciones.keySet())
+		{
+			JSONObject jOpcionInd;
+			jOpcionInd=this.opciones.get(numOpcion).getJSONObject();
+			jOpcionInd.put("numOpcion", numOpcion);
+			
+			listJOpciones.add(jOpcionInd);
+		}
+		
+		JSONArray jOpcionesArray = new JSONArray(listJOpciones);
+		jPregunta.put("opciones", jOpcionesArray);
+		
+		return jPregunta;
 	}
 
 

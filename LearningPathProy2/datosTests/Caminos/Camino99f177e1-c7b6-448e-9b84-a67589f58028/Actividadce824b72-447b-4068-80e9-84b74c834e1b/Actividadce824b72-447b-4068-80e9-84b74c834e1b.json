@@ -10,7 +10,7 @@
   "Diga cual es su tipo de variable favorita y justifique."
  ],
  "rating": 0,
- "datosEstudiantes": ["DatoEstudiante_38efea8d-08dc-4458-a993-8adcc8a35dde"],
+ "datosEstudiantes": ["DatoEstudiante_87ae5b77-6d67-4896-9c87-72675953cf69"],
  "resenias": [],
  "type": "Examen",
  "nombre": "Tipos de variables examen",
@@ -28,6 +28,6 @@
  "duracion": 30,
  "obligatoria": true,
  "creadorID": "Profesor-KakashiCentralPersistenciaTest",
- "id": "Actividad0fb15082-6c9d-4192-b164-247ea398bce0",
+ "id": "Actividadce824b72-447b-4068-80e9-84b74c834e1b",
  "dificultad": 2.5
 }

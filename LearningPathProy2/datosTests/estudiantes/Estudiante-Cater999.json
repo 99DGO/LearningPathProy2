@@ -1,10 +1,10 @@
 {
  "actividadActiva": false,
- "password": "Trey123",
+ "password": "Cater123",
  "ID": "Estudiante-Cater999",
  "login": "Cater999",
  "type": "Estudiante",
  "nombre": "Cater Diamond",
- "historialCaminos": [],
- "interes": ["_"]
+ "intereses": ["_"],
+ "historialCaminos": ["Camino70562a07-8345-49bf-bc42-26001cf8ce75"]
 }

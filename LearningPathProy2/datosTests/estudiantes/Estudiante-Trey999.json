@@ -5,6 +5,6 @@
  "login": "Trey999",
  "type": "Estudiante",
  "nombre": "Trey Clover",
- "historialCaminos": [],
- "interes": ["_"]
+ "intereses": ["_"],
+ "historialCaminos": ["Camino70562a07-8345-49bf-bc42-26001cf8ce75"]
 }

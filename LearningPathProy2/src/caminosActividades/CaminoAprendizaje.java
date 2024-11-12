@@ -39,11 +39,12 @@ public class CaminoAprendizaje {
 	private final String ID;
 
 //Constructor normal
-	public CaminoAprendizaje(String titulo, String descripcion, List<String> objetivos, double dificultad, String creadorID) {
+	public CaminoAprendizaje(String titulo, String descripcion, List<String> objetivos, double dificultad, int duracion, String creadorID) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.objetivos = objetivos;
 		this.dificultad = dificultad;
+		this.duracion = duracion;
 		this.fechaCreacion= new Date().toString();
 		this.fechaModificacion=new Date().toString();
 		this.creadorID=creadorID;

@@ -183,7 +183,7 @@ public class EditorActividadGeneral
 	}
 	
 	
-	public void editDelObjetivo(String IDcamino, String IDactividad, int pos) throws Exception
+	public static void editDelObjetivo(String IDcamino, String IDactividad, int pos) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);

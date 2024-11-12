@@ -75,10 +75,10 @@ public class MenuGeneral {
 			if (usuario != null) {
 				if (usuario.getType().equals("Profesor")) {
 					System.out.println("Bienvenido Profesor " + usuario.getNombre());
-					MenuEstudiante.mostarMenuEstudiante();
+					MenuEstudiante.mostarMenuEstudiante((Estudiante) usuario);
 				} else if (usuario.getType().equals("Estudiante")) {
 					System.out.println("Bienvenido Estudiante " + usuario.getNombre());
-					MenuProfesor.mostrarMenuProfesor();
+					MenuProfesor.mostrarMenuProfesor((Profesor) usuario);
 				} else {
 					System.out.println("Usuario no encontrado en la base de datos. \n");
 				}

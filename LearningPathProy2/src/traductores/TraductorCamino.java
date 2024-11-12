@@ -36,12 +36,15 @@ public class TraductorCamino
 	 * Retorna un hashMap donde las llaves son los atributos del camino y los valores son la información de ese atributo en String.
 	 *No retorna las actividades
 	 */
-	public static  HashMap<String, String> verInfoGeneralCamino(String IDCamino)
+	public static  HashMap<String, String> verInfoGeneralCamino(String IDCamino) throws Exception
 	{
 		HashMap<String, String> infoCamino=new HashMap<String, String>();
 		
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino=LPS.getCaminoIndividual(IDCamino);
+		if (camino == null) {
+			throw new Exception("No se encontró el camino");
+		}
 		
 		infoCamino.put("Titulo", (camino.getTitulo()+"\n"));
 		infoCamino.put("Descripcion", (camino.getDescripcion()+"\n"));
@@ -54,7 +57,7 @@ public class TraductorCamino
 		
 		while (it1.hasNext())
 		{
-			objetivos.concat(String.valueOf(numObjetivo)+")"+it1.next()+"\n");
+			objetivos += String.valueOf(numObjetivo)+")"+it1.next()+"\n";
 			numObjetivo+=1;
 		}
 		

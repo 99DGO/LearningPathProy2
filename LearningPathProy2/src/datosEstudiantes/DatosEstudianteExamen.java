@@ -30,11 +30,6 @@ public class DatosEstudianteExamen extends DatosEstudianteActividad {
 	}
 
 
-	public void finalizarExamen() throws Exception {
-		finalizarActividad();
-		setEstado(DatosEstudianteActividad.ENVIADO);
-	}
-	
 	public double getCalificacion() {
 		return calificacion;
 	}
@@ -48,6 +43,12 @@ public class DatosEstudianteExamen extends DatosEstudianteActividad {
 		return this.envio;
 	}
 	
+	
+	public void setEnvio(EnvioExamen envio) {
+		this.envio = envio;
+	}
+
+
 	public JSONObject salvarEnJSON()
 	{
 		JSONObject jDatosEst = new JSONObject();

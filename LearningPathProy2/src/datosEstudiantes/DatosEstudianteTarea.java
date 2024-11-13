@@ -29,11 +29,6 @@ public class DatosEstudianteTarea extends DatosEstudianteActividad {
 		this.metodoEntrega = metodoEntrega;
 	}
 	
-	public void finalizarTarea() throws Exception 
-	{
-		finalizarActividad();
-		setEstado(DatosEstudianteActividad.ENVIADO);
-	}
 	
 	public JSONObject salvarEnJSON()
 	{

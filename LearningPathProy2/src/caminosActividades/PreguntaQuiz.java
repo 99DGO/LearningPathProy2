@@ -72,7 +72,7 @@ public class PreguntaQuiz {
 	
 	public void setOpcion(int pos, OpcionQuiz opcion)
 	{
-		if (pos < 0 || pos >= this.cantidadOpciones)
+		if (pos < 1 || pos > this.cantidadOpciones)
 			throw new IllegalArgumentException(
 					"La posición de la opción debe ser mayor o igual a 0 y menor a la cantidad de opciones");
 		else

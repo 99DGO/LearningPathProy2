@@ -11,7 +11,8 @@ import caminosActividades.Quiz;
 public class EnvioQuiz extends Envio<PreguntaQuiz, Integer> {
 	private double calificacion;
 
-	public EnvioQuiz() {
+	public EnvioQuiz() 
+	{
 		super();
 	}
 
@@ -20,6 +21,11 @@ public class EnvioQuiz extends Envio<PreguntaQuiz, Integer> {
 		this.calificacion = calificacion;
 	}
 
+	public EnvioQuiz(HashMap<PreguntaQuiz, Integer> respuestas) 
+	{
+		super(respuestas);
+	}
+	
 	public void agregarRespuesta(PreguntaQuiz pregunta, Integer respuesta) {
 		respuestas.put(pregunta, respuesta);
 	}
@@ -42,7 +48,7 @@ public class EnvioQuiz extends Envio<PreguntaQuiz, Integer> {
 		return respuestas;
 	}
 
-	public void calcularCalificacionQuiz() 
+	public double calcularCalificacionQuiz() 
 	{
 		Set<PreguntaQuiz> preguntasQuiz = this.respuestas.keySet();
 		
@@ -62,6 +68,8 @@ public class EnvioQuiz extends Envio<PreguntaQuiz, Integer> {
 
 		double calificacionCalculada= (respuestasCorrectas / (double) totalPreguntas)*5;
 		this.calificacion=calificacionCalculada;
+		
+		return calificacionCalculada;
 	}
 
 

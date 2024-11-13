@@ -5,7 +5,8 @@ import java.util.HashMap;
 public class EnvioExamen extends Envio<String, String>{
 	private double calificacion;
 
-	public EnvioExamen(HashMap<String, String> respuestas, double calificacion) {
+	public EnvioExamen(HashMap<String, String> respuestas, double calificacion) 
+	{
 		this.respuestas = respuestas;
 		this.calificacion=calificacion;
 	}
@@ -14,6 +15,12 @@ public class EnvioExamen extends Envio<String, String>{
 	{
 		super ();
 	}
+	
+	public EnvioExamen(HashMap<String, String> respuestas) 
+	{
+		this.respuestas = respuestas;
+	}
+	
 	
 	public HashMap<String, String> getRespuestas() {
 		return respuestas;

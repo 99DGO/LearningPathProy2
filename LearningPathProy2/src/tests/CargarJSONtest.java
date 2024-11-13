@@ -26,6 +26,7 @@ import org.junit.jupiter.api.Test;
 
 import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
+import caminosActividades.Quiz;
 import controllers.Inscriptor;
 import controllers.LearningPathSystem;
 import creadores.CreadorAR;
@@ -86,11 +87,25 @@ public class CargarJSONtest {
     	assertEquals("Python123", camino.getTitulo(), "El nombre del camino no se guardo bien" );
     	
     	List<Actividad> actividades = camino.getActividades();
-    	assertEquals(2, actividades.size(), "Las actividades no se guardaron bien" );
+    	assertEquals(3, actividades.size(), "Las actividades no se guardaron bien" );
 
+		
     	Actividad actividad =actividades.getFirst();
     	HashMap<String, DatosEstudianteActividad>  hashDatosEst= actividad.getDatosEstudiantes();
-    	assertEquals(1, hashDatosEst.size(), "Los datos del estudiante no se guardaron bien" );
+    	assertEquals(2, hashDatosEst.size(), "Los datos del estudiante no se guardaron bien" );
+    	
+    	Quiz quiz=null;
+    	try
+    	{
+        	quiz = (Quiz) actividades.get(2);
+    	}
+    	catch (Exception e) 
+    	{
+    		fail("No se guardo correctamente la posición de las actividades");
+    	}
+    	
+    	assertEquals("Quiz de asignación variables", quiz.getNombre(), "No se guardo bien el nombre");
+    	assertEquals(2, quiz.getPreguntas().size(), "No se guardaron bien las preguntas");
 
 	
 	}

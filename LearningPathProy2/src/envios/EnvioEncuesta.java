@@ -2,7 +2,7 @@ package envios;
 
 import java.util.HashMap;
 
-public class EnvioEncuesta extends Envio<String>{
+public class EnvioEncuesta extends Envio<String, String>{
 
 	public EnvioEncuesta(HashMap<String, String> respuestas) 
 	{

@@ -2,7 +2,7 @@ package envios;
 
 import java.util.HashMap;
 
-public class EnvioExamen extends Envio<String>{
+public class EnvioExamen extends Envio<String, String>{
 	private double calificacion;
 
 	public EnvioExamen(HashMap<String, String> respuestas, double calificacion) {

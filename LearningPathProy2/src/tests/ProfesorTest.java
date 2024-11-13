@@ -41,8 +41,8 @@ public class ProfesorTest
 		objetivos.add("Aprender loops");
 		objetivos.add("Aprender estructuras");
 		
-		CreadorCamino.crearCaminoCero("Python123", "Un curso para saber los basicos de python", objetivos, 2, IDprof);
-		CreadorCamino.crearCaminoCero("Jaca123", "Un curso para saber los basicos de java", objetivos, 3, IDprof);
+		CreadorCamino.crearCaminoCero("Python123", "Un curso para saber los basicos de python", objetivos, 2, 120, IDprof);
+		CreadorCamino.crearCaminoCero("Jaca123", "Un curso para saber los basicos de java", objetivos, 3, 130, IDprof);
 		
 		String idCamino = TraductorCamino.getIDfromNombre("Python123");
 		

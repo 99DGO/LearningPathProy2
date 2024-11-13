@@ -26,7 +26,7 @@ public class TraductorActividad {
 		
 		if (IDtoReturn==null)
 		{
-			throw new Exception("No se encontro el camino");
+			throw new Exception("No se encontro la actividad");
 		}
 		else
 		{

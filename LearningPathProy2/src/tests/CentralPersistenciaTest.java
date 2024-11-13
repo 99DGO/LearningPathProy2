@@ -29,6 +29,8 @@ import org.junit.jupiter.api.Test;
 
 import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
+import caminosActividades.OpcionQuiz;
+import caminosActividades.PreguntaQuiz;
 import controllers.Inscriptor;
 import controllers.LearningPathSystem;
 import creadores.CreadorAR;
@@ -110,16 +112,18 @@ public class CentralPersistenciaTest
 			CreadorProfesor.crearProfesor("KakashiCentralPersistenciaTest", "Kakashi123", "Kakashi Hatake");
 			String IDprof = TraductorProfesor.getIDfromLogin("KakashiCentralPersistenciaTest");
 			
+			//Creo objetivos de camino
 			List<String> objetivos = new LinkedList<String>();
 			objetivos.add("Saber diferentes tipos de datos");
 			objetivos.add("Aprender loops");
 			objetivos.add("Aprender estructuras");
 			
-			CreadorCamino.crearCaminoCero("Python123", "Un curso para saber los basicos de python", objetivos, 2, IDprof);
-			CreadorCamino.crearCaminoCero("Jaca123", "Un curso para saber los basicos de java", objetivos, 3, IDprof);
+			CreadorCamino.crearCaminoCero("Python123", "Un curso para saber los basicos de python", objetivos, 2, 120, IDprof);
+			CreadorCamino.crearCaminoCero("Jaca123", "Un curso para saber los basicos de java", objetivos, 3, 125, IDprof);
 			
 			String idCamino = TraductorCamino.getIDfromNombre("Python123");
 			
+			//Creo objetivos de actividad
 			List<String> objetivosActividad = new LinkedList<String>();
 			objetivosActividad.add("Saber que es un int");
 			objetivosActividad.add("Saber que es un double");
@@ -138,19 +142,49 @@ public class CentralPersistenciaTest
 			CreadorExamen.crearExamenCero(idCamino, "Tipos de variables examen", "Comprobar que el estudiante sabe diferenciar variables numericos", 
 					objetivosActividad, 2.5, 30, fechaLim, true, 3, preguntasExamen, IDprof,1);
 			
-			CreadorQuiz.crearQuizCero(idCamino, idCamino, idCamino, objetivosActividad, 0, 0, 
-					fechaLim, false, 0, null, IDprof, false, 0);
+			//Creo el quiz
+			List<PreguntaQuiz> preguntas = new LinkedList<PreguntaQuiz>();
+			OpcionQuiz opcion1 = new OpcionQuiz("int", "Porque es un entero", true);
+			OpcionQuiz opcion2 = new OpcionQuiz("double", "Porque no es un decimal", false);
+			OpcionQuiz opcion3 = new OpcionQuiz("float", "Porque no es un decimal", false);
+			OpcionQuiz opcion4 = new OpcionQuiz("string", "Porque es un numero", false);
+
+			PreguntaQuiz pregunta1= new PreguntaQuiz("Si quiero representar el número de vacas que tengo, que tipo de variable debería usar?", 1, 4);
+			pregunta1.setOpcion(0, opcion1);
+			pregunta1.setOpcion(1, opcion2);
+			pregunta1.setOpcion(2, opcion3);
+			pregunta1.setOpcion(3, opcion4);
+			preguntas.add(pregunta1);
 			
+			OpcionQuiz opcion1B = new OpcionQuiz("Paloma", "Porque son sucias", false);
+			OpcionQuiz opcion2B = new OpcionQuiz("Cuervo", "Porque son hermosos e inteligentes", true);
+			OpcionQuiz opcion3B = new OpcionQuiz("Pechirrojo", "Tierno pero es muy pequeño", false);
+			OpcionQuiz opcion4B = new OpcionQuiz("Vaca", "La vaca no es un pajaro", false);
 			
-			CreadorEstudiante.crearEstudiante("TreyClover", "Trey123", "Trey Clover");
-			String IDEstudiante= TraductorEstudiante.getIDfromLogin("TreyClover");
+			PreguntaQuiz pregunta2= new PreguntaQuiz("Cual es el mejor pajaro?", 2, 4);
+			pregunta2.setOpcion(0, opcion1B);
+			pregunta2.setOpcion(1, opcion2B);
+			pregunta2.setOpcion(2, opcion3B);
+			pregunta2.setOpcion(3, opcion4B);
+			preguntas.add(pregunta2);
+
+			CreadorQuiz.crearQuizCero(idCamino, "Quiz de asignación variables", "Esto es un quiz donde te preguntan que tipo de variable es más indicado", 
+					objetivosActividad, 1.5, 15, fechaLim, false, 3, preguntas, IDprof, false, 2);
+			
+			CreadorEstudiante.crearEstudiante("Trey999", "Trey123", "Trey Clover");
+			String IDEstudiante= TraductorEstudiante.getIDfromLogin("Trey999");
+			
+			CreadorEstudiante.crearEstudiante("Cater999", "Cater123", "Cater Diamond");
+			String IDEstudiante2= TraductorEstudiante.getIDfromLogin("Cater999");
 	
 			Inscriptor.inscribirseCamino(idCamino, IDEstudiante);
+			Inscriptor.inscribirseCamino(idCamino, IDEstudiante2);
+
 		}
 		catch (Exception e)
 		{
-			fail("No se pudo crear el setup. Chequear otras pruebas antes de esta"+e.getMessage());
 			e.printStackTrace();
+			fail("No se pudo crear el setup. Chequear otras pruebas antes de esta"+e.getMessage());
 		}
 				
 		try 
@@ -159,8 +193,8 @@ public class CentralPersistenciaTest
 		} 
 		catch (Exception e) 
 		{
-    		fail("No se guardo, tiro"+e.getMessage()); 
 			e.printStackTrace();
+    		fail("No se guardo, tiro"+e.getMessage()); 
 		}	
 	
 	}

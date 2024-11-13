@@ -6,7 +6,7 @@
  "actividadesSigExitoso": [],
  "actividadesPrereqs": [],
  "rating": 0,
- "datosEstudiantes": ["DatoEstudiante_e9ab7d31-23a1-4e0b-bbcb-65742e2bb17c"],
+ "datosEstudiantes": ["DatoEstudiante_b9dfd6e2-8aba-4ddc-9c97-20dbeb366ea1"],
  "resenias": [],
  "type": "Actividad recurso",
  "nombre": "Lectura de variables",
@@ -23,6 +23,6 @@
  "duracion": 20,
  "obligatoria": true,
  "creadorID": "Profesor-KakashiCentralPersistenciaTest",
- "id": "Actividad89b26009-122b-4747-9567-0ec9e104e9ab",
+ "id": "Actividad940d4288-4473-40a0-86e5-406a3a72049c",
  "dificultad": 2
 }

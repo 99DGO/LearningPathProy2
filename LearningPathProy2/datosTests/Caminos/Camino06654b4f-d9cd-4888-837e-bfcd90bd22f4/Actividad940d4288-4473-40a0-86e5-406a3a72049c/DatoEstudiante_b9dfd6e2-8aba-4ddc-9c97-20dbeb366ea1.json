@@ -1,10 +1,8 @@
 {
- "envio": [],
  "IDEstudiante": "Estudiante-TreyClover",
  "estado": "Pendiente",
- "calificacion": 0,
  "fechaInicio": "No iniciada",
  "fechaFinal": "No finalizada",
- "id": "DatoEstudiante_7f2fdd6b-45b3-467d-9171-b440a971e9be",
- "type": "DatosExamen"
+ "id": "DatoEstudiante_b9dfd6e2-8aba-4ddc-9c97-20dbeb366ea1",
+ "type": "DatosActividadRecurso"
 }

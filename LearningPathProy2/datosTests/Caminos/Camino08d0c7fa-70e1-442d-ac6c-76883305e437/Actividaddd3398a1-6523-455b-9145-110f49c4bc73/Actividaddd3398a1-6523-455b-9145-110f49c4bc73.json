@@ -5,7 +5,10 @@
  "actividadesSigExitoso": [],
  "actividadesPrereqs": [],
  "rating": 0,
- "datosEstudiantes": ["DatoEstudiante_57660098-90ac-481b-ba9e-f1d64fb89016"],
+ "datosEstudiantes": [
+  "DatoEstudiante_dde4b31c-888e-43e3-ab0a-991baecdfaf2",
+  "DatoEstudiante_e7e167df-5906-454b-9df9-74bbd2d05a9b"
+ ],
  "resenias": [],
  "type": "Quiz",
  "nombre": "Quiz de asignación variables",
@@ -53,46 +56,7 @@
      "numOpcion": 3
     }
    ],
-   "respuesta": {
-    "texto": "int",
-    "correcta": true,
-    "explicacion": "Porque es un entero"
-   },
-   "cantidadOpciones": 4
-  },
-  {
-   "textoPregunta": "Si quiero representar el número de vacas que tengo, que tipo de variable debería usar?",
-   "opciones": [
-    {
-     "texto": "int",
-     "correcta": true,
-     "explicacion": "Porque es un entero",
-     "numOpcion": 0
-    },
-    {
-     "texto": "double",
-     "correcta": false,
-     "explicacion": "Porque no es un decimal",
-     "numOpcion": 1
-    },
-    {
-     "texto": "float",
-     "correcta": false,
-     "explicacion": "Porque no es un decimal",
-     "numOpcion": 2
-    },
-    {
-     "texto": "string",
-     "correcta": false,
-     "explicacion": "Porque es un numero",
-     "numOpcion": 3
-    }
-   ],
-   "respuesta": {
-    "texto": "int",
-    "correcta": true,
-    "explicacion": "Porque es un entero"
-   },
+   "respuesta": 0,
    "cantidadOpciones": 4
   },
   {
@@ -123,14 +87,10 @@
      "numOpcion": 3
     }
    ],
-   "respuesta": {
-    "texto": "Cuervo",
-    "correcta": true,
-    "explicacion": "Porque son hermosos e inteligentes"
-   },
+   "respuesta": 1,
    "cantidadOpciones": 4
   }
  ],
- "id": "Actividadd13eee69-6506-4891-a3e1-3cdc624ec6e5",
+ "id": "Actividaddd3398a1-6523-455b-9145-110f49c4bc73",
  "dificultad": 1.5
 }

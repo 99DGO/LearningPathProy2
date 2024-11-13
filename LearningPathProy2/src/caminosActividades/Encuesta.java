@@ -67,6 +67,7 @@ public class Encuesta extends Actividad{
 		this.preguntasAbiertas.remove(pos);
 	}
 	
+	
 	public JSONObject salvarEnJSON()
 	{
         JSONObject jobject = new JSONObject( );

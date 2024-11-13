@@ -74,4 +74,16 @@ public class TraductorEstudiante
 			return IDtoReturn;
 		}
 	}
+
+	public static String getNombrefromID(String idEstudiante) 
+	{
+		LearningPathSystem LPS = LearningPathSystem.getInstance();
+		HashMap<String, Estudiante> estudiantes = LPS.getEstudiantes();
+		
+		Estudiante estudiante=estudiantes.get(idEstudiante);
+		
+		return estudiante.getNombre();
+		
+
+	}
 }

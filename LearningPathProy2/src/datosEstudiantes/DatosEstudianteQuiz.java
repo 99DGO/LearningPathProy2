@@ -1,9 +1,15 @@
 package datosEstudiantes;
 
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import envios.EnvioQuiz;
+import caminosActividades.PreguntaQuiz;
 import caminosActividades.Quiz;
 
 public class DatosEstudianteQuiz extends DatosEstudianteActividad {
@@ -48,13 +54,29 @@ public class DatosEstudianteQuiz extends DatosEstudianteActividad {
 		this.calificacion = calificacion;
 	}
 	
+	public void updateCalificacion()
+	{
+		this.calificacion=this.envioQuiz.getCalificacion();
+	}
 	
 	public JSONObject salvarEnJSON()
 	{
 		JSONObject jDatosEst = new JSONObject();
 		jDatosEst=this.addInfoJSONGeneral(jDatosEst);
 		
-		jDatosEst.put("calificaion", this.calificacion);
+		jDatosEst.put("calificacion", this.calificacion);
+		
+		HashMap<PreguntaQuiz, Integer> respuestas = this.envioQuiz.getRespuestas();
+		List<JSONObject> jRespuestasList = new LinkedList<JSONObject>();
+		
+		for (PreguntaQuiz preguntaObjeto: respuestas.keySet())
+		{
+			JSONObject jRespuesta = preguntaObjeto.getJSONObject();
+			jRespuesta.put("respuestaUsuario", respuestas.get(preguntaObjeto));
+			jRespuestasList.add(jRespuesta);
+		}
+		
+		jDatosEst.put( "envio", new JSONArray(jRespuestasList));
 		
 		return jDatosEst;
 	}

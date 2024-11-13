@@ -149,7 +149,7 @@ public class CentralPersistenciaTest
 			OpcionQuiz opcion3 = new OpcionQuiz("float", "Porque no es un decimal", false);
 			OpcionQuiz opcion4 = new OpcionQuiz("string", "Porque es un numero", false);
 
-			PreguntaQuiz pregunta1= new PreguntaQuiz("Si quiero representar el número de vacas que tengo, que tipo de variable debería usar?", 1, 4);
+			PreguntaQuiz pregunta1= new PreguntaQuiz("Si quiero representar el número de vacas que tengo, que tipo de variable debería usar?", 0, 4);
 			pregunta1.setOpcion(0, opcion1);
 			pregunta1.setOpcion(1, opcion2);
 			pregunta1.setOpcion(2, opcion3);
@@ -161,7 +161,7 @@ public class CentralPersistenciaTest
 			OpcionQuiz opcion3B = new OpcionQuiz("Pechirrojo", "Tierno pero es muy pequeño", false);
 			OpcionQuiz opcion4B = new OpcionQuiz("Vaca", "La vaca no es un pajaro", false);
 			
-			PreguntaQuiz pregunta2= new PreguntaQuiz("Cual es el mejor pajaro?", 2, 4);
+			PreguntaQuiz pregunta2= new PreguntaQuiz("Cual es el mejor pajaro?", 1, 4);
 			pregunta2.setOpcion(0, opcion1B);
 			pregunta2.setOpcion(1, opcion2B);
 			pregunta2.setOpcion(2, opcion3B);

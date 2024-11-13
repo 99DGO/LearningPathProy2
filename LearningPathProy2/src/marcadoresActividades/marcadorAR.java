@@ -1,23 +1,19 @@
-package senders;
+package marcadoresActividades;
 
 import java.util.HashMap;
 
 import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
 import controllers.LearningPathSystem;
+import datosEstudiantes.DatosEstudianteAR;
 import datosEstudiantes.DatosEstudianteEncuesta;
 import datosEstudiantes.DatosEstudianteTarea;
 import envios.EnvioEncuesta;
-import envios.EnvioExamen;
 import usuarios.Estudiante;
 
-public class EncuestaSender 
+public class marcadorAR 
 {
-
-	/*
-	 * Las respuestas deben ser llave=pregunta, value=Respuesta del estudiante
-	 */
-	public static void sendEnvioEncuesta(String idCamino, String idActividad, String idEstudiante, HashMap<String, String> respuestas)
+	public static void marcarARTerminado(String idCamino, String idActividad, String idEstudiante)
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
@@ -32,10 +28,8 @@ public class EncuestaSender
 			}
 		}
 		
-		DatosEstudianteEncuesta datosEstudiante = (DatosEstudianteEncuesta) actividad.getDatoEstudianteIndividual(idEstudiante);
-		EnvioEncuesta envio = new EnvioEncuesta(respuestas);
-		datosEstudiante.setEnvio(envio);
-		datosEstudiante.setEstado(DatosEstudianteEncuesta.EXITOSO);
+		DatosEstudianteAR datosEstudiante = (DatosEstudianteAR) actividad.getDatoEstudianteIndividual(idEstudiante);
+		datosEstudiante.setEstado(DatosEstudianteAR.EXITOSO);
 		
 		Estudiante estudiante = LPS.getEstudianteIndividual(idEstudiante);
 		estudiante.setActividadActiva(false);

@@ -8,7 +8,7 @@ import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
 import controllers.LearningPathSystem;
 
-public class EditorCamino 
+public class EditorCamino extends EditorActividadGeneral
 {
 
 	public static void editTitulo(String idCamino, String titulo) throws Exception 
@@ -93,7 +93,7 @@ public class EditorCamino
 
 	
 	
-	public void editDelObjetivo(String IDcamino, String IDactividad, int pos) throws Exception
+	public static void editDelObjetivo(String IDcamino, String IDactividad, int pos) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);

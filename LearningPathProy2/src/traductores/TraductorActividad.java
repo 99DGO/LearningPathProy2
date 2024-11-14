@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
+import caminosActividades.Quiz;
 import controllers.LearningPathSystem;
 import usuarios.Profesor;
 
@@ -33,6 +34,26 @@ public class TraductorActividad {
 		{
 			return IDtoReturn;
 		}
+	}
+	
+	public static boolean getTipoQuiz(String idCamino, String idActividad)
+	{
+		boolean tipoQuiz = false;
+		LearningPathSystem LPS = LearningPathSystem.getInstance();
+		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		Quiz actividad = null;
+		
+		for (Actividad actividadIterator : camino.getActividades())
+		{
+			if (actividadIterator.getId().equals(idActividad))
+			{
+				actividad = (Quiz) actividadIterator;
+			}
+		}
+		
+		tipoQuiz  = actividad.isVerdaderoFalso();
+		
+		return tipoQuiz;
 	}
 	
 	public static HashMap<String, String> verInfoGeneralActividad(String idCamino, String idActividad)

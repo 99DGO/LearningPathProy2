@@ -140,14 +140,14 @@ public class MenuCreacionActividad
 				}
 				OpcionQuiz opcion2 = new OpcionQuiz(respuesta2, explicacion2, correcta2);
 
-				OpcionQuiz correcta = null;
+				int correcta = 0;
 				if (opcion1.isCorrecta())
 				{
-					correcta = opcion1;
+					correcta = 1;
 				}
 				else
 				{
-					correcta = opcion2;
+					correcta = 2;
 				}
 				PreguntaQuiz pregunta = new PreguntaQuiz(texto, correcta, cantidadOpciones);
 				pregunta.setOpcion(1, opcion1);
@@ -188,7 +188,7 @@ public class MenuCreacionActividad
 				String explicacion4 = scanner.nextLine();
 				OpcionQuiz opcion4 = new OpcionQuiz(respuesta4, explicacion4, correcta4);
 
-				OpcionQuiz correcta = null;
+				int correcta = 0;
 				if (correcta1 && correcta2 && correcta3 && correcta4)
 				{
 					System.out.println("Solo una de las opciones puede ser correcta.");
@@ -203,19 +203,19 @@ public class MenuCreacionActividad
 				{
 					if (correcta1)
 					{
-						correcta = opcion1;
+						correcta = 1;
 					}
 					else if (correcta2)
 					{
-						correcta = opcion2;
+						correcta = 2;
 					}
 					else if (correcta3)
 					{
-						correcta = opcion3;
+						correcta = 3;
 					}
 					else
 					{
-						correcta = opcion4;
+						correcta = 4;
 					}
 				}
 				PreguntaQuiz pregunta = new PreguntaQuiz(texto, correcta, cantidadOpciones);

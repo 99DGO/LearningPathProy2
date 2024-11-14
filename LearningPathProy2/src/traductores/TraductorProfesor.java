@@ -32,5 +32,22 @@ public class TraductorProfesor
 			return IDtoReturn;
 		}
 	}
+	
+	public static String getNombreFromID(String idProfesor) throws Exception
+	{
+		LearningPathSystem LPS = LearningPathSystem.getInstance();
+		HashMap<String, Profesor> profesores = LPS.getProfesores();
+		
+		String nombre= profesores.get(idProfesor).getNombre();
+		
+		if (nombre==null)
+		{
+			throw new Exception("No se encontro el login");
+		}
+		else
+		{
+			return nombre;
+		}
+	}
 
 }

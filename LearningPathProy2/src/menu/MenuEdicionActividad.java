@@ -9,7 +9,7 @@ import usuarios.Profesor;
 
 public class MenuEdicionActividad
 {
-	public static void mostrarMenuEdicionActividad(Profesor profesor)
+	public static void mostrarMenuEdicionActividad(String profesor)
 	{
 		// Menu de edicion de actividad
 		System.out.println("Edicion de actividad");

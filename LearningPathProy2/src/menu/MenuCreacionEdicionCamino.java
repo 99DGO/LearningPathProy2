@@ -12,7 +12,7 @@ import usuarios.Profesor;
 
 public class MenuCreacionEdicionCamino 
 {
-	public static void mostrarMenuCreacionCamino(Profesor profesor)
+	public static void mostrarMenuCreacionCamino(String profesorID)
 	{
 		System.out.println("Creacion de camino de aprendizaje");
 		System.out.println("Ingrese el titulo del camino: ");
@@ -38,7 +38,7 @@ public class MenuCreacionEdicionCamino
 		System.out.println("Creando camino...");
 		try
 		{
-			CreadorCamino.crearCaminoCero(titulo, descripcion, objetivos, dificultad, duracion, profesor.getID());
+			CreadorCamino.crearCaminoCero(titulo, descripcion, objetivos, dificultad, duracion, profesorID);
 			System.out.println("Camino creado exitosamente.");
 		}
 		catch (Exception e)
@@ -50,7 +50,7 @@ public class MenuCreacionEdicionCamino
 
 	}
 	
-	public static void mostrarMenuEdicionCamino(Profesor profesor)
+	public static void mostrarMenuEdicionCamino(String profesorID)
 	{
 		System.out.println("Edicion de camino de aprendizaje");
 		System.out.println("Ingrese el ID del camino que desea editar: ");
@@ -201,7 +201,7 @@ public class MenuCreacionEdicionCamino
 
 			case 7:
 				// TODO Crear y agregar actividad
-				MenuCreacionActividad.mostrarMenuCreacionActividad(profesor);
+				MenuCreacionActividad.mostrarMenuCreacionActividad(profesorID);
 				break;
 
 			case 8:

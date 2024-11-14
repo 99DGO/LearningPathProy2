@@ -79,12 +79,12 @@ public class MenuProfesor
 		{
 		case 1:
 			// Crear camino de aprendizaje
-			MenuCreacionEdicionCamino.mostrarMenuCreacionCamino(profesor);
+			MenuCreacionEdicionCamino.mostrarMenuCreacionCamino(profesor.getID());
 			break;
 
 		case 2:
 			// Crear actividad
-			MenuCreacionActividad.mostrarMenuCreacionActividad(profesor);
+			MenuCreacionActividad.mostrarMenuCreacionActividad(profesor.getID());
 			break;
 
 		case 3:
@@ -198,12 +198,12 @@ public class MenuProfesor
 
 		case 7:
 			// Editar un camino de aprendizaje
-			MenuCreacionEdicionCamino.mostrarMenuEdicionCamino();
+			MenuCreacionEdicionCamino.mostrarMenuEdicionCamino(profesor.getID());
 			break;
 
 		case 8:
 			// TODO Editar una actividad
-			MenuEdicionActividad.mostrarMenuEdicionActividad(profesor);
+			MenuEdicionActividad.mostrarMenuEdicionActividad(profesor.getID());
 			break;
 
 		case 0:

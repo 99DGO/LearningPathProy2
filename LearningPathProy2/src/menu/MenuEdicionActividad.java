@@ -3,9 +3,9 @@ package menu;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import editores.EditorQuiz;
-import traductores.TraductorActividad;
-import usuarios.Profesor;
+import editores.*;
+import traductores.*;
+import usuarios.*;
 import caminosActividades.*;
 
 public class MenuEdicionActividad
@@ -522,6 +522,164 @@ public class MenuEdicionActividad
 	public static void mostrarMenuEdicionTarea(String IDCamino, String IDActividad)
 	{
 		// TODO
+		System.out.println("Menú de edición de tarea");
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Seleccione una opcion: ");
+        System.out.println("1. Editar titulo");
+        System.out.println("2. Editar descripcion");
+        System.out.println("3. Editar dificultad");
+        System.out.println("4. Editar duracion");
+        System.out.println("5. Añadir objetivos");
+        System.out.println("6. Eliminar objetivos");
+        System.out.println("7. Editar fecha de entrega");
+        System.out.println("8. Editar obligatoriedad");
+        System.out.println("9. Añadir actividad prerequisito");
+        System.out.println("10. Eliminar actividad prerequisito");
+        System.out.println("11. Añadir actividad siguiente (exitosa)");
+        System.out.println("12. Eliminar actividad siguiente (exitosa)");
+        System.out.println("13. Añadir actividad siguiente (fallida)");
+        System.out.println("14. Eliminar actividad siguiente (fallida)");
+        System.out.println("15. Editar instrucciones");
+        int opcion = scanner.nextInt();
+        switch (opcion)
+        {
+		case 1:
+			// Editar titulo
+			System.out.println("Ingrese el nuevo titulo: ");
+			scanner.nextLine();
+			String nuevoTitulo = scanner.nextLine();
+			try
+			{
+				EditorTarea.editNombre(IDCamino, IDActividad, nuevoTitulo);
+				System.out.println("Titulo editado exitosamente.\nNuevo titulo: " + nuevoTitulo + "\n");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al editar el titulo.");
+				e.getMessage();
+				e.printStackTrace();
+			}
+			break;
+			
+		case 2:
+			// Editar descripcion
+			System.out.println("Ingrese la nueva descripcion: ");
+			scanner.nextLine();
+			String nuevaDescripcion = scanner.nextLine();
+			try
+			{
+				EditorTarea.editDescripcion(IDCamino, IDActividad, nuevaDescripcion);
+				System.out.println("Descripcion editada exitosamente.\nNueva descripcion: " + nuevaDescripcion + "\n");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al editar la descripcion.");
+				e.getMessage();
+				e.printStackTrace();
+			}
+			
+		case 3:
+			// Editar dificultad
+			System.out.println("Ingrese la nueva dificultad: ");
+			scanner.nextLine();
+			Float nuevaDificultad = scanner.nextFloat();
+			try
+			{
+				EditorTarea.editDificultad(IDCamino, IDActividad, nuevaDificultad);
+				System.out.println("Dificultad editada exitosamente.\nNueva dificultad: " + nuevaDificultad + "\n");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al editar la dificultad.");
+				e.getMessage();
+				e.printStackTrace();
+			}
+			break;
+			
+		case 4:
+			// Editar duracion
+			System.out.println("Ingrese la nueva duracion: ");
+			scanner.nextLine();
+			int nuevaDuracion = scanner.nextInt();
+			try
+			{
+				EditorTarea.editDuracion(IDCamino, IDActividad, nuevaDuracion);
+				System.out.println("Duracion editada exitosamente.\nNueva duracion: " + nuevaDuracion + "\n");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al editar la duracion.");
+				e.getMessage();
+				e.printStackTrace();
+			}
+			break;
+			
+		case 5:
+			// Añadir objetivos
+			System.out.println("Ingrese el nuevo objetivo: ");
+			scanner.nextLine();
+			String nuevoObjetivo = scanner.nextLine();
+			try
+			{
+				EditorTarea.editAddObjetivo(IDCamino, IDActividad, nuevoObjetivo);
+				System.out.println("Objetivo añadido exitosamente.\nObjetivo añadido: " + nuevoObjetivo + "\n");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al añadir el objetivo.");
+				e.getMessage();
+				e.printStackTrace();
+			}
+			break;
+			
+		case 6:
+			// Eliminar objetivo
+			System.out.println("Ingrese la posicion del objetivo que desea eliminar: ");
+			scanner.nextLine();
+			int objetivoEliminar = scanner.nextInt();
+			try
+			{
+				EditorTarea.editDelObjetivo(IDCamino, IDActividad, objetivoEliminar);
+				System.out.println("Objetivo eliminado exitosamente.");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al eliminar el objetivo.");
+				e.getMessage();
+				e.printStackTrace();
+			}
+			break;
+			
+		case 7:
+			// Editar fecha de entrega
+			System.out.println("Ingrese la nueva fecha de entrega: ");
+			System.out.println("Dia: ");
+			int dia = scanner.nextInt();
+			System.out.println("Mes: ");
+			int mes = scanner.nextInt();
+			System.out.println("Año: ");
+			int anio = scanner.nextInt();
+			int[] fechaLimite =
+			{ dia, mes, anio };
+			try
+			{
+				EditorTarea.editFechaLim(IDCamino, IDActividad, fechaLimite);
+				System.out.println(
+						"Fecha de entrega editada exitosamente.\nNueva fecha de entrega: " + fechaLimite + "\n");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al editar la fecha de entrega.");
+				e.getMessage();
+				e.printStackTrace();
+			}
+			break;
+			
+		
+			
+		default:
+			System.out.println("Volviendo al menu principal. \n");
+        }
 	}
 
 	public static void mostrarMenuEdicionEncuesta(String IDCamino, String IDActividad)

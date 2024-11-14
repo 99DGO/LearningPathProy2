@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -28,6 +29,8 @@ import org.junit.jupiter.api.Test;
 
 import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
+import caminosActividades.OpcionQuiz;
+import caminosActividades.PreguntaQuiz;
 import controllers.Inscriptor;
 import controllers.LearningPathSystem;
 import creadores.CreadorAR;
@@ -35,10 +38,12 @@ import creadores.CreadorCamino;
 import creadores.CreadorEstudiante;
 import creadores.CreadorExamen;
 import creadores.CreadorProfesor;
+import creadores.CreadorQuiz;
 import datosEstudiantes.DatosEstudianteActividad;
 import persistencia.ActividadesPersistencia;
 import persistencia.CaminosPersistencia;
 import persistencia.CentralPersistencia;
+import persistencia.metodosAuxPersistencia;
 import traductores.TraductorCamino;
 import traductores.TraductorEstudiante;
 import traductores.TraductorProfesor;
@@ -46,63 +51,58 @@ import traductores.TraductorProfesor;
 public class CentralPersistenciaTest 
 {
 
-	static boolean deleteDirectory(File directoryToBeDeleted) 
-	{
-	    File[] allContents = directoryToBeDeleted.listFiles();
-	    if (allContents != null) 
-	    {
-	        for (File file : allContents) 
-	        {
-	            deleteDirectory(file);
-	        }
-	    }
-	    return directoryToBeDeleted.delete();
-	}
-	
 	@BeforeAll
-	static void init() throws Exception 
-	{
-		File fileCaminosDirectorio = new File("LearningPathProy2/datosTests/Caminos/CaminosDirectorio.txt");
-	
-		//Leo el archivo
-		if (fileCaminosDirectorio.exists())
-		{
-			try (BufferedReader br = new BufferedReader(new FileReader(fileCaminosDirectorio))) 
-			{		        
-				
-			    String line;
-			    //Recorro el directorio para borrar las carpetas
-			    while ((line = br.readLine()) != null) 
-			    {
-			    	File carpetaCamino = new File("/LearningPathProy2/LearningPathProy2/datosTests/Caminos/"+line);
-			       
-			        deleteDirectory(carpetaCamino);
-			    	
-			    }
-			} 
-			catch (FileNotFoundException e) 
-			{			
-				e.printStackTrace();
-				fail("Error en el set up, file not found");
-			} 
-			catch (IOException e) 
-			{
-				e.printStackTrace();
-				fail("Error en el set up, IO exception");
-			}
-		}
-		else
-		{
-			fail("No existe el directorio");
-		}
+    static void setup( ) throws Exception
+    {
+		metodosAuxPersistencia.cleanDatos(true);
+		LearningPathSystem.resetLPS();
+    }
 
-
-	}
+    @AfterEach
+    void tearDown( ) throws Exception
+    {
+    }
 	
  
+	@Test
+	public void testCleanDatos() 
+	{
+		try 
+		{
+			metodosAuxPersistencia.cleanDatos(true);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			fail("Saco error la función clean datos"+e.getMessage());
+		}
+		
+
+		int lines=999;
+		try 
+		{
+			lines = metodosAuxPersistencia.contadorLineasCaminosDirectorio(true);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			fail("Saco error la función contar lineas"+e.getMessage());
+		}
+		
+		int numFolders=999;
+		try
+		{
+			numFolders=metodosAuxPersistencia.contadorFoldersCaminos(true);
+		}
+		catch (Exception e)
+		{
+			
+		}
+		assertEquals(0, lines, "No se borro el directorio");
+		assertEquals(2, numFolders, "No se borraron las carpetas");
+	}
 
 	@Test
-	@Order(1)
 	public void testGuardarPersitenciaCaminos()
 	{
 		LearningPathSystem LPS =LearningPathSystem.getInstance();
@@ -112,16 +112,18 @@ public class CentralPersistenciaTest
 			CreadorProfesor.crearProfesor("KakashiCentralPersistenciaTest", "Kakashi123", "Kakashi Hatake");
 			String IDprof = TraductorProfesor.getIDfromLogin("KakashiCentralPersistenciaTest");
 			
+			//Creo objetivos de camino
 			List<String> objetivos = new LinkedList<String>();
 			objetivos.add("Saber diferentes tipos de datos");
 			objetivos.add("Aprender loops");
 			objetivos.add("Aprender estructuras");
 			
-			CreadorCamino.crearCaminoCero("Python123", "Un curso para saber los basicos de python", objetivos, 2, IDprof);
-			CreadorCamino.crearCaminoCero("Jaca123", "Un curso para saber los basicos de java", objetivos, 3, IDprof);
+			CreadorCamino.crearCaminoCero("Python123", "Un curso para saber los basicos de python", objetivos, 2, 120, IDprof);
+			CreadorCamino.crearCaminoCero("Jaca123", "Un curso para saber los basicos de java", objetivos, 3, 125, IDprof);
 			
 			String idCamino = TraductorCamino.getIDfromNombre("Python123");
 			
+			//Creo objetivos de actividad
 			List<String> objetivosActividad = new LinkedList<String>();
 			objetivosActividad.add("Saber que es un int");
 			objetivosActividad.add("Saber que es un double");
@@ -140,16 +142,49 @@ public class CentralPersistenciaTest
 			CreadorExamen.crearExamenCero(idCamino, "Tipos de variables examen", "Comprobar que el estudiante sabe diferenciar variables numericos", 
 					objetivosActividad, 2.5, 30, fechaLim, true, 3, preguntasExamen, IDprof,1);
 			
+			//Creo el quiz
+			List<PreguntaQuiz> preguntas = new LinkedList<PreguntaQuiz>();
+			OpcionQuiz opcion1 = new OpcionQuiz("int", "Porque es un entero", true);
+			OpcionQuiz opcion2 = new OpcionQuiz("double", "Porque no es un decimal", false);
+			OpcionQuiz opcion3 = new OpcionQuiz("float", "Porque no es un decimal", false);
+			OpcionQuiz opcion4 = new OpcionQuiz("string", "Porque es un numero", false);
+
+			PreguntaQuiz pregunta1= new PreguntaQuiz("Si quiero representar el número de vacas que tengo, que tipo de variable debería usar?", 0, 4);
+			pregunta1.setOpcion(1, opcion1);
+			pregunta1.setOpcion(2, opcion2);
+			pregunta1.setOpcion(3, opcion3);
+			pregunta1.setOpcion(4, opcion4);
+			preguntas.add(pregunta1);
 			
-			CreadorEstudiante.crearEstudiante("TreyClover", "Trey123", "Trey Clover");
-			String IDEstudiante= TraductorEstudiante.getIDfromLogin("TreyClover");
+			OpcionQuiz opcion1B = new OpcionQuiz("Paloma", "Porque son sucias", false);
+			OpcionQuiz opcion2B = new OpcionQuiz("Cuervo", "Porque son hermosos e inteligentes", true);
+			OpcionQuiz opcion3B = new OpcionQuiz("Pechirrojo", "Tierno pero es muy pequeño", false);
+			OpcionQuiz opcion4B = new OpcionQuiz("Vaca", "La vaca no es un pajaro", false);
+			
+			PreguntaQuiz pregunta2= new PreguntaQuiz("Cual es el mejor pajaro?", 1, 4);
+			pregunta2.setOpcion(1, opcion1B);
+			pregunta2.setOpcion(2, opcion2B);
+			pregunta2.setOpcion(3, opcion3B);
+			pregunta2.setOpcion(4, opcion4B);
+			preguntas.add(pregunta2);
+
+			CreadorQuiz.crearQuizCero(idCamino, "Quiz de asignación variables", "Esto es un quiz donde te preguntan que tipo de variable es más indicado", 
+					objetivosActividad, 1.5, 15, fechaLim, false, 3, preguntas, IDprof, false, 2);
+			
+			CreadorEstudiante.crearEstudiante("Trey999", "Trey123", "Trey Clover");
+			String IDEstudiante= TraductorEstudiante.getIDfromLogin("Trey999");
+			
+			CreadorEstudiante.crearEstudiante("Cater999", "Cater123", "Cater Diamond");
+			String IDEstudiante2= TraductorEstudiante.getIDfromLogin("Cater999");
 	
 			Inscriptor.inscribirseCamino(idCamino, IDEstudiante);
+			Inscriptor.inscribirseCamino(idCamino, IDEstudiante2);
+
 		}
 		catch (Exception e)
 		{
-			fail("No se pudo crear el setup. Chequear otras pruebas antes de esta"+e.getMessage());
 			e.printStackTrace();
+			fail("No se pudo crear el setup. Chequear otras pruebas antes de esta"+e.getMessage());
 		}
 				
 		try 
@@ -158,8 +193,8 @@ public class CentralPersistenciaTest
 		} 
 		catch (Exception e) 
 		{
-    		fail("No se guardo, tiro"+e.getMessage()); 
 			e.printStackTrace();
+    		fail("No se guardo, tiro"+e.getMessage()); 
 		}	
 	
 	}

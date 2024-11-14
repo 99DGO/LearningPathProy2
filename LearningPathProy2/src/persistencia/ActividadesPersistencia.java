@@ -4,6 +4,9 @@ import caminosActividades.Actividad;
 import caminosActividades.ActividadRecurso;
 import caminosActividades.Encuesta;
 import caminosActividades.Examen;
+import caminosActividades.OpcionQuiz;
+import caminosActividades.PreguntaQuiz;
+import caminosActividades.Quiz;
 import caminosActividades.Tarea;
 import creadores.CreadorAR;
 import creadores.CreadorEncuesta;
@@ -19,6 +22,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -252,7 +256,55 @@ public class ActividadesPersistencia
 		
 		else if (jActividad.getString("type").equals(Actividad.QUIZ))
 		{
-			
+	       	//Saco las actividades fracaso
+	    	JSONArray jActividadesSigFracaso = jActividad.getJSONArray("actividadesSigFracaso");
+	    	List<String> actividadesSigFracaso = new LinkedList<String>();
+	    	
+	    	for (int i =0; i<jActividadesSigFracaso.length(); i++)
+	    	{
+	    		String IDactividadesSigFracaso=jActividadesSigFracaso.getString(i);
+	    		actividadesSigFracaso.add(IDactividadesSigFracaso);
+	    	}
+	    	
+	    	//Saco las preguntas 
+	    	List<PreguntaQuiz> preguntasQuiz=new ArrayList<PreguntaQuiz>();
+	    	JSONArray jPreguntas = jActividad.getJSONArray("preguntas");
+	    	for (int i =0; i<jPreguntas.length(); i++)
+	    	{
+	    		JSONObject jPreguntaInd=jPreguntas.getJSONObject(i);
+	    		//Declaro variables 
+	    		OpcionQuiz respuesta=null;
+	    		HashMap<Integer, OpcionQuiz> mapaOpciones= new HashMap<Integer, OpcionQuiz>();
+	    		
+	    		//Consigo las opciones
+	    		JSONArray jOpciones = jPreguntaInd.getJSONArray("opciones");
+	    		//Recorro las opciones
+	    		for (int i2 =0; i2<jOpciones.length(); i2++)
+	    		{
+	    			//Creo las opciones
+	    			JSONObject jOpcionInd=jOpciones.getJSONObject(i2);
+	    			
+	    			boolean correcta =jOpcionInd.getBoolean("correcta");
+	    			
+	    			OpcionQuiz opcionInd = new OpcionQuiz(jOpcionInd.getString("texto"), jOpcionInd.getString("explicacion"), correcta);
+	    			
+	    			mapaOpciones.put(jOpcionInd.getInt("numOpcion"), opcionInd);
+	    		}
+	    		
+	    		
+	    		PreguntaQuiz preguntaObjeto = new PreguntaQuiz(jPreguntaInd.getInt("cantidadOpciones"), mapaOpciones, 
+	    				jPreguntaInd.getString("textoPregunta"), jPreguntaInd.getInt("respuesta"));
+	    		
+	    		preguntasQuiz.add(preguntaObjeto);
+	    	}
+
+	    	
+			actividad= new Quiz(jActividad.getString("nombre"), jActividad.getString("descripcion"), objetivos,
+					jActividad.getDouble("dificultad"), jActividad.getInt("duracion"), fechaLim, jActividad.getBoolean("obligatoria"),
+					jActividad.getDouble("rating"), jActividad.getInt("ratingsTotales"), resenias, jActividad.getString("creadorID"),
+					jActividad.getString("type"), datosEstHash, jActividad.getDouble("calificacionMin"), actividadesSigFracaso,
+					preguntasQuiz, jActividad.getString("id"), jActividad.getBoolean("verdaderoFalso"), actividadesPrereqs, 
+					actividadesSigExitoso);
 		}
 		
 		return actividad;

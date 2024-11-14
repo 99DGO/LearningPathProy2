@@ -215,7 +215,7 @@ public abstract class EditorActividadGeneral
 	
 	
 	
-	public static void editAddActividadSiguienteExitosa(String IDcamino, String IDactividad, String IDactividadSiguiente)
+	public static void editAddActividadSiguienteExitosa(String IDcamino, String IDactividad, String nombreActividadSigExitosa)
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
@@ -230,7 +230,7 @@ public abstract class EditorActividadGeneral
 			}
 		}
 		
-		actividad.addActividadSiguienteExitosa(IDactividadSiguiente);
+		actividad.addActividadSiguienteExitosa(nombreActividadSigExitosa);
 		
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
@@ -238,7 +238,7 @@ public abstract class EditorActividadGeneral
 		camino.setFechaModificacion(fecha.toString());
 	}
 	
-	public static void editAddActividadPrereq(String IDcamino, String IDactividad, String IDactividadPrereq)
+	public static void editAddActividadPrereq(String IDcamino, String IDactividad, String nombreActividadPrereq)
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
@@ -253,7 +253,7 @@ public abstract class EditorActividadGeneral
 			}
 		}
 		
-		actividad.addActividadPrereq(IDactividadPrereq);
+		actividad.addActividadPrereq(nombreActividadPrereq);
 		
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);

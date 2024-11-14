@@ -65,20 +65,10 @@ public abstract class DatosEstudianteActividad {
         return this.fechaFinal;
 	}
 	
-	public void setEstado(String nuevoEstado) throws Exception 
+	public void setEstado(String nuevoEstado) 
 	{
-		if (nuevoEstado.equals(EXITOSO) || nuevoEstado.equals(ENVIADO) || nuevoEstado.equals(PENDIENTE) || nuevoEstado.equals(NOEXITOSO)) 
-		{
-	        this.estado = nuevoEstado;
-	    } 
-		else 
-		{
-	        throw new Exception("Estado no válido. Los estados válidos son: Exitoso, Enviado, Pendiente y No exitoso");
-	    }
-	}
+		this.estado = nuevoEstado;
 	
-	public void finalizarActividad() {
-		this.fechaFinal = new Date().toString();
 	}
 	
 	public void setFechaFinal() {

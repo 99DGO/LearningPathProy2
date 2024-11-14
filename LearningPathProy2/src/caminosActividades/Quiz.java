@@ -3,8 +3,10 @@ package caminosActividades;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import datosEstudiantes.DatosEstudianteActividad;
@@ -87,8 +89,22 @@ public class Quiz extends ActividadCalificable{
         
         jobject=this.addInfoJSONObject(jobject);
         jobject=this.addInfoCalificableJSON(jobject);
+        jobject.put("verdaderoFalso", this.verdaderoFalso);
+                
+        List<JSONObject> listJPreguntas = new LinkedList<JSONObject>();
+        
+        for (PreguntaQuiz preguntaObjeto : this.preguntas)
+        {
+        	JSONObject jPreguntaSingular = preguntaObjeto.getJSONObject();
+        	listJPreguntas.add(jPreguntaSingular);
+        }
+        
+        JSONArray jPreguntasTotales = new JSONArray(listJPreguntas);
 
+        jobject.put("preguntas", jPreguntasTotales);
+        
         return jobject;
+        
 	}
 
 }

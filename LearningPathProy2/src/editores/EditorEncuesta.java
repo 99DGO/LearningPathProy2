@@ -7,7 +7,7 @@ import caminosActividades.Encuesta;
 import caminosActividades.CaminoAprendizaje;
 import controllers.LearningPathSystem;
 
-public class EditorEncuesta 
+public class EditorEncuesta extends EditorActividadGeneral
 {
 	public static void editDelPregunta(int pos, String IDcamino, String IDactividad) throws Exception
 	{

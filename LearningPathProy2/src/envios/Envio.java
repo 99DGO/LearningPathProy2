@@ -11,8 +11,8 @@ public abstract class Envio<K, V> {
 	 }
 	 
 	 
-	 public Envio(HashMap<K, V> respuestas) {
-		super();
+	 public Envio(HashMap<K, V> respuestas) 
+	 {
 		this.respuestas = respuestas;
 	}
 

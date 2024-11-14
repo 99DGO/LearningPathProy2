@@ -9,8 +9,8 @@ import caminosActividades.Examen;
 import caminosActividades.Tarea;
 import controllers.LearningPathSystem;
 
-public class EditorTarea 
-{
+public class EditorTarea extends EditorActividadGeneral
+{ 
 	public static void editInstrucciones(String instrucciones, String IDcamino, String IDactividad) 
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();

@@ -18,10 +18,9 @@ public class DatosEstudianteQuiz extends DatosEstudianteActividad {
 	
 	public DatosEstudianteQuiz(String IDEstudiante) {
 		super(IDEstudiante);
-		this.envioQuiz = new EnvioQuiz();
-		this.calificacion = 0.0;
+		this.calificacion = -1;
 		this.type=DatosEstudianteActividad.QUIZDATO;
-
+		this.envioQuiz= new EnvioQuiz();
 
 	}
 	
@@ -36,15 +35,22 @@ public class DatosEstudianteQuiz extends DatosEstudianteActividad {
 
 	}
 
+	
+
+	public void setEnvioQuiz(EnvioQuiz envioQuiz) 
+	{
+		this.envioQuiz = envioQuiz;
+		double calificacion=envioQuiz.calcularCalificacionQuiz();
+		this.calificacion=calificacion;
+	}
+
 
 
 	public double getCalificacion() {
 		return calificacion;
 	}
 	
-	public void finalizarQuiz(Quiz quiz) {
-		finalizarActividad();
-	}
+
 	
 	public EnvioQuiz getEnvioQuiz() {
         return envioQuiz;

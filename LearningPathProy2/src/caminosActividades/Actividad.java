@@ -208,14 +208,20 @@ public abstract class Actividad {
 		this.resenias.add(resenia);
 	}
 	
-	public void addActividadSiguienteExitosa(String actividadID)
+	/*
+	 * El parametro es el nombre de la actividad para que despuesa sea facil mostrarsela al usuario
+	 */
+	public void addActividadSiguienteExitosa(String nombreActividad)
 	{
-		this.actividadesSigExitoso.add(actividadID);
+		this.actividadesSigExitoso.add(nombreActividad);
 	}
 	
-	public void addActividadPrereq(String actividadID)
+	/*
+	 * El parametro es el nombre de la actividad para que despuesa sea facil mostrarsela al usuario
+	 */
+	public void addActividadPrereq(String nombreActividad)
 	{
-		this.actividadesPrereqs.add(actividadID);
+		this.actividadesPrereqs.add(nombreActividad);
 	}
 	
 	public void addObjetivo(String objetivo)

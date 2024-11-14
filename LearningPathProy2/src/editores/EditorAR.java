@@ -1,13 +1,12 @@
 package editores;
 
 import java.util.Date;
-
 import caminosActividades.Actividad;
 import caminosActividades.ActividadRecurso;
 import caminosActividades.CaminoAprendizaje;
 import controllers.LearningPathSystem;
 
-public class EditorAR 
+public class EditorAR extends EditorActividadGeneral
 {
 	public static void editRecurso(String recurso, String IDcamino, String IDactividad) {
 		LearningPathSystem LPS= LearningPathSystem.getInstance();

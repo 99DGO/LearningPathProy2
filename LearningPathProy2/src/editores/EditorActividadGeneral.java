@@ -9,7 +9,7 @@ import caminosActividades.CaminoAprendizaje;
 import controllers.LearningPathSystem;
 import datosEstudiantes.DatosEstudianteActividad;
 
-public class EditorActividadGeneral 
+public abstract class EditorActividadGeneral 
 {
 	
 

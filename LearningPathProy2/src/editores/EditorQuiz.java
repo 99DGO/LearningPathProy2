@@ -4,7 +4,7 @@ import java.util.Date;
 
 import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
-import caminosActividades.Examen;
+import caminosActividades.PreguntaQuiz;
 import caminosActividades.Quiz;
 import controllers.LearningPathSystem;
 
@@ -41,9 +41,7 @@ public class EditorQuiz
 		camino.setFechaModificacion(fecha.toString());
 	}
 	
-	//TODO
-	/**
-	public static void editAddPregunta(String pregunta, String IDcamino, String IDactividad) 
+	public static void editAddPregunta(PreguntaQuiz pregunta, String IDcamino, String IDactividad) 
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
@@ -62,10 +60,10 @@ public class EditorQuiz
 		
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);
-		Date fecha = new Date();
+		String fecha = new Date().toString();
 		camino.setFechaModificacion(fecha);
 	}
-	*/
+
 	
 	public static void editAddActividadSigFracaso(String IDcamino, String IDactividad, String IDactividadSigFracaso)
 	{
@@ -83,15 +81,7 @@ public class EditorQuiz
 			}
 		}
 		
-		for (Actividad actividadIterator2: camino.getActividades())
-		{
-			if (actividadIterator2.getId().equals(IDactividadSigFracaso))
-			{
-				actividadSigFracaso= actividadIterator2;
-			}
-		}
-		
-		actividad.addActividadSigFracaso(actividadSigFracaso);
+		actividad.addActividadSigFracaso(IDactividadSigFracaso);
 		
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);

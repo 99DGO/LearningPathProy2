@@ -16,17 +16,19 @@ public class ActividadRecurso extends Actividad {
 
 	//Constructor normal
 	public ActividadRecurso(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
-			int[] fechaLim, boolean obligatoria, String recurso, String instrucciones, String creadorLogin, CaminoAprendizaje camino) {
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino);
+			int[] fechaLim, boolean obligatoria, String recurso, String instrucciones, String creadorLogin, 
+			CaminoAprendizaje camino, int pos) throws Exception
+	{
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino, pos);
 		this.recurso = recurso;
 		this.instrucciones = instrucciones;
 		this.type=ACTIVIDADRECURSO;
 	}
 
 	//Constructor para clonar
-	public ActividadRecurso(String creadorLogin, ActividadRecurso ActividadOG, CaminoAprendizaje camino)
+	public ActividadRecurso(String creadorLogin, ActividadRecurso ActividadOG, CaminoAprendizaje camino, int pos) throws Exception
 	{
-		super(creadorLogin, ActividadOG, camino);
+		super(creadorLogin, ActividadOG, camino, pos);
 		
 		this.recurso = ActividadOG.getRecurso();
 		this.instrucciones = ActividadOG.getInstrucciones();
@@ -39,8 +41,10 @@ public class ActividadRecurso extends Actividad {
 	public ActividadRecurso(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double rating, int ratingsTotales, List<String> resenias,
 			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes,
-			String recurso, String instrucciones, String id) {
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, rating, ratingsTotales, resenias, creadorLogin, type, datosEstudiantes, id);
+			String recurso, String instrucciones, String id, List<String> actividadesPrereqs, List<String> actividadesSigExitoso) 
+	{
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, rating, ratingsTotales, resenias, 
+				creadorLogin, type, datosEstudiantes, id, actividadesPrereqs, actividadesSigExitoso);
 		this.recurso = recurso;
 		this.instrucciones = instrucciones;
 	}

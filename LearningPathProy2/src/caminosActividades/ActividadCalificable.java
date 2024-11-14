@@ -12,15 +12,17 @@ import datosEstudiantes.DatosEstudianteActividad;
 
 public abstract class ActividadCalificable extends Actividad{
 	protected double calificacionMin;
-	protected List<Actividad> actividadesSigFracaso;
+	protected List<String> actividadesSigFracaso;
 	
 	//Constructor normal
 	public ActividadCalificable(String nombre, String descripcion, List<String> objetivos, double dificultad,
-			int duracion, int[] fechaLim, boolean obligatoria, double calificacionMin, String creadorLogin,CaminoAprendizaje camino) {
+			int duracion, int[] fechaLim, boolean obligatoria, double calificacionMin, String creadorLogin,
+			CaminoAprendizaje camino, int pos) throws Exception
+	{
 		
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino);
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino, pos);
 		this.calificacionMin = calificacionMin;
-		this.actividadesSigFracaso=new ArrayList<Actividad>();
+		this.actividadesSigFracaso=new ArrayList<String>();
 	}
 	
 	
@@ -28,18 +30,21 @@ public abstract class ActividadCalificable extends Actividad{
 	public ActividadCalificable(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria,  double rating, int ratingsTotales, List<String> resenias,
 			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes,
-			double calificacionMin, List<Actividad> actividadesSigFracaso, String id) {
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, rating, ratingsTotales, resenias, creadorLogin, type, datosEstudiantes, id);
+			double calificacionMin, List<String> actividadesSigFracaso, String id, List<String> actividadesPrereqs,
+			List<String> actividadesSigExitoso)
+	{
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, rating, ratingsTotales, resenias,
+				creadorLogin, type, datosEstudiantes, id, actividadesPrereqs,  actividadesSigExitoso);
 		this.calificacionMin = calificacionMin;
 		this.actividadesSigFracaso = actividadesSigFracaso;
 	}
 
 	//Constructor clonador
-	public ActividadCalificable(String creadorLogin, ActividadCalificable ActividadOG, CaminoAprendizaje camino)
+	public ActividadCalificable(String creadorLogin, ActividadCalificable ActividadOG, CaminoAprendizaje camino, int pos) throws Exception
 	{
-		super(creadorLogin, ActividadOG, camino);
+		super(creadorLogin, ActividadOG, camino, pos);
 		this.calificacionMin=ActividadOG.getCalificacionMin();
-		this.actividadesSigFracaso=new ArrayList<Actividad>();
+		this.actividadesSigFracaso=new ArrayList<String>();
 
 	}
 	
@@ -52,16 +57,16 @@ public abstract class ActividadCalificable extends Actividad{
 		this.calificacionMin = calificacionMin;
 	}
 
-	public List<Actividad> getActividadesSigFracaso() {
+	public List<String> getActividadesSigFracaso() {
 		return actividadesSigFracaso;
 	}
 	
-	public void addActividadSigFracaso(Actividad actividad)
+	public void addActividadSigFracaso(String actividad)
 	{
 		this.actividadesSigFracaso.add(actividad);
 	}
 	
-	public void delActividadSigFracaso(Actividad actividad)
+	public void delActividadSigFracaso(String actividad)
 	{
 		this.actividadesSigFracaso.remove(actividad);
 	}
@@ -73,12 +78,8 @@ public abstract class ActividadCalificable extends Actividad{
 	
 	public JSONObject addInfoCalificableJSON(JSONObject jobject)
 	{
-        List<String> listaIDsActividadesSigFracaso= new LinkedList<String>();
-        for (Actividad actividad: this.actividadesSigFracaso)
-        {
-        	listaIDsActividadesSigFracaso.add(actividad.getId());
-        }
-        JSONArray actividadesSigFracasoArray = new JSONArray (listaIDsActividadesSigFracaso);
+   
+        JSONArray actividadesSigFracasoArray = new JSONArray (this.actividadesSigFracaso);
         jobject.put("actividadesSigFracaso", actividadesSigFracasoArray);
         
         jobject.put("calificacionMin", this.calificacionMin);

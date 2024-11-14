@@ -30,6 +30,11 @@ public class LearningPathSystem {
 	
 	}
 	
+	public static void resetLPS()
+	{
+		LPS=new LearningPathSystem();
+	}
+	
 	
 	public HashMap<String, Estudiante> getEstudiantes() {
 		return estudiantes;

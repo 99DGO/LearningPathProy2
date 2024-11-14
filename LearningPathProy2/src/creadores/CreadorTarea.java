@@ -13,24 +13,24 @@ public class CreadorTarea
 {
 	public static void crearTareaCero(String IDcamino, String nombre, String descripcion,
 			List<String> objetivos, double dificultad, int duracion, int[] fechaLim, boolean obligatoria, 
-			String instrucciones, String IDprofesor)
+			String instrucciones, String IDprofesor, int pos) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		Profesor profesor= LPS.getProfesorIndividual(IDprofesor);
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
 		
 		Tarea tarea= new Tarea(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria,
-				instrucciones, profesor.getID(), camino);
+				instrucciones, profesor.getID(), camino, pos);
 		
 	}
 
-	public static void clonarTarea(Actividad tareaOG, String IDprofesor, String IDcaminoNuevo) 
+	public static void clonarTarea(Actividad tareaOG, String IDprofesor, String IDcaminoNuevo, int pos) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		Profesor profesor= LPS.getProfesorIndividual(IDprofesor);
 		CaminoAprendizaje caminoNuevo= LPS.getCaminoIndividual(IDcaminoNuevo);
 		
-		Tarea tarea = new Tarea(profesor.getID(), (Tarea) tareaOG, caminoNuevo);
+		Tarea tarea = new Tarea(profesor.getID(), (Tarea) tareaOG, caminoNuevo, pos);
 
 	}
 }

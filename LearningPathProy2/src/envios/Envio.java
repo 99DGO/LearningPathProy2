@@ -2,23 +2,23 @@ package envios;
 
 import java.util.HashMap;
 
-public abstract class Envio<K> {
+public abstract class Envio<K, V> {
 
-	protected HashMap<K, String> respuestas;
+	protected HashMap<K, V> respuestas;
 	
 	 public Envio() {
 		 this.respuestas = new HashMap<>(); 
 	 }
 	 
 	 
-	 public Envio(HashMap<K, String> respuestas) {
+	 public Envio(HashMap<K, V> respuestas) {
 		super();
 		this.respuestas = respuestas;
 	}
 
 
-	public abstract HashMap<K, String> getRespuestas();
+	public abstract HashMap<K, V> getRespuestas();
 	 
-	 public abstract void agregarRespuesta(K pregunta, String respuesta);
+	public abstract void agregarRespuesta(K pregunta, V respuesta);
 	   
 }

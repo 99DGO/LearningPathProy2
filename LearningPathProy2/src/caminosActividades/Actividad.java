@@ -26,8 +26,8 @@ public abstract class Actividad {
 	private int duracion;
 	private int[] fechaLim;
 	private boolean obligatoria;
-	private List<Actividad> actividadesPrereqs;
-	private List<Actividad> actividadesSigExitoso;
+	private List<String> actividadesPrereqs;
+	private List<String> actividadesSigExitoso;
 	private double rating;
 	private int ratingsTotales;
 	private List<String> resenias;
@@ -39,7 +39,7 @@ public abstract class Actividad {
 	
 	//Constructor normal
 	public Actividad(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion, int[] fechaLim,
-			boolean obligatoria, String creadorID, CaminoAprendizaje camino) 
+			boolean obligatoria, String creadorID, CaminoAprendizaje camino, int pos) throws Exception
 	{
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -50,10 +50,10 @@ public abstract class Actividad {
 		this.obligatoria = obligatoria;
 		this.creadorID=creadorID;
 		this.datosEstudiantes = new HashMap<>();
-		this.actividadesPrereqs=new ArrayList<Actividad>();
-		this.actividadesSigExitoso=new ArrayList<Actividad>();
+		this.actividadesPrereqs=new ArrayList<String>();
+		this.actividadesSigExitoso=new ArrayList<String>();
 		this.ID="Actividad"+UUID.randomUUID().toString();
-		camino.addActividad(this);
+		camino.addActividad(this, pos);
 	}
 	
 	/**Constructor para clonar
@@ -61,7 +61,7 @@ public abstract class Actividad {
 	 * @param creadorID
 	 * @param ActividadOG
 	 */
-	public Actividad(String creadorID, Actividad ActividadOG, CaminoAprendizaje camino)
+	public Actividad(String creadorID, Actividad ActividadOG, CaminoAprendizaje camino, int pos) throws Exception
 	{
 		this.nombre = ActividadOG.getNombre();
 		this.descripcion = ActividadOG.getDescripcion();
@@ -72,8 +72,8 @@ public abstract class Actividad {
 		this.datosEstudiantes = new HashMap<>();
 		
 		this.creadorID=creadorID;
-		this.actividadesPrereqs=new ArrayList<Actividad>();
-		this.actividadesSigExitoso=new ArrayList<Actividad>();
+		this.actividadesPrereqs=new ArrayList<String>();
+		this.actividadesSigExitoso=new ArrayList<String>();
 		
 		Iterator<String> it1 = ActividadOG.getObjetivos().iterator(); 
     	
@@ -82,17 +82,19 @@ public abstract class Actividad {
     		this.objetivos.add(it1.next());
     	}
 		this.ID="Actividad"+UUID.randomUUID().toString();
-		
-		camino.addActividad(this);
+	
+		camino.addActividad(this, pos);
 
 	}
 	
 
 	
-	//Constructor para cargar?
+	//Constructor para cargar
 	public Actividad(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double rating, int ratingsTotales, List<String> resenias,
-			String creadorID, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes, String id) {
+			String creadorID, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes, String id, 
+			List<String> actividadesPrereqs, List<String> actividadesSigExitoso) 
+	{
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.objetivos = objetivos;
@@ -107,6 +109,8 @@ public abstract class Actividad {
 		this.type = type;
 		this.datosEstudiantes = datosEstudiantes;
 		this.ID=id;
+		this.actividadesPrereqs=actividadesPrereqs;
+		this.actividadesSigExitoso=actividadesSigExitoso;
 	}
 
 	public String getCreadorID()
@@ -176,11 +180,11 @@ public abstract class Actividad {
 		this.obligatoria = obligatoria;
 	}
 
-	public List<Actividad> getActividadesPrereqs() {
+	public List<String> getActividadesPrereqs() {
 		return actividadesPrereqs;
 	}
 
-	public List<Actividad> getActividadesSigExitoso() {
+	public List<String> getActividadesSigExitoso() {
 		return actividadesSigExitoso;
 	}
 
@@ -204,14 +208,14 @@ public abstract class Actividad {
 		this.resenias.add(resenia);
 	}
 	
-	public void addActividadSiguienteExitosa(Actividad actividad)
+	public void addActividadSiguienteExitosa(String actividadID)
 	{
-		this.actividadesSigExitoso.add(actividad);
+		this.actividadesSigExitoso.add(actividadID);
 	}
 	
-	public void addActividadPrereq(Actividad actividad)
+	public void addActividadPrereq(String actividadID)
 	{
-		this.actividadesPrereqs.add(actividad);
+		this.actividadesPrereqs.add(actividadID);
 	}
 	
 	public void addObjetivo(String objetivo)
@@ -219,9 +223,9 @@ public abstract class Actividad {
 		this.objetivos.add(objetivo);
 	}
 	
-	public void delActividadPrereq(Actividad actividad)
+	public void delActividadPrereq(String actividadID)
 	{
-		this.actividadesPrereqs.remove(actividad);
+		this.actividadesPrereqs.remove(actividadID);
 	}
 	
 	public void delActividadPrereq(int pos)
@@ -239,9 +243,9 @@ public abstract class Actividad {
 		this.objetivos.remove(pos);
 	}
 	
-	public void delActividadSiguienteExitosa(Actividad actividad)
+	public void delActividadSiguienteExitosa(String actividadID)
 	{
-		this.actividadesSigExitoso.remove(actividad);
+		this.actividadesSigExitoso.remove(actividadID);
 	}
 	
 	public void delActividadSiguienteExitosa(int pos)
@@ -269,14 +273,14 @@ public abstract class Actividad {
 	/**
 	 * @param actividadesPrereqs the actividadesPrereqs to set
 	 */
-	public void setActividadesPrereqs(List<Actividad> actividadesPrereqs) {
+	public void setActividadesPrereqs(List<String> actividadesPrereqs) {
 		this.actividadesPrereqs = actividadesPrereqs;
 	}
 
 	/**
 	 * @param actividadesSigExitoso the actividadesSigExitoso to set
 	 */
-	public void setActividadesSigExitoso(List<Actividad> actividadesSigExitoso) {
+	public void setActividadesSigExitoso(List<String> actividadesSigExitoso) {
 		this.actividadesSigExitoso = actividadesSigExitoso;
 	}
 
@@ -307,26 +311,16 @@ public abstract class Actividad {
         JSONArray reseniasArray= new JSONArray(this.resenias);
         jobject.put("resenias", reseniasArray);
 
-        List<String> listaIDsActividadesPrereqs= new LinkedList<String>();
-        for (Actividad actividad: this.actividadesPrereqs)
-        {
-        	listaIDsActividadesPrereqs.add(actividad.getId());
-        }
-        JSONArray actividadesPrereqsArray = new JSONArray (listaIDsActividadesPrereqs);
+  
+        JSONArray actividadesPrereqsArray = new JSONArray (this.actividadesPrereqs);
         jobject.put("actividadesPrereqs", actividadesPrereqsArray);
         
-        
-        List<String> listaIDsActividadesSigExitoso= new LinkedList<String>();
-        for (Actividad actividad: this.actividadesPrereqs)
-        {
-        	listaIDsActividadesSigExitoso.add(actividad.getId());
-        }
-        JSONArray actividadesSigExitosoArray = new JSONArray (listaIDsActividadesSigExitoso);
+        JSONArray actividadesSigExitosoArray = new JSONArray (this.actividadesSigExitoso);
         jobject.put("actividadesSigExitoso", actividadesSigExitosoArray);
         
         
         JSONArray datosEstudiantesArray = new JSONArray (this.datosEstudiantes.keySet());
-        jobject.put("actividadesSigExitoso", datosEstudiantesArray);
+        jobject.put("datosEstudiantes", datosEstudiantesArray);
    
 		return jobject;
 	}

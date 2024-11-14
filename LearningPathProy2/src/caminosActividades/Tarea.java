@@ -14,16 +14,18 @@ import datosEstudiantes.DatosEstudianteActividad;
 public class Tarea extends Actividad{
 
 	private String instrucciones;
-	private List<Actividad> actividadesSigFracaso;
+	private List<String> actividadesSigFracaso;
 	
 	//Constructor normal
 	public Tarea(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
-			int[] fechaLim, boolean obligatoria, String instrucciones, String creadorLogin, CaminoAprendizaje camino) {
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino);
+			int[] fechaLim, boolean obligatoria, String instrucciones, String creadorLogin, 
+			CaminoAprendizaje camino, int pos)throws Exception
+	{
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino, pos);
 		this.instrucciones = instrucciones;
 		this.type=TAREA;
 
-		this.actividadesSigFracaso=new ArrayList<Actividad>();
+		this.actividadesSigFracaso=new ArrayList<String>();
 	}
 	
 	/**Constructo clonar 
@@ -31,12 +33,12 @@ public class Tarea extends Actividad{
 	 * @param creadorLogin
 	 * @param ActividadOG
 	 */
-	public Tarea(String creadorLogin, Tarea ActividadOG, CaminoAprendizaje camino)
+	public Tarea(String creadorLogin, Tarea ActividadOG, CaminoAprendizaje camino, int pos)throws Exception
 	{
-		super(creadorLogin, ActividadOG, camino);
+		super(creadorLogin, ActividadOG, camino, pos);
 		this.type=TAREA;
 
-		this.actividadesSigFracaso=new ArrayList<Actividad>();
+		this.actividadesSigFracaso=new ArrayList<String>();
 		
 	}
 	
@@ -45,9 +47,11 @@ public class Tarea extends Actividad{
 	public Tarea(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double rating, int ratingsTotales, List<String> resenias,
 			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes,
-			String instrucciones, List<Actividad> actividadesSigFracaso, String id) {
+			String instrucciones, List<String> actividadesSigFracaso, String id, List<String> actividadesPrereqs, 
+			List<String> actividadesSigExitoso)
+	{
 		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria,  rating, ratingsTotales, resenias, 
-				creadorLogin, type, datosEstudiantes, id);
+				creadorLogin, type, datosEstudiantes, id, actividadesPrereqs, actividadesSigExitoso);
 		this.instrucciones = instrucciones;
 		this.actividadesSigFracaso = actividadesSigFracaso;
 	}
@@ -62,18 +66,18 @@ public class Tarea extends Actividad{
 	}
 
 
-	public List<Actividad> getActividadesSigFracaso() {
+	public List<String> getActividadesSigFracaso() {
 		return actividadesSigFracaso;
 	}
 	
-	public void addActividadSigFracaso(Actividad actividad)
+	public void addActividadSigFracaso(String IDactividad)
 	{
-		this.actividadesSigFracaso.add(actividad);
+		this.actividadesSigFracaso.add(IDactividad);
 	}
 	
-	public void delActividadSigFracaso(Actividad actividad) 
+	public void delActividadSigFracaso(String IDactividad) 
 	{
-		this.actividadesSigFracaso.remove(actividad);
+		this.actividadesSigFracaso.remove(IDactividad);
 	}
 	
 	public void delActividadSigFracaso(int pos) 
@@ -89,12 +93,7 @@ public class Tarea extends Actividad{
         
         jobject.put("instrucciones", this.instrucciones);
 
-        List<String> listaIDsActividadesSigFracaso= new LinkedList<String>();
-        for (Actividad actividad: this.actividadesSigFracaso)
-        {
-        	listaIDsActividadesSigFracaso.add(actividad.getId());
-        }
-        JSONArray actividadesSigFracasoArray = new JSONArray (listaIDsActividadesSigFracaso);
+        JSONArray actividadesSigFracasoArray = new JSONArray (this.actividadesSigFracaso);
         jobject.put("actividadesSigFracaso", actividadesSigFracasoArray);
         
         return jobject;

@@ -1,5 +1,8 @@
 package caminosActividades;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -10,6 +13,11 @@ import java.util.UUID;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import creadores.CreadorAR;
+import creadores.CreadorEncuesta;
+import creadores.CreadorExamen;
+import creadores.CreadorQuiz;
+import creadores.CreadorTarea;
 import persistencia.ActividadesPersistencia;
 
 
@@ -31,12 +39,14 @@ public class CaminoAprendizaje {
 	private final String ID;
 
 //Constructor normal
-	public CaminoAprendizaje(String titulo, String descripcion, List<String> objetivos, double dificultad, String creadorID) {
+	public CaminoAprendizaje(String titulo, String descripcion, List<String> objetivos, double dificultad, int duracion, String creadorID) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.objetivos = objetivos;
 		this.dificultad = dificultad;
+		this.duracion = duracion;
 		this.fechaCreacion= new Date().toString();
+		this.fechaModificacion=new Date().toString();
 		this.creadorID=creadorID;
 		this.actividades=new ArrayList<Actividad>();
 		
@@ -48,66 +58,69 @@ public class CaminoAprendizaje {
 	}
 	
 //Constructor clonador
-	public CaminoAprendizaje(CaminoAprendizaje caminoOG, String creadorID, String titulo)
+	public CaminoAprendizaje(CaminoAprendizaje caminoOG, String creadorID, String titulo) throws Exception
 	{
 		this.titulo= titulo;
 		this.descripcion= caminoOG.getDescripcion();
 		this.dificultad= caminoOG.getDificultad();
 		this.duracion=caminoOG.getDuracion();
 		this.numActividadesObligatorias=caminoOG.getNumActividadesObligatorias();
+		this.fechaModificacion=new Date().toString();
 
 		this.actividades=new ArrayList<Actividad>();
-
+		this.objetivos = new ArrayList<String>();
 		this.ratingsTotales=0;
 		this.version=1;
 		
 		this.fechaCreacion= new Date().toString();
 
-    	Iterator<String> it1 = caminoOG.getObjetivos().iterator(); 
-    	
-    	while (it1.hasNext())
-    	{
-    		this.objetivos.add(it1.next());
-    	}
+		for (String objetivo : caminoOG.getObjetivos()) {
+	        this.objetivos.add(objetivo);
+	    }
     	
     	
     	//Copia de actividades
     	Iterator<Actividad> it2 = caminoOG.getActividades().iterator(); 
     	Actividad actividad;
+    	int i =0;
     	
     	while (it2.hasNext())
     	{
     		Actividad act2 = it2.next();
     		if (act2 .getType().equals(Actividad.ENCUESTA))
     		{
-    			actividad=new Encuesta (creadorID, (Encuesta) act2 , this);
+    			actividad=new Encuesta (creadorID, (Encuesta) act2 , this, i);
     		}
     		
     		else if (act2 .getType().equals(Actividad.ACTIVIDADRECURSO))
     		{
-    			actividad=new ActividadRecurso (creadorID, (ActividadRecurso) act2, this );
+    			actividad=new ActividadRecurso (creadorID, (ActividadRecurso) act2, this, i );
     		}
     		
     		else if (act2 .getType().equals(Actividad.EXAMEN))
     		{
-    			actividad=new Examen (creadorID, (Examen) act2, this );
+    			actividad=new Examen (creadorID, (Examen) act2, this, i );
     		}
     		
     		else if (act2 .getType().equals(Actividad.QUIZ))
     		{
-    			actividad=new Quiz (creadorID, (Quiz) act2, this );
+				if (((Quiz) act2).isVerdaderoFalso()) {
+					actividad = new Quiz(creadorID, (Quiz) act2, this, true, i);
+				} else {
+					actividad = new Quiz(creadorID, (Quiz) act2, this, false, i);
+				}
     		}
     		
     		else
     		{
-    			actividad= new Tarea (creadorID, (Tarea) act2, this );
+    			actividad= new Tarea (creadorID, (Tarea) act2, this, i);
     		}
     		
-    		this.actividades.add(actividad);
+    		i+=1;
     	}
 		
 		this.creadorID=creadorID;
-		this.ID="Actividad"+UUID.randomUUID().toString();
+		this.ID="Camino"+UUID.randomUUID().toString();
 	}
 
 //Constructor cargar
@@ -236,10 +249,17 @@ public class CaminoAprendizaje {
 	 * Actualiza la duracion del camino en total
 	 * añade al contador de obligatorias si es obligatoria
 	 */
-	public void addActividad(Actividad actividad, int pos)
+	public void addActividad(Actividad actividad, int pos) throws Exception
 	{
-		this.actividades.add(pos, actividad);
-		this.duracion+=actividad.getDuracion();
+		if (pos < 0 || pos > this.actividades.size())
+		{
+			throw new Exception ("La posicion indicada no existe");
+		}
+		else
+		{
+			this.actividades.add(pos, actividad);
+			this.duracion+=actividad.getDuracion();
+		}
 		
 		if (actividad.isObligatoria())
 		{
@@ -274,6 +294,29 @@ public class CaminoAprendizaje {
 		this.objetivos.remove(pos);
 	}
 
+	public void cambiarPosActividad(String idActividad, int newPos) throws Exception
+	{
+		if(newPos>=this.actividades.size() || newPos<0)
+		{
+			Iterator<Actividad> it1 = actividades.iterator();
+			int posIterator=0;
+			
+			while (it1.hasNext())
+			{
+				Actividad actividad=it1.next();
+				
+				if (actividad.getId().equals(idActividad))
+				{
+					actividades.remove(posIterator);
+					actividades.set(newPos, actividad);
+				}
+			}
+		}
+		else
+		{
+			throw new Exception ("La posicion de la actividad no es valida");
+		}
+	}
 
 	/**
      * Crea un nuevo objeto de tipo a partir de un objeto JSON.
@@ -293,8 +336,8 @@ public class CaminoAprendizaje {
 */ 
 	
     /**
-     * Salva este objeto de tipo ClienteCorporativo dentro de un objeto JSONObject para que ese objeto se almacene en un archivo
-     * @return El objeto JSON con toda la información del cliente corporativo
+     * Salva este objeto de tipo camino dentro de un objeto JSONObject para que ese objeto se almacene en un archivo
+     * @return El objeto JSON con toda la información del camino
      */
 	
     public JSONObject salvarEnJSON( )
@@ -332,43 +375,5 @@ public class CaminoAprendizaje {
         return jobject;
         
     }
-    
-    public static CaminoAprendizaje cargarDesdeJSON( JSONObject Jcamino, String pathCarpetaCamino )
-    {
-        String titulo= Jcamino.getString( "titulo" );
-        String descripcion= Jcamino.getString( "descripcion" );
-        double dificultad= Jcamino.getDouble( "dificultad" );
-        int duracion= Jcamino.getInt( "duracion" );
-        String fechaCreacion= Jcamino.getString( "fechaCreacion" );
-        String fechaModificacion= Jcamino.getString( "fechaModificacion" );
-        double rating=Jcamino.getDouble("rating");
-        int ratingsTotales= Jcamino.getInt( "ratingsTotales" );
-        int version= Jcamino.getInt( "version" );
-        int numActividadesObligatorias= Jcamino.getInt( "numActividadesObligatorias" );
-        String creadorID= Jcamino.getString( "creadorID" );
-        String ID= Jcamino.getString( "id" );
-        
-        JSONArray Jobjetivos=Jcamino.getJSONArray("objetivos");
-        List<String> objetivos = new LinkedList<String>();
-        //Iterating JSON array  
-        for (int i=0;i<Jobjetivos.length();i++)
-        {   
-        	objetivos.add((String) Jobjetivos.get(i));  
-        }   
-        
-        
-       JSONArray JactividadesID=Jcamino.getJSONArray("listaIDsActividades");
-       List<Actividad> actividades= new LinkedList<Actividad>();
-       for (int i=0;i<JactividadesID.length();i++)
-       {   
-    	   Actividad actividadToAdd= ActividadesPersistencia.cargarActividadDesdeID((String) Jobjetivos.get(i), pathCarpetaCamino);
-    	   actividades.add(actividadToAdd);  
-       }   
-
-
-        return new CaminoAprendizaje(titulo, descripcion, objetivos, dificultad, duracion, fechaCreacion,
-        		rating, ratingsTotales, version, fechaModificacion, numActividadesObligatorias, actividades, creadorID, 
-        		ID);
-    }
-    
+  
 }

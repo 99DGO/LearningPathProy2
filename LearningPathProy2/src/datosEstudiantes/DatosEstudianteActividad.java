@@ -3,24 +3,34 @@ package datosEstudiantes;
 import java.util.Date;
 import java.util.UUID;
 
+import org.json.JSONObject;
+
 public abstract class DatosEstudianteActividad {
 	public static final String EXITOSO = "Exitoso";
 	public static final String ENVIADO = "Enviado";
 	public static final String PENDIENTE = "Pendiente";
 	public static final String NOEXITOSO = "No exitoso";
 	
+	public static final String ARDATO= "DatosActividadRecurso";
+	public static final String ENCUESTADATO = "DatosEncuesta";
+	public static final String EXAMENDATO = "DatosExamen";
+	public static final String QUIZDATO = "DatosQuiz";
+	public static final String TAREADATO = "DatosTarea";
+	
 	private String IDEstudiante;
 	private String estado;
 	private String fechaInicio;
 	private String fechaFinal;
 	private final String id;
+	protected String type;
 
 	//Constructor normal
 	public DatosEstudianteActividad(String IDEstudiante) {
 		this.IDEstudiante = IDEstudiante;
 		this.estado = PENDIENTE;
-		this.fechaFinal = null;  //Se asigna cuando se finalice la actividad
-		this.id="Actividad"+UUID.randomUUID().toString();
+		this.fechaFinal = "No finalizada";  //Se asigna cuando se finalice la actividad
+		this.fechaInicio="No iniciada";
+		this.id="DatoEstudiante_"+UUID.randomUUID().toString();
 	} 
 	
 	
@@ -81,7 +91,26 @@ public abstract class DatosEstudianteActividad {
 	
 	public String getID()
 	{
-		return this.getID();
+		return this.id;
 	}
+	
+	public String getType()
+	{
+		return this.type;
+	}
+	
+	public JSONObject addInfoJSONGeneral(JSONObject jDatosEst)
+	{
+		jDatosEst.put("IDEstudiante", this.IDEstudiante);
+		jDatosEst.put("estado", this.estado);
+		jDatosEst.put("fechaInicio", this.fechaInicio);
+		jDatosEst.put("fechaFinal", this.fechaFinal);
+		jDatosEst.put("id", this.id);
+		jDatosEst.put("type", this.type);
+
+		return jDatosEst;
+	}
+	
+	public abstract JSONObject salvarEnJSON();
 
 }

@@ -7,7 +7,9 @@ import usuarios.Profesor;
 
 public class CreadorProfesor
 {
-	public static void crearProfesor(String login, String password) throws Exception
+	//public static void crearProfesor(LearningPathSystem LPS, String login, String password, String nombre) throws Exception
+	public static void crearProfesor(String login, String password, String nombre) throws Exception
+
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		HashMap<String, Profesor> profesores=LPS.getProfesores();
@@ -20,9 +22,20 @@ public class CreadorProfesor
 			}
 		}
  	
-        Profesor nuevoProfesor = new Profesor(login, password);  
+        Profesor nuevoProfesor = new Profesor(login, password, nombre);  
 		LPS.addProfesor(nuevoProfesor);
             
+	}
+	
+	public static void eliminarProfesor(String IDprofesor) throws Exception {
+		LearningPathSystem LPS= LearningPathSystem.getInstance();
+		HashMap<String, Profesor> profesores = LPS.getProfesores();
+
+		if (profesores.containsKey(IDprofesor)) {
+			profesores.remove(IDprofesor);
+		} else {
+			throw new Exception("No existe un profesor con ese ID");
+		}
 	}
 
 }

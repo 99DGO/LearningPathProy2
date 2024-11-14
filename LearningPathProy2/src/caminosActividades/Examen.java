@@ -15,19 +15,22 @@ public class Examen extends ActividadCalificable{
 	
 	//Constructor normal
 	public Examen(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
-			int[] fechaLim, boolean obligatoria, double calificacionMin, List<String> preguntasAbiertas, String creadorLogin, CaminoAprendizaje camino) {
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, calificacionMin, creadorLogin, camino);
+			int[] fechaLim, boolean obligatoria, double calificacionMin, List<String> preguntasAbiertas, String creadorLogin, 
+			CaminoAprendizaje camino, int pos) throws Exception
+	{
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, calificacionMin, creadorLogin, camino, pos);
 		this.preguntasAbiertas = preguntasAbiertas;
 		this.type=EXAMEN;
 
 	}
 	
-	//Constructor para clonar
+	//Constructor ??
 	public Examen(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double calificacionMin, String creadorLogin,
-			List<String> preguntasAbiertas, CaminoAprendizaje camino) {
+			List<String> preguntasAbiertas, CaminoAprendizaje camino, int pos) throws Exception
+	{
 		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, calificacionMin,
-				creadorLogin, camino);
+				creadorLogin, camino, pos);
 		this.preguntasAbiertas = preguntasAbiertas;
 	}
 
@@ -35,15 +38,18 @@ public class Examen extends ActividadCalificable{
 	public Examen(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
 			int[] fechaLim, boolean obligatoria, double rating, int ratingsTotales, List<String> resenias,
 			String creadorLogin, String type, HashMap<String, DatosEstudianteActividad> datosEstudiantes,
-			double calificacionMin, List<Actividad> actividadesSigFracaso, List<String> preguntasAbiertas, String id) {
+			double calificacionMin, List<String> actividadesSigFracaso, List<String> preguntasAbiertas, String id,
+			List<String> actividadesPrereqs, List<String> actividadesSigExitoso) 
+	{
 		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, rating, ratingsTotales, resenias, creadorLogin, type, datosEstudiantes,
-				calificacionMin, actividadesSigFracaso, id);
+				calificacionMin, actividadesSigFracaso, id, actividadesPrereqs, actividadesSigExitoso);
 		this.preguntasAbiertas = preguntasAbiertas;
 	}
-
-	public Examen(String creadorLogin, Examen ActividadOG, CaminoAprendizaje camino)
+	
+	//Constructor para clonar
+	public Examen(String creadorLogin, Examen ActividadOG, CaminoAprendizaje camino, int pos) throws Exception
 	{
-		super(creadorLogin, ActividadOG, camino);
+		super(creadorLogin, ActividadOG, camino, pos);
 		
 		Iterator<String> it1 = ActividadOG.getPreguntasAbiertas().iterator(); 
     	

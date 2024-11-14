@@ -1,6 +1,7 @@
 {
  "descripcion": "Un curso para saber los basicos de java",
  "numActividadesObligatorias": 0,
+ "fechaModificacion": "Tue Nov 12 20:52:43 COT 2024",
  "ratingsTotales": 0,
  "rating": 0,
  "titulo": "Jaca123",
@@ -11,9 +12,9 @@
   "Aprender loops",
   "Aprender estructuras"
  ],
- "duracion": 0,
- "fechaCreacion": "Sat Nov 09 21:53:53 COT 2024",
- "creadorID": "Actividad8ac39226-cf63-48b4-b68b-fdace813d5db",
- "id": "Camino1c143150-ff69-4f36-8aed-75b2aba49eae",
+ "duracion": 125,
+ "fechaCreacion": "Tue Nov 12 20:52:43 COT 2024",
+ "creadorID": "Profesor-KakashiCentralPersistenciaTest",
+ "id": "Camino0b9bad5a-da91-46bd-9f38-524ac45aec98",
  "dificultad": 3
 }

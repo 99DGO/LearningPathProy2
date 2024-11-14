@@ -75,17 +75,25 @@ public class Inscriptor {
 			}
 		}
 		
-		if (!estudiante.isActividadActiva())
+		DatosEstudianteActividad datoEst = actividad.getDatoEstudianteIndividual(estudiante.getID());
+		
+		if (datoEst!=null)
 		{
-			estudiante.setActividadActiva(true);
-			DatosEstudianteActividad datoEst = actividad.getDatoEstudianteIndividual(estudiante.getLogin());
-			datoEst.setFechaInicio();
+			if (!estudiante.isActividadActiva())
+			{
+				estudiante.setActividadActiva(true);
+				datoEst.setFechaInicio();
+				estudiante.setNombreCaminoActividadActiva(actividad.getNombre()+" en el camino " +camino.getTitulo());
+			}
+			else
+			{
+				throw new Exception ("No se puede iniciar una nueva actividad porque ya hay una iniciada");
+			}
 		}
 		else
 		{
-			throw new Exception ("No se puede iniciar una nueva actividad porque ya hay una iniciada");
+			throw new Exception ("No estas inscrito en este camino");
 		}
-	
 	}
 	
 	

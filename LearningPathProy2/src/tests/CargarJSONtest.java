@@ -20,11 +20,13 @@ import java.util.List;
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
+import caminosActividades.Quiz;
 import controllers.Inscriptor;
 import controllers.LearningPathSystem;
 import creadores.CreadorAR;
@@ -40,15 +42,26 @@ import traductores.TraductorActividad;
 import traductores.TraductorCamino;
 import traductores.TraductorEstudiante;
 import traductores.TraductorProfesor;
+import usuarios.Estudiante;
+import usuarios.Profesor;
 
 public class CargarJSONtest {
 
+    @BeforeEach
+    void setUp()
+    {
+    	LearningPathSystem.resetLPS();
+    }
     
+    @AfterEach
+    void tearDown( ) throws Exception
+    {
+    }
+
 	@Test
 	public void testCargarPersitenciaCaminos()
 	{
 		LearningPathSystem LPS =LearningPathSystem.getInstance();
-		
 		try 
 		{
 			CentralPersistencia.cargarCaminosActividadesDatosEstudiante(true);
@@ -74,12 +87,96 @@ public class CargarJSONtest {
     	assertEquals("Python123", camino.getTitulo(), "El nombre del camino no se guardo bien" );
     	
     	List<Actividad> actividades = camino.getActividades();
-    	assertEquals(2, actividades.size(), "Las actividades no se guardaron bien" );
+    	assertEquals(3, actividades.size(), "Las actividades no se guardaron bien" );
 
+		
     	Actividad actividad =actividades.getFirst();
     	HashMap<String, DatosEstudianteActividad>  hashDatosEst= actividad.getDatosEstudiantes();
-    	assertEquals(1, hashDatosEst.size(), "Los datos del estudiante no se guardaron bien" );
+    	assertEquals(2, hashDatosEst.size(), "Los datos del estudiante no se guardaron bien" );
+    	
+    	Quiz quiz=null;
+    	try
+    	{
+        	quiz = (Quiz) actividades.get(2);
+    	}
+    	catch (Exception e) 
+    	{
+    		fail("No se guardo correctamente la posición de las actividades");
+    	}
+    	
+    	assertEquals("Quiz de asignación variables", quiz.getNombre(), "No se guardo bien el nombre");
+    	assertEquals(2, quiz.getPreguntas().size(), "No se guardaron bien las preguntas");
 
+	
+	}
+	
+	@Test
+	public void testCargarPersitenciaEstudiantes()
+	{
+		LearningPathSystem LPS =LearningPathSystem.getInstance();
+		try 
+		{
+			CentralPersistencia.cargarEstudiantes(true);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+    		fail("No se cargo, tiro"+e.getMessage()); 
+		}
+		
+		assertEquals( 2, LPS.getEstudiantes().keySet().size(), "No se cargaron el numero correcto de estudiantes" );
+		
+		String idEstudiante=null;
+		try 
+		{
+			idEstudiante = TraductorEstudiante.getIDfromLogin("Cater999");
+		} 
+		catch (Exception e) {
+    		fail("No se encontro el ID del camino con el nombre"); 
+		}
+		
+		Estudiante estudiante= LPS.getEstudianteIndividual(idEstudiante);
+    	assertEquals("Cater Diamond", estudiante.getNombre(), "El nombre del estudainte no se guardo bien" );
+    	assertEquals("Cater123", estudiante.getPassword(), "La contraseña del estudainte no se guardo bien" );
+
+    	
+    	List<CaminoAprendizaje> caminos = estudiante.getHistorialCaminos();
+    	assertEquals(1, caminos.size(), "Los caminos no se guardaron bien" );
+	
+	}
+	
+	@Test
+	public void testCargarPersitenciaProfesores()
+	{
+		LearningPathSystem LPS =LearningPathSystem.getInstance();
+		try 
+		{
+			CentralPersistencia.cargarProfesores(true);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+    		fail("No se cargo, tiro"+e.getMessage()); 
+		}
+		
+		assertEquals( 2, LPS.getProfesores().keySet().size(), "No se cargaron el numero correcto de profesores" );
+		
+		String idProfesor=null;
+		try 
+		{
+			idProfesor = TraductorProfesor.getIDfromLogin("Divus999");
+		} 
+		catch (Exception e) {
+    		fail("No se encontro el ID del camino con el nombre"); 
+		}
+		
+		Profesor profesor= LPS.getProfesorIndividual(idProfesor);
+    	assertEquals("Divus Crewel", profesor.getNombre(), "El nombre del profesor no se guardo bien" );
+    	assertEquals("Divus123", profesor.getPassword(), "La contraseña del profesor no se guardo bien" );
+
+    	
+    	List<CaminoAprendizaje> caminos = profesor.getCaminos();
+    	assertEquals(2, caminos.size(), "Los caminos no se guardaron bien" );
 	
 	}
 	

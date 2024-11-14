@@ -65,7 +65,7 @@ public class EditorQuiz extends EditorActividadGeneral
 	}
 
 	
-	public static void editAddActividadSigFracaso(String IDcamino, String IDactividad, String IDactividadSigFracaso)
+	public static void editAddActividadSigFracaso(String IDcamino, String IDactividad, String nombreActividadSigFracaso)
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
@@ -81,7 +81,7 @@ public class EditorQuiz extends EditorActividadGeneral
 			}
 		}
 		
-		actividad.addActividadSigFracaso(IDactividadSigFracaso);
+		actividad.addActividadSigFracaso(nombreActividadSigFracaso);
 		
 		int version=camino.getVersion();
 		camino.setVersion(version+=1);

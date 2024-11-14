@@ -27,13 +27,17 @@ public class CreadorProfesor
             
 	}
 	
-	public static void eliminarProfesor(String IDprofesor) throws Exception {
+	public static void eliminarProfesor(String IDprofesor) throws Exception 
+	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		HashMap<String, Profesor> profesores = LPS.getProfesores();
 
-		if (profesores.containsKey(IDprofesor)) {
+		if (profesores.containsKey(IDprofesor)) 
+		{
 			profesores.remove(IDprofesor);
-		} else {
+		} 
+		else 
+		{
 			throw new Exception("No existe un profesor con ese ID");
 		}
 	}

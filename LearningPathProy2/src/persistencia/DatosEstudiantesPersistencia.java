@@ -13,13 +13,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import caminosActividades.OpcionQuiz;
+import caminosActividades.PreguntaQuiz;
 import datosEstudiantes.DatosEstudianteAR;
 import datosEstudiantes.DatosEstudianteActividad;
 import datosEstudiantes.DatosEstudianteEncuesta;
 import datosEstudiantes.DatosEstudianteExamen;
+import datosEstudiantes.DatosEstudianteQuiz;
 import datosEstudiantes.DatosEstudianteTarea;
 import envios.EnvioEncuesta;
 import envios.EnvioExamen;
+import envios.EnvioQuiz;
 
 public class DatosEstudiantesPersistencia 
 {
@@ -109,7 +113,43 @@ public class DatosEstudiantesPersistencia
 		
 		else if (jDatoEst.getString("type").equals(DatosEstudianteActividad.QUIZDATO))
 		{
-	
+			HashMap<PreguntaQuiz, Integer> respuestasHash = new HashMap<PreguntaQuiz, Integer>();
+			
+			//Saco las respuestas y preguntas para crear el hashmap
+		   	JSONArray jRespuestas = jDatoEst.getJSONArray("envio");
+	    	
+	    	for (int i =0; i<jRespuestas.length(); i++)
+	    	{
+	    		JSONObject jPreguntaInd=jRespuestas.getJSONObject(i);
+	    		//Declaro variables 
+	    		OpcionQuiz respuesta=null;
+	    		HashMap<Integer, OpcionQuiz> mapaOpciones= new HashMap<Integer, OpcionQuiz>();
+	    		
+	    		//Consigo las opciones
+	    		JSONArray jOpciones = jPreguntaInd.getJSONArray("opciones");
+	    		//Recorro las opciones
+	    		for (int i2 =0; i2<jOpciones.length(); i2++)
+	    		{
+	    			//Creo las opciones
+	    			JSONObject jOpcionInd=jOpciones.getJSONObject(i2);
+	    			
+	    			boolean correcta =jOpcionInd.getBoolean("correcta");
+	    			
+	    			OpcionQuiz opcionInd = new OpcionQuiz(jOpcionInd.getString("texto"), jOpcionInd.getString("explicacion"), correcta);
+	    			
+	    			mapaOpciones.put(jOpcionInd.getInt("numOpcion"), opcionInd);
+	    		}
+	    		
+	    		PreguntaQuiz preguntaObjeto = new PreguntaQuiz(jPreguntaInd.getInt("cantidadOpciones"), mapaOpciones, 
+	    				jPreguntaInd.getString("textoPregunta"), jPreguntaInd.getInt("respuesta"));
+	    		
+	    		respuestasHash.put(preguntaObjeto, jPreguntaInd.getInt("respuestaUsuario"));
+	    		
+	    	}
+	    	
+			EnvioQuiz envio= new EnvioQuiz();
+			datoEst= new DatosEstudianteQuiz(jDatoEst.getString("IDEstudiante"), jDatoEst.getString("estado"), jDatoEst.getString("fechaInicio"), 
+					jDatoEst.getString("fechaFinal"), jDatoEst.getDouble("calificacion"), envio, jDatoEst.getString("id"));
 		}
 		
 		else

@@ -2,6 +2,8 @@ package usuarios;
 
 import java.util.UUID;
 
+import org.json.JSONObject;
+
 public abstract class Usuario {
 	public static final String ESTUDIANTE = "Estudiante";
 	public static final String PROFESOR = "Profesor";
@@ -46,6 +48,17 @@ public abstract class Usuario {
 	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public JSONObject addInfoGeneralJSON(JSONObject jEstudiante) {
+
+		jEstudiante.put("login", this.login);
+		jEstudiante.put("nombre", this.nombre);
+		jEstudiante.put("password", this.password);
+		jEstudiante.put("type", this.type);
+		jEstudiante.put("ID", this.ID);
+
+		return jEstudiante;
 	}
 	
 }

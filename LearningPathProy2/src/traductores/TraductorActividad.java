@@ -6,6 +6,7 @@ import java.util.Iterator;
 import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
 import controllers.LearningPathSystem;
+import usuarios.Profesor;
 
 public class TraductorActividad {
 	
@@ -26,7 +27,7 @@ public class TraductorActividad {
 		
 		if (IDtoReturn==null)
 		{
-			throw new Exception("No se encontro el camino");
+			throw new Exception("No se encontro la actividad");
 		}
 		else
 		{
@@ -57,7 +58,10 @@ public class TraductorActividad {
 		infoActividad.put("Dificultad: ", String.valueOf(actividad.getDificultad()) + "\n");
 		infoActividad.put("Duracion: ", String.valueOf(actividad.getDuracion()) + "\n");
 		infoActividad.put("Fecha límite: ", actividad.getFechaLim() + "\n");
-		infoActividad.put("ID Profesor creador: ", actividad.getCreadorID() + "\n");
+		
+		Profesor profesor = LPS.getProfesorIndividual(actividad.getCreadorID());
+		infoActividad.put("Nombre Profesor creador: ", profesor.getNombre() + "\n");
+		
 		Iterator<String> it1 = actividad.getObjetivos().iterator();
 		String objetivos="";
 		int numObjetivo=0;

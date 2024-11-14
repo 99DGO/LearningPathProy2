@@ -8,7 +8,8 @@ import controllers.LearningPathSystem;
 
 public class EditorAR extends EditorActividadGeneral
 {
-	public static void editRecurso(String recurso, String IDcamino, String IDactividad) {
+	public static void editRecurso(String recurso, String IDcamino, String IDactividad) 
+	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
 		ActividadRecurso actividad=null;

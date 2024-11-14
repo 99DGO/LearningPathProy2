@@ -1,5 +1,7 @@
 package persistencia;
 
+import static org.junit.Assert.fail;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,9 +23,18 @@ import caminosActividades.CaminoAprendizaje;
 import controllers.LearningPathSystem;
 import datosEstudiantes.DatosEstudianteActividad;
 import usuarios.Estudiante;
+import usuarios.Profesor;
 
 public class CentralPersistencia 
 {
+
+	
+	public static void cargarTodo(boolean test) throws Exception
+	{
+		cargarCaminosActividadesDatosEstudiante(test);
+		cargarEstudiantes(test);
+		cargarProfesores(test);
+	}
 	
 	public static void guardarCaminosActividadesDatosEstudiante(boolean test) throws Exception
 	{
@@ -43,16 +54,8 @@ public class CentralPersistencia
 		}
 
 		File fileCaminosDirectorio = new File(pathCaminosDirectorio);
+		metodosAuxPersistencia.cleanDatos(test);
 
-		//Limpio el directorio para que no queden dobles nombres
-		try(PrintWriter pwCaminosDirectorio = new PrintWriter(fileCaminosDirectorio))
-		{
-		} 
-		catch (FileNotFoundException e) 
-		{
-		  e.printStackTrace();
-		}
-		
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		HashMap<String, CaminoAprendizaje> caminosHash =LPS.getCaminos();
 		
@@ -89,6 +92,7 @@ public class CentralPersistencia
 		}
 	}
 	
+	
 	public static void cargarCaminosActividadesDatosEstudiante(boolean test) throws Exception
 	{
 
@@ -108,37 +112,75 @@ public class CentralPersistencia
 			pathCaminos="LearningPathProy2/datos/Caminos/";
 		}
 		
+
 		File fileCaminosDirectorio = new File(pathCaminosDirectorio);
 		
 
 		//Leo el archivo
-		try (BufferedReader br = new BufferedReader(new FileReader(fileCaminosDirectorio))) 
-		{		        
+		BufferedReader br = new BufferedReader(new FileReader(fileCaminosDirectorio)); 		        
 			
-		    String line;
-		    //Recorro el directorio
-		    while ((line = br.readLine()) != null) 
-		    {
-		       // Saco el objeto JSON del camino por cada archivo que hay
-		    	String content = new String(Files.readAllBytes(Paths.get(pathCaminos+line+"/"+line+".json")));
-		    	JSONObject jcamino = new JSONObject(content);
-		    	
-		    	CaminoAprendizaje camino = CaminosPersistencia.cargarCamino(jcamino, pathCaminos+line+"/");
-		    	//Añado al LPS
-		    	LPS.addCamino(camino);
-		    }
-		} 
-		catch (FileNotFoundException e) 
+	    String line;
+	    //Recorro el directorio
+	    while ((line = br.readLine()) != null) 
+	    {
+	       // Saco el objeto JSON del camino por cada archivo que hay
+	    	String content = new String(Files.readAllBytes(Paths.get(pathCaminos+line+"/"+line+".json")));
+	    	JSONObject jcamino = new JSONObject(content);
+	    	
+	    	CaminoAprendizaje camino = CaminosPersistencia.cargarCamino(jcamino, pathCaminos+line+"/");
+	    	//Añado al LPS
+	    	LPS.addCamino(camino);
+	    }
+
+	}
+
+	public static void cargarEstudiantes(boolean test) throws Exception
+	{
+
+    	LearningPathSystem LPS = LearningPathSystem.getInstance(); 
+    	
+		String pathEstudiantesDirectorio;
+		String pathEstudiantes;
+		
+		if (test)
 		{
-			e.printStackTrace();
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
+			pathEstudiantesDirectorio = "LearningPathProy2/datosTests/estudiantes/estudiantesDirectorio.txt";
+			pathEstudiantes="LearningPathProy2/datosTests/estudiantes/";
 		}
+		else
+		{
+			pathEstudiantesDirectorio = "LearningPathProy2/datos/estudiantes/estudiantesDirectorio.txt";
+			pathEstudiantes="LearningPathProy2/datos/estudiantes/";
+		}
+		
+
+		File fileEstudiantesDirectorio = new File(pathEstudiantesDirectorio);
+		
+		if (!fileEstudiantesDirectorio.exists())
+		{
+			throw new Exception ("No se encontro el directorio");
+		}
+
+		//Leo el archivo
+		BufferedReader br = new BufferedReader(new FileReader(fileEstudiantesDirectorio)); 		        
+			
+	    String line;
+	    //Recorro el directorio
+	    while ((line = br.readLine()) != null) 
+	    {
+	       // Saco el objeto JSON del estudiante por cada archivo que hay
+	    	String content = new String(Files.readAllBytes(Paths.get(pathEstudiantes+"/"+line+".json")));
+	    	JSONObject jEstudiante = new JSONObject(content);
+	    	
+	    	Estudiante estudiante = EstudiantesPersistencia.cargarEstudiante(jEstudiante);
+	    	//Añado al LPS
+	    	LPS.addEstudiante(estudiante);
+	    }
 	}
 	
-	public static void guardarEstudiantes(boolean test)
+
+	
+	public static void guardarEstudiantes(boolean test) throws Exception
 	{
     	LearningPathSystem LPS = LearningPathSystem.getInstance();
 		HashMap<String, Estudiante> estudiantesHash=LPS.getEstudiantes();
@@ -157,24 +199,104 @@ public class CentralPersistencia
 			pathEstudiantes="LearningPathProy2/datos/estudiantes/";
 
 		}
+		
+		metodosAuxPersistencia.cleanDatosEstudiantes(test);
 
 		File fileEstudidantesDirectorio = new File(pathEstudiantesDirectorio);
 
+		
 		//Limpio el directorio para que no queden dobles nombres
-		try(PrintWriter pwCaminosDirectorio = new PrintWriter(fileEstudidantesDirectorio))
-		{
-		} 
-		catch (FileNotFoundException e) 
-		{
-		  e.printStackTrace();
-		}
+		PrintWriter pwEstudiantesDirectorio = new PrintWriter(fileEstudidantesDirectorio);
+		pwEstudiantesDirectorio.print("");
+		pwEstudiantesDirectorio.close();
 		
-		
+
 		for (Estudiante estudiante : estudiantesHash.values())
 		{
-			EstudiantesPersistencia.guardarEstudianteSingular(estudiante, pathEstudiantes);
+			EstudiantesPersistencia.guardarEstudianteSingular(estudiante, pathEstudiantes, pathEstudiantesDirectorio);
 			
 		}
 	}
+
+	public static void guardarProfesores(boolean test) throws Exception
+	{
+	   	LearningPathSystem LPS = LearningPathSystem.getInstance();
+			HashMap<String, Profesor> profesoresHash=LPS.getProfesores();
+			
+			String pathProfesoresDirectorio;
+			String pathProfesores;
+			
+			if (test)
+			{
+				pathProfesoresDirectorio = "LearningPathProy2/datosTests/profesores/profesoresDirectorio.txt";
+				pathProfesores="LearningPathProy2/datosTests/profesores/";
+			}
+			else
+			{
+				pathProfesoresDirectorio = "LearningPathProy2/datos/profesores/profesoresDirectorio.txt";
+				pathProfesores="LearningPathProy2/datos/profesores/";
+
+			}
+
+			File fileEstudidantesDirectorio = new File(pathProfesoresDirectorio);
+
+			//Limpio el directorio para que no queden dobles nombres
+			PrintWriter pwProfesoresDirectorio = new PrintWriter(fileEstudidantesDirectorio);
+			pwProfesoresDirectorio.write("");
+			pwProfesoresDirectorio.close();
+
+			
+			
+			for (Profesor profesor : profesoresHash.values())
+			{
+				ProfesoresPersistencia.guardarProfesorSingular(profesor, pathProfesores, pathProfesoresDirectorio);
+				
+			}		
+	}
+	
+
+	public static void cargarProfesores(boolean test) throws Exception
+	{
+	  	LearningPathSystem LPS = LearningPathSystem.getInstance(); 
+    	
+		String pathProfesoresDirectorio;
+		String pathProfesores;
+		
+		if (test)
+		{
+			pathProfesoresDirectorio = "LearningPathProy2/datosTests/profesores/profesoresDirectorio.txt";
+			pathProfesores="LearningPathProy2/datosTests/profesores/";
+		}
+		else
+		{
+			pathProfesoresDirectorio = "LearningPathProy2/datos/profesores/profesoresDirectorio.txt";
+			pathProfesores="LearningPathProy2/datos/profesores/";
+		}
+		
+
+		File fileProfesoresDirectorio = new File(pathProfesoresDirectorio);
+		
+		if (!fileProfesoresDirectorio.exists())
+		{
+			throw new Exception ("No se encontro el directorio");
+		}
+
+		//Leo el archivo
+		BufferedReader br = new BufferedReader(new FileReader(fileProfesoresDirectorio)); 		        
+			
+	    String line;
+	    //Recorro el directorio
+	    while ((line = br.readLine()) != null) 
+	    {
+	       // Saco el objeto JSON del estudiante por cada archivo que hay
+	    	String content = new String(Files.readAllBytes(Paths.get(pathProfesores+"/"+line+".json")));
+	    	JSONObject jProfesor = new JSONObject(content);
+	    	
+	    	Profesor profesor =ProfesoresPersistencia.cargarProfesor(jProfesor);
+	    	//Añado al LPS
+	    	LPS.addProfesor(profesor);
+	    }
+	}
+	
 
 }

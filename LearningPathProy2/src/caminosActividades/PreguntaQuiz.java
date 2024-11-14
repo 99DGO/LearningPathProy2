@@ -1,15 +1,20 @@
 package caminosActividades;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class PreguntaQuiz {
 	private int cantidadOpciones;
 	private Map <Integer, OpcionQuiz> opciones;
 	private String textoPregunta;
-	private OpcionQuiz respuesta;
+	private Integer respuesta;
 	
-	public PreguntaQuiz(String textoPregunta, OpcionQuiz respuesta, int cantidadOpciones) {
+	public PreguntaQuiz(String textoPregunta, Integer respuesta, int cantidadOpciones) {
 		this.opciones = new HashMap<>();
 		this.textoPregunta = textoPregunta;
 		this.respuesta = respuesta;
@@ -23,6 +28,16 @@ public class PreguntaQuiz {
 		this.textoPregunta = preguntaOG.getTextoPregunta();
 		this.respuesta = preguntaOG.getRespuesta();
 		this.cantidadOpciones = preguntaOG.getCantidadOpciones();
+	}
+	
+
+	//Constructor para cargar
+	public PreguntaQuiz(int cantidadOpciones, Map<Integer, OpcionQuiz> opciones, String textoPregunta,
+			Integer respuesta) {
+		this.cantidadOpciones = cantidadOpciones;
+		this.opciones = opciones;
+		this.textoPregunta = textoPregunta;
+		this.respuesta = respuesta;
 	}
 
 	private Map<Integer, OpcionQuiz> clonerOpciones(Map<Integer, OpcionQuiz> opcionesOG) {
@@ -38,19 +53,13 @@ public class PreguntaQuiz {
 		this.textoPregunta = textoPregunta;
 	}
 
-	public OpcionQuiz getRespuesta() {
+	public Integer getRespuesta() {
 		return respuesta;
 	}
 
-	public void setRespuesta(OpcionQuiz respuesta) {
-		if (this.getOpciones().containsValue(respuesta)) {
-			if (respuesta.isCorrecta() == true)
-				this.respuesta = respuesta;
-			else
-				throw new IllegalArgumentException("La respuesta de la pregunta debe ser correcta");
-		}
-		else
-			throw new IllegalArgumentException("La respuesta de la pregunta debe ser una de las opciones");
+	public void setRespuesta(Integer respuesta) 
+	{
+		this.respuesta = respuesta;
 	}
 
 	public Map<Integer, OpcionQuiz> getOpciones() {
@@ -63,11 +72,35 @@ public class PreguntaQuiz {
 	
 	public void setOpcion(int pos, OpcionQuiz opcion)
 	{
-		if (pos < 0 || pos >= this.cantidadOpciones)
+		if (pos < 1 || pos > this.cantidadOpciones)
 			throw new IllegalArgumentException(
 					"La posición de la opción debe ser mayor o igual a 0 y menor a la cantidad de opciones");
 		else
 			this.opciones.put(pos, opcion);
+	}
+
+	public JSONObject getJSONObject() 
+	{
+		JSONObject jPregunta = new JSONObject();
+		
+		jPregunta.put("cantidadOpciones", this.cantidadOpciones);
+		jPregunta.put("textoPregunta", this.textoPregunta);		
+		jPregunta.put("respuesta", respuesta.intValue());
+	
+		List<JSONObject> listJOpciones= new LinkedList<JSONObject>();
+		for (int numOpcion: this.opciones.keySet())
+		{
+			JSONObject jOpcionInd;
+			jOpcionInd=this.opciones.get(numOpcion).getJSONObject();
+			jOpcionInd.put("numOpcion", numOpcion);
+			
+			listJOpciones.add(jOpcionInd);
+		}
+		
+		JSONArray jOpcionesArray = new JSONArray(listJOpciones);
+		jPregunta.put("opciones", jOpcionesArray);
+		
+		return jPregunta;
 	}
 
 

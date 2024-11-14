@@ -10,11 +10,11 @@ import envios.EnvioExamen;
 
 public class DatosEstudianteExamen extends DatosEstudianteActividad {
 	private double calificacion;
-	private EnvioExamen envio;
+	private EnvioExamen envio=new EnvioExamen();
 	
 	public DatosEstudianteExamen(String IDEstudiante) {
 		super(IDEstudiante);
-		this.calificacion = 0.0;
+		this.calificacion = -1;
 		this.type=DatosEstudianteActividad.EXAMENDATO;
 		this.envio=new EnvioExamen();
 	}

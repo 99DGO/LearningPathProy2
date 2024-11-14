@@ -2,6 +2,7 @@ package traductores;
 
 import java.util.HashMap;
 
+import caminosActividades.CaminoAprendizaje;
 import controllers.LearningPathSystem;
 import usuarios.Profesor;
 
@@ -33,21 +34,35 @@ public class TraductorProfesor
 		}
 	}
 	
-	public static String getNombreFromID(String idProfesor) throws Exception
+	public static String getNombreFromID(String idProfesor)
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		HashMap<String, Profesor> profesores = LPS.getProfesores();
 		
 		String nombre= profesores.get(idProfesor).getNombre();
 		
-		if (nombre==null)
+		return nombre;
+		
+	}
+	
+	/*
+	 * Retorna un hashmap que contiene como llave el id del camino y como value le nombre del camino
+	 */
+	public static HashMap<String, String> verCaminosCreados(String idProfesor)
+	{
+		LearningPathSystem LPS = LearningPathSystem.getInstance();
+		HashMap<String, Profesor> profesores = LPS.getProfesores();
+		Profesor profesor= profesores.get(idProfesor);
+		HashMap<String, String> caminosCreados=new HashMap<String, String>();
+		
+		for (CaminoAprendizaje camino: profesor.getCaminos())
 		{
-			throw new Exception("No se encontro el login");
+			caminosCreados.put(camino.getID(), camino.getTitulo());
 		}
-		else
-		{
-			return nombre;
-		}
+		
+		return caminosCreados;
+		
+		
 	}
 
 }

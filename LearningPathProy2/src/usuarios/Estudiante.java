@@ -14,6 +14,7 @@ public class Estudiante extends Usuario {
 	private List<CaminoAprendizaje> historialCaminos;
 	private List<String> intereses;
 	private boolean actividadActiva=false;
+	//Este string de nombreCaminoActividadActiva contendra el nombre del camino tambien si se inicia la actividad
 	private String nombreCaminoActividadActiva="Ninguna";
 	
 	public Estudiante(String login, String password, String nombre) 

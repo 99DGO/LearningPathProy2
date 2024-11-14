@@ -4,7 +4,7 @@ package datosEstudiantes;
 import org.json.JSONObject;
 
 public class DatosEstudianteTarea extends DatosEstudianteActividad {
-	private String metodoEntrega;
+	private String metodoEntrega=null;
 	
 	public DatosEstudianteTarea(String IDEstudiante,String metodoEntrega) {
 		super(IDEstudiante);

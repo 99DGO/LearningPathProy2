@@ -8,9 +8,11 @@ import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
 import caminosActividades.Encuesta;
 import caminosActividades.Quiz;
+import caminosActividades.Tarea;
 import controllers.LearningPathSystem;
 import datosEstudiantes.DatosEstudianteActividad;
 import datosEstudiantes.DatosEstudianteEncuesta;
+import datosEstudiantes.DatosEstudianteTarea;
 import envios.EnvioEncuesta;
 
 public class TraductorEncuesta 
@@ -37,7 +39,7 @@ public class TraductorEncuesta
 	/*
 	 * Retorna unalista que contiene strings que estan compuestos por la pregunta y la respuesta del estudiante
 	 */
-	public static List<String> retornarEnvioIndividual(String idCamino, String idActividad, String idEstudiante)
+	public static List<String> retornarEnvioIndividual(String idCamino, String idActividad, String idEstudiante) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
@@ -55,18 +57,26 @@ public class TraductorEncuesta
 		}
 		
 		HashMap<String, DatosEstudianteActividad> datosEstudiantes= encuesta.getDatosEstudiantes();
-		
-		//Añado las respuestas con sus preguntas
+
 		DatosEstudianteEncuesta datoEstInd= (DatosEstudianteEncuesta) datosEstudiantes.get(idEstudiante);
-		EnvioEncuesta envioEstInd= datoEstInd.getEnvio();
-		HashMap<String, String> respuestasHash= envioEstInd.getRespuestas();
-		for (String pregunta: respuestasHash.keySet())
-		{
-			String respuesta= respuestasHash.get(pregunta);
-			respuestasFormateadas.add(pregunta+"\n"+respuesta+"\n");
-		}
 		
-		return respuestasFormateadas;
+		if (!datoEstInd.getType().equals(DatosEstudianteActividad.PENDIENTE))
+		{
+			//Añado las respuestas con sus preguntas
+			EnvioEncuesta envioEstInd= datoEstInd.getEnvio();
+			HashMap<String, String> respuestasHash= envioEstInd.getRespuestas();
+			for (String pregunta: respuestasHash.keySet())
+			{
+				String respuesta= respuestasHash.get(pregunta);
+				respuestasFormateadas.add(pregunta+"\n"+respuesta+"\n");
+			}
+			
+			return respuestasFormateadas;
+		}
+		else
+		{
+			throw new Exception ("Este estudiante no tiene un envio realizado");
+		}
 	}
 	
 	/*
@@ -97,9 +107,8 @@ public class TraductorEncuesta
 			String nombreEstudiante=TraductorEstudiante.getNombrefromID(idEstudiante);
 						
 			DatosEstudianteEncuesta datoEstInd= (DatosEstudianteEncuesta) datosEstudiantes.get(idEstudiante);
-			EnvioEncuesta envioEstInd= datoEstInd.getEnvio();
 			
-			if (envioEstInd!=null)
+			if (!datoEstInd.getEstado().equals(DatosEstudianteActividad.PENDIENTE))
 			{
 				estudiantesConEnvios.put(idEstudiante, nombreEstudiante);
 			}

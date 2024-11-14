@@ -52,9 +52,12 @@ public class Autentificador {
 
 	public boolean registrarUsuario(Usuario usuario) throws Exception
 	{
-		if (usuario.getType() == "Estudiante") {
-			if (LPS.getEstudianteIndividual(usuario.getID()) == null) {
-				try {
+		if (usuario.getType() == "Estudiante") 
+		{
+			if (LPS.getEstudianteIndividual(usuario.getID()) == null) 
+			{
+				try 
+				{
 					CreadorEstudiante.crearEstudiante(usuario.getLogin(), usuario.getPassword(),
 							usuario.getNombre());
 					if (LPS.getEstudianteIndividual(usuario.getID()) != null) 
@@ -70,7 +73,9 @@ public class Autentificador {
 					e.printStackTrace();
 				}
 			}
-		} else if (usuario.getType() == "Profesor") {
+		} 
+		else if (usuario.getType() == "Profesor")
+		{
 			if (LPS.getProfesorIndividual(usuario.getID()) == null) 
 			{
 				try 
@@ -96,16 +101,24 @@ public class Autentificador {
 	public void eliminarUsuario(String ID) 
 	{
 		if (LPS.getEstudianteIndividual(ID) != null) {
-			try {
+			try 
+			{
 				CreadorEstudiante.eliminarEstudiante(ID);
-			} catch (Exception e) {
+			} 
+			catch (Exception e) 
+			{
 				e.getMessage();
 				e.printStackTrace();
 			}
-		} else if (LPS.getProfesorIndividual(ID) != null) {
-			try {
+		} 
+		else if (LPS.getProfesorIndividual(ID) != null) 
+		{
+			try 
+			{
 				CreadorProfesor.eliminarProfesor(ID);
-			} catch (Exception e) {
+			} 
+			catch (Exception e) 
+			{
 				e.getMessage();
 				e.printStackTrace();
 			}
@@ -114,18 +127,24 @@ public class Autentificador {
 
 	public void modificarContrasena(String ID, String contrasena) 
 	{
-		if (LPS.getEstudianteIndividual(ID) != null) {
+		if (LPS.getEstudianteIndividual(ID) != null) 
+		{
 			LPS.getEstudianteIndividual(ID).setPassword(contrasena);
-		} else if (LPS.getProfesorIndividual(ID) != null) {
+		} 
+		else if (LPS.getProfesorIndividual(ID) != null) 
+		{
 			LPS.getProfesorIndividual(ID).setPassword(contrasena);
 		}
 	}
 
 	public void modificarNombre(String ID, String nombre) 
 	{
-		if (LPS.getEstudianteIndividual(ID) != null) {
+		if (LPS.getEstudianteIndividual(ID) != null) 
+		{
 			LPS.getEstudianteIndividual(ID).setNombre(nombre);
-		} else if (LPS.getProfesorIndividual(ID) != null) {
+		} 
+		else if (LPS.getProfesorIndividual(ID) != null) 
+		{
 			LPS.getProfesorIndividual(ID).setNombre(nombre);
 		}
 	}

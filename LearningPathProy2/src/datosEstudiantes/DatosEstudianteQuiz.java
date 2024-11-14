@@ -18,10 +18,9 @@ public class DatosEstudianteQuiz extends DatosEstudianteActividad {
 	
 	public DatosEstudianteQuiz(String IDEstudiante) {
 		super(IDEstudiante);
-		this.envioQuiz = new EnvioQuiz();
-		this.calificacion = 0.0;
+		this.calificacion = -1;
 		this.type=DatosEstudianteActividad.QUIZDATO;
-
+		this.envioQuiz= new EnvioQuiz();
 
 	}
 	

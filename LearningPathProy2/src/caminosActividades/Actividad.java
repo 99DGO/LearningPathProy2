@@ -35,6 +35,7 @@ public abstract class Actividad {
 	private final String ID;
 	
 	protected String type;
+	//El string de este hashMap es el id del datoEstudiante, NO DEL ESTUDIANTE
 	protected HashMap<String, DatosEstudianteActividad> datosEstudiantes;
 	
 	//Constructor normal
@@ -267,9 +268,31 @@ public abstract class Actividad {
 		this.datosEstudiantes.put(dato.getID(), dato );
 	}
 	
-	public DatosEstudianteActividad getDatoEstudianteIndividual(String IDestudiante)
+	public DatosEstudianteActividad getDatoEstudianteIndFromIDDato(String IDDato)
 	{
-		return this.datosEstudiantes.get(IDestudiante);
+		return this.datosEstudiantes.get(IDDato);
+	}
+	
+	public DatosEstudianteActividad getDatoEstudianteIndFromIDEstudiante(String IDestudiante) throws Exception
+	{
+		DatosEstudianteActividad datoEstInd=null; 
+		for (String idDato: this.datosEstudiantes.keySet())
+		{
+			DatosEstudianteActividad datoEstIterator = this.datosEstudiantes.get(idDato);
+			if (datoEstIterator.getIDEstudiante().equals(IDestudiante))
+			{
+				datoEstInd=datoEstIterator;
+			}
+		}
+		
+		if (datoEstInd==null)
+		{
+			throw new Exception ("No existe el id de este estudiante en los datos de estudiantes");
+		}
+		else
+		{
+			return datoEstInd;
+		}
 	}
 	
 	public HashMap<String, DatosEstudianteActividad> getDatosEstudiantes()

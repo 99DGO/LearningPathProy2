@@ -20,7 +20,7 @@ public class QuizSender
 	/*
 	 * Las respuestas deben estar String=texto pregunta, integer=numero de la opcion escogida
 	 */
-	public static void sendEnvioQuiz(String idCamino, String idActividad, String idEstudiante, HashMap<String, Integer> respuestas)
+	public static void sendEnvioQuiz(String idCamino, String idActividad, String idEstudiante, HashMap<String, Integer> respuestas) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
@@ -51,23 +51,30 @@ public class QuizSender
 			}
 		}
 		
-		DatosEstudianteQuiz datosEstudiante = (DatosEstudianteQuiz) quiz.getDatoEstudianteIndividual(idEstudiante);
+		DatosEstudianteQuiz datosEstudiante = (DatosEstudianteQuiz) quiz.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
+		Estudiante estudiante = LPS.getEstudianteIndividual(idEstudiante);
 		
-		EnvioQuiz envio = new EnvioQuiz(respuestasFormateadas);
-		datosEstudiante.setEnvioQuiz(envio);
-
-		if (datosEstudiante.getCalificacion()<quiz.getCalificacionMin())
+		if (!estudiante.isActividadActiva() || estudiante.getIdActividadActiva().equals(idActividad))
 		{
-			datosEstudiante.setEstado(DatosEstudianteTarea.NOEXITOSO);
+			throw new Exception ("No se ha iniciado esta actividad");
 		}
 		else
 		{
-			datosEstudiante.setEstado(DatosEstudianteTarea.EXITOSO);
+			EnvioQuiz envio = new EnvioQuiz(respuestasFormateadas);
+			datosEstudiante.setEnvioQuiz(envio);
+	
+			if (datosEstudiante.getCalificacion()<quiz.getCalificacionMin())
+			{
+				datosEstudiante.setEstado(DatosEstudianteTarea.NOEXITOSO);
+			}
+			else
+			{
+				datosEstudiante.setEstado(DatosEstudianteTarea.EXITOSO);
+			}
+			
+			estudiante.setActividadActiva(false);
+			estudiante.setNombreCaminoActividadActiva("Ninguna");
 		}
-		
-		Estudiante estudiante = LPS.getEstudianteIndividual(idEstudiante);
-		estudiante.setActividadActiva(false);
-		estudiante.setNombreCaminoActividadActiva("Ninguna");
 	}
 
 

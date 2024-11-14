@@ -24,7 +24,7 @@ public class Quiz extends ActividadCalificable{
 		this.preguntas = preguntas;
 		this.type=QUIZ;
 		this.verdaderoFalso = verdaderoFalso;
-
+		
 	}
 	
 	//Constructor para clonar

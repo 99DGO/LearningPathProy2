@@ -75,7 +75,12 @@ public class Inscriptor {
 			}
 		}
 		
-		DatosEstudianteActividad datoEst = actividad.getDatoEstudianteIndividual(estudiante.getID());
+		if (actividad==null)
+		{
+			throw new Exception ("El id de la actividad no existe");
+		}
+		
+		DatosEstudianteActividad datoEst = actividad.getDatoEstudianteIndFromIDEstudiante(estudiante.getID());
 		
 		if (datoEst!=null)
 		{

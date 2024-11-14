@@ -16,6 +16,7 @@ public class Estudiante extends Usuario {
 	private boolean actividadActiva=false;
 	//Este string de nombreCaminoActividadActiva contendra el nombre del camino tambien si se inicia la actividad
 	private String nombreCaminoActividadActiva="Ninguna";
+	private String idActividadActiva="";
 	
 	public Estudiante(String login, String password, String nombre) 
 	{
@@ -81,6 +82,17 @@ public class Estudiante extends Usuario {
 	public void setNombreCaminoActividadActiva(String nombreCaminoActividadActiva) 
 	{
 		this.nombreCaminoActividadActiva = nombreCaminoActividadActiva;
+	}
+
+	
+
+	public String getIdActividadActiva() {
+		return idActividadActiva;
+	}
+
+
+	public void setIdActividadActiva(String idActividadActiva) {
+		this.idActividadActiva = idActividadActiva;
 	}
 
 

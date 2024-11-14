@@ -87,7 +87,16 @@ public class CargarJSONtest {
     	assertEquals("Python123", camino.getTitulo(), "El nombre del camino no se guardo bien" );
     	
     	List<Actividad> actividades = camino.getActividades();
-    	assertEquals(3, actividades.size(), "Las actividades no se guardaron bien" );
+    	
+    	/*
+    	for (Actividad act: actividades)
+    	{
+    		System.out.println(act.getNombre());	
+    	}
+		*/
+    	
+    	assertEquals(4, actividades.size(), "Las actividades no se guardaron bien" );
+    	
 
 		
     	Actividad actividad =actividades.getFirst();

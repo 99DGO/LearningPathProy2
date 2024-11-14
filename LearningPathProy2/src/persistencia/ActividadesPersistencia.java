@@ -34,7 +34,7 @@ import org.json.JSONObject;
 public class ActividadesPersistencia 
 {
 	
-	public static void guardarActividad(Actividad actividad, String caminoID, String pathCaminos)
+	public static void guardarActividad(Actividad actividad, String caminoID, String pathCaminos) throws Exception
 	{
 		JSONObject jActividad=actividad.salvarEnJSON();
 		
@@ -45,56 +45,31 @@ public class ActividadesPersistencia
 	      
 		//Creo el archivo con la información de la actividad
 		FileWriter fileActividad;
-		try 
-		{
-			fileActividad = new FileWriter(pathCarpetaActividad+"/"+actividad.getId()+".json");
-			
-			try 
-			{
-				fileActividad.write(jActividad.toString(1));
-			} 
-			catch (JSONException e) 
-			{
-				e.printStackTrace();
-			}
-			
-			fileActividad.flush();
-			fileActividad.close();
-			
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
+		fileActividad = new FileWriter(pathCarpetaActividad+"/"+actividad.getId()+".json");
 		
-		//Creo el directorio de actividades dentro la carpeta del camino
+		
+		fileActividad.write(jActividad.toString(1));
+		
+		fileActividad.flush();
+		fileActividad.close();
+			
+	
+		
+		//Creo el directorio de datos de estudiante dentro la carpeta de la actividad
 		FileWriter fileDirectorioDatosEstudiantes;
-		try 
-		{
-			fileDirectorioDatosEstudiantes = new FileWriter(pathCarpetaActividad+"/"+"DatosEstudiantesDirectorio"+".txt");		
-			fileDirectorioDatosEstudiantes.flush();
-			fileDirectorioDatosEstudiantes.close();
-			
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
 		
+		fileDirectorioDatosEstudiantes = new FileWriter(pathCarpetaActividad+"/"+"DatosEstudiantesDirectorio"+".txt");		
+		fileDirectorioDatosEstudiantes.flush();
+		fileDirectorioDatosEstudiantes.close();
+
 
 		//Añado al directorio de actividades el ID de esta actividad
 		Writer output;
-		try 
-		{
-			output = new BufferedWriter(new FileWriter(pathCaminos+caminoID+"/ActividadesDirectorio.txt", true));
-			output.append(actividad.getId()+"\n");
-			output.close();
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
-		
+	
+		output = new BufferedWriter(new FileWriter(pathCaminos+caminoID+"/ActividadesDirectorio.txt", true));
+		output.append(actividad.getId()+"\n");
+		output.close();
+
 	}
 	
 	public static Actividad cargarActividad(JSONObject jActividad, String pathActividad) throws Exception

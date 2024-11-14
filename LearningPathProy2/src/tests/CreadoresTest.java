@@ -1,6 +1,7 @@
 package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,24 +16,38 @@ import caminosActividades.PreguntaQuiz;
 import caminosActividades.Quiz;
 import controllers.LearningPathSystem;
 import creadores.CreadorQuiz;
+import usuarios.Profesor;
 
-public class QuizTest
-{
-	//Clase que prueba las funciones internas de quiz
+public class CreadoresTest {
 	
 	private static Quiz quiztest;
 	private static List<String> objetivos;
-	private static List<PreguntaQuiz> preguntas;
+	private static List<PreguntaQuiz> preguntasQuiz;
+	private static CaminoAprendizaje camino;
+	private static int[] fechaLim;
+	private static LearningPathSystem LPS;
+	private static Profesor profesor;
+	
+
 	@BeforeEach
  	void init( ) throws Exception
     {
+		LearningPathSystem.resetLPS();
+		LPS=LearningPathSystem.getInstance();
+		
+		profesor = new Profesor("Aizawa999", "Aizawa 123", "Aizawa Shouta");
+		LPS.addProfesor(profesor);
+		
 		objetivos = new LinkedList<String>();
 		objetivos.add("Saber diferentes tipos de datos");
 		objetivos.add("Aprender loops");
 		objetivos.add("Aprender estructuras");
 		
-		CaminoAprendizaje camino = new CaminoAprendizaje("CaminoTest", "Como crear caminos", objetivos, 0, 10, "Prof999");
-		preguntas = new LinkedList<PreguntaQuiz>();
+		camino = new CaminoAprendizaje("CaminoTest", "Como crear caminos", objetivos, 0, 10, profesor.getID());
+		
+		LPS.addCamino(camino);
+		
+		preguntasQuiz = new LinkedList<PreguntaQuiz>();
 		OpcionQuiz opcion1 = new OpcionQuiz("int", "Porque es un entero", true);
 		OpcionQuiz opcion2 = new OpcionQuiz("double", "Porque no es un decimal", false);
 		OpcionQuiz opcion3 = new OpcionQuiz("float", "Porque no es un decimal", false);
@@ -43,7 +58,7 @@ public class QuizTest
 		pregunta1.setOpcion(2, opcion2);
 		pregunta1.setOpcion(3, opcion3);
 		pregunta1.setOpcion(4, opcion4);
-		preguntas.add(pregunta1);
+		preguntasQuiz.add(pregunta1);
 		
 		OpcionQuiz opcion1B = new OpcionQuiz("Paloma", "Porque son sucias", false);
 		OpcionQuiz opcion2B = new OpcionQuiz("Cuervo", "Porque son hermosos e inteligentes", true);
@@ -55,22 +70,28 @@ public class QuizTest
 		pregunta2.setOpcion(2, opcion2B);
 		pregunta2.setOpcion(3, opcion3B);
 		pregunta2.setOpcion(4, opcion4B);
-		preguntas.add(pregunta2);
+		preguntasQuiz.add(pregunta2);
 
-		int[] fechaLim= new int[]{0,1,0};
-
-		quiztest=new Quiz("Quiz Test", "Esto es un quiz donde te preguntan que tipo de variable es más indicado", objetivos, 1.5, 20, fechaLim, 
-				false, 2, preguntas, "Prof999", camino, false, 0);
+		fechaLim= new int[]{0,1,0};
 
 		
     }
 	
 	@Test
-	public void preguntasCorrectasTest()
+	public void crearQuizCeroTest()
 	{
-		assertEquals(2, quiztest.getPreguntas().size(), "No se crearon el numero correcto de preguntas");
+		try 
+		{
+			CreadorQuiz.crearQuizCero(camino.getID(),"Quiz Test", "Esto es un quiz donde te preguntan que tipo de variable es más indicado", objetivos, 1.5, 20, fechaLim, 
+					false, 2, preguntasQuiz, profesor.getID(), false, 0);
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			fail("No deberia sacar error: "+e.getMessage());
+		}
+		
+		assertEquals(1, camino.getActividades().size(), "No se crearon el numero correcto de actividades");
 	}
-	
-
 
 }

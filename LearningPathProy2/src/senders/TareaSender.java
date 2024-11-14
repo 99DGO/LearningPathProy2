@@ -12,7 +12,7 @@ import usuarios.Estudiante;
 public class TareaSender 
 {
 
-	public static void addMetodoEntregaTarea(String idCamino, String idActividad, String idEstudiante, String metodoEntrega)
+	public static void addMetodoEntregaTarea(String idCamino, String idActividad, String idEstudiante, String metodoEntrega) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
@@ -26,15 +26,23 @@ public class TareaSender
 				actividad = actividadIterator;
 			}
 		}
-		
-		DatosEstudianteTarea datosEstudiante = (DatosEstudianteTarea) actividad.getDatoEstudianteIndividual(idEstudiante);
-		datosEstudiante.setMetodoEntrega(metodoEntrega);
-		datosEstudiante.setFechaFinal();
-		datosEstudiante.setEstado(DatosEstudianteTarea.ENVIADO);
-		
+
+		DatosEstudianteTarea datosEstudiante = (DatosEstudianteTarea) actividad.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
 		Estudiante estudiante = LPS.getEstudianteIndividual(idEstudiante);
-		estudiante.setActividadActiva(false);
-		estudiante.setNombreCaminoActividadActiva("Ninguna");
+		
+		if (!estudiante.isActividadActiva() || estudiante.getIdActividadActiva().equals(idActividad))
+		{
+			throw new Exception ("No se ha iniciado esta actividad");
+		}
+		else
+		{
+			datosEstudiante.setMetodoEntrega(metodoEntrega);
+			datosEstudiante.setFechaFinal();
+			datosEstudiante.setEstado(DatosEstudianteTarea.ENVIADO);
+			
+			estudiante.setActividadActiva(false);
+			estudiante.setNombreCaminoActividadActiva("Ninguna");	
+		}
 	}
 
 

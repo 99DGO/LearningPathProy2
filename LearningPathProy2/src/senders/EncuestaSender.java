@@ -17,7 +17,7 @@ public class EncuestaSender
 	/*
 	 * Las respuestas deben ser llave=pregunta, value=Respuesta del estudiante
 	 */
-	public static void sendEnvioEncuesta(String idCamino, String idActividad, String idEstudiante, HashMap<String, String> respuestas)
+	public static void sendEnvioEncuesta(String idCamino, String idActividad, String idEstudiante, HashMap<String, String> respuestas) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
@@ -32,14 +32,23 @@ public class EncuestaSender
 			}
 		}
 		
-		DatosEstudianteEncuesta datosEstudiante = (DatosEstudianteEncuesta) actividad.getDatoEstudianteIndividual(idEstudiante);
-		EnvioEncuesta envio = new EnvioEncuesta(respuestas);
-		datosEstudiante.setEnvio(envio);
-		datosEstudiante.setEstado(DatosEstudianteEncuesta.EXITOSO);
 		
 		Estudiante estudiante = LPS.getEstudianteIndividual(idEstudiante);
-		estudiante.setActividadActiva(false);
-		estudiante.setNombreCaminoActividadActiva("Ninguna");
+
+		if (!estudiante.isActividadActiva() || estudiante.getIdActividadActiva().equals(idActividad))
+		{
+			throw new Exception ("No se ha iniciado esta actividad");
+		}
+		else
+		{
+			DatosEstudianteEncuesta datosEstudiante = (DatosEstudianteEncuesta) actividad.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
+			EnvioEncuesta envio = new EnvioEncuesta(respuestas);
+			datosEstudiante.setEnvio(envio);
+			datosEstudiante.setEstado(DatosEstudianteEncuesta.EXITOSO);
+			
+			estudiante.setActividadActiva(false);
+			estudiante.setNombreCaminoActividadActiva("Ninguna");
+		}
 	}
 
 }

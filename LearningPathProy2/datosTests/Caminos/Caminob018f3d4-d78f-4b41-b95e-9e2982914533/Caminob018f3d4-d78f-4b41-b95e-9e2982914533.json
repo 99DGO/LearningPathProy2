@@ -1,7 +1,7 @@
 {
  "descripcion": "Un curso para saber los basicos de java",
  "numActividadesObligatorias": 0,
- "fechaModificacion": "Thu Nov 14 13:41:52 COT 2024",
+ "fechaModificacion": "Thu Nov 14 17:24:04 COT 2024",
  "ratingsTotales": 0,
  "rating": 0,
  "titulo": "Jaca123",
@@ -13,8 +13,8 @@
   "Aprender estructuras"
  ],
  "duracion": 125,
- "fechaCreacion": "Thu Nov 14 13:41:52 COT 2024",
+ "fechaCreacion": "Thu Nov 14 17:24:04 COT 2024",
  "creadorID": "Profesor-KakashiCentralPersistenciaTest",
- "id": "Camino73ae19cb-2bcd-43d9-b003-2d82ad457e61",
+ "id": "Caminob018f3d4-d78f-4b41-b95e-9e2982914533",
  "dificultad": 3
 }

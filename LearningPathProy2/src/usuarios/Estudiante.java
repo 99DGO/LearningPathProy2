@@ -14,6 +14,8 @@ public class Estudiante extends Usuario {
 	private List<CaminoAprendizaje> historialCaminos;
 	private List<String> intereses;
 	private boolean actividadActiva=false;
+	//Este string de nombreCaminoActividadActiva contendra el nombre del camino tambien si se inicia la actividad
+	private String nombreCaminoActividadActiva="Ninguna";
 	
 	public Estudiante(String login, String password, String nombre) 
 	{
@@ -25,11 +27,13 @@ public class Estudiante extends Usuario {
 	
 	
 	public Estudiante(String login, String password, String type, List<CaminoAprendizaje> historialCaminos, List<String> intereses,
-			boolean actividadActiva, String nombre) {
+			boolean actividadActiva, String nombre, String nombreCaminoActividadActiva )
+	{
 		super(login, password, type, Usuario.ESTUDIANTE+"-"+login, nombre);
 		this.historialCaminos = historialCaminos;
 		this.intereses = intereses;
 		this.actividadActiva = actividadActiva;
+		this.nombreCaminoActividadActiva=nombreCaminoActividadActiva;
 	}
 
 
@@ -66,6 +70,19 @@ public class Estudiante extends Usuario {
 		return actividadActiva;
 	}
 
+	
+
+	public String getNombreCaminoActividadActiva() 
+	{
+		return nombreCaminoActividadActiva;
+	}
+
+
+	public void setNombreCaminoActividadActiva(String nombreCaminoActividadActiva) 
+	{
+		this.nombreCaminoActividadActiva = nombreCaminoActividadActiva;
+	}
+
 
 	public JSONObject salvarJSON() 
 	{
@@ -85,6 +102,8 @@ public class Estudiante extends Usuario {
 		}
 		
 		jEstudiante.put("historialCaminos", new JSONArray(idsCaminos));
+		
+		jEstudiante.put("nombreCaminoActividadActiva", this.nombreCaminoActividadActiva);
 		
 		return jEstudiante;
 	}

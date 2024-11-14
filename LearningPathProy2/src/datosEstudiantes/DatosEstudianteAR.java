@@ -15,13 +15,6 @@ public class DatosEstudianteAR  extends DatosEstudianteActividad {
 		super(IDEstudiante, estado, fechaInicio, fechaFinal, id);
 		this.type=DatosEstudianteActividad.ARDATO;
 	}
-
-
-	public void finalizarAR() throws Exception 
-	{
-		finalizarActividad();
-		setEstado(DatosEstudianteActividad.EXITOSO);
-	}
 	
 	public JSONObject salvarEnJSON()
 	{

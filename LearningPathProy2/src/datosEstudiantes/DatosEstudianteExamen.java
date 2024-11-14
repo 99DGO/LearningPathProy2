@@ -10,11 +10,11 @@ import envios.EnvioExamen;
 
 public class DatosEstudianteExamen extends DatosEstudianteActividad {
 	private double calificacion;
-	private EnvioExamen envio;
+	private EnvioExamen envio=new EnvioExamen();
 	
 	public DatosEstudianteExamen(String IDEstudiante) {
 		super(IDEstudiante);
-		this.calificacion = 0.0;
+		this.calificacion = -1;
 		this.type=DatosEstudianteActividad.EXAMENDATO;
 		this.envio=new EnvioExamen();
 	}
@@ -30,11 +30,6 @@ public class DatosEstudianteExamen extends DatosEstudianteActividad {
 	}
 
 
-	public void finalizarExamen() throws Exception {
-		finalizarActividad();
-		setEstado(DatosEstudianteActividad.ENVIADO);
-	}
-	
 	public double getCalificacion() {
 		return calificacion;
 	}
@@ -48,6 +43,12 @@ public class DatosEstudianteExamen extends DatosEstudianteActividad {
 		return this.envio;
 	}
 	
+	
+	public void setEnvio(EnvioExamen envio) {
+		this.envio = envio;
+	}
+
+
 	public JSONObject salvarEnJSON()
 	{
 		JSONObject jDatosEst = new JSONObject();

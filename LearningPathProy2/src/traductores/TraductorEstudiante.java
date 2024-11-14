@@ -74,4 +74,29 @@ public class TraductorEstudiante
 			return IDtoReturn;
 		}
 	}
+
+	public static String getNombrefromID(String idEstudiante) 
+	{
+		LearningPathSystem LPS = LearningPathSystem.getInstance();
+		HashMap<String, Estudiante> estudiantes = LPS.getEstudiantes();
+		
+		Estudiante estudiante=estudiantes.get(idEstudiante);
+		
+		return estudiante.getNombre();
+		
+	}
+	
+	/*
+	 * Retoran un string que dice el nombre del camino y actividad si el estudiante ha iniciado una actividad.
+	 * Si no ha iniciado una, el string dice "Ninguna actividad activa"
+	 */
+	public static String verActividadActiva(String idEstudiante)
+	{
+		LearningPathSystem LPS = LearningPathSystem.getInstance();
+		HashMap<String, Estudiante> estudiantes = LPS.getEstudiantes();
+		
+		Estudiante estudiante=estudiantes.get(idEstudiante);
+		
+		return estudiante.getNombreCaminoActividadActiva();
+	}
 }

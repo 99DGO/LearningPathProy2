@@ -14,49 +14,50 @@ public class CreadorCamino
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		Profesor profesor= LPS.getProfesorIndividual(IDprofesor);
+		HashMap<String, CaminoAprendizaje> caminos = LPS.getCaminos();
 		
-		if (!(LPS.getCaminoIndividual(titulo)==null))
+		//Chequear que otro camino no tenga el mismo titulo
+		for (String IDCamino: caminos.keySet())
 		{
-			throw new Exception ("Ya existe un camino con ese titulo");
+			CaminoAprendizaje caminoIterator=caminos.get(IDCamino);
+			
+			if (caminoIterator.getTitulo().equals(titulo))
+			{
+				throw new Exception ("Ya existe un camino con ese titulo");
+			}
 		}
-		else
-		{
-			CaminoAprendizaje camino= new CaminoAprendizaje(titulo, descripcion, objetivos, dificultad, duracion,
+		
+		CaminoAprendizaje camino= new CaminoAprendizaje(titulo, descripcion, objetivos, dificultad, duracion,
 					 profesor.getID());
-			profesor.addCamino(camino);
-			LPS.addCamino(camino);
-		}
+		profesor.addCamino(camino);
+		LPS.addCamino(camino);
 		
 	}
 	
 
-	public static void clonarCamino(String IDcaminoOG, String tituloCamino,  String IDprofesor) throws Exception 
+	public static void clonarCamino(String IDcaminoOG, String titulo,  String IDprofesor) throws Exception 
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		Profesor profesor=LPS.getProfesorIndividual(IDprofesor);
 		CaminoAprendizaje caminoOG= LPS.getCaminoIndividual(IDcaminoOG);
 		
-		String caminoForCheck = null;
-		HashMap<String, CaminoAprendizaje> allCaminos = LPS.getCaminos();
+		HashMap<String, CaminoAprendizaje> caminos = LPS.getCaminos();
 		
-		for (String caminoTitulo : allCaminos.keySet())
-        {
-            if (caminoTitulo.equals(tituloCamino))
-            {
-                caminoForCheck = caminoTitulo;
-            }
-        }
+		//Chequear que otro camino no tenga el mismo titulo
+		for (String IDCamino: caminos.keySet())
+		{
+			CaminoAprendizaje caminoIterator=caminos.get(IDCamino);
+			
+			if (caminoIterator.getTitulo().equals(titulo))
+			{
+				throw new Exception ("Ya existe un camino con ese titulo");
+			}
+		}
 		
-		if (caminoForCheck != null)
-		{
-			throw new Exception ("Ya existe un camino con ese titulo");
-		}
-		else
-		{
-			CaminoAprendizaje camino= new CaminoAprendizaje(caminoOG, profesor.getID(), tituloCamino);
-			profesor.addCamino(camino);
-			LPS.addCamino(camino);
-		}
+		CaminoAprendizaje camino= new CaminoAprendizaje(caminoOG, profesor.getID(), titulo);
+		profesor.addCamino(camino);
+		LPS.addCamino(camino);
+		
 	}
 
 }

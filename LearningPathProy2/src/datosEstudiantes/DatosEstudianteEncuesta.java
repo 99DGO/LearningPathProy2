@@ -10,7 +10,7 @@ import envios.EnvioEncuesta;
 
 public class DatosEstudianteEncuesta extends DatosEstudianteActividad {
 	
-	private EnvioEncuesta envio;
+	private EnvioEncuesta envio=null;
 	
 	public DatosEstudianteEncuesta(String IDEstudiante) {
 		super(IDEstudiante);
@@ -25,14 +25,19 @@ public class DatosEstudianteEncuesta extends DatosEstudianteActividad {
 
 	}
 
-
-
-	public void finalizarEncuesta() throws Exception 
-	{
-		finalizarActividad();
-		setEstado(DatosEstudianteActividad.EXITOSO);
-	}
 	
+
+
+	public EnvioEncuesta getEnvio() 
+	{
+		return envio;
+	}
+
+
+	public void setEnvio(EnvioEncuesta envio) 
+	{
+		this.envio = envio;
+	}
 	
 	public JSONObject salvarEnJSON()
 	{

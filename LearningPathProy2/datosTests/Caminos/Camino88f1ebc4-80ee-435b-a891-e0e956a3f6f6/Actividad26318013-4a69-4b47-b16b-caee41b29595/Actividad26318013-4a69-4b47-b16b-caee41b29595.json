@@ -1,0 +1,36 @@
+{
+ "descripcion": "Comprobar que el estudiante sabe diferenciar variables numericos",
+ "calificacionMin": 3,
+ "ratingsTotales": 0,
+ "actividadesSigExitoso": [],
+ "actividadesPrereqs": [],
+ "preguntasAbiertas": [
+  "Cual es la diferencia entre double y float?",
+  "Se puede pasar de un double a un int o de un int a un double? Por que o por que no?",
+  "Diga cual es su tipo de variable favorita y justifique."
+ ],
+ "rating": 0,
+ "datosEstudiantes": [
+  "DatoEstudiante_aad36434-a2cb-4a12-8071-a4b3dc27ab9c",
+  "DatoEstudiante_cc3eddc0-c92b-4e07-b3bc-aa6b6c21d998"
+ ],
+ "resenias": [],
+ "type": "Examen",
+ "nombre": "Tipos de variables examen",
+ "fechaLim": [
+  0,
+  1,
+  0
+ ],
+ "objetivos": [
+  "Saber que es un int",
+  "Saber que es un double",
+  "Saber que es un float"
+ ],
+ "actividadesSigFracaso": [],
+ "duracion": 30,
+ "obligatoria": true,
+ "creadorID": "Profesor-KakashiCentralPersistenciaTest",
+ "id": "Actividad26318013-4a69-4b47-b16b-caee41b29595",
+ "dificultad": 2.5
+}

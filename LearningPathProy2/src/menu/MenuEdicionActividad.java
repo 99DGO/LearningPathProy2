@@ -11,7 +11,7 @@ public class MenuEdicionActividad
 {
 	public static void mostrarMenuEdicionActividad(Profesor profesor)
 	{
-		// TODO Crear menu de edicion de actividad
+		// Menu de edicion de actividad
 		System.out.println("Edicion de actividad");
 		System.out.println("Ingrese el ID del camino al que pertenece la actividad a editar: ");
 		Scanner scanner = new Scanner(System.in);

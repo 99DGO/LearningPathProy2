@@ -10,7 +10,7 @@ import envios.EnvioEncuesta;
 
 public class DatosEstudianteEncuesta extends DatosEstudianteActividad {
 	
-	private EnvioEncuesta envio;
+	private EnvioEncuesta envio=null;
 	
 	public DatosEstudianteEncuesta(String IDEstudiante) {
 		super(IDEstudiante);

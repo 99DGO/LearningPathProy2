@@ -35,14 +35,13 @@ public class TraductorEncuesta
 	}
 	
 	/*
-	 * Retorna un hashmap donde la llave es el nombre del estudiante y el valor una lista que contiene strings que estan compuestos por
-	 * la pregunta y la respuesta del estudiante
+	 * Retorna unalista que contiene strings que estan compuestos por la pregunta y la respuesta del estudiante
 	 */
-	public static HashMap<String, List<String>> retornarEnvios(String idCamino, String idActividad)
+	public static List<String> retornarEnvioIndividual(String idCamino, String idActividad, String idEstudiante)
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
-		HashMap<String, List<String>> enviosFormateados= new HashMap<String, List<String>>();
+		List<String> respuestasFormateadas= new LinkedList<String>();
 		
 		Encuesta encuesta = null;
 
@@ -57,26 +56,55 @@ public class TraductorEncuesta
 		
 		HashMap<String, DatosEstudianteActividad> datosEstudiantes= encuesta.getDatosEstudiantes();
 		
-		//Recorro todos los envios
+		//Añado las respuestas con sus preguntas
+		DatosEstudianteEncuesta datoEstInd= (DatosEstudianteEncuesta) datosEstudiantes.get(idEstudiante);
+		EnvioEncuesta envioEstInd= datoEstInd.getEnvio();
+		HashMap<String, String> respuestasHash= envioEstInd.getRespuestas();
+		for (String pregunta: respuestasHash.keySet())
+		{
+			String respuesta= respuestasHash.get(pregunta);
+			respuestasFormateadas.add(pregunta+"\n"+respuesta+"\n");
+		}
+		
+		return respuestasFormateadas;
+	}
+	
+	/*
+	 * Retorna un hashmap donde la llave es el id del estudiante y el valor el nombre del estudiante 
+	 */
+	public static HashMap<String, String> retornarListaEstudiantesEnvios(String idCamino, String idActividad)
+	{
+		LearningPathSystem LPS = LearningPathSystem.getInstance();
+		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		HashMap<String, String> estudiantesConEnvios= new HashMap<String, String>();
+		
+		Encuesta encuesta = null;
+
+		//Encuestro la actividad
+		for (Actividad actividadIterator : camino.getActividades())
+		{
+			if (actividadIterator.getId().equals(idActividad))
+			{
+				encuesta = (Encuesta) actividadIterator;
+			}
+		}
+		
+		HashMap<String, DatosEstudianteActividad> datosEstudiantes= encuesta.getDatosEstudiantes();
+		
+		//Recorro todos los datos de estudiantes envios
 		for (String idEstudiante: datosEstudiantes.keySet())
 		{
 			String nombreEstudiante=TraductorEstudiante.getNombrefromID(idEstudiante);
-			
-			List<String> respuestasFormateadas= new LinkedList<String>();
-			
-			//Añado las respuestas con sus preguntas
+						
 			DatosEstudianteEncuesta datoEstInd= (DatosEstudianteEncuesta) datosEstudiantes.get(idEstudiante);
 			EnvioEncuesta envioEstInd= datoEstInd.getEnvio();
-			HashMap<String, String> respuestasHash= envioEstInd.getRespuestas();
-			for (String pregunta: respuestasHash.keySet())
-			{
-				String respuesta= respuestasHash.get(pregunta);
-				respuestasFormateadas.add(pregunta+"\n"+respuesta+"\n");
-			}
 			
-			enviosFormateados.put(nombreEstudiante, respuestasFormateadas);
+			if (envioEstInd!=null)
+			{
+				estudiantesConEnvios.put(idEstudiante, nombreEstudiante);
+			}
 		}
 		
-		return enviosFormateados;
+		return estudiantesConEnvios;
 	}
 }

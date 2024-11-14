@@ -34,8 +34,10 @@ public class DatosEstudianteExamen extends DatosEstudianteActividad {
 		return calificacion;
 	}
 	
-	public void setCalificacion(double calificacion) {
+	public void setCalificacion(double calificacion) 
+	{
 		this.calificacion = calificacion;
+		this.envio.setCalificacion(calificacion);
 	}
 	
 	public EnvioExamen getEnvio()

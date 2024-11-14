@@ -28,7 +28,7 @@ public class CreadorCamino
 		}
 		
 		CaminoAprendizaje camino= new CaminoAprendizaje(titulo, descripcion, objetivos, dificultad, duracion,
-					 profesor.getID());
+		profesor.getID());
 		profesor.addCamino(camino);
 		LPS.addCamino(camino);
 		

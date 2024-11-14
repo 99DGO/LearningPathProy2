@@ -8,7 +8,7 @@ import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
 import controllers.LearningPathSystem;
 
-public class EditorCamino extends EditorActividadGeneral
+public class EditorCamino 
 {
 
 	public static void editTitulo(String idCamino, String titulo) throws Exception 

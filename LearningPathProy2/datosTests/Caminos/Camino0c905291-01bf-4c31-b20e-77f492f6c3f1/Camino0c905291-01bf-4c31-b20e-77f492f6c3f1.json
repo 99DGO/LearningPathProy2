@@ -1,14 +1,14 @@
 {
  "descripcion": "Un curso para saber los basicos de python",
  "numActividadesObligatorias": 2,
- "fechaModificacion": "Wed Nov 13 21:30:24 COT 2024",
+ "fechaModificacion": "Wed Nov 13 22:43:43 COT 2024",
  "ratingsTotales": 0,
  "rating": 0,
  "titulo": "Python123",
  "actividades": [
-  "Actividadabf501c1-ccef-487d-823f-9829f12029c7",
-  "Actividad074ff78d-e23d-4180-b365-b2e632565793",
-  "Actividad1ba4c1a5-77ab-4d8c-979f-8cc61e44ba9e"
+  "Actividad09ed3721-a71f-4c0f-9eff-f154a8214671",
+  "Actividadabe3d785-5402-4cc1-b94a-1b10fed3eeed",
+  "Actividadd4a5be56-49b9-4018-aead-b2b0c12c8b15"
  ],
  "version": 1,
  "objetivos": [
@@ -17,8 +17,8 @@
   "Aprender estructuras"
  ],
  "duracion": 185,
- "fechaCreacion": "Wed Nov 13 21:30:24 COT 2024",
+ "fechaCreacion": "Wed Nov 13 22:43:43 COT 2024",
  "creadorID": "Profesor-KakashiCentralPersistenciaTest",
- "id": "Caminocb528baf-3a54-49e2-ac14-7b766616ca20",
+ "id": "Camino0c905291-01bf-4c31-b20e-77f492f6c3f1",
  "dificultad": 2
 }

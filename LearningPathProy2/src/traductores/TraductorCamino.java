@@ -13,7 +13,7 @@ import usuarios.Profesor;
 public class TraductorCamino 
 {
 	/*
-	 * Retorna un hashMap donde las llaves son los IDs de los caminos y los valores son los nombres de ese camino.
+	 * Retorna un hashMap donde las llaves son los titulos de los caminos y los valores son el creador de ese camino.
 	 */
 	public static HashMap<String, String> verTodosCaminos ()
 	{
@@ -26,7 +26,8 @@ public class TraductorCamino
 		for (String IDCamino : hashCaminosLPS.keySet())
 		{
 			camino=hashCaminosLPS.get(IDCamino);
-			caminosToReturn.put(IDCamino, camino.getTitulo());
+			Profesor profesor =LPS.getProfesorIndividual(camino.getCreadorID());
+			caminosToReturn.put(camino.getTitulo(), profesor.getNombre());
 		}
 		
 		return caminosToReturn;

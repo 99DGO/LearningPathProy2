@@ -45,9 +45,11 @@ public class EncuestaSender
 			EnvioEncuesta envio = new EnvioEncuesta(respuestas);
 			datosEstudiante.setEnvio(envio);
 			datosEstudiante.setEstado(DatosEstudianteEncuesta.EXITOSO);
+			datosEstudiante.setFechaFinal();
 			
 			estudiante.setActividadActiva(false);
 			estudiante.setNombreCaminoActividadActiva("Ninguna");
+
 		}
 	}
 

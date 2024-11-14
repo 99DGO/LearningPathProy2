@@ -44,9 +44,11 @@ public class ExamenSender
 			EnvioExamen envio = new EnvioExamen(respuestas);
 			datosEstudiante.setEnvio(envio);
 			datosEstudiante.setEstado(DatosEstudianteTarea.ENVIADO);
+			datosEstudiante.setFechaFinal();
 			
 			estudiante.setActividadActiva(false);
 			estudiante.setNombreCaminoActividadActiva("Ninguna");
+
 		}
 	}
 

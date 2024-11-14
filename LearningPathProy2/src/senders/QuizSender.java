@@ -74,6 +74,7 @@ public class QuizSender
 			
 			estudiante.setActividadActiva(false);
 			estudiante.setNombreCaminoActividadActiva("Ninguna");
+			datosEstudiante.setFechaFinal();
 		}
 	}
 

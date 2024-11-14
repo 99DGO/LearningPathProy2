@@ -7,23 +7,27 @@ import usuarios.Estudiante;
 import usuarios.Profesor;
 import usuarios.Usuario;
 
-public class MenuGeneral {
+public class MenuGeneral
+{
 	public static LearningPathSystem LPS = null;
 	public static Autentificador autentificador = null;
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		if (LPS == null)
 			LPS = LearningPathSystem.getInstance();
-		
+
 		if (autentificador == null)
 			autentificador = Autentificador.getInstance(LPS);
-		
-		while (true) {
+
+		while (true)
+		{
 			mostrarMenu();
 		}
 	}
 
-	public static void mostrarMenu() {
+	public static void mostrarMenu()
+	{
 		System.out.println("¡Bienvenido al sistema de gestión de caminos de aprendizaje!");
 		System.out.println("Seleccione una opcion:");
 		System.out.println("1. Iniciar sesion");
@@ -32,7 +36,8 @@ public class MenuGeneral {
 
 		Scanner scanner = new Scanner(System.in);
 		int opcion = scanner.nextInt();
-		switch (opcion) {
+		switch (opcion)
+		{
 		case 1:
 			// Iniciar sesion
 			iniciarSesion();
@@ -47,12 +52,17 @@ public class MenuGeneral {
 			System.out.println("1. Si");
 			System.out.println("2. No");
 			int cerrar = scanner.nextInt();
-			if (cerrar == 1) {
+			if (cerrar == 1)
+			{
 				System.out.println("Gracias por usar el sistema. \n¡Hasta luego!");
 				System.exit(0);
-			} else if (cerrar == 2) {
+			}
+			else if (cerrar == 2)
+			{
 				System.out.println("Volviendo al menu principal. \n");
-			} else {
+			}
+			else
+			{
 				System.out.println("Opcion no valida. Volviendo al menu principal. \n");
 			}
 			break;
@@ -62,7 +72,8 @@ public class MenuGeneral {
 
 	}
 
-	public static void iniciarSesion() {
+	public static void iniciarSesion()
+	{
 		System.out.println("Ingrese su login:");
 		Scanner scanner = new Scanner(System.in);
 		String login = scanner.nextLine();
@@ -70,27 +81,42 @@ public class MenuGeneral {
 		String password = scanner.nextLine();
 		// Validar login y password
 
-		try {
+		try
+		{
 			Usuario usuario = autentificador.autentificar(login, password);
-			if (usuario != null) {
-				if (usuario.getType().equals("Profesor")) {
-					System.out.println("Bienvenido Profesor " + usuario.getNombre());
-					MenuEstudiante.mostarMenuEstudiante((Estudiante) usuario);
-				} else if (usuario.getType().equals("Estudiante")) {
-					System.out.println("Bienvenido Estudiante " + usuario.getNombre());
-					MenuProfesor.mostrarMenuProfesor((Profesor) usuario);
-				} else {
+			if (usuario != null)
+			{
+				if (usuario.getType().equals("Profesor"))
+				{
+					System.out.println("Bienvenido Profesor " + usuario.getNombre() + "\n");
+					while (true)
+					{
+						MenuProfesor.mostrarMenuProfesor((Profesor) usuario);
+					}
+				}
+				else if (usuario.getType().equals("Estudiante"))
+				{
+					System.out.println("Bienvenido Estudiante " + usuario.getNombre() + "\n");
+					while (true)
+					{
+						MenuEstudiante.mostarMenuEstudiante((Estudiante) usuario);
+					}
+				}
+				else
+				{
 					System.out.println("Usuario no encontrado en la base de datos. \n");
 				}
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			System.out.println(e.getMessage());
 		}
 
-
 	}
 
-	public static void registrarse() {
+	public static void registrarse()
+	{
 		Usuario newUsuario = null;
 
 		System.out.println("Por favor complete los siguientes campos para registrarse:");
@@ -105,7 +131,8 @@ public class MenuGeneral {
 		System.out.println("1. Estudiante");
 		System.out.println("2. Profesor");
 		int type = scanner.nextInt();
-		switch (type) {
+		switch (type)
+		{
 		case 1:
 			// estudiante
 			newUsuario = new Estudiante(login, password, nombre);
@@ -118,15 +145,22 @@ public class MenuGeneral {
 			System.out.println("Opcion no valida. \n");
 		}
 
-		if (newUsuario != null) {
-			try {
-				if (autentificador.registrarUsuario(newUsuario)== true) {
+		if (newUsuario != null)
+		{
+			try
+			{
+				if (autentificador.registrarUsuario(newUsuario) == true)
+				{
 					System.out.println("Usuario registrado exitosamente. \n");
-				} else {
-					System.out.println("Error en el proceso de registro. \n");
-					
 				}
-			} catch (Exception e) {
+				else
+				{
+					System.out.println("Error en el proceso de registro. \n");
+
+				}
+			}
+			catch (Exception e)
+			{
 				e.getMessage();
 				e.printStackTrace();
 			}

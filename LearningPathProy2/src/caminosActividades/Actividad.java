@@ -287,7 +287,8 @@ public abstract class Actividad {
 		
 		if (datoEstInd==null)
 		{
-			throw new Exception ("No existe el id de este estudiante en los datos de estudiantes");
+			throw new Exception ("No existe el id de este estudiante en los datos de estudiantes de la actividad. "
+					+ "Asegurese que el estudiante este inscrito");
 		}
 		else
 		{

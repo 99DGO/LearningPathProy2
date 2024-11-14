@@ -22,6 +22,11 @@ public class ExamenSender
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
 		
+		if (camino==null)
+		{
+			throw new Exception ("No existe un camino con ese id");
+		}
+		
 		Actividad actividad = null;
 
 		for (Actividad actividadIterator : camino.getActividades())

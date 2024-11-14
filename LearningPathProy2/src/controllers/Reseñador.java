@@ -7,10 +7,16 @@ import usuarios.Profesor;
 
 public class Reseñador 
 {
-	public static void dejarResenia(String resenia, String IDcamino, String IDactividad)
+	public static void dejarResenia(String resenia, String IDcamino, String IDactividad) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No existe un camino con ese id");
+		}
+		
 		Actividad actividad=null;
 		
 		//Consigo la actividad del id
@@ -26,10 +32,16 @@ public class Reseñador
 		
 	}
 	
-	public static void dejarRatingActividad(float rating, String IDcamino, String IDactividad)
+	public static void dejarRatingActividad(float rating, String IDcamino, String IDactividad) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No existe un camino con ese id");
+		}
+		
 		Actividad actividad=null;
 		
 		//Consigo la actividad del id

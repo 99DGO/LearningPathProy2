@@ -13,10 +13,15 @@ import usuarios.Estudiante;
 
 public class marcadorAR 
 {
-	public static void marcarARTerminado(String idCamino, String idActividad, String idEstudiante)
+	public static void marcarARTerminado(String idCamino, String idActividad, String idEstudiante) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No existe un camino con ese id");
+		}
 		
 		Actividad actividad = null;
 
@@ -28,10 +33,23 @@ public class marcadorAR
 			}
 		}
 		
-		DatosEstudianteAR datosEstudiante = (DatosEstudianteAR) actividad.getDatoEstudianteIndividual(idEstudiante);
-		datosEstudiante.setEstado(DatosEstudianteAR.EXITOSO);
+		if (actividad==null)
+		{
+			throw new Exception ("No existe una actividad con ese id");
+		}
 		
+		//Tira exception de que no se encontro el dato del estudiante
+		DatosEstudianteAR datosEstudiante = (DatosEstudianteAR) actividad.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
 		Estudiante estudiante = LPS.getEstudianteIndividual(idEstudiante);
+		
+		if (!estudiante.getIdActividadActiva().equals(idActividad))
+		{
+			throw new Exception ("No se ha iniciado esta actividad");
+		}
+		
+		datosEstudiante.setEstado(DatosEstudianteAR.EXITOSO);
+		datosEstudiante.setFechaFinal();
+		
 		estudiante.setActividadActiva(false);
 		estudiante.setNombreCaminoActividadActiva("Ninguna");
 	}

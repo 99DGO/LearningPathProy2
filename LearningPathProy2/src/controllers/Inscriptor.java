@@ -18,11 +18,16 @@ import usuarios.Profesor;
 
 public class Inscriptor {
 
-	public static void inscribirseCamino(String IDcamino, String IDestudiante)
+	public static void inscribirseCamino(String IDcamino, String IDestudiante) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		Estudiante estudiante=LPS.getEstudianteIndividual(IDestudiante);
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No existe un camino con ese id");
+		}
 		
 		Iterator<Actividad> it1= camino.getActividades().iterator();
 		DatosEstudianteActividad datoEst;
@@ -64,6 +69,12 @@ public class Inscriptor {
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		Estudiante estudiante=LPS.getEstudianteIndividual(IDestudiante);
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No existe un camino con ese id");
+		}
+		
 		Actividad actividad=null;
 		
 		//Consigo la actividad del id

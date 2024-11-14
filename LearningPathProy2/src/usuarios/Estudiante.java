@@ -28,13 +28,14 @@ public class Estudiante extends Usuario {
 	
 	
 	public Estudiante(String login, String password, String type, List<CaminoAprendizaje> historialCaminos, List<String> intereses,
-			boolean actividadActiva, String nombre, String nombreCaminoActividadActiva )
+			boolean actividadActiva, String nombre, String nombreCaminoActividadActiva, String idActividadActiva )
 	{
 		super(login, password, type, Usuario.ESTUDIANTE+"-"+login, nombre);
 		this.historialCaminos = historialCaminos;
 		this.intereses = intereses;
 		this.actividadActiva = actividadActiva;
 		this.nombreCaminoActividadActiva=nombreCaminoActividadActiva;
+		this.idActividadActiva=idActividadActiva;
 	}
 
 
@@ -103,6 +104,8 @@ public class Estudiante extends Usuario {
 		jEstudiante=addInfoGeneralJSON(jEstudiante);
 		
 		jEstudiante.put("actividadActiva", this.actividadActiva);
+		jEstudiante.put("idActividadActiva", this.idActividadActiva);
+		jEstudiante.put("nombreCaminoActividadActiva", this.nombreCaminoActividadActiva);
 		
 		JSONArray intereses = new JSONArray(this.intereses);
 		jEstudiante.put("intereses", intereses);
@@ -114,9 +117,7 @@ public class Estudiante extends Usuario {
 		}
 		
 		jEstudiante.put("historialCaminos", new JSONArray(idsCaminos));
-		
-		jEstudiante.put("nombreCaminoActividadActiva", this.nombreCaminoActividadActiva);
-		
+				
 		return jEstudiante;
 	}
 	

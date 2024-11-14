@@ -76,7 +76,8 @@ public class EstudiantesPersistencia {
     	List<CaminoAprendizaje> historialCaminos = cargarListaCaminosEstudiantes(jEstudiante);
     	
 		Estudiante estudiante = new Estudiante(jEstudiante.getString("login"), jEstudiante.getString("password"), jEstudiante.getString("type"),
-				historialCaminos, intereses, jEstudiante.getBoolean("actividadActiva"), jEstudiante.getString("nombre"));
+				historialCaminos, intereses, jEstudiante.getBoolean("actividadActiva"), jEstudiante.getString("nombre"), 
+				jEstudiante.getString("nombreCaminoActividadActiva"));
 	
 		return estudiante;
 	}

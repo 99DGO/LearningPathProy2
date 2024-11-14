@@ -1,10 +1,11 @@
 {
  "actividadActiva": false,
  "password": "Trey123",
+ "nombreCaminoActividadActiva": "Ninguna",
  "ID": "Estudiante-Trey999",
  "login": "Trey999",
  "type": "Estudiante",
  "nombre": "Trey Clover",
  "intereses": ["_"],
- "historialCaminos": ["Camino2711ec10-c532-432b-af64-179a8556ab23"]
+ "historialCaminos": ["Caminob6a58d15-bf4f-4a6d-93b8-51b24251f3d5"]
 }

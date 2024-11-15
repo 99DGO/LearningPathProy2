@@ -95,7 +95,7 @@ public class CreadorCaminoTests
 	@Test
 	public void clonarCaminoTest()
 	{
-		String idCaminoOG= null;
+		String idCaminoOG= null; 
 		String idCaminoClonado= null;
 		
 		try

@@ -7,7 +7,7 @@ import caminosActividades.CaminoAprendizaje;
 import controllers.LearningPathSystem;
 import usuarios.Profesor;
 
-public class CreadorCamino 
+public class CreadorCamino  
 {
 	public static void crearCaminoCero(String titulo, String descripcion, List<String> objetivos, double dificultad, 
 			int duracion, String IDprofesor) throws Exception 

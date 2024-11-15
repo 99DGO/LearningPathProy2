@@ -21,7 +21,7 @@ public abstract class Actividad {
 
 	private String nombre;
 	private String descripcion;
-	private List<String> objetivos;
+	private List<String> objetivos = new LinkedList<String>();
 	private double dificultad;
 	private int duracion;
 	private int[] fechaLim;

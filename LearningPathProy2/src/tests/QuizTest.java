@@ -31,7 +31,7 @@ public class QuizTest
 		objetivos.add("Aprender loops");
 		objetivos.add("Aprender estructuras");
 		
-		CaminoAprendizaje camino = new CaminoAprendizaje("CaminoTest", "Como crear caminos", objetivos, 0, 10, "Prof999");
+		CaminoAprendizaje camino = new CaminoAprendizaje("CaminoTest", "Como crear caminos", objetivos, 1, "Prof999");
 		preguntas = new LinkedList<PreguntaQuiz>();
 		OpcionQuiz opcion1 = new OpcionQuiz("int", "Porque es un entero", true);
 		OpcionQuiz opcion2 = new OpcionQuiz("double", "Porque no es un decimal", false);

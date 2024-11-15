@@ -43,59 +43,64 @@ public class CreadoresActividadesTests
 	
 
 	@BeforeEach
- 	void init( ) throws Exception
+ 	void init( ) 
     {
-		LearningPathSystem.resetLPS(); 
-		LPS=LearningPathSystem.getInstance();
-		
-		profesor = new Profesor("Aizawa999", "Aizawa 123", "Aizawa Shouta");
-		LPS.addProfesor(profesor);
-		
-		objetivos = new LinkedList<String>();
-		objetivos.add("Saber la diferencia entre distintos tipos de cuervos.");
-		objetivos.add("Poder sustentar porque los cuervos son tan increibles.");
-		objetivos.add("Volverse fan de los cuervos.");
-		
-		camino = new CaminoAprendizaje("El maravilloso mundo de los cuervos", "Esto es un curso que te enseña lo increible que son los cuervos",
-				objetivos, 0, 10, profesor.getID());
-		nuevoCamino = new CaminoAprendizaje("El maravilloso mundo de los zorros", "Mismo curso que cuervos pero con zorros", objetivos, 0, 10, profesor.getID());
-
-		LPS.addCamino(nuevoCamino);
-		LPS.addCamino(camino);
-		
-		preguntasQuiz = new LinkedList<PreguntaQuiz>();
-		OpcionQuiz opcion1 = new OpcionQuiz("int", "Porque es un entero lo que necesitas representar", true);
-		OpcionQuiz opcion2 = new OpcionQuiz("double", "Porque no puedes tener decimales de cuervos", false);
-		OpcionQuiz opcion3 = new OpcionQuiz("float", "Porque no puedes tener decimales de cuervos", false);
-		OpcionQuiz opcion4 = new OpcionQuiz("string", "Porque es un numero lo que necesitas", false);
-
-		PreguntaQuiz pregunta1= new PreguntaQuiz("Si quiero representar el número de cuervos que tengo, que tipo de variable debería usar?", 1, 4);
-		pregunta1.setOpcion(1, opcion1);
-		pregunta1.setOpcion(2, opcion2);
-		pregunta1.setOpcion(3, opcion3);
-		pregunta1.setOpcion(4, opcion4);
-		preguntasQuiz.add(pregunta1);
-		
-		OpcionQuiz opcion1B = new OpcionQuiz("Paloma", "Porque son sucias", false);
-		OpcionQuiz opcion2B = new OpcionQuiz("Cuervo", "Porque son hermosos e inteligentes", true);
-		OpcionQuiz opcion3B = new OpcionQuiz("Pechirrojo", "Tierno pero es muy pequeño", false);
-		OpcionQuiz opcion4B = new OpcionQuiz("Vaca", "La vaca no es un pajaro", false);
-		
-		PreguntaQuiz pregunta2= new PreguntaQuiz("Cual es el mejor pajaro?", 2, 4);
-		pregunta2.setOpcion(1, opcion1B);
-		pregunta2.setOpcion(2, opcion2B);
-		pregunta2.setOpcion(3, opcion3B);
-		pregunta2.setOpcion(4, opcion4B);
-		preguntasQuiz.add(pregunta2);
-
-		fechaLim= new int[]{0,1,0};
-		
-		preguntasString= new LinkedList<String>();
-		preguntasString.add("¿Cuales son las caracteristicas princiaples de los cuervos?");
-		preguntasString.add("¿Que otro animal es parecido e igual de increible que los cuervos?");
-		preguntasString.add("¿Por que son mejores los cuervos que otros pajaros?");
-
-		
+		try
+		{
+			LearningPathSystem.resetLPS(); 
+			LPS=LearningPathSystem.getInstance();
+			
+			profesor = new Profesor("Aizawa999", "Aizawa 123", "Aizawa Shouta");
+			LPS.addProfesor(profesor);
+			
+			objetivos = new LinkedList<String>();
+			objetivos.add("Saber la diferencia entre distintos tipos de cuervos.");
+			objetivos.add("Poder sustentar porque los cuervos son tan increibles.");
+			objetivos.add("Volverse fan de los cuervos.");
+			
+			camino = new CaminoAprendizaje("El maravilloso mundo de los cuervos", "Esto es un curso que te enseña lo increible que son los cuervos",
+					objetivos, 1.5, profesor.getID());
+			nuevoCamino = new CaminoAprendizaje("El maravilloso mundo de los zorros", "Mismo curso que cuervos pero con zorros", objetivos, 1.5, profesor.getID());
+	
+			LPS.addCamino(nuevoCamino);
+			LPS.addCamino(camino);
+			
+			preguntasQuiz = new LinkedList<PreguntaQuiz>();
+			OpcionQuiz opcion1 = new OpcionQuiz("int", "Porque es un entero lo que necesitas representar", true);
+			OpcionQuiz opcion2 = new OpcionQuiz("double", "Porque no puedes tener decimales de cuervos", false);
+			OpcionQuiz opcion3 = new OpcionQuiz("float", "Porque no puedes tener decimales de cuervos", false);
+			OpcionQuiz opcion4 = new OpcionQuiz("string", "Porque es un numero lo que necesitas", false);
+	
+			PreguntaQuiz pregunta1= new PreguntaQuiz("Si quiero representar el número de cuervos que tengo, que tipo de variable debería usar?", 1, 4);
+			pregunta1.setOpcion(1, opcion1);
+			pregunta1.setOpcion(2, opcion2);
+			pregunta1.setOpcion(3, opcion3);
+			pregunta1.setOpcion(4, opcion4);
+			preguntasQuiz.add(pregunta1);
+			
+			OpcionQuiz opcion1B = new OpcionQuiz("Paloma", "Porque son sucias", false);
+			OpcionQuiz opcion2B = new OpcionQuiz("Cuervo", "Porque son hermosos e inteligentes", true);
+			OpcionQuiz opcion3B = new OpcionQuiz("Pechirrojo", "Tierno pero es muy pequeño", false);
+			OpcionQuiz opcion4B = new OpcionQuiz("Vaca", "La vaca no es un pajaro", false);
+			
+			PreguntaQuiz pregunta2= new PreguntaQuiz("Cual es el mejor pajaro?", 2, 4);
+			pregunta2.setOpcion(1, opcion1B);
+			pregunta2.setOpcion(2, opcion2B);
+			pregunta2.setOpcion(3, opcion3B);
+			pregunta2.setOpcion(4, opcion4B);
+			preguntasQuiz.add(pregunta2);
+	
+			fechaLim= new int[]{0,1,0};
+			
+			preguntasString= new LinkedList<String>();
+			preguntasString.add("¿Cuales son las caracteristicas princiaples de los cuervos?");
+			preguntasString.add("¿Que otro animal es parecido e igual de increible que los cuervos?");
+			preguntasString.add("¿Por que son mejores los cuervos que otros pajaros?");
+    	}
+		catch (Exception e)
+		{
+			fail("Error en el setup: "+e.getMessage());
+		}
     }
 	
     @AfterEach

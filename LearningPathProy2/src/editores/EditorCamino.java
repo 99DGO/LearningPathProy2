@@ -63,20 +63,6 @@ public class EditorCamino
 		camino.setFechaModificacion(fecha.toString());
 	}
 
-	public static void editDuracion(String idCamino, int duracion) 
-	{
-		LearningPathSystem LPS= LearningPathSystem.getInstance();
-		CaminoAprendizaje camino=LPS.getCaminoIndividual(idCamino);
-
-		camino.setDuracion(duracion);
-		
-		int version=camino.getVersion();
-		camino.setVersion(version+=1);
-		Date fecha = new Date();
-		camino.setFechaModificacion(fecha.toString());
-	}
-	
-
 	
 	public static void editAddObjetivo(String idCamino, String objetivo)
 	{

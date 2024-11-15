@@ -58,11 +58,16 @@ public class Reseñador
 	}
 	
 	
-	public static void dejarRatingCamino(float rating, String IDcamino)
+	public static void dejarRatingCamino(float rating, String IDcamino) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
 	
+		if (camino==null)
+		{
+			throw new Exception ("No existe un camino con ese id");
+		}
+		
 		camino.addRating(rating);
 		
 	}

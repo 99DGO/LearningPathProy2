@@ -59,7 +59,7 @@ public class CreadorCaminoTests
 		{
 			CreadorCamino.crearCaminoCero("El maravilloso mundo de los cuervos", 
 					"Esto es un curso que te enseña lo increible que son los cuervos", 
-					objetivos, 0.5, 30, profesorID);
+					objetivos, 0.5, profesorID);
 		}
 		catch (Exception e) 
 		{
@@ -88,11 +88,23 @@ public class CreadorCaminoTests
 		}
 		
 		assertEquals(0.5, camino.getDificultad(), "No se creo bien la dificultad del camino.");
-		assertEquals(30, camino.getDuracion(), "No se creo bien la duracion del camino.");
+		assertEquals(0, camino.getDuracion(), "No se creo bien la duracion del camino.");
 		assertEquals("Esto es un curso que te enseña lo increible que son los cuervos", camino.getDescripcion(), 
 				"No se creo bien la descripcion del camino.");
 
 
+		try
+		{
+			CreadorCamino.crearCaminoCero("El maravilloso mundo de los cuervos", 
+					"Esto es un curso que te enseña lo increible que son los cuervos", 
+					objetivos, 0.5, profesorID);
+			fail("Deberia salir error de nombre repetido");
+		}
+		catch (Exception e) 
+		{
+			assertEquals("Ya existe un camino con ese titulo", e.getMessage(), "No saco la exception correcta");
+		}
+		
 	}
 
 	@Test
@@ -106,7 +118,7 @@ public class CreadorCaminoTests
 		{
 			CreadorCamino.crearCaminoCero("El maravilloso mundo de los cuervos", 
 					"Esto es un curso que te enseña lo increible que son los cuervos", 
-					objetivos, 0.5, 30, profesorID);
+					objetivos, 0.5, profesorID);
 			
 			idCaminoOG=TraductorCamino.getIDfromNombre("El maravilloso mundo de los cuervos");
 			CaminoAprendizaje caminoOG = LPS.getCaminoIndividual(idCaminoOG);
@@ -114,26 +126,20 @@ public class CreadorCaminoTests
 			//Creo las actividades para añadirlas al camino original para que luego sean clonadas
 			ActividadRecurso AR = new ActividadRecurso("Lectura Cuervos", "Lectura de cuervos", objetivos, 1, 20, fechaLim, 
 					false, "https://www.audubon.org/es/guia-de-aves/ave/cuervo-comun", "Lee el articulo", profesorID, caminoOG, 0);
-			caminoOG.addActividad(AR);
 			
 			List<PreguntaQuiz> preguntasQuiz= new LinkedList<PreguntaQuiz>();
 			Quiz quiz = new Quiz("Quiz cuervos", "Un quiz sobre cuervos", objetivos, 2, 20, fechaLim, false, 3, preguntasQuiz, 
 					profesorID, caminoOG, false, 1);
-			caminoOG.addActividad(quiz);
 			
 			List<String> preguntas = new LinkedList<String>();
 			Examen examen = new Examen("Examen cuervos", "Un examen de cuervos", objetivos, 2, 20, fechaLim, false, 3, preguntas, 
 					profesorID, caminoOG, 1);
-			caminoOG.addActividad(examen);
 			
 			Encuesta encuesta = new Encuesta("Encuesta cuervos", "Una encuesta de cuervos", objetivos, 2, 20, fechaLim, false, preguntas, 
 					profesorID, caminoOG, 1);
-			caminoOG.addActividad(encuesta);
 			
 			Tarea tarea = new Tarea("Tarea Cuervos", "Tarea de cuervos", objetivos, 1, 20, fechaLim, 
 					false, "Toma fotos de cuervos", profesorID, caminoOG, 0);
-			caminoOG.addActividad(tarea);
-
 
 		}
 		catch (Exception e) 
@@ -172,10 +178,21 @@ public class CreadorCaminoTests
 			fail("No se puede obtener el camino. No se guardaron bien el id y titulo del camino clonado");
 		}
 		
+		assertEquals(5, caminoClonado.getActividades().size(), "No se clonaron bien las actividades");
 		assertEquals(0.5, caminoClonado.getDificultad(), "No se creo bien la dificultad del camino clonado.");
 		assertEquals(100, caminoClonado.getDuracion(), "No se creo bien la duracion del camino clonado.");
 		assertEquals("Esto es un curso que te enseña lo increible que son los cuervos", caminoClonado.getDescripcion(), 
 				"No se creo bien la descripcion del camino clonado.");
-		assertEquals(5, caminoClonado.getActividades().size(), "No se clonaron bien las actividades");
+		
+		
+		try 
+		{
+			CreadorCamino.clonarCamino(idCaminoOG, "El maravilloso mundo de los zorros", profesorID);
+			fail("Deberia salir error de nombre repetido");
+		}
+		catch (Exception e) 
+		{
+			assertEquals("Ya existe un camino con ese titulo", e.getMessage(), "No saco la exception correcta");
+		}
 	}
 }

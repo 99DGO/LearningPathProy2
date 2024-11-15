@@ -30,7 +30,7 @@ public abstract class Actividad {
 	private List<String> actividadesSigExitoso;
 	private double rating;
 	private int ratingsTotales;
-	private List<String> resenias;
+	private List<String> resenias= new LinkedList<String>();
 	private String creadorID;
 	private final String ID;
 	
@@ -124,7 +124,7 @@ public abstract class Actividad {
 		return this.type;
 	}
 	
-	public String getNombre() {
+	public String getNombre() { 
 		return nombre;
 	}
 
@@ -202,6 +202,15 @@ public abstract class Actividad {
 		double sumatoriaPrev=this.rating*this.ratingsTotales;
 		this.ratingsTotales+=1;
 		this.rating=(sumatoriaPrev+ratingNuevo)/this.ratingsTotales;
+	}
+
+	
+	public int getRatingsTotales() {
+		return ratingsTotales;
+	}
+
+	public String getID() {
+		return ID;
 	}
 
 	public void addResenia(String resenia) 

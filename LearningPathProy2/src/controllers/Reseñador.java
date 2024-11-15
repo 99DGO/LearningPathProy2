@@ -32,7 +32,7 @@ public class Reseñador
 		
 	}
 	
-	public static void dejarRatingActividad(float rating, String IDcamino, String IDactividad) throws Exception
+	public static void dejarRatingActividad(double rating, String IDcamino, String IDactividad) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);

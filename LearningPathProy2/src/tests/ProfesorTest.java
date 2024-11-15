@@ -26,7 +26,7 @@ import traductores.TraductorEstudiante;
 import traductores.TraductorProfesor;
 import usuarios.Estudiante;
 
-public class ProfesorTest 
+public class ProfesorTest  
 {
 	@BeforeAll
  	static void init( ) throws Exception

@@ -45,7 +45,7 @@ public class CreadoresActividadesTests
 	@BeforeEach
  	void init( ) throws Exception
     {
-		LearningPathSystem.resetLPS();
+		LearningPathSystem.resetLPS(); 
 		LPS=LearningPathSystem.getInstance();
 		
 		profesor = new Profesor("Aizawa999", "Aizawa 123", "Aizawa Shouta");

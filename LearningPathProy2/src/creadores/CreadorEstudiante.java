@@ -16,7 +16,7 @@ public class CreadorEstudiante
 		{
 			if (estudiante.getLogin().equals(login))
 			{
-				throw new Exception ("Ya existe un estudiante con ese login");
+				throw new Exception ("Ya existe un estudiante con ese login"); 
 			}
 		}
  	

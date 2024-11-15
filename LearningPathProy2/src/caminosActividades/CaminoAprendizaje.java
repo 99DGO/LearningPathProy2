@@ -39,12 +39,12 @@ public class CaminoAprendizaje {
 	private final String ID;
 
 //Constructor normal
-	public CaminoAprendizaje(String titulo, String descripcion, List<String> objetivos, double dificultad, int duracion, String creadorID) {
+	public CaminoAprendizaje(String titulo, String descripcion, List<String> objetivos, double dificultad, String creadorID) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.objetivos = objetivos;
 		this.dificultad = dificultad;
-		this.duracion = duracion;
+		this.duracion = 0;
 		this.fechaCreacion= new Date().toString();
 		this.fechaModificacion=new Date().toString();
 		this.creadorID=creadorID;
@@ -63,7 +63,6 @@ public class CaminoAprendizaje {
 		this.titulo= titulo;
 		this.descripcion= caminoOG.getDescripcion();
 		this.dificultad= caminoOG.getDificultad();
-		this.duracion=caminoOG.getDuracion();
 		this.numActividadesObligatorias=caminoOG.getNumActividadesObligatorias();
 		this.fechaModificacion=new Date().toString();
 
@@ -118,7 +117,7 @@ public class CaminoAprendizaje {
     		
     		i+=1;
     	}
-		
+    			
 		this.creadorID=creadorID;
 		this.ID="Camino"+UUID.randomUUID().toString();
 	}
@@ -216,11 +215,6 @@ public class CaminoAprendizaje {
 
 	public String getFechaModificacion() {
 		return fechaModificacion;
-	}
-
-	
-	public void setDuracion(int duracion) {
-		this.duracion = duracion;
 	}
 
 	public int getNumActividadesObligatorias() {

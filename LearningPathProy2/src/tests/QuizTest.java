@@ -13,21 +13,26 @@ import caminosActividades.CaminoAprendizaje;
 import caminosActividades.OpcionQuiz;
 import caminosActividades.PreguntaQuiz;
 import caminosActividades.Quiz;
+import controllers.LearningPathSystem;
 import creadores.CreadorQuiz;
 
 public class QuizTest
 {
+	//Clase que prueba las funciones internas de quiz
+	
 	private static Quiz quiztest;
+	private static List<String> objetivos;
+	private static List<PreguntaQuiz> preguntas;
 	@BeforeEach
  	void init( ) throws Exception
     {
-		List<String> objetivos = new LinkedList<String>();
+		objetivos = new LinkedList<String>();
 		objetivos.add("Saber diferentes tipos de datos");
 		objetivos.add("Aprender loops");
 		objetivos.add("Aprender estructuras");
 		
-		CaminoAprendizaje camino = new CaminoAprendizaje("CaminoTest", "Como crear caminos", objetivos, 0, 10, "Prof999");
-		List<PreguntaQuiz> preguntas = new LinkedList<PreguntaQuiz>();
+		CaminoAprendizaje camino = new CaminoAprendizaje("CaminoTest", "Como crear caminos", objetivos, 1, "Prof999");
+		preguntas = new LinkedList<PreguntaQuiz>();
 		OpcionQuiz opcion1 = new OpcionQuiz("int", "Porque es un entero", true);
 		OpcionQuiz opcion2 = new OpcionQuiz("double", "Porque no es un decimal", false);
 		OpcionQuiz opcion3 = new OpcionQuiz("float", "Porque no es un decimal", false);
@@ -65,5 +70,7 @@ public class QuizTest
 	{
 		assertEquals(2, quiztest.getPreguntas().size(), "No se crearon el numero correcto de preguntas");
 	}
+	
+
 
 }

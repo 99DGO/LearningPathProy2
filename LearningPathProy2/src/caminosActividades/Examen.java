@@ -2,6 +2,7 @@ package caminosActividades;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -11,7 +12,7 @@ import datosEstudiantes.DatosEstudianteActividad;
 
 
 public class Examen extends ActividadCalificable{
-	private List<String> preguntasAbiertas;
+	private List<String> preguntasAbiertas=new LinkedList<String>();
 	
 	//Constructor normal
 	public Examen(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,

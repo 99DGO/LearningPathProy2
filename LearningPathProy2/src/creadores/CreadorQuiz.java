@@ -16,6 +16,11 @@ public class CreadorQuiz {
 		Profesor profesor= LPS.getProfesorIndividual(IDprofesor);
 		CaminoAprendizaje caminoNuevo= LPS.getCaminoIndividual(IDcaminoNuevo);
 		
+		if (caminoNuevo==null)
+		{
+			throw new Exception ("No se encontro el camino al cual se quiere añadir la actividad");
+		}
+		
 		Quiz quiz = new Quiz(profesor.getID(), (Quiz) quizOG, caminoNuevo, ((Quiz) quizOG).isVerdaderoFalso(), pos);
 
 	}

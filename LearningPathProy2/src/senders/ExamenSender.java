@@ -17,10 +17,15 @@ public class ExamenSender
 	/*
 	 * Las respuestas deben ser llave=pregunta, value=Respuesta del estudiante
 	 */
-	public static void sendEnvioExamen(String idCamino, String idActividad, String idEstudiante, HashMap<String, String> respuestas)
+	public static void sendEnvioExamen(String idCamino, String idActividad, String idEstudiante, HashMap<String, String> respuestas) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No existe un camino con ese id");
+		}
 		
 		Actividad actividad = null;
 
@@ -32,14 +37,24 @@ public class ExamenSender
 			}
 		}
 		
-		DatosEstudianteExamen datosEstudiante = (DatosEstudianteExamen) actividad.getDatoEstudianteIndividual(idEstudiante);
-		EnvioExamen envio = new EnvioExamen(respuestas);
-		datosEstudiante.setEnvio(envio);
-		datosEstudiante.setEstado(DatosEstudianteTarea.ENVIADO);
-		
 		Estudiante estudiante = LPS.getEstudianteIndividual(idEstudiante);
-		estudiante.setActividadActiva(false);
-		estudiante.setNombreCaminoActividadActiva("Ninguna");
+
+		if (!estudiante.isActividadActiva() || estudiante.getIdActividadActiva().equals(idActividad))
+		{
+			throw new Exception ("No se ha iniciado esta actividad");
+		}
+		else
+		{
+			DatosEstudianteExamen datosEstudiante = (DatosEstudianteExamen) actividad.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
+			EnvioExamen envio = new EnvioExamen(respuestas);
+			datosEstudiante.setEnvio(envio);
+			datosEstudiante.setEstado(DatosEstudianteTarea.ENVIADO);
+			datosEstudiante.setFechaFinal();
+			
+			estudiante.setActividadActiva(false);
+			estudiante.setNombreCaminoActividadActiva("Ninguna");
+
+		}
 	}
 
 

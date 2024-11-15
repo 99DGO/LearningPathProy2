@@ -1,10 +1,8 @@
 {
- "envio": [],
  "IDEstudiante": "Estudiante-Cater999",
  "estado": "Pendiente",
- "calificacion": -1,
  "fechaInicio": "No iniciada",
  "fechaFinal": "No finalizada",
- "id": "DatoEstudiante_874db2b7-1097-48d7-bc2d-0c4e55ce4d10",
- "type": "DatosQuiz"
+ "id": "DatoEstudiante_9aa56391-5d9c-48a7-bd1f-e71f815cd2c4",
+ "type": "DatosActividadRecurso"
 }

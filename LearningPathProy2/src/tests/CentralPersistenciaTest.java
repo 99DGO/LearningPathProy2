@@ -39,18 +39,21 @@ import creadores.CreadorEstudiante;
 import creadores.CreadorExamen;
 import creadores.CreadorProfesor;
 import creadores.CreadorQuiz;
+import creadores.CreadorTarea;
 import datosEstudiantes.DatosEstudianteActividad;
 import persistencia.ActividadesPersistencia;
 import persistencia.CaminosPersistencia;
 import persistencia.CentralPersistencia;
 import persistencia.metodosAuxPersistencia;
+import senders.QuizSender;
+import traductores.TraductorActividad;
 import traductores.TraductorCamino;
 import traductores.TraductorEstudiante;
 import traductores.TraductorProfesor;
 
 public class CentralPersistenciaTest 
 {
-
+	//Clase que prueba el clean de datos y el metodo de guardar. NO prueba cargar, para eso mirar cargarJSONtest
 	@BeforeAll
     static void setup( ) throws Exception
     {
@@ -118,8 +121,8 @@ public class CentralPersistenciaTest
 			objetivos.add("Aprender loops");
 			objetivos.add("Aprender estructuras");
 			
-			CreadorCamino.crearCaminoCero("Python123", "Un curso para saber los basicos de python", objetivos, 2, 120, IDprof);
-			CreadorCamino.crearCaminoCero("Jaca123", "Un curso para saber los basicos de java", objetivos, 3, 125, IDprof);
+			CreadorCamino.crearCaminoCero("Python123", "Un curso para saber los basicos de python", objetivos, 2, IDprof);
+			CreadorCamino.crearCaminoCero("Jaca123", "Un curso para saber los basicos de java", objetivos, 3, IDprof);
 			
 			String idCamino = TraductorCamino.getIDfromNombre("Python123");
 			
@@ -149,7 +152,7 @@ public class CentralPersistenciaTest
 			OpcionQuiz opcion3 = new OpcionQuiz("float", "Porque no es un decimal", false);
 			OpcionQuiz opcion4 = new OpcionQuiz("string", "Porque es un numero", false);
 
-			PreguntaQuiz pregunta1= new PreguntaQuiz("Si quiero representar el número de vacas que tengo, que tipo de variable debería usar?", 0, 4);
+			PreguntaQuiz pregunta1= new PreguntaQuiz("Si quiero representar el número de vacas que tengo, que tipo de variable debería usar?", 1, 4);
 			pregunta1.setOpcion(1, opcion1);
 			pregunta1.setOpcion(2, opcion2);
 			pregunta1.setOpcion(3, opcion3);
@@ -161,7 +164,7 @@ public class CentralPersistenciaTest
 			OpcionQuiz opcion3B = new OpcionQuiz("Pechirrojo", "Tierno pero es muy pequeño", false);
 			OpcionQuiz opcion4B = new OpcionQuiz("Vaca", "La vaca no es un pajaro", false);
 			
-			PreguntaQuiz pregunta2= new PreguntaQuiz("Cual es el mejor pajaro?", 1, 4);
+			PreguntaQuiz pregunta2= new PreguntaQuiz("Cual es el mejor pajaro?", 2, 4);
 			pregunta2.setOpcion(1, opcion1B);
 			pregunta2.setOpcion(2, opcion2B);
 			pregunta2.setOpcion(3, opcion3B);
@@ -171,6 +174,9 @@ public class CentralPersistenciaTest
 			CreadorQuiz.crearQuizCero(idCamino, "Quiz de asignación variables", "Esto es un quiz donde te preguntan que tipo de variable es más indicado", 
 					objetivosActividad, 1.5, 15, fechaLim, false, 3, preguntas, IDprof, false, 2);
 			
+			CreadorTarea.crearTareaCero(idCamino, "Dibujo de variables", "Una tarea para ejercer la creatividad", objetivosActividad, 0.5,
+					45, fechaLim, false, "Haga un dibujo de su vavriable favorita que muestre sus mejores aspectos", IDprof, 3);
+			
 			CreadorEstudiante.crearEstudiante("Trey999", "Trey123", "Trey Clover");
 			String IDEstudiante= TraductorEstudiante.getIDfromLogin("Trey999");
 			
@@ -179,6 +185,17 @@ public class CentralPersistenciaTest
 	
 			Inscriptor.inscribirseCamino(idCamino, IDEstudiante);
 			Inscriptor.inscribirseCamino(idCamino, IDEstudiante2);
+			
+			
+			String idActividad=TraductorActividad.getIDfromNombre(idCamino, "Quiz de asignación variables");
+			
+			Inscriptor.iniciarActivad(idCamino, idActividad, IDEstudiante);
+			
+			HashMap<String, Integer> respuestas = new HashMap<String, Integer>();
+			respuestas.put("Cual es el mejor pajaro?", 2);
+			respuestas.put("Si quiero representar el número de vacas que tengo, que tipo de variable debería usar?", 4);
+			
+			QuizSender.sendEnvioQuiz(idCamino, idActividad, IDEstudiante, respuestas);
 
 		}
 		catch (Exception e)

@@ -77,7 +77,7 @@ public class EstudiantesPersistencia {
     	
 		Estudiante estudiante = new Estudiante(jEstudiante.getString("login"), jEstudiante.getString("password"), jEstudiante.getString("type"),
 				historialCaminos, intereses, jEstudiante.getBoolean("actividadActiva"), jEstudiante.getString("nombre"), 
-				jEstudiante.getString("nombreCaminoActividadActiva"));
+				jEstudiante.getString("nombreCaminoActividadActiva"), jEstudiante.getString("idActividadActiva") );
 	
 		return estudiante;
 	}

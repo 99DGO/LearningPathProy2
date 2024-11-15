@@ -15,26 +15,28 @@ public class ChooserClonadorActividad
 		CaminoAprendizaje caminoOG= LPS.getCaminoIndividual(IDcaminoOG);
 		Actividad actividadOG=null;
 		
-		for (Actividad actividad: caminoOG.getActividades())
+		for (Actividad actividadIterator: caminoOG.getActividades())
 		{
-			if (actividad.getId().equals(IDActividadOG))
+			if (actividadIterator.getId().equals(IDActividadOG))
 			{
-				if (actividad.getType().equals(Actividad.QUIZ))
+				actividadOG=actividadIterator;
+				
+				if (actividadIterator.getType().equals(Actividad.QUIZ))
 				{
 					CreadorQuiz.clonarQuiz(actividadOG, IDprofesor, IDcaminoNuevo, pos);
 				}
 				
-				else if (actividad.getType().equals(Actividad.ENCUESTA))
+				else if (actividadIterator.getType().equals(Actividad.ENCUESTA))
 				{
 					CreadorEncuesta.clonarEncuesta(actividadOG, IDprofesor, IDcaminoNuevo, pos);
 				}
 				
-				else if (actividad.getType().equals(Actividad.EXAMEN))
+				else if (actividadIterator.getType().equals(Actividad.EXAMEN))
 				{
 					CreadorExamen.clonarExamen(actividadOG, IDprofesor, IDcaminoNuevo, pos);
 				}
 				
-				else if (actividad.getType().equals(Actividad.TAREA))
+				else if (actividadIterator.getType().equals(Actividad.TAREA))
 				{
 					CreadorTarea.clonarTarea(actividadOG, IDprofesor, IDcaminoNuevo, pos);
 				}

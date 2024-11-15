@@ -16,6 +16,7 @@ public class Estudiante extends Usuario {
 	private boolean actividadActiva=false;
 	//Este string de nombreCaminoActividadActiva contendra el nombre del camino tambien si se inicia la actividad
 	private String nombreCaminoActividadActiva="Ninguna";
+	private String idActividadActiva="";
 	
 	public Estudiante(String login, String password, String nombre) 
 	{
@@ -27,13 +28,14 @@ public class Estudiante extends Usuario {
 	
 	
 	public Estudiante(String login, String password, String type, List<CaminoAprendizaje> historialCaminos, List<String> intereses,
-			boolean actividadActiva, String nombre, String nombreCaminoActividadActiva )
+			boolean actividadActiva, String nombre, String nombreCaminoActividadActiva, String idActividadActiva )
 	{
 		super(login, password, type, Usuario.ESTUDIANTE+"-"+login, nombre);
 		this.historialCaminos = historialCaminos;
 		this.intereses = intereses;
 		this.actividadActiva = actividadActiva;
 		this.nombreCaminoActividadActiva=nombreCaminoActividadActiva;
+		this.idActividadActiva=idActividadActiva;
 	}
 
 
@@ -83,6 +85,17 @@ public class Estudiante extends Usuario {
 		this.nombreCaminoActividadActiva = nombreCaminoActividadActiva;
 	}
 
+	
+
+	public String getIdActividadActiva() {
+		return idActividadActiva;
+	}
+
+
+	public void setIdActividadActiva(String idActividadActiva) {
+		this.idActividadActiva = idActividadActiva;
+	}
+
 
 	public JSONObject salvarJSON() 
 	{
@@ -91,6 +104,8 @@ public class Estudiante extends Usuario {
 		jEstudiante=addInfoGeneralJSON(jEstudiante);
 		
 		jEstudiante.put("actividadActiva", this.actividadActiva);
+		jEstudiante.put("idActividadActiva", this.idActividadActiva);
+		jEstudiante.put("nombreCaminoActividadActiva", this.nombreCaminoActividadActiva);
 		
 		JSONArray intereses = new JSONArray(this.intereses);
 		jEstudiante.put("intereses", intereses);
@@ -102,9 +117,7 @@ public class Estudiante extends Usuario {
 		}
 		
 		jEstudiante.put("historialCaminos", new JSONArray(idsCaminos));
-		
-		jEstudiante.put("nombreCaminoActividadActiva", this.nombreCaminoActividadActiva);
-		
+				
 		return jEstudiante;
 	}
 	

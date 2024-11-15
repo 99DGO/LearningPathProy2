@@ -7,10 +7,10 @@ import caminosActividades.CaminoAprendizaje;
 import controllers.LearningPathSystem;
 import usuarios.Profesor;
 
-public class CreadorCamino 
+public class CreadorCamino  
 {
 	public static void crearCaminoCero(String titulo, String descripcion, List<String> objetivos, double dificultad, 
-			int duracion, String IDprofesor) throws Exception 
+			String IDprofesor) throws Exception 
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		Profesor profesor= LPS.getProfesorIndividual(IDprofesor);
@@ -23,12 +23,11 @@ public class CreadorCamino
 			
 			if (caminoIterator.getTitulo().equals(titulo))
 			{
-				throw new Exception ("Ya existe un camino con ese titulo");
+				throw new Exception ("Ya existe un camino con ese titulo"); 
 			}
 		}
 		
-		CaminoAprendizaje camino= new CaminoAprendizaje(titulo, descripcion, objetivos, dificultad, duracion,
-		profesor.getID());
+		CaminoAprendizaje camino= new CaminoAprendizaje(titulo, descripcion, objetivos, dificultad, profesor.getID());
 		profesor.addCamino(camino);
 		LPS.addCamino(camino);
 		

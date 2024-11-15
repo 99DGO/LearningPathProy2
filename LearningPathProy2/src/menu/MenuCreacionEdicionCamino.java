@@ -23,8 +23,6 @@ public class MenuCreacionEdicionCamino
 		System.out.println(
 				"Ingrese la dificultad del camino (en una escala del 1.0 al 10.0, puede ingresar un numero decimal utilizando el .): ");
 		double dificultad = scanner.nextDouble();
-		System.out.println("Ingrese la duración estimada del camino (en horas): ");
-		int duracion = scanner.nextInt();
 		System.out.println("Cuantos objetivos tiene el camino?");
 		int numObjetivos = scanner.nextInt();
 		scanner.nextLine();
@@ -38,7 +36,7 @@ public class MenuCreacionEdicionCamino
 		System.out.println("Creando camino...");
 		try
 		{
-			CreadorCamino.crearCaminoCero(titulo, descripcion, objetivos, dificultad, duracion, profesor.getID());
+			CreadorCamino.crearCaminoCero(titulo, descripcion, objetivos, dificultad, profesor.getID());
 			System.out.println("Camino creado exitosamente.");
 		}
 		catch (Exception e)
@@ -58,7 +56,7 @@ public class MenuCreacionEdicionCamino
 		String IDCamino = scanner.nextLine();
 		try
 		{
-			HashMap<String, String> infoCamino = TraductorCamino.verInfoGeneralCamino(IDCamino);
+			HashMap<String, String> infoCamino = TraductorCamino.verInfoGeneralCamino(IDCamino); 
 			for (String key : infoCamino.keySet())
 			{
 				if (key.equals("Objetivos"))

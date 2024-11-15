@@ -16,7 +16,7 @@ public class TraductorEstudiante
 	 * retorna un HashMap<String, String> que contiene como llave el nombre del camino y como valor el porcentaje
 	 * logrado en ese camino
 	 */
-	public static HashMap<String, String> getAvancesCaminos(String IDestudiante) 
+	public static HashMap<String, String> getAvancesCaminos(String IDestudiante) throws Exception
 	{
 
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
@@ -31,7 +31,7 @@ public class TraductorEstudiante
 			
 			for (Actividad actividad: camino.getActividades())
 			{
-				DatosEstudianteActividad datoEst = actividad.getDatoEstudianteIndividual(estudiante.getID());
+				DatosEstudianteActividad datoEst = actividad.getDatoEstudianteIndFromIDEstudiante(estudiante.getID());
 				
 				if (actividad.isObligatoria()  && (datoEst.getEstado().equals(DatosEstudianteActividad.EXITOSO)))
 				{

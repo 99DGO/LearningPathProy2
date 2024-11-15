@@ -13,7 +13,7 @@ import usuarios.Profesor;
 public class TraductorCamino 
 {
 	/*
-	 * Retorna un hashMap donde las llaves son los titulos de los caminos y los valores son el creador de ese camino.
+	 * Retorna un hashMap donde las llaves son los titulos de los caminos y los valores son el nombtr del creador de ese camino.
 	 */
 	public static HashMap<String, String> verTodosCaminos ()
 	{

@@ -31,6 +31,11 @@ public class CreadorEncuesta
 		Profesor profesor= LPS.getProfesorIndividual(IDprofesor);
 		CaminoAprendizaje caminoNuevo= LPS.getCaminoIndividual(IDcaminoNuevo);
 		
+		if (caminoNuevo==null)
+		{
+			throw new Exception ("No se encontro el camino al cual se quiere añadir la actividad");
+		}
+		
 		Encuesta encuesta = new Encuesta(profesor.getID(), (Encuesta) encuestaOG, caminoNuevo, pos);
 
 	}

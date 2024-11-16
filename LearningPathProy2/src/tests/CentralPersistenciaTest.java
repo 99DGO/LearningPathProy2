@@ -35,17 +35,22 @@ import controllers.Inscriptor;
 import controllers.LearningPathSystem;
 import creadores.CreadorAR;
 import creadores.CreadorCamino;
+import creadores.CreadorEncuesta;
 import creadores.CreadorEstudiante;
 import creadores.CreadorExamen;
 import creadores.CreadorProfesor;
 import creadores.CreadorQuiz;
 import creadores.CreadorTarea;
 import datosEstudiantes.DatosEstudianteActividad;
+import marcadoresActividades.marcadorAR;
 import persistencia.ActividadesPersistencia;
 import persistencia.CaminosPersistencia;
 import persistencia.CentralPersistencia;
 import persistencia.metodosAuxPersistencia;
+import senders.EncuestaSender;
+import senders.ExamenSender;
 import senders.QuizSender;
+import senders.TareaSender;
 import traductores.TraductorActividad;
 import traductores.TraductorCamino;
 import traductores.TraductorEstudiante;
@@ -122,7 +127,7 @@ public class CentralPersistenciaTest
 			objetivos.add("Aprender estructuras");
 			
 			CreadorCamino.crearCaminoCero("Python123", "Un curso para saber los basicos de python", objetivos, 2, IDprof);
-			CreadorCamino.crearCaminoCero("Jaca123", "Un curso para saber los basicos de java", objetivos, 3, IDprof);
+			CreadorCamino.crearCaminoCero("Java123", "Un curso para saber los basicos de java", objetivos, 3, IDprof);
 			
 			String idCamino = TraductorCamino.getIDfromNombre("Python123");
 			
@@ -144,6 +149,9 @@ public class CentralPersistenciaTest
 			int[] fechaLim= new int[]{0,1,0};
 			CreadorExamen.crearExamenCero(idCamino, "Tipos de variables examen", "Comprobar que el estudiante sabe diferenciar variables numericos", 
 					objetivosActividad, 2.5, 30, fechaLim, true, 3, preguntasExamen, IDprof,1);
+			
+			CreadorEncuesta.crearEncuestaCero(idCamino, "Opioniones de pajaros encuesta", "Una encuesta para tomar las opiniones de los estudiantes en el curso.", 
+					objetivosActividad, 2.5, 30, fechaLim, true, preguntasExamen, IDprof,1);
 			
 			//Creo el quiz
 			List<PreguntaQuiz> preguntas = new LinkedList<PreguntaQuiz>();
@@ -187,16 +195,42 @@ public class CentralPersistenciaTest
 			Inscriptor.inscribirseCamino(idCamino, IDEstudiante2);
 			
 			
-			String idActividad=TraductorActividad.getIDfromNombre(idCamino, "Quiz de asignación variables");
+			String idQuiz=TraductorActividad.getIDfromNombre(idCamino, "Quiz de asignación variables");
 			
-			Inscriptor.iniciarActivad(idCamino, idActividad, IDEstudiante);
-			
+			Inscriptor.iniciarActivad(idCamino, idQuiz, IDEstudiante);
+						
 			HashMap<String, Integer> respuestas = new HashMap<String, Integer>();
 			respuestas.put("Cual es el mejor pajaro?", 2);
 			respuestas.put("Si quiero representar el número de vacas que tengo, que tipo de variable debería usar?", 4);
 			
-			QuizSender.sendEnvioQuiz(idCamino, idActividad, IDEstudiante, respuestas);
+			QuizSender.sendEnvioQuiz(idCamino, idQuiz, IDEstudiante, respuestas);
+			
+			String idExamen=TraductorActividad.getIDfromNombre(idCamino, "Tipos de variables examen");
+			String idEncuesta=TraductorActividad.getIDfromNombre(idCamino, "Opioniones de pajaros encuesta");
+			
+			Inscriptor.iniciarActivad(idCamino, idExamen, IDEstudiante);
+			Inscriptor.iniciarActivad(idCamino, idExamen, IDEstudiante2);
+			
+			HashMap<String, String> respuestasAbiertas=new HashMap<String, String>();
+			respuestasAbiertas.put("Cual es la diferencia entre double y float?", "Que uno flota y otro es doble");
+			respuestasAbiertas.put("Se puede pasar de un double a un int o de un int a un double? Por que o por que no?", "Si se puede los dos porque lo vi en un sueño.");
+			respuestasAbiertas.put("Diga cual es su tipo de variable favorita y justifique.", "La variable del clima me encanta por que rompe la rutina.");
 
+			ExamenSender.sendEnvioExamen(idCamino, idExamen, IDEstudiante2, respuestasAbiertas);
+			
+			Inscriptor.iniciarActivad(idCamino, idEncuesta, IDEstudiante2);
+			EncuestaSender.sendEnvioEncuesta(idCamino, idEncuesta, IDEstudiante2, respuestasAbiertas);
+			
+			String idAR=TraductorActividad.getIDfromNombre(idCamino, "Lectura de variables");
+			Inscriptor.iniciarActivad(idCamino, idAR, IDEstudiante2);
+			
+			marcadorAR.marcarARTerminado(idCamino, idAR, IDEstudiante2);
+			
+			String idTarea=TraductorActividad.getIDfromNombre(idCamino, "Dibujo de variables");
+			Inscriptor.iniciarActivad(idCamino, idTarea, IDEstudiante2);
+			TareaSender.addMetodoEntregaTarea(idCamino, idTarea, IDEstudiante2, "Lo entregue por medio de telekinesis.");
+
+			
 		}
 		catch (Exception e)
 		{

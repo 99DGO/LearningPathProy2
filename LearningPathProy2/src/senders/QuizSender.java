@@ -36,8 +36,20 @@ public class QuizSender
 		{
 			if (actividadIterator.getId().equals(idActividad))
 			{
-				quiz = (Quiz) actividadIterator;
+				try
+				{
+					quiz = (Quiz) actividadIterator;
+				}
+				catch (Exception e)
+				{
+					throw new Exception ("El id pasado no es el de un quiz");
+				}
 			}
+		}
+		
+		if (quiz==null)
+		{
+			throw new Exception ("No se encontro la actividad.");
 		}
 		
 		HashMap<PreguntaQuiz, Integer> respuestasFormateadas = new HashMap<PreguntaQuiz, Integer>();
@@ -59,7 +71,7 @@ public class QuizSender
 		DatosEstudianteQuiz datosEstudiante = (DatosEstudianteQuiz) quiz.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
 		Estudiante estudiante = LPS.getEstudianteIndividual(idEstudiante);
 		
-		if (!estudiante.isActividadActiva() || estudiante.getIdActividadActiva().equals(idActividad))
+		if (!estudiante.isActividadActiva()||!estudiante.getIdActividadActiva().equals(idActividad))
 		{
 			throw new Exception ("No se ha iniciado esta actividad");
 		}

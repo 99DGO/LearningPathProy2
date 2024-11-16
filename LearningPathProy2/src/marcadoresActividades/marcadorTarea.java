@@ -53,9 +53,6 @@ public class marcadorTarea
 			datosEstudiante.setEstado(DatosEstudianteAR.NOEXITOSO);
 		}
 		
-		Estudiante estudiante = LPS.getEstudianteIndividual(idEstudiante);
-		estudiante.setActividadActiva(false);
-		estudiante.setNombreCaminoActividadActiva("Ninguna");
 	}
 
 }

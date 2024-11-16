@@ -57,9 +57,6 @@ public class calificadorExamen
 			datosEstudiante.setEstado(DatosEstudianteAR.EXITOSO);
 		}
 		
-		Estudiante estudiante = LPS.getEstudianteIndividual(idEstudiante);
-		estudiante.setActividadActiva(false);
-		estudiante.setNombreCaminoActividadActiva("Ninguna");
 	}
 
 }

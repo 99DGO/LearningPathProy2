@@ -7,8 +7,8 @@
  "actividadesPrereqs": [],
  "rating": 0,
  "datosEstudiantes": [
-  "DatoEstudiante_834a0938-18dd-48f5-867b-dc5da2371025",
-  "DatoEstudiante_bad69873-b290-4762-a000-5274e2cba53c"
+  "DatoEstudiante_f19e02e5-eb41-43f3-8883-714d300cdb28",
+  "DatoEstudiante_d6c0efdc-d147-4638-8613-90ba97ecdf62"
  ],
  "resenias": [],
  "type": "Actividad recurso",
@@ -26,6 +26,6 @@
  "duracion": 20,
  "obligatoria": true,
  "creadorID": "Profesor-KakashiCentralPersistenciaTest",
- "id": "Actividad143f9dec-404b-41bb-b571-d62b0a9fa273",
+ "id": "Actividadc9b2cbb9-e7f3-4d91-85ab-69dae676e78a",
  "dificultad": 2
 }

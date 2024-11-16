@@ -3,13 +3,14 @@ package menu;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import editores.EditorQuiz;
-import traductores.TraductorActividad;
-import usuarios.Profesor;
+import editores.*;
+import traductores.*;
+import usuarios.*;
+import caminosActividades.*;
 
 public class MenuEdicionActividad
 {
-	public static void mostrarMenuEdicionActividad(Profesor profesor)
+	public static void mostrarMenuEdicionActividad(String profesor)
 	{
 		// Menu de edicion de actividad
 		System.out.println("Edicion de actividad");
@@ -42,7 +43,8 @@ public class MenuEdicionActividad
 			switch (tipoActividad)
 			{
 			case "Quiz":
-				mostrarMenuEdicionQuiz(IDCamino, IDActividad);
+				boolean tipoQuiz = TraductorActividad.getTipoQuiz(IDCamino, IDActividad);
+				mostrarMenuEdicionQuiz(IDCamino, IDActividad, tipoQuiz);
 				break;
 
 			case "Tarea":
@@ -72,7 +74,7 @@ public class MenuEdicionActividad
 		}
 	}
 
-	public static void mostrarMenuEdicionQuiz(String IDCamino, String IDActividad)
+	public static void mostrarMenuEdicionQuiz(String IDCamino, String IDActividad, boolean tipoQuiz)
 	{
 		System.out.println("Menú de edición de quiz");
 		Scanner scanner = new Scanner(System.in);
@@ -322,9 +324,194 @@ public class MenuEdicionActividad
             
         case 13:
         	// Editar calificacion minima
+        	System.out.println("Ingrese la nueva calificacion minima: ");
+        	scanner.nextLine();
+        	double nuevaCalificacionMin = scanner.nextDouble();
+			try
+			{
+				EditorQuiz.editCalificacionMin(IDCamino, IDActividad, nuevaCalificacionMin);
+				System.out.println("Calificacion minima editada exitosamente.\nNueva calificacion minima: "
+						+ nuevaCalificacionMin + "\n");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al editar la calificacion minima.");
+				e.getMessage();
+				e.printStackTrace();
+			}
         	break;
-            
-            
+        	
+        case 14:
+        	// Añadir pregunta
+        	System.out.println("Ingrese el texto de la nueva pregunta: ");
+        	scanner.nextLine();
+        	String nuevaPreguntaTexto = scanner.nextLine();
+        	if (tipoQuiz == true) // Quiz de verdadero o falso
+        	{
+        		System.out.println("Ingrese la primera opcion de respuesta: ");
+				String respuesta1 = scanner.nextLine();
+				System.out.println("La primera opción es correcta? (true/false): ");
+				boolean correcta1 = scanner.nextBoolean();
+				System.out.println("Ingrese la explicacion de la respuesta: ");
+				String explicacion1 = scanner.nextLine();
+				OpcionQuiz opcion1 = new OpcionQuiz(respuesta1, explicacion1, correcta1);
+
+				System.out.println("Ingrese la segunda opcion de respuesta: ");
+				String respuesta2 = scanner.nextLine();
+				System.out.println("La segunda opción es correcta? (true/false): ");
+				boolean correcta2 = scanner.nextBoolean();
+				System.out.println("Ingrese la explicacion de la respuesta: ");
+				String explicacion2 = scanner.nextLine();
+
+				if (correcta1 && correcta2)
+				{
+					System.out.println("Solo una de las opciones puede ser correcta.");
+				}
+				else if (!correcta1 && !correcta2)
+				{
+					System.out.println("Al menos una de las opciones debe ser correcta.");
+				}
+				OpcionQuiz opcion2 = new OpcionQuiz(respuesta2, explicacion2, correcta2);
+
+				int correcta = 0;
+				if (opcion1.isCorrecta())
+				{
+					correcta = 1;
+				}
+				else
+				{
+					correcta = 2;
+				}
+				PreguntaQuiz newPregunta = new PreguntaQuiz(nuevaPreguntaTexto, correcta, 2);
+				newPregunta.setOpcion(1, opcion1);
+				newPregunta.setOpcion(2, opcion2);
+				EditorQuiz.editAddPregunta(newPregunta, IDCamino, IDActividad);
+				
+        	}
+        	else // Quiz de opción múltiple
+        	{
+        		System.out.println("Ingrese la primera opcion de respuesta: ");
+				String respuesta1 = scanner.nextLine();
+				System.out.println("La primera opción es correcta? (true/false): ");
+				boolean correcta1 = scanner.nextBoolean();
+				System.out.println("Ingrese la explicacion de la respuesta: ");
+				String explicacion1 = scanner.nextLine();
+				OpcionQuiz opcion1 = new OpcionQuiz(respuesta1, explicacion1, correcta1);
+
+				System.out.println("Ingrese la segunda opcion de respuesta: ");
+				String respuesta2 = scanner.nextLine();
+				System.out.println("La segunda opción es correcta? (true/false): ");
+				boolean correcta2 = scanner.nextBoolean();
+				System.out.println("Ingrese la explicacion de la respuesta: ");
+				String explicacion2 = scanner.nextLine();
+				OpcionQuiz opcion2 = new OpcionQuiz(respuesta2, explicacion2, correcta2);
+
+				System.out.println("Ingrese la tercera opcion de respuesta: ");
+				String respuesta3 = scanner.nextLine();
+				System.out.println("La tercera opción es correcta? (true/false): ");
+				boolean correcta3 = scanner.nextBoolean();
+				System.out.println("Ingrese la explicacion de la respuesta: ");
+				String explicacion3 = scanner.nextLine();
+				OpcionQuiz opcion3 = new OpcionQuiz(respuesta3, explicacion3, correcta3);
+
+				System.out.println("Ingrese la cuarta opcion de respuesta: ");
+				String respuesta4 = scanner.nextLine();
+				System.out.println("La cuarta opción es correcta? (true/false): ");
+				boolean correcta4 = scanner.nextBoolean();
+				System.out.println("Ingrese la explicacion de la respuesta: ");
+				String explicacion4 = scanner.nextLine();
+				OpcionQuiz opcion4 = new OpcionQuiz(respuesta4, explicacion4, correcta4);
+
+				int correcta = 0;
+				if (correcta1 && correcta2 && correcta3 && correcta4)
+				{
+					System.out.println("Solo una de las opciones puede ser correcta.");
+				}
+				else if (!correcta1 && !correcta2 && !correcta3 && !correcta4)
+				{
+					System.out.println("Al menos una de las opciones debe ser correcta.");
+				}
+				else
+				{
+					if (correcta1)
+					{
+						correcta = 1;
+					}
+					else if (correcta2)
+					{
+						correcta = 2;
+					}
+					else if (correcta3)
+					{
+						correcta = 3;
+					}
+					else
+					{
+						correcta = 4;
+					}
+				}
+				PreguntaQuiz pregunta = new PreguntaQuiz(nuevaPreguntaTexto, correcta, 4);
+				pregunta.setOpcion(1, opcion1);
+				pregunta.setOpcion(2, opcion2);
+				pregunta.setOpcion(3, opcion3);
+				pregunta.setOpcion(4, opcion4);
+				EditorQuiz.editAddPregunta(pregunta, IDCamino, IDActividad);
+        	}   	
+            break;
+        			
+        case 15:
+        	// Eliminar pregunta
+        	System.out.println("Ingrese la posición de la pregunta que desea eliminar: ");
+        	scanner.nextLine();
+        	int PosPreguntaEliminar = scanner.nextInt();
+        	try
+        	{
+				EditorQuiz.editDelPregunta(PosPreguntaEliminar, IDCamino, IDActividad);
+				System.out.println("Pregunta eliminada exitosamente.");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al eliminar la pregunta.");
+				e.getMessage();
+				e.printStackTrace();
+        	}
+        	break;
+        			
+        case 16:
+        	// Añadir actividad siguiente (fallida)
+        	System.out.println("Ingrese el nombre de la actividad siguiente (fallida): ");
+        	scanner.nextLine();
+        	String nombreSiguienteFallida = scanner.nextLine();
+        	try
+        	{
+        		EditorQuiz.editAddActividadSigFracaso(IDCamino, IDActividad, nombreSiguienteFallida);
+        		System.out.println("Actividad siguiente (fallida) añadida exitosamente.\nNombre de la actividad siguiente: " + nombreSiguienteFallida + "\n");
+        	}
+        	catch (Exception e)
+        	{
+        		System.out.println("Ocurrió un error al añadir la actividad siguiente (fallida).");
+        		e.getMessage();
+        		e.printStackTrace();
+        	}
+        	break;
+        			
+        case 17:
+        	// Eliminar actividad siguiente (fallida)
+        	System.out.println("Ingrese la posición de la actividad siguiente (fallida) que desea eliminar: ");
+        	scanner.nextLine();
+        	int PosSiguienteFallidaEliminar = scanner.nextInt();
+			try
+			{
+				EditorQuiz.editDelActividadSigFracaso(IDCamino, IDActividad, PosSiguienteFallidaEliminar);
+				System.out.println("Actividad siguiente (fallida) eliminada exitosamente.");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al eliminar la actividad siguiente (fallida).");
+				e.getMessage();
+				e.printStackTrace();
+			}
+        	break;
             
         default:
 			System.out.println("Volviendo al menu principal. \n");
@@ -335,6 +522,164 @@ public class MenuEdicionActividad
 	public static void mostrarMenuEdicionTarea(String IDCamino, String IDActividad)
 	{
 		// TODO
+		System.out.println("Menú de edición de tarea");
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Seleccione una opcion: ");
+        System.out.println("1. Editar titulo");
+        System.out.println("2. Editar descripcion");
+        System.out.println("3. Editar dificultad");
+        System.out.println("4. Editar duracion");
+        System.out.println("5. Añadir objetivos");
+        System.out.println("6. Eliminar objetivos");
+        System.out.println("7. Editar fecha de entrega");
+        System.out.println("8. Editar obligatoriedad");
+        System.out.println("9. Añadir actividad prerequisito");
+        System.out.println("10. Eliminar actividad prerequisito");
+        System.out.println("11. Añadir actividad siguiente (exitosa)");
+        System.out.println("12. Eliminar actividad siguiente (exitosa)");
+        System.out.println("13. Añadir actividad siguiente (fallida)");
+        System.out.println("14. Eliminar actividad siguiente (fallida)");
+        System.out.println("15. Editar instrucciones");
+        int opcion = scanner.nextInt();
+        switch (opcion)
+        {
+		case 1:
+			// Editar titulo
+			System.out.println("Ingrese el nuevo titulo: ");
+			scanner.nextLine();
+			String nuevoTitulo = scanner.nextLine();
+			try
+			{
+				EditorTarea.editNombre(IDCamino, IDActividad, nuevoTitulo);
+				System.out.println("Titulo editado exitosamente.\nNuevo titulo: " + nuevoTitulo + "\n");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al editar el titulo.");
+				e.getMessage();
+				e.printStackTrace();
+			}
+			break;
+			
+		case 2:
+			// Editar descripcion
+			System.out.println("Ingrese la nueva descripcion: ");
+			scanner.nextLine();
+			String nuevaDescripcion = scanner.nextLine();
+			try
+			{
+				EditorTarea.editDescripcion(IDCamino, IDActividad, nuevaDescripcion);
+				System.out.println("Descripcion editada exitosamente.\nNueva descripcion: " + nuevaDescripcion + "\n");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al editar la descripcion.");
+				e.getMessage();
+				e.printStackTrace();
+			}
+			
+		case 3:
+			// Editar dificultad
+			System.out.println("Ingrese la nueva dificultad: ");
+			scanner.nextLine();
+			Float nuevaDificultad = scanner.nextFloat();
+			try
+			{
+				EditorTarea.editDificultad(IDCamino, IDActividad, nuevaDificultad);
+				System.out.println("Dificultad editada exitosamente.\nNueva dificultad: " + nuevaDificultad + "\n");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al editar la dificultad.");
+				e.getMessage();
+				e.printStackTrace();
+			}
+			break;
+			
+		case 4:
+			// Editar duracion
+			System.out.println("Ingrese la nueva duracion: ");
+			scanner.nextLine();
+			int nuevaDuracion = scanner.nextInt();
+			try
+			{
+				EditorTarea.editDuracion(IDCamino, IDActividad, nuevaDuracion);
+				System.out.println("Duracion editada exitosamente.\nNueva duracion: " + nuevaDuracion + "\n");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al editar la duracion.");
+				e.getMessage();
+				e.printStackTrace();
+			}
+			break;
+			
+		case 5:
+			// Añadir objetivos
+			System.out.println("Ingrese el nuevo objetivo: ");
+			scanner.nextLine();
+			String nuevoObjetivo = scanner.nextLine();
+			try
+			{
+				EditorTarea.editAddObjetivo(IDCamino, IDActividad, nuevoObjetivo);
+				System.out.println("Objetivo añadido exitosamente.\nObjetivo añadido: " + nuevoObjetivo + "\n");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al añadir el objetivo.");
+				e.getMessage();
+				e.printStackTrace();
+			}
+			break;
+			
+		case 6:
+			// Eliminar objetivo
+			System.out.println("Ingrese la posicion del objetivo que desea eliminar: ");
+			scanner.nextLine();
+			int objetivoEliminar = scanner.nextInt();
+			try
+			{
+				EditorTarea.editDelObjetivo(IDCamino, IDActividad, objetivoEliminar);
+				System.out.println("Objetivo eliminado exitosamente.");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al eliminar el objetivo.");
+				e.getMessage();
+				e.printStackTrace();
+			}
+			break;
+			
+		case 7:
+			// Editar fecha de entrega
+			System.out.println("Ingrese la nueva fecha de entrega: ");
+			System.out.println("Dia: ");
+			int dia = scanner.nextInt();
+			System.out.println("Mes: ");
+			int mes = scanner.nextInt();
+			System.out.println("Año: ");
+			int anio = scanner.nextInt();
+			int[] fechaLimite =
+			{ dia, mes, anio };
+			try
+			{
+				EditorTarea.editFechaLim(IDCamino, IDActividad, fechaLimite);
+				System.out.println(
+						"Fecha de entrega editada exitosamente.\nNueva fecha de entrega: " + fechaLimite + "\n");
+			}
+			catch (Exception e)
+			{
+				System.out.println("Ocurrió un error al editar la fecha de entrega.");
+				e.getMessage();
+				e.printStackTrace();
+			}
+			break;
+			
+		
+			
+		default:
+			System.out.println("Volviendo al menu principal. \n");
+        }
 	}
 
 	public static void mostrarMenuEdicionEncuesta(String IDCamino, String IDActividad)

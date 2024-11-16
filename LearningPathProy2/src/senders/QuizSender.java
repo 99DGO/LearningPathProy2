@@ -68,7 +68,18 @@ public class QuizSender
 			}
 		}
 		
-		DatosEstudianteQuiz datosEstudiante = (DatosEstudianteQuiz) quiz.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
+		
+		DatosEstudianteQuiz datosEstudiante =null;
+		try
+		{
+			datosEstudiante = (DatosEstudianteQuiz) quiz.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
+		}
+		catch (Exception e)
+		{
+			throw new Exception("No se ha inscrito a este camino");
+		}
+		
+		
 		Estudiante estudiante = LPS.getEstudianteIndividual(idEstudiante);
 		
 		if (!estudiante.isActividadActiva()||!estudiante.getIdActividadActiva().equals(idActividad))

@@ -71,7 +71,7 @@ public class InscriptorTest
 		LPS.addEstudiante(estudiante);
 		
 		idEstudiante= TraductorEstudiante.getIDfromLogin("Trey999");
-    }
+    } 
 	
     @AfterEach
     void tearDown( ) throws Exception

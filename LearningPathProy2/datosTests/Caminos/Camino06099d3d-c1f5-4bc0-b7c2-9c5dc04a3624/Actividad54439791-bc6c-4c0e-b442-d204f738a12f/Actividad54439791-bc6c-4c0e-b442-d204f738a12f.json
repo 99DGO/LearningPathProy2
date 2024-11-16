@@ -1,0 +1,34 @@
+{
+ "descripcion": "Una encuesta para tomar las opiniones de los estudiantes en el curso.",
+ "ratingsTotales": 0,
+ "actividadesSigExitoso": [],
+ "actividadesPrereqs": [],
+ "preguntasAbiertas": [
+  "Cual es la diferencia entre double y float?",
+  "Se puede pasar de un double a un int o de un int a un double? Por que o por que no?",
+  "Diga cual es su tipo de variable favorita y justifique."
+ ],
+ "rating": 0,
+ "datosEstudiantes": [
+  "DatoEstudiante_78b1c35c-9e4d-4655-9cf5-7f358492666e",
+  "DatoEstudiante_5636b20e-6daf-4945-b78e-181f6875ca87"
+ ],
+ "resenias": [],
+ "type": "Encuesta",
+ "nombre": "Opioniones de pajaros encuesta",
+ "fechaLim": [
+  0,
+  1,
+  0
+ ],
+ "objetivos": [
+  "Saber que es un int",
+  "Saber que es un double",
+  "Saber que es un float"
+ ],
+ "duracion": 30,
+ "obligatoria": true,
+ "creadorID": "Profesor-KakashiCentralPersistenciaTest",
+ "id": "Actividad54439791-bc6c-4c0e-b442-d204f738a12f",
+ "dificultad": 2.5
+}

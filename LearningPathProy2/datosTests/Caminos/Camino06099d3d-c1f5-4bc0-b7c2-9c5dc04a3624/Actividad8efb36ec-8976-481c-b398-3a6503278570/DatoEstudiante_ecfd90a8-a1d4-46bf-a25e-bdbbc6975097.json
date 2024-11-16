@@ -1,0 +1,14 @@
+{
+ "envio": [
+  "Se puede pasar de un double a un int o de un int a un double? Por que o por que no?999_999Si se puede los dos porque lo vi en un sueño.",
+  "Cual es la diferencia entre double y float?999_999Que uno flota y otro es doble",
+  "Diga cual es su tipo de variable favorita y justifique.999_999La variable del clima me encanta por que rompe la rutina."
+ ],
+ "IDEstudiante": "Estudiante-Cater999",
+ "estado": "Enviado",
+ "calificacion": 0,
+ "fechaInicio": "Fri Nov 15 21:05:20 COT 2024",
+ "fechaFinal": "Fri Nov 15 21:05:20 COT 2024",
+ "id": "DatoEstudiante_ecfd90a8-a1d4-46bf-a25e-bdbbc6975097",
+ "type": "DatosExamen"
+}

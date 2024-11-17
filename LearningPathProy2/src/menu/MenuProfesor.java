@@ -198,7 +198,7 @@ public class MenuProfesor
 
 		case 7:
 			// Editar un camino de aprendizaje
-			MenuCreacionEdicionCamino.mostrarMenuEdicionCamino(); 
+			MenuCreacionEdicionCamino.mostrarMenuEdicionCamino(profesor.getID()); 
 			break;
 
 		case 8:

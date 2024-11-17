@@ -99,7 +99,7 @@ public class TraductorTarea
 	}
 	
 	/*
-	 * Retorna unalista que contiene strings que estan compuestos por la pregunta y la respuesta del estudiante
+	 * Retorna un string que contiene el metodo de entrega del estudiante
 	 */
 	public static String retornarEntregaIndividual(String idCamino, String idActividad, String idEstudiante) throws Exception
 	{

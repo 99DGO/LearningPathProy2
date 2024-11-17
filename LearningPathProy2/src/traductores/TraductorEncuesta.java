@@ -14,6 +14,7 @@ import datosEstudiantes.DatosEstudianteActividad;
 import datosEstudiantes.DatosEstudianteEncuesta;
 import datosEstudiantes.DatosEstudianteTarea;
 import envios.EnvioEncuesta;
+import usuarios.Estudiante;
 
 public class TraductorEncuesta 
 {
@@ -112,7 +113,7 @@ public class TraductorEncuesta
 	}
 	
 	/*
-	 * Retorna un hashmap donde la llave es el id del estudiante y el valor el nombre del estudiante 
+	 * Retorna un hashmap donde la llave es el login del estudiante y el valor el nombre del estudiante 
 	 */
 	public static HashMap<String, String> retornarListaEstudiantesEnvios(String idCamino, String idActividad) throws Exception
 	{
@@ -151,11 +152,11 @@ public class TraductorEncuesta
 			DatosEstudianteEncuesta datoEstInd= (DatosEstudianteEncuesta) datosEstudiantes.get(idDatoEstudiante);
 			
 			//Throws exception
-			String nombreEstudiante=TraductorEstudiante.getNombrefromID(datoEstInd.getIDEstudiante());
+			Estudiante estudiante=LPS.getEstudianteIndividual(datoEstInd.getIDEstudiante());
 					
 			if (!datoEstInd.getEstado().equals(DatosEstudianteActividad.PENDIENTE))
 			{
-				estudiantesConEnvios.put(datoEstInd.getIDEstudiante(), nombreEstudiante);
+				estudiantesConEnvios.put(estudiante.getLogin(), estudiante.getNombre());
 			}
 		}
 		

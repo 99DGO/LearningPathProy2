@@ -39,7 +39,14 @@ public class TraductorProfesor
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		HashMap<String, Profesor> profesores = LPS.getProfesores();
 		
-		String nombre= profesores.get(idProfesor).getNombre();
+		Profesor profesor= profesores.get(idProfesor);
+		
+		if (profesor==null)
+		{
+			throw new Exception ("No se encontro el profesor");
+		}
+		
+		String nombre= profesor.getNombre();
 		
 		if (nombre==null)
 		{

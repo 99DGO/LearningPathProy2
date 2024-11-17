@@ -6,8 +6,8 @@
  "actividadesPrereqs": [],
  "rating": 0,
  "datosEstudiantes": [
-  "DatoEstudiante_8ed5cde3-e071-41eb-9f08-b12325ab4063",
-  "DatoEstudiante_2a6fdd70-3c0c-4e7a-a927-7f9fefbbfbd7"
+  "DatoEstudiante_ce9a7efb-e140-4d53-a971-190778d8a339",
+  "DatoEstudiante_7161e6dc-a6fe-4986-9de9-3263c7123cdf"
  ],
  "resenias": [],
  "type": "Quiz",
@@ -91,6 +91,6 @@
    "cantidadOpciones": 4
   }
  ],
- "id": "Actividadc6cccbfa-68b9-4820-bb30-aea078fde7de",
+ "id": "Actividad141b55b5-19bc-4369-bcee-1662993d232a",
  "dificultad": 1.5
 }

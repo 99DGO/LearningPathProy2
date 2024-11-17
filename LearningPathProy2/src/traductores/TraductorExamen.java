@@ -47,6 +47,35 @@ public class TraductorExamen
 		
 	}
 	
+	public static double retornarCalificacinMin (String idCamino, String idActividad) throws Exception
+	{
+		LearningPathSystem LPS = LearningPathSystem.getInstance();
+		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
+		Examen examen = null;
+
+		for (Actividad actividadIterator : camino.getActividades())
+		{
+			if (actividadIterator.getId().equals(idActividad))
+			{
+				if (!actividadIterator.getType().equals(Actividad.EXAMEN))
+				{
+					throw new Exception ("La actividad no es un examen");
+				}
+				
+				examen = (Examen) actividadIterator;
+			}
+		}
+		
+		return examen.getCalificacionMin();
+		
+	}
+	
 	/*
 	 * Retorna un hashmap donde la llave es el login del estudiante y el valor es un string[] que contiene en la primera posicion
 	 * el nombre del estudiante y en la segunda la calificacion si esta calificado o "No esta calificado".

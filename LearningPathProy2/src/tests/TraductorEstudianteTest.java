@@ -69,7 +69,7 @@ public class TraductorEstudianteTest
 			preguntasString.add("¿Que otro animal es parecido e igual de increible que los cuervos?");
 			preguntasString.add("¿Por que son mejores los cuervos que otros pajaros?");
 			
-			Examen examen = new Examen("Tarea Test", "Esto es una tarea sobre cuervos", objetivos, 1.5, 20, 
+			Examen examen = new Examen("Examen Test", "Esto es una tarea sobre cuervos", objetivos, 1.5, 20, 
 					fechaLim, true, 3, preguntasString, profesor.getID(), camino, 0);
 			String idActividadExamen=examen.getId();
 
@@ -154,6 +154,16 @@ public class TraductorEstudianteTest
 	   {
 		e.printStackTrace();
 		fail("No deberia sacar error: "+ e.getMessage());
+	   }
+	   
+	   try
+	   {
+		   TraductorEstudiante.getAvancesCaminoIndividual(idEstudiante, idCamino);
+	   }
+	   catch (Exception e)
+	   {
+			e.printStackTrace();
+			fail("No deberia sacar error: "+ e.getMessage());
 	   }
    }
 

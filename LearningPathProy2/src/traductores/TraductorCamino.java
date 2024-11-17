@@ -52,6 +52,7 @@ public class TraductorCamino
 		infoCamino.put("Titulo", (camino.getTitulo()+"\n"));
 		infoCamino.put("Descripcion", (camino.getDescripcion()+"\n"));
 		infoCamino.put("Dificultad", (String.valueOf(camino.getDificultad())+"\n"));
+		infoCamino.put("Duracion", (String.valueOf(camino.getDuracion())+"\n"));
 
 		
 		Iterator<String> it1 = camino.getObjetivos().iterator();

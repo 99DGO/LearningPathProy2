@@ -5,10 +5,9 @@
   "Diga cual es su tipo de variable favorita y justifique.999_999La variable del clima me encanta por que rompe la rutina."
  ],
  "IDEstudiante": "Estudiante-Cater999",
- "estado": "Enviado",
- "calificacion": 0,
- "fechaInicio": "Sat Nov 16 22:27:44 COT 2024",
- "fechaFinal": "Sat Nov 16 22:27:44 COT 2024",
- "id": "DatoEstudiante_e7036bb2-54d2-4025-bfd9-89e25553cf39",
- "type": "DatosExamen"
+ "estado": "Exitoso",
+ "fechaInicio": "Sun Nov 17 09:54:06 COT 2024",
+ "fechaFinal": "Sun Nov 17 09:54:06 COT 2024",
+ "id": "DatoEstudiante_e0932363-75ea-49a5-940d-e479efb72d6a",
+ "type": "DatosEncuesta"
 }

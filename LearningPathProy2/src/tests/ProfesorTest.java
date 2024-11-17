@@ -63,7 +63,7 @@ public class ProfesorTest
 		int[] fechaLim= new int[]{0,1,0};
 		CreadorExamen.crearExamenCero(idCamino, "Tipos de variables examen", "Comprobar que el estudiante sabe diferenciar variables numericos", 
 				objetivosActividad, 2.5, 30, fechaLim, true, 3, preguntasExamen, IDprof,1);
-		
+		 
     }
  	
     @AfterEach

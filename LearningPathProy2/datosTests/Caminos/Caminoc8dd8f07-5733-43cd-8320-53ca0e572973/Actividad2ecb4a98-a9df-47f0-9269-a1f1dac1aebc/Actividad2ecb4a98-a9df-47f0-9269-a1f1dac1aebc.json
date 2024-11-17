@@ -11,8 +11,8 @@
  ],
  "rating": 0,
  "datosEstudiantes": [
-  "DatoEstudiante_6673b678-4471-413d-a966-ce16ad3dca2e",
-  "DatoEstudiante_8d5d53be-5949-4375-a84b-840247dcacc9"
+  "DatoEstudiante_b5a55a6e-9628-4c71-a394-f25da3b0299f",
+  "DatoEstudiante_f1208692-a778-437e-9cc0-4f0cea2e4775"
  ],
  "resenias": [],
  "type": "Examen",
@@ -31,6 +31,6 @@
  "duracion": 30,
  "obligatoria": true,
  "creadorID": "Profesor-KakashiCentralPersistenciaTest",
- "id": "Actividadd5a5157d-ceba-4127-90fa-08994972dfe9",
+ "id": "Actividad2ecb4a98-a9df-47f0-9269-a1f1dac1aebc",
  "dificultad": 2.5
 }

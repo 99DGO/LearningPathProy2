@@ -202,7 +202,7 @@ public class MenuProfesor
 			break;
 
 		case 8:
-			// TODO Editar una actividad
+			// Editar una actividad
 			MenuEdicionActividad.mostrarMenuEdicionActividad(profesor.getID());
 			break;
 

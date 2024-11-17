@@ -58,7 +58,7 @@ public class ExamenSenderTest
 			camino = new CaminoAprendizaje("El maravilloso mundo de los cuervos", "Esto es un curso que te enseña lo increible que son los cuervos",
 					objetivos, 1.5, profesor.getID());
 	
-			LPS.addCamino(camino);
+			LPS.addCamino(camino); 
 			idCamino=camino.getID();
 
 	

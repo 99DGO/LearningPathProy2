@@ -79,7 +79,7 @@ public class TraductorActividad {
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
 		
-		if (camino==null)
+		if (camino==null) 
 		{
 			throw new Exception ("No se encontro el camino");
 		}

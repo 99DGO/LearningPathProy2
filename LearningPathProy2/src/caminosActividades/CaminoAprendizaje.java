@@ -290,7 +290,8 @@ public class CaminoAprendizaje {
 
 	public void cambiarPosActividad(String idActividad, int newPos) throws Exception
 	{
-		if(newPos>=this.actividades.size() || newPos<0)
+
+		if(newPos<this.actividades.size() && (newPos>=0))
 		{
 			Iterator<Actividad> it1 = actividades.iterator();
 			int posIterator=0;
@@ -305,29 +306,14 @@ public class CaminoAprendizaje {
 					actividades.set(newPos, actividad);
 				}
 			}
-		}
+		} 
 		else
 		{
 			throw new Exception ("La posicion de la actividad no es valida");
 		}
 	}
 
-	/**
-     * Crea un nuevo objeto de tipo a partir de un objeto JSON.
-     * 
-     * El objeto JSON debe tener dos atributos: nombreEmpresa (una cadena) y tamanoEmpresa (un número).
-     * @param cliente El objeto JSON que contiene la información
-     * @return El nuevo objeto inicializado con la información
-     */
-	/*
-    public static ClienteCorporativo cargarDesdeJSON( JSONObject cliente )
-    {
-        String nombreEmpresa = cliente.getString( "nombreEmpresa" );
-        int tam = cliente.getInt( "tamanoEmpresa" );
-        return new ClienteCorporativo( nombreEmpresa, tam );
-    }
 
-*/ 
 	
     /**
      * Salva este objeto de tipo camino dentro de un objeto JSONObject para que ese objeto se almacene en un archivo

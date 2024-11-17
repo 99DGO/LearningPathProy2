@@ -36,6 +36,13 @@ public class CentralPersistencia
 		cargarProfesores(test);
 	}
 	
+	public static void guardarTodo(boolean test) throws Exception
+	{
+		guardarCaminosActividadesDatosEstudiante(test);
+		guardarEstudiantes(test);
+		guardarProfesores(test);
+	}
+	
 	public static void guardarCaminosActividadesDatosEstudiante(boolean test) throws Exception
 	{
 		String pathCaminosDirectorio;

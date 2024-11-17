@@ -18,10 +18,15 @@ import usuarios.Estudiante;
 
 public class TraductorExamen 
 {
-	public static List<String> retornarPreguntas (String idCamino, String idActividad)
+	public static List<String> retornarPreguntas (String idCamino, String idActividad) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
 		
 		Examen examen = null;
 
@@ -29,6 +34,11 @@ public class TraductorExamen
 		{
 			if (actividadIterator.getId().equals(idActividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.EXAMEN))
+				{
+					throw new Exception ("La actividad no es un examen");
+				}
+				
 				examen = (Examen) actividadIterator;
 			}
 		}
@@ -42,10 +52,16 @@ public class TraductorExamen
 	 * el nombre del estudiante y en la segunda la calificacion si esta calificado o "No esta calificado".
 	 * Retorna el login porque este es único, si solo fuera el nombre pueden haber repetidos.
 	 */
-	public static HashMap<String, String[]> retornarListaEstudiantesEnvios(String idCamino, String idActividad)
+	public static HashMap<String, String[]> retornarListaEstudiantesEnvios(String idCamino, String idActividad) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		HashMap<String, String[]> estudiantesConEnvios= new HashMap<String, String[]>();
 		
 		Examen examen = null;
@@ -55,6 +71,11 @@ public class TraductorExamen
 		{
 			if (actividadIterator.getId().equals(idActividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.EXAMEN))
+				{
+					throw new Exception ("La actividad no es un examen");
+				}
+				
 				examen = (Examen) actividadIterator;
 			}
 		}
@@ -96,6 +117,12 @@ public class TraductorExamen
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		List<String> respuestasFormateadas= new LinkedList<String>();
 		
 		Examen examen = null;
@@ -105,6 +132,11 @@ public class TraductorExamen
 		{
 			if (actividadIterator.getId().equals(idActividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.EXAMEN))
+				{
+					throw new Exception ("La actividad no es un examen");
+				}
+				
 				examen = (Examen) actividadIterator;
 			}
 		}

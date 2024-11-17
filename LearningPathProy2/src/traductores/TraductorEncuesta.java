@@ -17,10 +17,15 @@ import envios.EnvioEncuesta;
 
 public class TraductorEncuesta 
 {
-	public static List<String> retornarPreguntas (String idCamino, String idActividad)
+	public static List<String> retornarPreguntas (String idCamino, String idActividad) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
 		
 		Encuesta encuesta = null;
 
@@ -28,6 +33,11 @@ public class TraductorEncuesta
 		{
 			if (actividadIterator.getId().equals(idActividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.ENCUESTA))
+				{
+					throw new Exception ("La actividad pasada no fue una encuesta.");
+				}
+				
 				encuesta = (Encuesta) actividadIterator;
 			}
 		}
@@ -45,6 +55,11 @@ public class TraductorEncuesta
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
 		List<String> respuestasFormateadas= new LinkedList<String>();
 		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		Encuesta encuesta = null;
 
 		//Encuestro la actividad
@@ -52,6 +67,11 @@ public class TraductorEncuesta
 		{
 			if (actividadIterator.getId().equals(idActividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.ENCUESTA))
+				{
+					throw new Exception ("La actividad pasada no fue una encuesta.");
+				}
+				
 				encuesta = (Encuesta) actividadIterator;
 			}
 		}
@@ -60,7 +80,7 @@ public class TraductorEncuesta
 
 		DatosEstudianteEncuesta datoEstInd= (DatosEstudianteEncuesta) datosEstudiantes.get(idEstudiante);
 		
-		if (!datoEstInd.getType().equals(DatosEstudianteActividad.PENDIENTE))
+		if (!datoEstInd.getType().equals(DatosEstudianteActividad.PENDIENTE)) 
 		{
 			//Añado las respuestas con sus preguntas
 			EnvioEncuesta envioEstInd= datoEstInd.getEnvio();
@@ -82,10 +102,16 @@ public class TraductorEncuesta
 	/*
 	 * Retorna un hashmap donde la llave es el id del estudiante y el valor el nombre del estudiante 
 	 */
-	public static HashMap<String, String> retornarListaEstudiantesEnvios(String idCamino, String idActividad)
+	public static HashMap<String, String> retornarListaEstudiantesEnvios(String idCamino, String idActividad) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		HashMap<String, String> estudiantesConEnvios= new HashMap<String, String>();
 		
 		Encuesta encuesta = null;
@@ -95,6 +121,11 @@ public class TraductorEncuesta
 		{
 			if (actividadIterator.getId().equals(idActividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.ENCUESTA))
+				{
+					throw new Exception ("La actividad pasada no fue una encuesta.");
+				}
+				
 				encuesta = (Encuesta) actividadIterator;
 			}
 		}

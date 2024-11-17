@@ -19,10 +19,15 @@ public class TraductorQuiz
 	 * Retorna una lista que contiene un String[] adentro (una para cada pregunta) con el texto de la pregunta en la poscion 0
 	 	y el resto de las opciones en las otras posiciones.
 	 */
-	public static List<String[]> retornarPreguntasSinRespuesta(String idCamino, String idActividad)
+	public static List<String[]> retornarPreguntasSinRespuesta(String idCamino, String idActividad) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
 		
 		Quiz quiz = null;
 
@@ -30,6 +35,11 @@ public class TraductorQuiz
 		{
 			if (actividadIterator.getId().equals(idActividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.QUIZ))
+				{
+					throw new Exception ("La actividad no es un quiz");
+				}
+				
 				quiz = (Quiz) actividadIterator;
 			}
 		}
@@ -60,10 +70,15 @@ public class TraductorQuiz
 	 * Retorna una lista que contiene un String[] adentro (una para cada pregunta) con el texto de la pregunta 
 	 * en la poscion 0. El resto de las opciones estan en las otras posiciones del arreglo y su explicacion de si esta correcta o no. 
 	 */
-	public static List<String[]> retornarPreguntasConRespuesta(String idCamino, String idActividad)
+	public static List<String[]> retornarPreguntasConRespuesta(String idCamino, String idActividad) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
 		
 		Quiz quiz = null;
 
@@ -71,6 +86,11 @@ public class TraductorQuiz
 		{
 			if (actividadIterator.getId().equals(idActividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.QUIZ))
+				{
+					throw new Exception ("La actividad no es un quiz");
+				}
+				
 				quiz = (Quiz) actividadIterator;
 			}
 		}

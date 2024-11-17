@@ -128,7 +128,7 @@ public class TareaSenderTest
     	catch (Exception e) 
     	{
 			assertEquals("No se ha iniciado esta actividad", e.getMessage(), "Exception incorrecta");
-		}
+		} 
     	
     	try
     	{

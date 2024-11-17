@@ -87,7 +87,7 @@ public class calificadorExamenTest
 		
     		Inscriptor.inscribirseCamino(idCamino, idEstudiante);
     		Inscriptor.iniciarActivad(idCamino, idActividad, idEstudiante);
-
+ 
     	}
 		catch (Exception e) 
 		{

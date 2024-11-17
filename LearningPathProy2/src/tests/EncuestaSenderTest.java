@@ -67,7 +67,7 @@ public class EncuestaSenderTest
 			preguntasString.add("¿Que otro animal es parecido e igual de increible que los cuervos?");
 			preguntasString.add("¿Por que son mejores los cuervos que otros pajaros?");
 			
-			encuesta = new Encuesta("Tarea Test", "Esto es una tarea sobre cuervos", objetivos, 1.5, 20, 
+			encuesta = new Encuesta("Encuesta Test", "Esto es una tarea sobre cuervos", objetivos, 1.5, 20, 
 					fechaLim, true, preguntasString, profesor.getID(), camino, 0);
 			idActividad=encuesta.getId();
 

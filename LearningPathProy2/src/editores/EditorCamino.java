@@ -77,41 +77,18 @@ public class EditorCamino
 		camino.setFechaModificacion(fecha.toString());
 	}
 
-	
-	
-	public static void editDelObjetivo(String IDcamino, String IDactividad, int pos) throws Exception
-	{
-		LearningPathSystem LPS= LearningPathSystem.getInstance();
-		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
-		
-		if (pos>=camino.getObjetivos().size() || pos<=0)
-		{
-			throw new Exception ("El número del objetivo no existe");
-		}
-		else
-		{
-			camino.delObjetivo(pos);
-		}
-		
-		int version=camino.getVersion();
-		camino.setVersion(version+=1);
-		Date fecha = new Date();
-		camino.setFechaModificacion(fecha.toString());
-	}
-	
-
 	public static void editDelActividad(String idCamino, int pos) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino=LPS.getCaminoIndividual(idCamino);
 		
-		if (pos>=camino.getActividades().size() || pos<=0)
+		if (pos>camino.getActividades().size() || pos<=0)
 		{
 			throw new Exception ("El número de la actividad no existe");
 		}
 		else
 		{
-			camino.delActividad(pos);
+			camino.delActividad(pos-1);
 		}
 				
 		int version=camino.getVersion();
@@ -125,13 +102,13 @@ public class EditorCamino
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino=LPS.getCaminoIndividual(idCamino);
 		
-		if (pos>=camino.getObjetivos().size() || pos<=0)
+		if (pos>camino.getObjetivos().size() || pos<=0)
 		{
 			throw new Exception ("El número del objetivo no existe");
 		}
 		else
 		{
-			camino.delObjetivo(pos);
+			camino.delObjetivo(pos-1);
 		}
 		
 		int version=camino.getVersion();

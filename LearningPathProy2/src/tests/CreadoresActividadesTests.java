@@ -111,7 +111,7 @@ public class CreadoresActividadesTests
 	@Test
 	public void crearQuizCeroTest()
 	{
-		try 
+		try  
 		{
 			CreadorQuiz.crearQuizCero(camino.getID(),"Quiz Test", "Esto es un quiz donde te preguntan que tipo de variable es más indicado", objetivos, 1.5, 20, fechaLim, 
 					false, 3, preguntasQuiz, profesor.getID(), false, 0);

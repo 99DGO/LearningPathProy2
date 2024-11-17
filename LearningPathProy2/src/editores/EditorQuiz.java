@@ -41,13 +41,13 @@ public class EditorQuiz extends EditorActividadGeneral
 			throw new Exception ("No se encontro la actividad");
 		}
 		
-		if (pos>=actividad.getPreguntas().size() || pos<=0)
+		if (pos>actividad.getPreguntas().size() || pos<=0)
 		{
 			throw new Exception ("El número de la pregunta no existe");
 		}
 		else
 		{
-			actividad.delPregunta(pos);
+			actividad.delPregunta(pos-1);
 		}
 		
 		
@@ -168,13 +168,13 @@ public class EditorQuiz extends EditorActividadGeneral
 			throw new Exception ("No se encontro la actividad");
 		}
 		
-		if (pos>=actividad.getActividadesSigFracaso().size() || pos<=0)
+		if (pos>actividad.getActividadesSigFracaso().size() || pos<=0)
 		{
 			throw new Exception ("El número de la actividad no existe");
 		}
 		else
 		{
-			actividad.delActividadSigFracaso(pos);
+			actividad.delActividadSigFracaso(pos-1);
 		}
 		
 		int version=camino.getVersion();

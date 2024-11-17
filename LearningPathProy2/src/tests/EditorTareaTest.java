@@ -14,14 +14,9 @@ import org.junit.jupiter.api.Test;
 
 import caminosActividades.ActividadRecurso;
 import caminosActividades.CaminoAprendizaje;
-import caminosActividades.Examen;
 import caminosActividades.Tarea;
 import controllers.LearningPathSystem;
-import editores.EditorAR;
-import editores.EditorActividadGeneral;
 import editores.EditorTarea;
-import traductores.TraductorEstudiante;
-import usuarios.Estudiante;
 import usuarios.Profesor;
 
 public class EditorTareaTest 
@@ -138,7 +133,7 @@ public class EditorTareaTest
      	
        	try 
     	{
-			EditorTarea.editAddActividadSigFracaso(idCamino, idActividadSecundaria, "Lectura Test");
+			EditorTarea.editDelActividadSigFracaso(idCamino, idActividadSecundaria, 1);
 			fail("Deberia sacar error por tipo de actividad equivocado");
 		} 
     	catch (Exception e) 

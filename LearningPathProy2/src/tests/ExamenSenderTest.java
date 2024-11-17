@@ -44,7 +44,7 @@ public class ExamenSenderTest
     {
 		try
 		{
-			LearningPathSystem.resetLPS(); 
+			LearningPathSystem.resetLPS();  
 			LPS=LearningPathSystem.getInstance();
 			
 			profesor = new Profesor("Aizawa999", "Aizawa 123", "Aizawa Shouta");

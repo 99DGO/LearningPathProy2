@@ -104,7 +104,7 @@ public class EditorARTest
     }
     
     @Test
-    public void editInstruccion()
+    public void editInstruccionTest()
     {
     	try 
     	{

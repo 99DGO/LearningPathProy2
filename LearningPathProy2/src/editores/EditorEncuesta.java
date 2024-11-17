@@ -41,13 +41,13 @@ public class EditorEncuesta extends EditorActividadGeneral
 		}
 		
 		
-		if (pos>=actividad.getPreguntasAbiertas().size() || pos<=0)
+		if (pos>actividad.getPreguntasAbiertas().size() || pos<=0)
 		{
 			throw new Exception ("El número de la pregunta no existe");
 		}
 		else
 		{
-			actividad.delPregunta(pos);
+			actividad.delPregunta(pos-1);
 		}
 		
 		

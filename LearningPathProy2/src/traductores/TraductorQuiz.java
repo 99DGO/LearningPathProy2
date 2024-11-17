@@ -59,6 +59,8 @@ public class TraductorQuiz
 				preguntaInd[numOpcion]=opcionesHash.get(numOpcion).getTexto();
 
 			}
+			
+			preguntas.add(preguntaInd);
 		}
 		
 		return preguntas;
@@ -125,6 +127,8 @@ public class TraductorQuiz
 			
 			String respuesta="La respuesta es "+String.valueOf(preguntaObjeto.getRespuesta())+" porque ";
 			preguntaInd[preguntaObjeto.getCantidadOpciones()+1]=respuesta;
+			
+			preguntas.add(preguntaInd);
 		}
 		
 		return preguntas;

@@ -57,7 +57,7 @@ public class QuizSenderTest
 	@BeforeEach
 	void init( ) throws Exception
     {	
-		LPS.resetLPS();
+		LPS.resetLPS(); 
 		LearningPathSystem LPS =LearningPathSystem.getInstance();
 
 		profesor = new Profesor("Aizawa999", "Aizawa 123", "Aizawa Shouta");

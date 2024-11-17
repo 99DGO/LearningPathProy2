@@ -16,7 +16,7 @@ import datosEstudiantes.DatosEstudianteTarea;
 import envios.EnvioEncuesta;
 import usuarios.Estudiante;
 
-public class TraductorTarea 
+public class TraductorTarea  
 {
 	
 	public static String retornarInstrucciones (String idCamino, String idActividad) throws Exception

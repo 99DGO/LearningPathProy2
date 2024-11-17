@@ -35,8 +35,4 @@ public class EnvioExamen extends Envio<String, String>{
 		this.calificacion = calificacion;
 	}
 
-	public void agregarRespuesta(String pregunta, String respuesta) {
-        respuestas.put(pregunta, respuesta);
-    }
-
 }

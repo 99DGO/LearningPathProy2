@@ -26,10 +26,6 @@ public class EnvioQuiz extends Envio<PreguntaQuiz, Integer> {
 		super(respuestas);
 	}
 	
-	public void agregarRespuesta(PreguntaQuiz pregunta, Integer respuesta) {
-		respuestas.put(pregunta, respuesta);
-	}
-
 	public void setRespuestas(HashMap<PreguntaQuiz, Integer> respuestas)
 	{
 		this.respuestas=respuestas;

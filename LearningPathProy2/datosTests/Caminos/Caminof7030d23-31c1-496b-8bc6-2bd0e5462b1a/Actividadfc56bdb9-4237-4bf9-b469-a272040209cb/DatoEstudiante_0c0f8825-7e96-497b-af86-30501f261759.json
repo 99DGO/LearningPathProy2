@@ -1,8 +1,9 @@
 {
+ "envio": [],
  "IDEstudiante": "Estudiante-Trey999",
  "estado": "Pendiente",
  "fechaInicio": "No iniciada",
  "fechaFinal": "No finalizada",
- "id": "DatoEstudiante_35d9bfed-598a-4324-b927-dc4c3b2191bf",
- "type": "DatosActividadRecurso"
+ "id": "DatoEstudiante_0c0f8825-7e96-497b-af86-30501f261759",
+ "type": "DatosEncuesta"
 }

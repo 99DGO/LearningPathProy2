@@ -37,6 +37,10 @@ public class marcadorAR
 		{
 			throw new Exception ("No existe una actividad con ese id");
 		}
+		else if (!actividad.getType().equals(Actividad.ACTIVIDADRECURSO))
+		{
+			throw new Exception ("La actividad pasada no fue una actividad de recurso.");
+		}
 		
 		//Tira exception de que no se encontro el dato del estudiante
 		DatosEstudianteAR datosEstudiante = (DatosEstudianteAR) actividad.getDatoEstudianteIndFromIDEstudiante(idEstudiante);

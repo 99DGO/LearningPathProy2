@@ -79,7 +79,8 @@ public class CargarJSONtest {
 		{
 			idCamino = TraductorCamino.getIDfromNombre("Python123");
 		} 
-		catch (Exception e) {
+		catch (Exception e) 
+		{
     		fail("No se encontro el ID del camino con el nombre"); 
 		}
 		
@@ -95,7 +96,7 @@ public class CargarJSONtest {
     	}
 		*/
     	
-    	assertEquals(4, actividades.size(), "Las actividades no se guardaron bien" );
+    	assertEquals(5, actividades.size(), "Las actividades no se guardaron bien" );
     	
 
 		

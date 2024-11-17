@@ -22,8 +22,5 @@ public class EnvioEncuesta extends Envio<String, String>{
 		return respuestas;
 	}
 
-    public void agregarRespuesta(String pregunta, String respuesta) {
-        respuestas.put(pregunta, respuesta);
-    }
 	
 }

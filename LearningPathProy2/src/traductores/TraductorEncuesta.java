@@ -17,10 +17,15 @@ import envios.EnvioEncuesta;
 
 public class TraductorEncuesta 
 {
-	public static List<String> retornarPreguntas (String idCamino, String idActividad)
+	public static List<String> retornarPreguntas (String idCamino, String idActividad) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
 		
 		Encuesta encuesta = null;
 
@@ -28,6 +33,11 @@ public class TraductorEncuesta
 		{
 			if (actividadIterator.getId().equals(idActividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.ENCUESTA))
+				{
+					throw new Exception ("La actividad pasada no fue una encuesta.");
+				}
+				
 				encuesta = (Encuesta) actividadIterator;
 			}
 		}
@@ -45,6 +55,11 @@ public class TraductorEncuesta
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
 		List<String> respuestasFormateadas= new LinkedList<String>();
 		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		Encuesta encuesta = null;
 
 		//Encuestro la actividad
@@ -52,15 +67,32 @@ public class TraductorEncuesta
 		{
 			if (actividadIterator.getId().equals(idActividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.ENCUESTA))
+				{
+					throw new Exception ("La actividad pasada no fue una encuesta.");
+				}
+				
 				encuesta = (Encuesta) actividadIterator;
 			}
 		}
 		
 		HashMap<String, DatosEstudianteActividad> datosEstudiantes= encuesta.getDatosEstudiantes();
-
-		DatosEstudianteEncuesta datoEstInd= (DatosEstudianteEncuesta) datosEstudiantes.get(idEstudiante);
+		DatosEstudianteEncuesta datoEstInd=null;
 		
-		if (!datoEstInd.getType().equals(DatosEstudianteActividad.PENDIENTE))
+		for (DatosEstudianteActividad datoEstIterator: datosEstudiantes.values())
+		{
+			if(datoEstIterator.getIDEstudiante().equals(idEstudiante))
+			{
+				datoEstInd= (DatosEstudianteEncuesta) datoEstIterator;
+			}
+		}
+		
+		if (datoEstInd==null)
+		{
+			throw new Exception("No se encontro el estudiante inscrito en el camino");
+		}
+		
+		if (!datoEstInd.getType().equals(DatosEstudianteActividad.PENDIENTE)) 
 		{
 			//Añado las respuestas con sus preguntas
 			EnvioEncuesta envioEstInd= datoEstInd.getEnvio();
@@ -82,10 +114,16 @@ public class TraductorEncuesta
 	/*
 	 * Retorna un hashmap donde la llave es el id del estudiante y el valor el nombre del estudiante 
 	 */
-	public static HashMap<String, String> retornarListaEstudiantesEnvios(String idCamino, String idActividad)
+	public static HashMap<String, String> retornarListaEstudiantesEnvios(String idCamino, String idActividad) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		HashMap<String, String> estudiantesConEnvios= new HashMap<String, String>();
 		
 		Encuesta encuesta = null;
@@ -95,6 +133,11 @@ public class TraductorEncuesta
 		{
 			if (actividadIterator.getId().equals(idActividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.ENCUESTA))
+				{
+					throw new Exception ("La actividad pasada no fue una encuesta.");
+				}
+				
 				encuesta = (Encuesta) actividadIterator;
 			}
 		}
@@ -102,15 +145,17 @@ public class TraductorEncuesta
 		HashMap<String, DatosEstudianteActividad> datosEstudiantes= encuesta.getDatosEstudiantes();
 		
 		//Recorro todos los datos de estudiantes envios
-		for (String idEstudiante: datosEstudiantes.keySet())
+		for (String idDatoEstudiante: datosEstudiantes.keySet())
 		{
-			String nombreEstudiante=TraductorEstudiante.getNombrefromID(idEstudiante);
-						
-			DatosEstudianteEncuesta datoEstInd= (DatosEstudianteEncuesta) datosEstudiantes.get(idEstudiante);
+	
+			DatosEstudianteEncuesta datoEstInd= (DatosEstudianteEncuesta) datosEstudiantes.get(idDatoEstudiante);
 			
+			//Throws exception
+			String nombreEstudiante=TraductorEstudiante.getNombrefromID(datoEstInd.getIDEstudiante());
+					
 			if (!datoEstInd.getEstado().equals(DatosEstudianteActividad.PENDIENTE))
 			{
-				estudiantesConEnvios.put(idEstudiante, nombreEstudiante);
+				estudiantesConEnvios.put(datoEstInd.getIDEstudiante(), nombreEstudiante);
 			}
 		}
 		

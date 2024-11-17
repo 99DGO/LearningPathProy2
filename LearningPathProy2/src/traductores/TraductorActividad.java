@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
+import caminosActividades.Quiz;
 import controllers.LearningPathSystem;
 import usuarios.Profesor;
 
@@ -14,6 +15,12 @@ public class TraductorActividad {
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino =LPS.getCaminoIndividual(idCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		String IDtoReturn=null;
 
 		for (Actividad actividad: camino.getActividades())
@@ -35,11 +42,48 @@ public class TraductorActividad {
 		}
 	}
 	
-	public static HashMap<String, String> verInfoGeneralActividad(String idCamino, String idActividad)
+	public static boolean getTipoQuiz(String idCamino, String idActividad) throws Exception
+	{
+		boolean tipoQuiz = false;
+		LearningPathSystem LPS = LearningPathSystem.getInstance();
+		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
+		Quiz actividad = null;
+		
+		for (Actividad actividadIterator : camino.getActividades())
+		{
+			if (actividadIterator.getId().equals(idActividad))
+			{
+				if (!actividadIterator.getType().equals(Actividad.QUIZ))
+				{
+					throw new Exception ("La actividad pasada no es un quiz.");
+				}
+				
+				actividad = (Quiz) actividadIterator;
+			}
+		}
+		
+		tipoQuiz  = actividad.isVerdaderoFalso();
+		
+		return tipoQuiz;
+	}
+	
+	public static HashMap<String, String> verInfoGeneralActividad(String idCamino, String idActividad) throws Exception
 	{
 		HashMap<String, String> infoActividad = new HashMap<String, String>();
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		Actividad actividad = null;
 
 		for (Actividad actividadIterator : camino.getActividades())
@@ -50,9 +94,14 @@ public class TraductorActividad {
 			}
 		}
 		
+		
+		if (actividad==null)
+		{
+			throw new Exception ("No se encontro la actividad");
+		}
+		
 
 		infoActividad.put("Nombre: ", actividad.getNombre() + "\n");
-		infoActividad.put("ID: ", actividad.getId() + "\n");
 		infoActividad.put("Tipo de actividad: ", actividad.getType() + "\n");
 		infoActividad.put("Descripcion: ", actividad.getDescripcion() + "\n");
 		infoActividad.put("Dificultad: ", String.valueOf(actividad.getDificultad()) + "\n");

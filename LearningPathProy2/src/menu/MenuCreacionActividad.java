@@ -18,7 +18,7 @@ public class MenuCreacionActividad
 	static List<String> preguntasExamen = new ArrayList<>();
 	static boolean obligatoria, verdaderoFalso;
 
-	public static void mostrarMenuCreacionActividad(Usuario profesor)
+	public static void mostrarMenuCreacionActividad(String profesorID)
 	{
 		System.out.println("Creacion de actividad");
 		System.out.println("Seleccione el tipo de actividad que desea crear: ");
@@ -35,26 +35,26 @@ public class MenuCreacionActividad
 		switch (tipoActividad)
 		{
 		case 1:
-			menuCreacionQuiz(profesor);
+			menuCreacionQuiz(profesorID);
 			break;
 		case 2:
-			menuCreacionTarea(profesor);
+			menuCreacionTarea(profesorID);
 			break;
 		case 3:
-			menuCreacionExamen(profesor);
+			menuCreacionExamen(profesorID);
 			break;
 		case 4:
-			menuCreacionEncuesta(profesor);
+			menuCreacionEncuesta(profesorID);
 			break;
 		case 5:
-			menuCreacionRecurso(profesor);
+			menuCreacionRecurso(profesorID);
 			break;
 		default:
 			System.out.println("Volviendo al menu principal. \n");
 		}
 	}
 
-	private static void menuCreacionQuiz(Usuario profesor)
+	private static void menuCreacionQuiz(String profesorID)
 	{
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Creacion de quiz");
@@ -140,14 +140,14 @@ public class MenuCreacionActividad
 				}
 				OpcionQuiz opcion2 = new OpcionQuiz(respuesta2, explicacion2, correcta2);
 
-				OpcionQuiz correcta = null;
+				int correcta = 0;
 				if (opcion1.isCorrecta())
 				{
-					correcta = opcion1;
+					correcta = 1;
 				}
 				else
 				{
-					correcta = opcion2;
+					correcta = 2;
 				}
 				PreguntaQuiz pregunta = new PreguntaQuiz(texto, correcta, cantidadOpciones);
 				pregunta.setOpcion(1, opcion1);
@@ -188,7 +188,7 @@ public class MenuCreacionActividad
 				String explicacion4 = scanner.nextLine();
 				OpcionQuiz opcion4 = new OpcionQuiz(respuesta4, explicacion4, correcta4);
 
-				OpcionQuiz correcta = null;
+				int correcta = 0;
 				if (correcta1 && correcta2 && correcta3 && correcta4)
 				{
 					System.out.println("Solo una de las opciones puede ser correcta.");
@@ -203,19 +203,19 @@ public class MenuCreacionActividad
 				{
 					if (correcta1)
 					{
-						correcta = opcion1;
+						correcta = 1;
 					}
 					else if (correcta2)
 					{
-						correcta = opcion2;
+						correcta = 2;
 					}
 					else if (correcta3)
 					{
-						correcta = opcion3;
+						correcta = 3;
 					}
 					else
 					{
-						correcta = opcion4;
+						correcta = 4;
 					}
 				}
 				PreguntaQuiz pregunta = new PreguntaQuiz(texto, correcta, cantidadOpciones);
@@ -230,7 +230,7 @@ public class MenuCreacionActividad
 		try
 		{
 			CreadorQuiz.crearQuizCero(IDCamino, titulo, descripcion, objetivos, dificultad, duracion, fechaLimiteQuiz,
-					obligatoria, calificacionMin, preguntas, profesor.getID(), verdaderoFalso, pos);
+					obligatoria, calificacionMin, preguntas, profesorID, verdaderoFalso, pos);
 			System.out.println("Quiz creado exitosamente.");
 		}
 		catch (Exception e)
@@ -242,7 +242,7 @@ public class MenuCreacionActividad
 
 	}
 
-	private static void menuCreacionTarea(Usuario profesor)
+	private static void menuCreacionTarea(String profesorID)
 	{
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Creacion de tarea");
@@ -286,7 +286,7 @@ public class MenuCreacionActividad
 		try
 		{
 			CreadorTarea.crearTareaCero(IDCamino, titulo, descripcion, objetivos, dificultad, duracion,
-					fechaLimiteTarea, obligatoria, instrucciones, profesor.getID(), pos);
+					fechaLimiteTarea, obligatoria, instrucciones, profesorID, pos);
 			System.out.println("Tarea creada exitosamente.");
 		}
 		catch (Exception e)
@@ -297,7 +297,7 @@ public class MenuCreacionActividad
 		}
 	}
 
-	private static void menuCreacionExamen(Usuario profesor)
+	private static void menuCreacionExamen(String profesorID)
 	{
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Creacion de examen");
@@ -351,7 +351,7 @@ public class MenuCreacionActividad
 		try
 		{
 			CreadorExamen.crearExamenCero(IDCamino, titulo, descripcion, objetivos, dificultad, duracion,
-					fechaLimiteExamen, obligatoria, calificacionMin, preguntasExamen, profesor.getID(), pos);
+					fechaLimiteExamen, obligatoria, calificacionMin, preguntasExamen, profesorID, pos);
 			System.out.println("Examen creado exitosamente.");
 		}
 		catch (Exception e)
@@ -362,7 +362,7 @@ public class MenuCreacionActividad
 		}
 	}
 
-	private static void menuCreacionEncuesta(Usuario profesor)
+	private static void menuCreacionEncuesta(String profesorID)
 	{
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Creacion de encuesta");
@@ -414,7 +414,7 @@ public class MenuCreacionActividad
 		try
 		{
 			CreadorEncuesta.crearEncuestaCero(IDCamino, titulo, descripcion, objetivos, dificultad, duracion,
-					fechaLimiteEncuesta, obligatoria, preguntasEncuesta, profesor.getID(), pos);
+					fechaLimiteEncuesta, obligatoria, preguntasEncuesta, profesorID, pos);
 			System.out.println("Encuesta creada exitosamente.");
 		}
 		catch (Exception e)
@@ -425,7 +425,7 @@ public class MenuCreacionActividad
 		}
 	}
 
-	private static void menuCreacionRecurso(Usuario profesor)
+	private static void menuCreacionRecurso(String profesorID)
 	{
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Creacion de recurso educativo");
@@ -471,7 +471,7 @@ public class MenuCreacionActividad
 		try
 		{
 			CreadorAR.crearARCero(IDCamino, titulo, descripcion, objetivos, dificultad, duracion, fechaLimiteRecurso,
-					obligatoria, URL, instruccionesRecurso, profesor.getID(), pos);
+					obligatoria, URL, instruccionesRecurso, profesorID, pos);
 			System.out.println("Recurso educativo creado exitosamente.");
 		}
 		catch (Exception e)

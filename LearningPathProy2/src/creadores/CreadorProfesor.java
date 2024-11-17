@@ -3,6 +3,7 @@ package creadores;
 import java.util.HashMap;
 
 import controllers.LearningPathSystem;
+import usuarios.Estudiante;
 import usuarios.Profesor;
 
 public class CreadorProfesor
@@ -18,7 +19,15 @@ public class CreadorProfesor
 		{
 			if (profesor.getLogin().equals(login))
 			{
-				throw new Exception ("Ya existe un profesor con ese login");
+				throw new Exception ("Ya existe un usuario con ese login");
+			}
+		}
+		
+		for (Estudiante estudiante: LPS.getEstudiantes().values())
+		{
+			if (estudiante.getLogin().equals(login))
+			{
+				throw new Exception ("Ya existe un usuario con ese login"); 
 			}
 		}
  	

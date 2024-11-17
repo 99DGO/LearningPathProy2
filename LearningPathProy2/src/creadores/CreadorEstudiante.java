@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import controllers.LearningPathSystem;
 import usuarios.Estudiante;
+import usuarios.Profesor;
 
 public class CreadorEstudiante 
 {
@@ -16,15 +17,23 @@ public class CreadorEstudiante
 		{
 			if (estudiante.getLogin().equals(login))
 			{
-				throw new Exception ("Ya existe un estudiante con ese login"); 
+				throw new Exception ("Ya existe un usuario con ese login"); 
 			}
 		}
  	
+		for (Profesor profesor: LPS.getProfesores().values())
+		{
+			if (profesor.getLogin().equals(login))
+			{
+				throw new Exception ("Ya existe un usuario con ese login"); 
+			}
+		}
+		
         Estudiante nuevoEstudiante = new Estudiante(login, password, nombre);  
 		LPS.addEstudiante(nuevoEstudiante);
 
             
-	}
+	} 
 	
 	public static void eliminarEstudiante(String ID) throws Exception {
 		LearningPathSystem LPS= LearningPathSystem.getInstance();

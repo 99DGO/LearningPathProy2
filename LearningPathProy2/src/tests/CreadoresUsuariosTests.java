@@ -72,7 +72,7 @@ public class CreadoresUsuariosTests
 		} 
 		catch (Exception e) 
 		{
-			assertEquals("Ya existe un estudiante con ese login", e.getMessage(), "Deberia sacar error de tener el mismo login.");
+			assertEquals("Ya existe un usuario con ese login", e.getMessage(), "Deberia sacar error de tener el mismo login.");
 		}
 	}
 	
@@ -117,7 +117,7 @@ public class CreadoresUsuariosTests
 		} 
 		catch (Exception e) 
 		{
-			assertEquals("Ya existe un profesor con ese login", e.getMessage(), "Deberia sacar error de tener el mismo login.");
+			assertEquals("Ya existe un usuario con ese login", e.getMessage(), "Deberia sacar error de tener el mismo login.");
 		}
 	}
 }

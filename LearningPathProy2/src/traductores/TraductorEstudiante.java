@@ -40,7 +40,16 @@ public class TraductorEstudiante
 				
 			}
 			
-			int porcentaje = (actvCompletadas/camino.getNumActividadesObligatorias())*100;
+			double porcentaje;
+			
+			if (camino.getNumActividadesObligatorias()==0)
+			{
+				porcentaje=0;
+			}
+			else
+			{
+				porcentaje = ((double) actvCompletadas/ (double)camino.getNumActividadesObligatorias())*100.0;
+			}
 			
 			avances.put(camino.getTitulo(), String.valueOf(porcentaje)+"%");
 
@@ -75,12 +84,17 @@ public class TraductorEstudiante
 		}
 	}
 
-	public static String getNombrefromID(String idEstudiante) 
+	public static String getNombrefromID(String idEstudiante) throws Exception 
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		HashMap<String, Estudiante> estudiantes = LPS.getEstudiantes();
 		
 		Estudiante estudiante=estudiantes.get(idEstudiante);
+		
+		if (estudiante==null)
+		{
+			throw new Exception ("No se encontro el estudiante");
+		}
 		
 		return estudiante.getNombre();
 		
@@ -90,12 +104,17 @@ public class TraductorEstudiante
 	 * Retoran un string que dice el nombre del camino y actividad si el estudiante ha iniciado una actividad.
 	 * Si no ha iniciado una, el string dice "Ninguna actividad activa"
 	 */
-	public static String verActividadActiva(String idEstudiante)
+	public static String verActividadActiva(String idEstudiante) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		HashMap<String, Estudiante> estudiantes = LPS.getEstudiantes();
 		
 		Estudiante estudiante=estudiantes.get(idEstudiante);
+		
+		if (estudiante==null)
+		{
+			throw new Exception ("No se encontro el estudiante");
+		}
 		
 		return estudiante.getNombreCaminoActividadActiva();
 	}

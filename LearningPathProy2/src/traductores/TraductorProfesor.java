@@ -34,12 +34,24 @@ public class TraductorProfesor
 		}
 	}
 	
-	public static String getNombreFromID(String idProfesor)
+	public static String getNombreFromID(String idProfesor) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		HashMap<String, Profesor> profesores = LPS.getProfesores();
 		
-		String nombre= profesores.get(idProfesor).getNombre();
+		Profesor profesor= profesores.get(idProfesor);
+		
+		if (profesor==null)
+		{
+			throw new Exception ("No se encontro el profesor");
+		}
+		
+		String nombre= profesor.getNombre();
+		
+		if (nombre==null)
+		{
+			throw new Exception ("No se encontro el profesor");
+		}
 		
 		return nombre;
 		
@@ -48,11 +60,17 @@ public class TraductorProfesor
 	/*
 	 * Retorna un hashmap que contiene como llave el id del camino y como value le nombre del camino
 	 */
-	public static HashMap<String, String> verCaminosCreados(String idProfesor)
+	public static HashMap<String, String> verCaminosCreados(String idProfesor) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		HashMap<String, Profesor> profesores = LPS.getProfesores();
 		Profesor profesor= profesores.get(idProfesor);
+		
+		if (profesor==null)
+		{
+			throw new Exception ("No se encontro el profesor");
+		}
+		
 		HashMap<String, String> caminosCreados=new HashMap<String, String>();
 		
 		for (CaminoAprendizaje camino: profesor.getCaminos())

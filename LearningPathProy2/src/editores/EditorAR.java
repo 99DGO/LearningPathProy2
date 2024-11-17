@@ -8,19 +8,35 @@ import controllers.LearningPathSystem;
 
 public class EditorAR extends EditorActividadGeneral
 {
-	public static void editRecurso(String recurso, String IDcamino, String IDactividad) 
+	public static void editRecurso(String recurso, String IDcamino, String IDactividad) throws Exception 
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		ActividadRecurso actividad=null;
 		
 		//Consigo la actividad del id
 		for (Actividad actividadIterator: camino.getActividades())
 		{
 			if (actividadIterator.getId().equals(IDactividad))
-			{
+			{				
+				if (!actividadIterator.getType().equals(Actividad.ACTIVIDADRECURSO))
+				{
+					throw new Exception ("La actividad pasada no fue una actividad de recurso.");
+				}
+				
 				actividad= (ActividadRecurso) actividadIterator;
 			}
+		}
+		
+		if (actividad==null)
+		{
+			throw new Exception ("No se encontro la actividad");
 		}
 		
 		actividad.setRecurso(recurso);
@@ -33,10 +49,16 @@ public class EditorAR extends EditorActividadGeneral
 	}
 
 
-	public static void editInstrucciones(String instrucciones, String IDcamino, String IDactividad) 
+	public static void editInstrucciones(String instrucciones, String IDcamino, String IDactividad) throws Exception 
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		ActividadRecurso actividad=null;
 		
 		//Consigo la actividad del id
@@ -44,8 +66,18 @@ public class EditorAR extends EditorActividadGeneral
 		{
 			if (actividadIterator.getId().equals(IDactividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.ACTIVIDADRECURSO))
+				{
+					throw new Exception ("La actividad pasada no fue una actividad de recurso.");
+				}
+				
 				actividad= (ActividadRecurso) actividadIterator;
 			}
+		}
+		
+		if (actividad==null)
+		{
+			throw new Exception ("No se encontro la actividad");
 		}
 		
 		actividad.setInstrucciones(instrucciones);

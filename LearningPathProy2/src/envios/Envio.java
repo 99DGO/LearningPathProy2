@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public abstract class Envio<K, V> {
 
-	protected HashMap<K, V> respuestas;
+	protected HashMap<K, V> respuestas=new HashMap<K,V>();
 	
 	 public Envio() {
 		 this.respuestas = new HashMap<>(); 
@@ -18,7 +18,5 @@ public abstract class Envio<K, V> {
 
 
 	public abstract HashMap<K, V> getRespuestas();
-	 
-	public abstract void agregarRespuesta(K pregunta, V respuesta);
-	   
+	 	   
 }

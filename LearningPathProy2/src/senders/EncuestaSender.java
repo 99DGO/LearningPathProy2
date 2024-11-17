@@ -25,7 +25,7 @@ public class EncuestaSender
 		if (camino==null)
 		{
 			throw new Exception ("No existe un camino con ese id");
-		}
+		} 
 		
 		Actividad actividad = null;
 
@@ -37,16 +37,30 @@ public class EncuestaSender
 			}
 		}
 		
+		if (!actividad.getType().equals(Actividad.ENCUESTA)||actividad==null)
+		{
+			throw new Exception ("El id pasado no es el de una encuesta");
+		}
+		
+		
+		DatosEstudianteEncuesta datosEstudiante =null;
+		try
+		{
+			datosEstudiante = (DatosEstudianteEncuesta) actividad.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
+		}
+		catch (Exception e)
+		{
+			throw new Exception("No se ha inscrito a este camino");
+		}
 		
 		Estudiante estudiante = LPS.getEstudianteIndividual(idEstudiante);
 
-		if (!estudiante.isActividadActiva() || estudiante.getIdActividadActiva().equals(idActividad))
+		if (!estudiante.isActividadActiva() || !estudiante.getIdActividadActiva().equals(idActividad))
 		{
 			throw new Exception ("No se ha iniciado esta actividad");
 		}
 		else
-		{
-			DatosEstudianteEncuesta datosEstudiante = (DatosEstudianteEncuesta) actividad.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
+		{			
 			EnvioEncuesta envio = new EnvioEncuesta(respuestas);
 			datosEstudiante.setEnvio(envio);
 			datosEstudiante.setEstado(DatosEstudianteEncuesta.EXITOSO);

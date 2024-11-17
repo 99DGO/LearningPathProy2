@@ -5,6 +5,7 @@ import java.util.HashMap;
 import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
 import controllers.LearningPathSystem;
+import datosEstudiantes.DatosEstudianteEncuesta;
 import datosEstudiantes.DatosEstudianteExamen;
 import datosEstudiantes.DatosEstudianteTarea;
 import envios.Envio;
@@ -37,15 +38,29 @@ public class ExamenSender
 			}
 		}
 		
+		if (!actividad.getType().equals(Actividad.EXAMEN)||actividad==null)
+		{
+			throw new Exception ("El id pasado no es el de un examen");
+		}
+		
+		DatosEstudianteExamen datosEstudiante =null;
+		try
+		{
+			datosEstudiante = (DatosEstudianteExamen) actividad.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
+		}
+		catch (Exception e)
+		{
+			throw new Exception("No se ha inscrito a este camino");
+		}
+		
 		Estudiante estudiante = LPS.getEstudianteIndividual(idEstudiante);
 
-		if (!estudiante.isActividadActiva() || estudiante.getIdActividadActiva().equals(idActividad))
+		if (!estudiante.isActividadActiva() || !estudiante.getIdActividadActiva().equals(idActividad))
 		{
 			throw new Exception ("No se ha iniciado esta actividad");
 		}
 		else
 		{
-			DatosEstudianteExamen datosEstudiante = (DatosEstudianteExamen) actividad.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
 			EnvioExamen envio = new EnvioExamen(respuestas);
 			datosEstudiante.setEnvio(envio);
 			datosEstudiante.setEstado(DatosEstudianteTarea.ENVIADO);

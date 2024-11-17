@@ -16,10 +16,10 @@ public class ActividadRecurso extends Actividad {
 
 	//Constructor normal
 	public ActividadRecurso(String nombre, String descripcion, List<String> objetivos, double dificultad, int duracion,
-			int[] fechaLim, boolean obligatoria, String recurso, String instrucciones, String creadorLogin, 
+			int[] fechaLim, boolean obligatoria, String recurso, String instrucciones, String creadorID, 
 			CaminoAprendizaje camino, int pos) throws Exception
 	{
-		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorLogin, camino, pos);
+		super(nombre, descripcion, objetivos, dificultad, duracion, fechaLim, obligatoria, creadorID, camino, pos);
 		this.recurso = recurso;
 		this.instrucciones = instrucciones;
 		this.type=ACTIVIDADRECURSO;

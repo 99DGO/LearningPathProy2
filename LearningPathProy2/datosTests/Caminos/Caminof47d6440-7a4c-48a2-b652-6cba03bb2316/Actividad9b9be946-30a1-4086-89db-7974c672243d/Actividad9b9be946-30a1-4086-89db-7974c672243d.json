@@ -1,0 +1,31 @@
+{
+ "descripcion": "Una tarea para ejercer la creatividad",
+ "instrucciones": "Haga un dibujo de su vavriable favorita que muestre sus mejores aspectos",
+ "ratingsTotales": 0,
+ "actividadesSigExitoso": [],
+ "actividadesPrereqs": [],
+ "rating": 0,
+ "datosEstudiantes": [
+  "DatoEstudiante_30cab4a0-8691-4790-8de6-2805fa46879d",
+  "DatoEstudiante_237a3feb-a6c4-4c44-b545-0f08d0649164"
+ ],
+ "resenias": [],
+ "type": "Tarea",
+ "nombre": "Dibujo de variables",
+ "fechaLim": [
+  0,
+  1,
+  0
+ ],
+ "objetivos": [
+  "Saber que es un int",
+  "Saber que es un double",
+  "Saber que es un float"
+ ],
+ "actividadesSigFracaso": [],
+ "duracion": 45,
+ "obligatoria": false,
+ "creadorID": "Profesor-KakashiCentralPersistenciaTest",
+ "id": "Actividad9b9be946-30a1-4086-89db-7974c672243d",
+ "dificultad": 0.5
+}

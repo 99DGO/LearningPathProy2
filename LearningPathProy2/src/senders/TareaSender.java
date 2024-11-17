@@ -31,11 +31,25 @@ public class TareaSender
 				actividad = actividadIterator;
 			}
 		}
-
-		DatosEstudianteTarea datosEstudiante = (DatosEstudianteTarea) actividad.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
+		
+		if (!actividad.getType().equals(Actividad.TAREA)||actividad==null)
+		{
+			throw new Exception ("El id pasado no es el de una tarea");
+		}
+		
+		DatosEstudianteTarea datosEstudiante =null;
+		try
+		{
+			datosEstudiante = (DatosEstudianteTarea) actividad.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
+		}
+		catch (Exception e)
+		{
+			throw new Exception("No se ha inscrito a este camino");
+		}
+		
 		Estudiante estudiante = LPS.getEstudianteIndividual(idEstudiante);
 		
-		if (!estudiante.isActividadActiva() || estudiante.getIdActividadActiva().equals(idActividad))
+		if (!estudiante.isActividadActiva() || !estudiante.getIdActividadActiva().equals(idActividad))
 		{
 			throw new Exception ("No se ha iniciado esta actividad");
 		}

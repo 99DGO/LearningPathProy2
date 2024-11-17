@@ -11,10 +11,16 @@ import controllers.LearningPathSystem;
 
 public class EditorTarea extends EditorActividadGeneral
 { 
-	public static void editInstrucciones(String instrucciones, String IDcamino, String IDactividad) 
+	public static void editInstrucciones(String instrucciones, String IDcamino, String IDactividad) throws Exception 
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		Tarea actividad=null;
 		
 		//Consigo la actividad del id
@@ -22,8 +28,18 @@ public class EditorTarea extends EditorActividadGeneral
 		{
 			if (actividadIterator.getId().equals(IDactividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.TAREA))
+				{
+					throw new Exception ("La actividad pasada no fue una tarea.");
+				}
+				
 				actividad= (Tarea) actividadIterator;
 			}
+		}
+		
+		if (actividad==null)
+		{
+			throw new Exception ("No se encontro la actividad");
 		}
 		
 		actividad.setInstrucciones(instrucciones);
@@ -34,10 +50,16 @@ public class EditorTarea extends EditorActividadGeneral
 		camino.setFechaModificacion(fecha.toString());
 	}
 	
-	public static void editAddActividadSigFracaso(String IDcamino, String IDactividad, String nombreActividadSigFracaso)
+	public static void editAddActividadSigFracaso(String IDcamino, String IDactividad, String nombreActividadSigFracaso) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		Tarea actividad=null;
 		Actividad actividadSigFracaso=null;
 		
@@ -46,8 +68,18 @@ public class EditorTarea extends EditorActividadGeneral
 		{
 			if (actividadIterator.getId().equals(IDactividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.TAREA))
+				{
+					throw new Exception ("La actividad pasada no fue una tarea.");
+				}
+				
 				actividad= (Tarea) actividadIterator;
 			}
+		}
+		
+		if (actividad==null)
+		{
+			throw new Exception ("No se encontro la actividad");
 		}
 		
 		actividad.addActividadSigFracaso(nombreActividadSigFracaso);
@@ -63,6 +95,12 @@ public class EditorTarea extends EditorActividadGeneral
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		Tarea actividad=null;
 		
 		//Consigo la actividad del id
@@ -70,17 +108,27 @@ public class EditorTarea extends EditorActividadGeneral
 		{
 			if (actividadIterator.getId().equals(IDactividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.TAREA))
+				{
+					throw new Exception ("La actividad pasada no fue una tarea.");
+				}
+				
 				actividad= (Tarea) actividadIterator;
 			}
 		}
 		
-		if (pos>=actividad.getActividadesSigFracaso().size() || pos<=0)
+		if (actividad==null)
+		{
+			throw new Exception ("No se encontro la actividad");
+		}
+		
+		if (pos>actividad.getActividadesSigFracaso().size() || pos<=0)
 		{
 			throw new Exception ("El número de la actividad no existe");
 		}
 		else
 		{
-			actividad.delActividadSigFracaso(pos);
+			actividad.delActividadSigFracaso(pos-1);
 		}
 				
 		int version=camino.getVersion();

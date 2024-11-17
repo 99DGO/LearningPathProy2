@@ -27,7 +27,14 @@ public class calificadorExamen
 		{
 			if (actividadIterator.getId().equals(idActividad))
 			{
-				examen = (Examen) actividadIterator;
+				try
+				{
+					examen = (Examen) actividadIterator;
+				}
+				catch (Exception e)
+				{
+					throw new Exception ("La actividad no es un examen");
+				}
 			}
 		}
 		
@@ -35,7 +42,7 @@ public class calificadorExamen
 		{
 			throw new Exception ("No existe una actividad con ese id");
 		}
-		
+		 
 		
 		//Tira exception de que no se encontro el dato del estudiante
 		DatosEstudianteExamen datosEstudiante = (DatosEstudianteExamen) examen.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
@@ -57,9 +64,6 @@ public class calificadorExamen
 			datosEstudiante.setEstado(DatosEstudianteAR.EXITOSO);
 		}
 		
-		Estudiante estudiante = LPS.getEstudianteIndividual(idEstudiante);
-		estudiante.setActividadActiva(false);
-		estudiante.setNombreCaminoActividadActiva("Ninguna");
 	}
 
 }

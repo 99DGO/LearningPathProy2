@@ -61,7 +61,7 @@ public class Quiz extends ActividadCalificable{
 
 	public void addPregunta(PreguntaQuiz pregunta)
 	{
-		this.preguntas.add(pregunta);
+		this.preguntas.add(pregunta); 
 	}
 	
 	public void delPregunta(PreguntaQuiz pregunta)

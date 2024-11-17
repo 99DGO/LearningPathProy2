@@ -43,7 +43,9 @@ public class TraductorCamino
 		
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino=LPS.getCaminoIndividual(IDCamino);
-		if (camino == null) {
+		
+		if (camino == null)
+		{
 			throw new Exception("No se encontró el camino");
 		}
 		
@@ -74,11 +76,16 @@ public class TraductorCamino
 	 * Cada arreglo es de tamaño dos, con el primer valor siendo el IDActividad y el segundo el título de la actividad
 	 * La lista esta en el mismo orden que en el camino
 	 */
-	public static  List<String[]> verActividadesCamino(String IDCamino)
+	public static  List<String[]> verActividadesCamino(String IDCamino) throws Exception
 	{
 		List<String[]> listToReturn = new LinkedList<String[]>();
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino=LPS.getCaminoIndividual(IDCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
 		
 		Iterator<Actividad> it2 = camino.getActividades().iterator();
 		Actividad actividadIterator;

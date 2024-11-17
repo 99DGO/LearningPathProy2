@@ -91,25 +91,31 @@ public class Inscriptor {
 			throw new Exception ("El id de la actividad no existe");
 		}
 		
-		DatosEstudianteActividad datoEst = actividad.getDatoEstudianteIndFromIDEstudiante(estudiante.getID());
-		
-		if (datoEst!=null)
+		DatosEstudianteActividad datoEst;
+		try
 		{
-			if (!estudiante.isActividadActiva())
-			{
-				estudiante.setActividadActiva(true);
-				datoEst.setFechaInicio();
-				estudiante.setNombreCaminoActividadActiva(actividad.getNombre()+" en el camino " +camino.getTitulo());
-			}
-			else
-			{
-				throw new Exception ("No se puede iniciar una nueva actividad porque ya hay una iniciada");
-			}
+			datoEst = actividad.getDatoEstudianteIndFromIDEstudiante(estudiante.getID());
+		}
+		catch (Exception e)
+		{
+			throw new Exception ("No estas inscrito en este camino");
+
+		}
+
+		
+		if (!estudiante.isActividadActiva())
+		{
+			estudiante.setActividadActiva(true);
+			datoEst.setFechaInicio();
+			estudiante.setNombreCaminoActividadActiva(actividad.getNombre()+" en el camino " +camino.getTitulo());
+			estudiante.setIdActividadActiva(IDactividad);
 		}
 		else
 		{
-			throw new Exception ("No estas inscrito en este camino");
+			throw new Exception ("No se puede iniciar una nueva actividad porque ya hay una iniciada");
 		}
+		
+	
 	}
 	
 	

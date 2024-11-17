@@ -12,7 +12,7 @@ public class Autentificador {
 
 	private Autentificador(LearningPathSystem LPS) 
 	{
-		this.LPS = LPS;
+		this.LPS = LPS; 
 	}
 
 	public static Autentificador getInstance(LearningPathSystem LPS) 

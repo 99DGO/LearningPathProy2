@@ -13,6 +13,12 @@ public class EditorEncuesta extends EditorActividadGeneral
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		Encuesta actividad=null;
 		
 		//Consigo la actividad del id
@@ -20,17 +26,28 @@ public class EditorEncuesta extends EditorActividadGeneral
 		{
 			if (actividadIterator.getId().equals(IDactividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.ENCUESTA))
+				{
+					throw new Exception ("La actividad pasada no fue una encuesta.");
+				}
+				
 				actividad= (Encuesta) actividadIterator;
 			}
 		}
 		
-		if (pos>=actividad.getPreguntasAbiertas().size() || pos<=0)
+		if (actividad==null)
+		{
+			throw new Exception ("No se encontro la actividad");
+		}
+		
+		
+		if (pos>actividad.getPreguntasAbiertas().size() || pos<=0)
 		{
 			throw new Exception ("El número de la pregunta no existe");
 		}
 		else
 		{
-			actividad.delPregunta(pos);
+			actividad.delPregunta(pos-1);
 		}
 		
 		
@@ -40,10 +57,16 @@ public class EditorEncuesta extends EditorActividadGeneral
 		camino.setFechaModificacion(fecha.toString());
 	}
 	
-	public static void editAddPregunta(String pregunta, String IDcamino, String IDactividad) 
+	public static void editAddPregunta(String pregunta, String IDcamino, String IDactividad) throws Exception 
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		Encuesta actividad=null;
 		
 		//Consigo la actividad del id
@@ -51,8 +74,18 @@ public class EditorEncuesta extends EditorActividadGeneral
 		{
 			if (actividadIterator.getId().equals(IDactividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.ENCUESTA))
+				{
+					throw new Exception ("La actividad pasada no fue una encuesta.");
+				}
+				
 				actividad= (Encuesta) actividadIterator;
 			}
+		}
+		
+		if (actividad==null)
+		{
+			throw new Exception ("No se encontro la actividad");
 		}
 		
 		actividad.addPregunta(pregunta);

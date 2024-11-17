@@ -77,8 +77,20 @@ public class TraductorEncuesta
 		}
 		
 		HashMap<String, DatosEstudianteActividad> datosEstudiantes= encuesta.getDatosEstudiantes();
-
-		DatosEstudianteEncuesta datoEstInd= (DatosEstudianteEncuesta) datosEstudiantes.get(idEstudiante);
+		DatosEstudianteEncuesta datoEstInd=null;
+		
+		for (DatosEstudianteActividad datoEstIterator: datosEstudiantes.values())
+		{
+			if(datoEstIterator.getIDEstudiante().equals(idEstudiante))
+			{
+				datoEstInd= (DatosEstudianteEncuesta) datoEstIterator;
+			}
+		}
+		
+		if (datoEstInd==null)
+		{
+			throw new Exception("No se encontro el estudiante inscrito en el camino");
+		}
 		
 		if (!datoEstInd.getType().equals(DatosEstudianteActividad.PENDIENTE)) 
 		{
@@ -133,15 +145,17 @@ public class TraductorEncuesta
 		HashMap<String, DatosEstudianteActividad> datosEstudiantes= encuesta.getDatosEstudiantes();
 		
 		//Recorro todos los datos de estudiantes envios
-		for (String idEstudiante: datosEstudiantes.keySet())
+		for (String idDatoEstudiante: datosEstudiantes.keySet())
 		{
-			String nombreEstudiante=TraductorEstudiante.getNombrefromID(idEstudiante);
-						
-			DatosEstudianteEncuesta datoEstInd= (DatosEstudianteEncuesta) datosEstudiantes.get(idEstudiante);
+	
+			DatosEstudianteEncuesta datoEstInd= (DatosEstudianteEncuesta) datosEstudiantes.get(idDatoEstudiante);
 			
+			//Throws exception
+			String nombreEstudiante=TraductorEstudiante.getNombrefromID(datoEstInd.getIDEstudiante());
+					
 			if (!datoEstInd.getEstado().equals(DatosEstudianteActividad.PENDIENTE))
 			{
-				estudiantesConEnvios.put(idEstudiante, nombreEstudiante);
+				estudiantesConEnvios.put(datoEstInd.getIDEstudiante(), nombreEstudiante);
 			}
 		}
 		

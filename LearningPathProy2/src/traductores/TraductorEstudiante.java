@@ -40,7 +40,16 @@ public class TraductorEstudiante
 				
 			}
 			
-			int porcentaje = (actvCompletadas/camino.getNumActividadesObligatorias())*100;
+			double porcentaje;
+			
+			if (camino.getNumActividadesObligatorias()==0)
+			{
+				porcentaje=0;
+			}
+			else
+			{
+				porcentaje = ((double) actvCompletadas/ (double)camino.getNumActividadesObligatorias())*100.0;
+			}
 			
 			avances.put(camino.getTitulo(), String.valueOf(porcentaje)+"%");
 

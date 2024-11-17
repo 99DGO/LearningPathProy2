@@ -11,6 +11,7 @@ import caminosActividades.Tarea;
 import controllers.LearningPathSystem;
 import datosEstudiantes.DatosEstudianteActividad;
 import datosEstudiantes.DatosEstudianteEncuesta;
+import datosEstudiantes.DatosEstudianteExamen;
 import datosEstudiantes.DatosEstudianteTarea;
 import envios.EnvioEncuesta;
 import usuarios.Estudiante;
@@ -82,16 +83,15 @@ public class TraductorTarea
 		HashMap<String, DatosEstudianteActividad> datosEstudiantes= tarea.getDatosEstudiantes();
 		
 		//Recorro todos los datos de estudiantes 
-		for (String idEstudiante: datosEstudiantes.keySet())
-		{
-			Estudiante estudiante=LPS.getEstudianteIndividual(idEstudiante);
-						
-			DatosEstudianteTarea datoEstInd= (DatosEstudianteTarea) datosEstudiantes.get(idEstudiante);
-			
+		for (String idDatosEstudiante: datosEstudiantes.keySet())
+		{						
+			DatosEstudianteTarea datoEstInd= (DatosEstudianteTarea) datosEstudiantes.get(idDatosEstudiante);
+			Estudiante estudiante=LPS.getEstudianteIndividual(datoEstInd.getIDEstudiante());
+
 			if (!datoEstInd.getEstado().equals(DatosEstudianteActividad.PENDIENTE))
 			{
 				String[] nombreEstado= new String[] {estudiante.getNombre(), datoEstInd.getEstado()};
-				estudiantesConEntregas.put(idEstudiante, nombreEstado);
+				estudiantesConEntregas.put(datoEstInd.getIDEstudiante(), nombreEstado);
 			}
 		}
 		
@@ -131,7 +131,20 @@ public class TraductorTarea
 		
 		HashMap<String, DatosEstudianteActividad> datosEstudiantes= tarea.getDatosEstudiantes();
 
-		DatosEstudianteTarea datoEstInd= (DatosEstudianteTarea) datosEstudiantes.get(idEstudiante);
+		DatosEstudianteTarea datoEstInd=null;
+		
+		for (DatosEstudianteActividad datoEstIterator: datosEstudiantes.values())
+		{
+			if(datoEstIterator.getIDEstudiante().equals(idEstudiante))
+			{
+				datoEstInd= (DatosEstudianteTarea) datoEstIterator;
+			}
+		}
+		
+		if (datoEstInd==null)
+		{
+			throw new Exception("No se encontro el estudiante inscrito en el camino");
+		}
 		
 		if (!datoEstInd.getType().equals(DatosEstudianteActividad.PENDIENTE))
 		{	

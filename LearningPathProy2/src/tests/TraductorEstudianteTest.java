@@ -1,12 +1,14 @@
 package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +17,6 @@ import caminosActividades.CaminoAprendizaje;
 import caminosActividades.Examen;
 import controllers.Inscriptor;
 import controllers.LearningPathSystem;
-import datosEstudiantes.DatosEstudianteAR;
-import datosEstudiantes.DatosEstudianteActividad;
-import datosEstudiantes.DatosEstudianteExamen;
 import marcadoresActividades.calificadorExamen;
 import marcadoresActividades.marcadorAR;
 import senders.ExamenSender;
@@ -25,15 +24,17 @@ import traductores.TraductorEstudiante;
 import usuarios.Estudiante;
 import usuarios.Profesor;
 
-public class marcadorARTest 
+public class TraductorEstudianteTest 
 {
 	private static String idEstudiante;
 	private static String idActividad;
+	private static String idActividad3;
 	private static String idCamino;
 	private static CaminoAprendizaje camino;
 	private static ActividadRecurso AR;
 	private static LearningPathSystem LPS;
 	private static Profesor profesor;
+	private static HashMap<String, String> respuestas;
 	private static String idActividadSecundaria;
 	private static Estudiante estudiante;
 	
@@ -70,7 +71,7 @@ public class marcadorARTest
 			
 			Examen examen = new Examen("Tarea Test", "Esto es una tarea sobre cuervos", objetivos, 1.5, 20, 
 					fechaLim, true, 3, preguntasString, profesor.getID(), camino, 0);
-			idActividadSecundaria=examen.getId();
+			String idActividadExamen=examen.getId();
 
 			estudiante= new Estudiante("Trey999", "Trey123", "Trey Clover");
 			LPS.addEstudiante(estudiante);
@@ -78,10 +79,26 @@ public class marcadorARTest
 			idEstudiante= TraductorEstudiante.getIDfromLogin("Trey999");
 			
 			AR= new ActividadRecurso("Lectura Test", "Esto es una lectura de tipos de variables", objetivos, 1.5, 20, fechaLim, 
-					false, "https://www.w3schools.com/python/python_variables.asp", "Leer el articulo.", profesor.getID(), camino, 0);
+					true, "https://www.w3schools.com/python/python_variables.asp", "Leer el articulo.", profesor.getID(), camino, 0);
 			idActividad=AR.getID();
 			
+			ActividadRecurso ARNoOblig= new ActividadRecurso("Lectura Test2", "Esto es una lectura de tipos de variables", objetivos, 1.5, 20, fechaLim, 
+					false, "https://www.w3schools.com/python/python_variables.asp", "Leer el articulo.", profesor.getID(), camino, 0);
+			idActividad3=ARNoOblig.getID();
+
+			respuestas=new HashMap<String, String>();
+			respuestas.put("¿Cuales son las caracteristicas princiaples de los cuervos?", "Que son increibles");
+			respuestas.put("¿Que otro animal es parecido e igual de increible que los cuervos?", "Ninguno alcanza la grandeza de los cuervos");
+			respuestas.put("¿Por que son mejores los cuervos que otros pajaros?", "Porque es una verdad universal");
+		
     		Inscriptor.inscribirseCamino(idCamino, idEstudiante);
+    		Inscriptor.iniciarActivad(idCamino, idActividad, idEstudiante);
+    		marcadorAR.marcarARTerminado(idCamino, idActividad, idEstudiante);
+    		Inscriptor.iniciarActivad(idCamino, idActividadExamen, idEstudiante);
+    		ExamenSender.sendEnvioExamen(idCamino, idActividadExamen, idEstudiante, respuestas);
+    		calificadorExamen.calificarExamen(idCamino, idActividadExamen, idEstudiante, 1);
+    		Inscriptor.iniciarActivad(idCamino, idActividad3, idEstudiante);
+			
 
     	}
 		catch (Exception e) 
@@ -89,77 +106,55 @@ public class marcadorARTest
 			fail("Error en el setup: "+e.getMessage());
 		}
     }
-
-	@Test
-	public void marcarARTerminadoTest()
-	{
-		
-		try 
-		{
-			marcadorAR.marcarARTerminado(idCamino, idActividadSecundaria, idEstudiante);
-			fail("Deberia sacar error por ser actividad de un tipo distinto");
-		} 
-		catch (Exception e) 
-		{
-	    	assertEquals("La actividad pasada no fue una actividad de recurso.", e.getMessage(), "No saco la exception correcta");
-		}
-		
-		try 
-		{
-			marcadorAR.marcarARTerminado(idCamino, idActividad, idEstudiante);
-			fail("Deberia sacar error por no haber iniciado la actividad el estudiante ");
-		} 
-		catch (Exception e) 
-		{
-	    	assertEquals("No se ha iniciado esta actividad", e.getMessage(), "No saco la exception correcta");
-		}
-		
-		try 
-		{
-    		Inscriptor.iniciarActivad(idCamino, idActividad, idEstudiante);
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-    		fail("No deberia salir error: "+e.getMessage());
-		}
-    	
-		
-		try 
-		{
-			marcadorAR.marcarARTerminado(idCamino, idActividadSecundaria, idEstudiante);
-			fail("Deberia sacar error por no ser actividad de recurso ");
-		} 
-		catch (Exception e) 
-		{
-	    	assertEquals("La actividad pasada no fue una actividad de recurso.", e.getMessage(), "No saco la exception correcta");
-		}
-		
-		try 
-		{
-			marcadorAR.marcarARTerminado(idCamino, idActividad, idEstudiante);
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-			fail("No deberia sacar error: "+e.getMessage());
-		}
-		
-	 	DatosEstudianteAR datoEst=null;
-		try 
-		{
-			datoEst = (DatosEstudianteAR) AR.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
-		} 
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-    		fail("No deberia salir error: "+e.getMessage());
-		}
-    	
-    	assertEquals(DatosEstudianteActividad.EXITOSO, datoEst.getEstado(), "No se actualizo el estado del dato del estudiante");
-    	assertEquals(false, estudiante.isActividadActiva(), "No se puso false actividad activa" );
-	    	
-	}
 	
+   @AfterEach
+    void tearDown( ) throws Exception
+    {
+    }
+   
+   @Test
+   public void getNombreFromIDTest()
+   {
+	  try 
+	  {
+		assertEquals("Trey Clover", TraductorEstudiante.getNombrefromID(idEstudiante), "No retorno el nombre correcto");
+	  } 
+	  catch (Exception e) 
+	  {
+		e.printStackTrace();
+		fail("No deberia sacar error: "+ e.getMessage());
+	  }
+   }
+   
+   @Test
+   public void verActividadActivaTest()
+   {
+	   try 
+	   {
+		   String act= TraductorEstudiante.verActividadActiva(idEstudiante);
+		   assertTrue(act.contains("El maravilloso mundo de los cuervos"), "No dice camino");
+		   assertTrue(act.contains("Lectura Test2"), "No dice actividad");
+	   } 
+	   catch (Exception e) 
+	   {
+		e.printStackTrace();
+		fail("No deberia sacar error: "+ e.getMessage());
+	   }
+   }
+   
+   @Test
+   public void getAvancesCaminosTest()
+   {
+	   try
+	   {
+		   HashMap<String,String> avances=TraductorEstudiante.getAvancesCaminos(idEstudiante);
+		   assertEquals("50.0%", avances.get("El maravilloso mundo de los cuervos"), "No calculo porcentajes bien");
+	   }
+	   catch (Exception e) 
+	   {
+		e.printStackTrace();
+		fail("No deberia sacar error: "+ e.getMessage());
+	   }
+   }
 
 }

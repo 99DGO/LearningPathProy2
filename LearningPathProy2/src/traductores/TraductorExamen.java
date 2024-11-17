@@ -83,12 +83,11 @@ public class TraductorExamen
 		HashMap<String, DatosEstudianteActividad> datosEstudiantes= examen.getDatosEstudiantes();
 		
 		//Recorro todos los datos de estudiantes envios
-		for (String idEstudiante: datosEstudiantes.keySet())
+		for (String idDatoEstudiante: datosEstudiantes.keySet())
 		{
-			Estudiante estudiante=LPS.getEstudianteIndividual(idEstudiante);
-						
-			DatosEstudianteExamen datoEstInd= (DatosEstudianteExamen) datosEstudiantes.get(idEstudiante);
-						
+			DatosEstudianteExamen datoEstInd= (DatosEstudianteExamen) datosEstudiantes.get(idDatoEstudiante);
+			Estudiante estudiante=LPS.getEstudianteIndividual(datoEstInd.getIDEstudiante());
+	
 			if (!datoEstInd.getEstado().equals(DatosEstudianteActividad.PENDIENTE))
 			{
 				String calificacionString;
@@ -144,7 +143,19 @@ public class TraductorExamen
 		HashMap<String, DatosEstudianteActividad> datosEstudiantes= examen.getDatosEstudiantes();
 		
 		//Añado las respuestas con sus preguntas
-		DatosEstudianteExamen datoEstInd= (DatosEstudianteExamen) datosEstudiantes.get(idEstudiante);
+		DatosEstudianteExamen datoEstInd=null;
+		for (DatosEstudianteActividad datoEstIterator: datosEstudiantes.values())
+		{
+			if(datoEstIterator.getIDEstudiante().equals(idEstudiante))
+			{
+				datoEstInd= (DatosEstudianteExamen) datoEstIterator;
+			}
+		}
+
+		if(datoEstInd==null)
+		{
+			throw new Exception("No se encontro el estudiante inscrito en el camino");
+		}
 		
 		if (!datoEstInd.getType().equals(DatosEstudianteActividad.PENDIENTE))
 		{

@@ -218,7 +218,7 @@ public class CaminoAprendizaje {
 	}
 
 	public int getNumActividadesObligatorias() {
-		return numActividadesObligatorias;
+		return this.numActividadesObligatorias;
 	}
 
 	public List<Actividad> getActividades() {

@@ -153,7 +153,7 @@ public class TraductorQuiz
 			{
 				if (!actividadIterator.getType().equals(Actividad.QUIZ))
 				{
-					throw new Exception ("La actividad no es un examen");
+					throw new Exception ("La actividad no es un quiz");
 				}
 				
 				examen = (Examen) actividadIterator;

@@ -1,6 +1,5 @@
 {
- "descripcion": "Comprobar que el estudiante sabe diferenciar variables numericos",
- "calificacionMin": 3,
+ "descripcion": "Una encuesta para tomar las opiniones de los estudiantes en el curso.",
  "ratingsTotales": 0,
  "actividadesSigExitoso": [],
  "actividadesPrereqs": [],
@@ -11,12 +10,12 @@
  ],
  "rating": 0,
  "datosEstudiantes": [
-  "DatoEstudiante_2e50b23c-a677-4c47-9fb6-9265ce33ca96",
-  "DatoEstudiante_d208dec5-daf1-4d48-8876-3deafdd41359"
+  "DatoEstudiante_db750764-e081-4268-88d1-70f79cb33953",
+  "DatoEstudiante_0f9e3170-fa3e-452c-8ed2-36db534151fd"
  ],
  "resenias": [],
- "type": "Examen",
- "nombre": "Tipos de variables examen",
+ "type": "Encuesta",
+ "nombre": "Opioniones de pajaros encuesta",
  "fechaLim": [
   0,
   1,
@@ -27,10 +26,9 @@
   "Saber que es un double",
   "Saber que es un float"
  ],
- "actividadesSigFracaso": [],
  "duracion": 30,
  "obligatoria": true,
  "creadorID": "Profesor-KakashiCentralPersistenciaTest",
- "id": "Actividad3ef570fe-a945-46bb-9ee7-69e3b99f02e6",
+ "id": "Actividad6d3f4279-4a9c-4e2e-9c90-2e30f244afed",
  "dificultad": 2.5
 }

@@ -49,7 +49,7 @@ public class TraductorTarea
 	}
 
 	/*
-	 * Retorna un hashmap donde la llave es el id del estudiante y el valor es un String[] con el nombre del estudiante en la primera
+	 * Retorna un hashmap donde la llave es el login del estudiante y el valor es un String[] con el nombre del estudiante en la primera
 	 * posicion y en la segunda si fue exitoso, no fue exitoso, o si solo esta enviado
 	 */
 	public static HashMap<String, String[]> retornarListaEstudiantesEntrega(String idCamino, String idActividad) throws Exception
@@ -91,7 +91,7 @@ public class TraductorTarea
 			if (!datoEstInd.getEstado().equals(DatosEstudianteActividad.PENDIENTE))
 			{
 				String[] nombreEstado= new String[] {estudiante.getNombre(), datoEstInd.getEstado()};
-				estudiantesConEntregas.put(datoEstInd.getIDEstudiante(), nombreEstado);
+				estudiantesConEntregas.put(estudiante.getLogin(), nombreEstado);
 			}
 		}
 		

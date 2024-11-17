@@ -130,7 +130,7 @@ public class CentralPersistenciaTest
 			CreadorCamino.crearCaminoCero("Java123", "Un curso para saber los basicos de java", objetivos, 3, IDprof);
 			
 			String idCamino = TraductorCamino.getIDfromNombre("Python123");
-			
+			 
 			//Creo objetivos de actividad
 			List<String> objetivosActividad = new LinkedList<String>();
 			objetivosActividad.add("Saber que es un int");

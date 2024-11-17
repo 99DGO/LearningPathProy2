@@ -8,6 +8,7 @@ import java.util.Map;
 
 import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
+import caminosActividades.Examen;
 import caminosActividades.OpcionQuiz;
 import caminosActividades.PreguntaQuiz;
 import caminosActividades.Quiz;
@@ -59,6 +60,8 @@ public class TraductorQuiz
 				preguntaInd[numOpcion]=opcionesHash.get(numOpcion).getTexto();
 
 			}
+			
+			preguntas.add(preguntaInd);
 		}
 		
 		return preguntas;
@@ -125,10 +128,40 @@ public class TraductorQuiz
 			
 			String respuesta="La respuesta es "+String.valueOf(preguntaObjeto.getRespuesta())+" porque ";
 			preguntaInd[preguntaObjeto.getCantidadOpciones()+1]=respuesta;
+			
+			preguntas.add(preguntaInd);
 		}
 		
 		return preguntas;
 	}
 
+	public static double retornarCalificacinMin (String idCamino, String idActividad) throws Exception
+	{
+		LearningPathSystem LPS = LearningPathSystem.getInstance();
+		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
+		Examen examen = null;
+
+		for (Actividad actividadIterator : camino.getActividades())
+		{
+			if (actividadIterator.getId().equals(idActividad))
+			{
+				if (!actividadIterator.getType().equals(Actividad.QUIZ))
+				{
+					throw new Exception ("La actividad no es un examen");
+				}
+				
+				examen = (Examen) actividadIterator;
+			}
+		}
+		
+		return examen.getCalificacionMin();
+		
+	}
 	
 }

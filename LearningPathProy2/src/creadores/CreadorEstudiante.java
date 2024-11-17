@@ -20,7 +20,7 @@ public class CreadorEstudiante
 				throw new Exception ("Ya existe un usuario con ese login"); 
 			}
 		}
- 	
+ 	 
 		for (Profesor profesor: LPS.getProfesores().values())
 		{
 			if (profesor.getLogin().equals(login))

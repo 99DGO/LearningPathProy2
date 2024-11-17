@@ -42,7 +42,7 @@ public class TraductorCaminoTest
 			List<String> objetivos = new LinkedList<String>();
 			objetivos.add("Saber la diferencia entre distintos tipos de cuervos.");
 			objetivos.add("Poder sustentar porque los cuervos son tan increibles.");
-			objetivos.add("Volverse fan de los cuervos.");
+			objetivos.add("Volverse fan de los cuervos."); 
 			
 			camino = new CaminoAprendizaje("El maravilloso mundo de los cuervos", "Esto es un curso que te enseña lo increible que son los cuervos",
 					objetivos, 1.5, profesor.getID());

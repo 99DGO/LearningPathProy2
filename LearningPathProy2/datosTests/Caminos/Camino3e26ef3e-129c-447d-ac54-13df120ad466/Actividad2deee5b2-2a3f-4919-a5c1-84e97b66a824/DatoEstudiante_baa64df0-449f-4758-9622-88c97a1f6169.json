@@ -3,6 +3,7 @@
  "estado": "Pendiente",
  "fechaInicio": "No iniciada",
  "fechaFinal": "No finalizada",
- "id": "DatoEstudiante_506f64dd-a2ed-4ed4-b918-44781ceac937",
- "type": "DatosActividadRecurso"
+ "id": "DatoEstudiante_baa64df0-449f-4758-9622-88c97a1f6169",
+ "metodoEntrega": "Sin enviar",
+ "type": "DatosTarea"
 }

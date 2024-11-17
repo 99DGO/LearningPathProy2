@@ -15,6 +15,12 @@ public class EditorExamen extends EditorActividadGeneral
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		Examen actividad=null;
 		
 		//Consigo la actividad del id
@@ -22,8 +28,18 @@ public class EditorExamen extends EditorActividadGeneral
 		{
 			if (actividadIterator.getId().equals(IDactividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.EXAMEN))
+				{
+					throw new Exception ("La actividad pasada no fue un examen.");
+				}
+				
 				actividad= (Examen) actividadIterator;
 			}
+		}
+		
+		if (actividad==null)
+		{
+			throw new Exception ("No se encontro la actividad");
 		}
 		
 		if (pos>=actividad.getPreguntasAbiertas().size() || pos<=0)
@@ -42,10 +58,16 @@ public class EditorExamen extends EditorActividadGeneral
 		camino.setFechaModificacion(fecha.toString());
 	}
 	
-	public static void editAddPregunta(String pregunta, String IDcamino, String IDactividad) 
+	public static void editAddPregunta(String pregunta, String IDcamino, String IDactividad) throws Exception 
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		Examen actividad=null;
 		
 		//Consigo la actividad del id
@@ -53,8 +75,18 @@ public class EditorExamen extends EditorActividadGeneral
 		{
 			if (actividadIterator.getId().equals(IDactividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.EXAMEN))
+				{
+					throw new Exception ("La actividad pasada no fue un examen.");
+				}
+				
 				actividad= (Examen) actividadIterator;
 			}
+		}
+		
+		if (actividad==null)
+		{
+			throw new Exception ("No se encontro la actividad");
 		}
 		
 		actividad.addPregunta(pregunta);
@@ -65,10 +97,16 @@ public class EditorExamen extends EditorActividadGeneral
 		camino.setFechaModificacion(fecha.toString());
 	}
 	
-	public static void editAddActividadSigFracaso(String IDcamino, String IDactividad, String nombreActividadSigFracaso)
+	public static void editAddActividadSigFracaso(String IDcamino, String IDactividad, String nombreActividadSigFracaso) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		Examen actividad=null;
 		Actividad actividadSigFracaso=null;
 		
@@ -77,8 +115,18 @@ public class EditorExamen extends EditorActividadGeneral
 		{
 			if (actividadIterator.getId().equals(IDactividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.EXAMEN))
+				{
+					throw new Exception ("La actividad pasada no fue un examen.");
+				}
+				
 				actividad= (Examen) actividadIterator;
 			}
+		}
+		
+		if (actividad==null)
+		{
+			throw new Exception ("No se encontro la actividad");
 		}
 		
 		actividad.addActividadSigFracaso(nombreActividadSigFracaso);
@@ -94,6 +142,12 @@ public class EditorExamen extends EditorActividadGeneral
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		Examen actividad=null;
 		
 		//Consigo la actividad del id
@@ -101,8 +155,18 @@ public class EditorExamen extends EditorActividadGeneral
 		{
 			if (actividadIterator.getId().equals(IDactividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.EXAMEN))
+				{
+					throw new Exception ("La actividad pasada no fue un examen.");
+				}
+				
 				actividad= (Examen) actividadIterator;
 			}
+		}
+		
+		if (actividad==null)
+		{
+			throw new Exception ("No se encontro la actividad");
 		}
 		
 		if (pos>=actividad.getActividadesSigFracaso().size() || pos<=0)
@@ -120,10 +184,16 @@ public class EditorExamen extends EditorActividadGeneral
 		camino.setFechaModificacion(fecha.toString());
 	}
 	
-	public static void editCalificacionMin(String IDcamino, String IDactividad, double calificacionMin)
+	public static void editCalificacionMin(String IDcamino, String IDactividad, double calificacionMin) throws Exception
 	{
 		LearningPathSystem LPS= LearningPathSystem.getInstance();
 		CaminoAprendizaje camino= LPS.getCaminoIndividual(IDcamino);
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
 		Examen actividad=null;
 		
 		//Consigo la actividad del id
@@ -131,8 +201,18 @@ public class EditorExamen extends EditorActividadGeneral
 		{
 			if (actividadIterator.getId().equals(IDactividad))
 			{
+				if (!actividadIterator.getType().equals(Actividad.EXAMEN))
+				{
+					throw new Exception ("La actividad pasada no fue un examen.");
+				}
+				
 				actividad= (Examen) actividadIterator;
 			}
+		}
+		
+		if (actividad==null)
+		{
+			throw new Exception ("No se encontro la actividad");
 		}
 		
 		actividad.setCalificacionMin(calificacionMin);

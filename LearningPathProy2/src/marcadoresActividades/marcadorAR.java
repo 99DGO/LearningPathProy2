@@ -33,7 +33,7 @@ public class marcadorAR
 			}
 		}
 		
-		if (actividad==null)
+		if (actividad==null) 
 		{
 			throw new Exception ("No existe una actividad con ese id");
 		}

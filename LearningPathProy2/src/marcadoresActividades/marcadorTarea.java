@@ -26,22 +26,35 @@ public class marcadorTarea
 		{
 			if (actividadIterator.getId().equals(idActividad))
 			{
-				actividad = actividadIterator;
+				if (!actividadIterator.getType().equals(Actividad.TAREA))
+				{
+					throw new Exception ("La actividad pasada no es una tarea.");
+				}
+				
+				actividad = actividadIterator;	
 			}
 		}
-		
+		 
 		if (actividad==null)
 		{
 			throw new Exception ("No existe una actividad con ese id");
 		}
 		
-		//Tira exception de que no se encontro el dato del estudiante
-		DatosEstudianteTarea datosEstudiante = (DatosEstudianteTarea) actividad.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
+		DatosEstudianteTarea datosEstudiante=null;
+		try
+		{
+			datosEstudiante = (DatosEstudianteTarea) actividad.getDatoEstudianteIndFromIDEstudiante(idEstudiante);
+		}
+		catch(Exception e)
+		{
+			throw new Exception ("No se ha inscrito a este camino el estudiante");
+		}
 		
 		if (datosEstudiante.getEstado().equals(DatosEstudianteExamen.PENDIENTE))
 		{
 			throw new Exception ("El estudiante no ha hecho un envio para esta tarea.");
 		}
+		
 		
 		
 		if (exito)

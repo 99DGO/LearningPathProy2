@@ -7,6 +7,7 @@ import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
 import controllers.LearningPathSystem;
 import datosEstudiantes.DatosEstudianteActividad;
+import datosEstudiantes.DatosEstudianteExamen;
 import usuarios.Estudiante;
 import usuarios.Profesor;
 
@@ -58,6 +59,52 @@ public class TraductorEstudiante
 		return avances;
 	}
 
+	
+	/**
+	 * retorna un HashMap<String, String> que contiene como llave el nombre de la actividad y como valor el estado de la actividad.
+	 * Si está calificada, muestra la calificacion
+	 */
+	public static HashMap<String, String> getAvancesCaminoIndividual(String IDestudiante, String idCamino) throws Exception
+	{
+
+		LearningPathSystem LPS= LearningPathSystem.getInstance();
+		Estudiante estudiante=LPS.getEstudianteIndividual(IDestudiante);
+		
+		CaminoAprendizaje camino=LPS.getCaminoIndividual(idCamino);
+		
+		HashMap<String, String> avances = new HashMap<String, String>();
+		
+		if (camino==null)
+		{
+			throw new Exception ("No se encontro el camino");
+		}
+		
+		for (Actividad actividadIterator: camino.getActividades())
+		{
+			DatosEstudianteActividad datoEst = actividadIterator.getDatoEstudianteIndFromIDEstudiante(estudiante.getID());
+			
+			String estado;
+			if (actividadIterator.getType()==Actividad.EXAMEN && !datoEst.getEstado().equals(DatosEstudianteActividad.PENDIENTE) && !datoEst.getEstado().equals(DatosEstudianteActividad.ENVIADO))
+			{
+				estado=datoEst.getEstado()+" con calificacion de: "+ ((DatosEstudianteExamen) datoEst).getCalificacion();;
+
+			}
+			else if (actividadIterator.getType()==Actividad.QUIZ && !datoEst.getEstado().equals(DatosEstudianteActividad.PENDIENTE))
+			{
+				estado=datoEst.getEstado()+" con calificacion de: "+ ((DatosEstudianteExamen) datoEst).getCalificacion();;
+			}
+			else
+			{
+				estado=datoEst.getEstado();
+			}
+				
+			avances.put(actividadIterator.getNombre(), estado);
+
+		}
+		
+		return avances;
+	}
+	
 	public static String getIDfromLogin(String login) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();

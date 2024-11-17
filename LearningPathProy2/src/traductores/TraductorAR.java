@@ -14,7 +14,7 @@ public class TraductorAR
 	public static String[] retornarInstruccionesRecurso(String idCamino, String idActividad) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
-		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino); 
 		
 		if (camino==null)
 		{

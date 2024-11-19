@@ -193,7 +193,8 @@ public class MenuProfesor
 			break;
 
 		case 6:
-			// TODO Ver envios de actividades
+			// Ver envios de actividades
+			MenuCalificarEnvios.mostrarMenuCalificarEnvios(profesor.getID());
 			break;
 
 		case 7:

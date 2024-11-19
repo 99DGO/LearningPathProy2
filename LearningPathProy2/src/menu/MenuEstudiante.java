@@ -1,6 +1,7 @@
 package menu;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import controllers.*;
@@ -60,11 +61,11 @@ public class MenuEstudiante
 		System.out.println("3. Ver caminos disponibles e inscribirse a uno");
 		System.out.println("4. Ver actividades de caminos inscritos e iniciar una");
 		System.out.println("0. Salir");
-
+	
 		Scanner scanner = new Scanner(System.in);
 		Integer opcion = scanner.nextInt();
 		scanner.nextLine();
-
+	
 		switch (opcion)
 		{
 		case 1:
@@ -88,13 +89,12 @@ public class MenuEstudiante
 		}
 	}
 
-	private static void verAvancesCaminos(String estudianteID)
+	public static void verAvancesCaminos(String idEstudiante)
 	{
 		System.out.println("Avances en todos los caminos");
-		String ID = estudiante.getID();
 		try
 		{
-			HashMap<String, String> avances = TraductorEstudiante.getAvancesCaminos(ID);
+			HashMap<String, String> avances = TraductorEstudiante.getAvancesCaminos(idEstudiante);
 			for (HashMap.Entry<String, String> camino : avances.entrySet())
 			{
 				System.out.println("Camino: " + camino.getKey() + " | Avance: " + camino.getValue());
@@ -105,6 +105,108 @@ public class MenuEstudiante
 		{
 			e.getMessage();
 		}
+	}
+
+	public static void realizarEnvioActividad(String idEstudiante)
+	{
+		System.out.println("Realizar envío de actividad");
+		System.out.println("Actividad actual: ");
+		try
+		{
+			String actividad = TraductorEstudiante.verActividadActiva(idEstudiante);
+			System.out.println("Actividad: " + actividad);
+			// TODO continuar creando envío de una actividad, hay que mostrar los detalles de la act y 
+			// preguntas y todo al estudiante para que sepa qué está respondiendo
+		}
+		catch (Exception e)
+		{
+			e.getMessage();
+		}
+		
+	}
+
+	public static void verCaminosDisponibles(String idEstudiante)
+	{
+		System.out.println("Caminos disponibles");
+		try
+		{
+			HashMap<String, String> caminos = TraductorCamino.verTodosCaminos();
+			for (HashMap.Entry<String, String> camino : caminos.entrySet())
+			{
+				System.out.println("Titulo: " + camino.getKey() + " | Creador: " + camino.getValue());
+			}
+		}
+		catch (Exception e)
+		{
+			e.getMessage();
+		}
+		System.out.println("Desea inscribirse a un camino?");
+		System.out.println("1. Si");
+		System.out.println("2. No");
+		Scanner scanner = new Scanner(System.in);
+		int inscribir = scanner.nextInt();
+		scanner.nextLine();
+		if (inscribir == 1)
+		{
+			System.out.println("Ingrese el titulo del camino al que desea inscribirse: ");
+			String titulo = scanner.nextLine();
+			try
+			{
+				String idCamino = TraductorCamino.getIDfromNombre(titulo);
+				Inscriptor.inscribirseCamino(idCamino, idEstudiante);
+				System.out.println("Inscripción exitosa.");
+			}
+			catch (Exception e)
+			{
+				e.getMessage();
+			}
+		}
+		
+	}
+
+	public static void iniciarActividad(String idEstudiante)
+	{
+		String idCamino = "";
+		System.out.println("Iniciar actividad");
+		System.out.println("Ingrese el nombre del camino: ");
+		Scanner scanner = new Scanner(System.in);
+		String nombreCamino = scanner.nextLine();
+		try
+		{
+			idCamino = TraductorCamino.getIDfromNombre(nombreCamino);
+		} 
+		catch (Exception e)
+		{
+			e.getMessage();
+		}
+		
+		try
+		{
+			HashMap<String, String> caminosMap = TraductorEstudiante.getAvancesCaminos(idEstudiante);
+			for (String titulo : caminosMap.keySet())
+			{
+				if (titulo.equals(nombreCamino))
+				{
+					List<String[]> actividades  = TraductorCamino.verActividadesCamino(idCamino);
+					for (String[] actividad : actividades)
+					{
+						System.out.println("Actividad: " + actividad[1]);
+					}
+			System.out.println("Ingrese el nombre de la actividad que desea iniciar: ");
+			String nombreActividad = scanner.nextLine();
+			String idActividad = TraductorActividad.getIDfromNombre(idCamino, nombreActividad);
+			Inscriptor.iniciarActivad(idCamino, idActividad, idEstudiante);
+			System.out.println("Actividad iniciada.");
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			e.getMessage();
+		}
+		
+		
+		
 	}
 
 }

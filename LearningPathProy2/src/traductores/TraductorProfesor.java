@@ -54,7 +54,7 @@ public class TraductorProfesor
 		}
 		
 		return nombre;
-		
+		 
 	}
 	
 	/*

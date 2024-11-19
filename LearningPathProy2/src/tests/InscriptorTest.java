@@ -1,5 +1,6 @@
 package tests;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.LinkedList;
@@ -130,7 +131,10 @@ public class InscriptorTest
 		
 		assertEquals(AR.getId(), estudiante.getIdActividadActiva(), "No se guardo el id de actividad activa correcto");
 		assertEquals(true, estudiante.isActividadActiva(), "No se puso el booleano de id de actividad activa");
-
+		assertTrue(estudiante.getNombreCaminoActividadActiva().contains("Lectura Test"), "No se guardo bien el nombre de la actividad");
+		assertTrue(estudiante.getNombreCaminoActividadActiva().contains("El maravilloso mundo de los cuervos"), "No se guardo bien el nombre del camino");
+		String [] split =estudiante.getNombreCaminoActividadActiva().split(";");
+		assertEquals(3, split.length, "No se guardo bien el nombre");
 		
 		try 
 		{

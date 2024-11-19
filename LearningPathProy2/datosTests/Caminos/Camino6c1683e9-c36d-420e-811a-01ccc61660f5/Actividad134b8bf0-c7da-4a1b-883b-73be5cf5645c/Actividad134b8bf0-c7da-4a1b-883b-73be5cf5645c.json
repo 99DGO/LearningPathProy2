@@ -1,0 +1,96 @@
+{
+ "descripcion": "Esto es un quiz donde te preguntan que tipo de variable es más indicado",
+ "calificacionMin": 3,
+ "ratingsTotales": 0,
+ "actividadesSigExitoso": [],
+ "actividadesPrereqs": [],
+ "rating": 0,
+ "datosEstudiantes": [
+  "DatoEstudiante_1294bfdb-9ba3-44af-94ea-7401e9aaf69d",
+  "DatoEstudiante_3e5d2ec7-1a98-45b5-b82f-442cbc5b59e5"
+ ],
+ "resenias": [],
+ "type": "Quiz",
+ "nombre": "Quiz de asignación variables",
+ "fechaLim": [
+  0,
+  1,
+  0
+ ],
+ "verdaderoFalso": false,
+ "objetivos": [
+  "Saber que es un int",
+  "Saber que es un double",
+  "Saber que es un float"
+ ],
+ "actividadesSigFracaso": [],
+ "duracion": 15,
+ "obligatoria": false,
+ "creadorID": "Profesor-KakashiCentralPersistenciaTest",
+ "preguntas": [
+  {
+   "textoPregunta": "Si quiero representar el número de vacas que tengo, que tipo de variable debería usar?",
+   "opciones": [
+    {
+     "texto": "int",
+     "correcta": true,
+     "explicacion": "Porque es un entero",
+     "numOpcion": 1
+    },
+    {
+     "texto": "double",
+     "correcta": false,
+     "explicacion": "Porque no es un decimal",
+     "numOpcion": 2
+    },
+    {
+     "texto": "float",
+     "correcta": false,
+     "explicacion": "Porque no es un decimal",
+     "numOpcion": 3
+    },
+    {
+     "texto": "string",
+     "correcta": false,
+     "explicacion": "Porque es un numero",
+     "numOpcion": 4
+    }
+   ],
+   "respuesta": 1,
+   "cantidadOpciones": 4
+  },
+  {
+   "textoPregunta": "Cual es el mejor pajaro?",
+   "opciones": [
+    {
+     "texto": "Paloma",
+     "correcta": false,
+     "explicacion": "Porque son sucias",
+     "numOpcion": 1
+    },
+    {
+     "texto": "Cuervo",
+     "correcta": true,
+     "explicacion": "Porque son hermosos e inteligentes",
+     "numOpcion": 2
+    },
+    {
+     "texto": "Pechirrojo",
+     "correcta": false,
+     "explicacion": "Tierno pero es muy pequeño",
+     "numOpcion": 3
+    },
+    {
+     "texto": "Vaca",
+     "correcta": false,
+     "explicacion": "La vaca no es un pajaro",
+     "numOpcion": 4
+    }
+   ],
+   "respuesta": 2,
+   "cantidadOpciones": 4
+  }
+ ],
+ "id": "Actividad134b8bf0-c7da-4a1b-883b-73be5cf5645c",
+ "dificultad": 1.5
+}

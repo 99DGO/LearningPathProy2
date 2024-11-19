@@ -117,6 +117,18 @@ public class MenuEstudiante
 			System.out.println("Actividad: " + actividad);
 			// TODO continuar creando envío de una actividad, hay que mostrar los detalles de la act y 
 			// preguntas y todo al estudiante para que sepa qué está respondiendo
+			String[] actividadAll = actividad.split(";");
+			String nombreActividad = actividadAll[0];
+			String nombreCamino = actividadAll[2];
+			String idCamino = TraductorCamino.getIDfromNombre(nombreCamino);
+			String idActividad = TraductorActividad.getIDfromNombre(idCamino, nombreActividad);
+			HashMap<String, String> infoActividad = TraductorActividad.verInfoGeneralActividad(idCamino, idActividad);
+			for (HashMap.Entry<String, String> info : infoActividad.entrySet())
+			{
+				System.out.println(info.getKey() + ": " + info.getValue());
+			}
+			MenuRealizarEnvio.mostrarMenuRealizarEnvio(idEstudiante, idCamino, idActividad);
+			
 		}
 		catch (Exception e)
 		{

@@ -112,9 +112,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar el titulo.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar el titulo: "+ e.getMessage());
 			}
 			break;
 
@@ -130,9 +128,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la descripcion.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la descripcion: " + e.getMessage());
 			}
 			break;
 
@@ -148,9 +144,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la dificultad.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la dificultad: "+ e.getMessage());
 			}
 			break;
 
@@ -166,9 +160,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la duracion.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la duracion: "+ e.getMessage());
 			}
 			break;
 
@@ -184,9 +176,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir el objetivo.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir el objetivo: "+ e.getMessage());
 			}
 			break;
 
@@ -202,9 +192,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar el objetivo.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar el objetivo: "+ e.getMessage());
 			}
 			break;
 
@@ -227,9 +215,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la fecha de entrega.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la fecha de entrega: "+ e.getMessage());
 			}
 			break;
 
@@ -245,9 +231,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la obligatoriedad.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la obligatoriedad: "+ e.getMessage());
 			}
 			break;
 
@@ -263,9 +247,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir el prerequisito.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir el prerequisito: "+ e.getMessage());
 			}
 			break;
 
@@ -281,9 +263,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar el prerequisito.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar el prerequisito: "+ e.getMessage());
 			}
 			break;
 
@@ -300,9 +280,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir la actividad siguiente (exitosa).");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir la actividad siguiente (exitosa): "+ e.getMessage());
 			}
 			break;
 
@@ -318,9 +296,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar la actividad siguiente (exitosa).");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar la actividad siguiente (exitosa): "+ e.getMessage());
 			}
 			break;
 
@@ -337,9 +313,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la calificacion minima.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la calificacion minima: "+ e.getMessage());
 			}
 			break;
 
@@ -393,7 +367,7 @@ public class MenuEdicionActividad
 				}
 				catch (Exception e)
 				{
-					e.getMessage();
+					System.out.println("Ocurrió un error al añadir pregunta: " + e.getMessage());
 				}
 
 			}
@@ -470,7 +444,7 @@ public class MenuEdicionActividad
 				}
 				catch (Exception e)
 				{
-					e.getMessage();
+					System.out.println("Ocurrió un error al añadir pregunta: " + e.getMessage());
 				}
 			}
 			break;
@@ -487,9 +461,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar la pregunta.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar la pregunta: "+ e.getMessage());
 			}
 			break;
 
@@ -507,9 +479,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir la actividad siguiente (fallida).");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir la actividad siguiente (fallida): "+ e.getMessage());
 			}
 			break;
 
@@ -525,9 +495,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar la actividad siguiente (fallida).");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar la actividad siguiente (fallida): " + e.getMessage());
 			}
 			break;
 
@@ -573,9 +541,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar el titulo.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar el titulo: " + e.getMessage());
 			}
 			break;
 
@@ -591,9 +557,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la descripcion.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la descripcion: "+ e.getMessage());
 			}
 
 		case 3:
@@ -608,9 +572,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la dificultad.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la dificultad: "+ e.getMessage());
 			}
 			break;
 
@@ -626,9 +588,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la duracion.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la duracion: "+ e.getMessage());
 			}
 			break;
 
@@ -644,9 +604,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir el objetivo.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir el objetivo: "+ e.getMessage());
 			}
 			break;
 
@@ -662,9 +620,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar el objetivo.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar el objetivo: "+ e.getMessage());
 			}
 			break;
 
@@ -687,9 +643,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la fecha de entrega.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la fecha de entrega: "+ e.getMessage());
 			}
 			break;
 
@@ -705,9 +659,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la obligatoriedad.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la obligatoriedad: "+ e.getMessage());
 			}
 			break;
 
@@ -723,9 +675,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir el prerequisito.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir el prerequisito: "+ e.getMessage());
 			}
 			break;
 
@@ -741,9 +691,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar el prerequisito.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar el prerequisito: "+ e.getMessage());
 			}
 			break;
 
@@ -760,9 +708,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir la actividad siguiente (exitosa).");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir la actividad siguiente (exitosa): "+ e.getMessage());
 			}
 			break;
 
@@ -778,9 +724,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar la actividad siguiente (exitosa).");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar la actividad siguiente (exitosa): "+ e.getMessage());
 			}
 			break;
 
@@ -798,9 +742,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir la actividad siguiente (fallida).");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir la actividad siguiente (fallida): "+ e.getMessage());
 			}
 			break;
 
@@ -816,9 +758,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar la actividad siguiente (fallida).");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar la actividad siguiente (fallida): " + e.getMessage());
 			}
 			break;
 
@@ -835,9 +775,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar las instrucciones.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar las instrucciones: " + e.getMessage());
 			}
 			break;
 
@@ -880,9 +818,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar el titulo.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar el titulo: " + e.getMessage());
 			}
 			break;
 
@@ -898,9 +834,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la descripcion.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la descripcion: "+ e.getMessage());
 			}
 			break;
 
@@ -916,9 +850,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la dificultad.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la dificultad: "+ e.getMessage());
 			}
 			break;
 
@@ -934,9 +866,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la duracion.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la duracion: "+ e.getMessage());
 			}
 			break;
 
@@ -952,9 +882,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir el objetivo.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir el objetivo: "+ e.getMessage());
 			}
 			break;
 
@@ -970,9 +898,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar el objetivo.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar el objetivo: " + e.getMessage());
 			}
 			break;
 
@@ -995,9 +921,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la fecha de entrega.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la fecha de entrega: "+ e.getMessage());
 			}
 			break;
 
@@ -1013,9 +937,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la obligatoriedad.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la obligatoriedad: " + e.getMessage());
 			}
 			break;
 
@@ -1031,9 +953,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir el prerequisito.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir el prerequisito: "+ e.getMessage());
 			}
 			break;
 
@@ -1049,9 +969,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar el prerequisito.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar el prerequisito: " + e.getMessage());
 			}
 			break;
 
@@ -1068,9 +986,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir la actividad siguiente (exitosa).");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir la actividad siguiente (exitosa): "+ e.getMessage());
 			}
 			break;
 
@@ -1086,9 +1002,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar la actividad siguiente (exitosa).");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar la actividad siguiente (exitosa): " + e.getMessage());
 			}
 			break;
 
@@ -1105,9 +1019,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir la pregunta.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir la pregunta: " + e.getMessage());
 			}
 			break;
 
@@ -1123,9 +1035,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar la pregunta.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar la pregunta: " + e.getMessage());
 			}
 			break;
 
@@ -1171,9 +1081,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar el titulo.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar el titulo: " + e.getMessage());
 			}
 			break;
 
@@ -1189,9 +1097,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la descripcion.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la descripcion: " + e.getMessage());
 			}
 			break;
 
@@ -1207,9 +1113,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la dificultad.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la dificultad: " + e.getMessage());
 			}
 			break;
 
@@ -1225,9 +1129,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la duracion.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la duracion: " + e.getMessage());
 			}
 			break;
 
@@ -1243,9 +1145,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir el objetivo.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir el objetivo: " + e.getMessage());
 			}
 			break;
 
@@ -1261,9 +1161,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar el objetivo.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar el objetivo: " + e.getMessage());
 			}
 			break;
 
@@ -1286,9 +1184,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la fecha de entrega.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la fecha de entrega: " + e.getMessage());
 			}
 			break;
 
@@ -1304,9 +1200,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la obligatoriedad.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la obligatoriedad: " + e.getMessage());
 			}
 			break;
 
@@ -1322,9 +1216,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir el prerequisito.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir el prerequisito: "+ e.getMessage());
 			}
 			break;
 
@@ -1340,9 +1232,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar el prerequisito.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar el prerequisito: " + e.getMessage());
 			}
 			break;
 
@@ -1359,9 +1249,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir la actividad siguiente (exitosa).");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir la actividad siguiente (exitosa): "+ e.getMessage());
 			}
 			break;
 
@@ -1377,9 +1265,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar la actividad siguiente (exitosa).");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar la actividad siguiente (exitosa): "+ e.getMessage());
 			}
 			break;
 
@@ -1398,9 +1284,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir la pregunta.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir la pregunta: " + e.getMessage());
 			}
 			break;
 
@@ -1416,9 +1300,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar la pregunta.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar la pregunta: " + e.getMessage());
 			}
 			break;
 
@@ -1435,9 +1317,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir la actividad siguiente (fallida).");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir la actividad siguiente (fallida): " + e.getMessage());
 			}
 			break;
 
@@ -1453,9 +1333,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar la actividad siguiente (fallida).");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar la actividad siguiente (fallida): " + e.getMessage());
 			}
 			break;
 
@@ -1472,9 +1350,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la calificacion minima.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la calificacion minima: " + e.getMessage());
 			}
 			break;
 
@@ -1518,9 +1394,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar el titulo.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar el titulo: " + e.getMessage());
 			}
 			break;
 
@@ -1536,9 +1410,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la descripcion.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la descripcion: " + e.getMessage());
 			}
 			break;
 
@@ -1554,9 +1426,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la dificultad.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la dificultad: " + e.getMessage());
 			}
 			break;
 
@@ -1572,9 +1442,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la duracion.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la duracion: " + e.getMessage());
 			}
 			break;
 			
@@ -1590,9 +1458,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir el objetivo.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir el objetivo: " + e.getMessage());
 			}
 			break;
 			
@@ -1608,9 +1474,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar el objetivo.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar el objetivo: " + e.getMessage());
 			}
 			break;
 			
@@ -1633,9 +1497,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la fecha de entrega.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la fecha de entrega: " + e.getMessage());
 			}
 			break;
 			
@@ -1651,9 +1513,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar la obligatoriedad.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar la obligatoriedad: " + e.getMessage());
 			}
 			break;
 			
@@ -1669,9 +1529,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir el prerequisito.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir el prerequisito: "+ e.getMessage());
 			}
 			break;
 		
@@ -1687,9 +1545,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar el prerequisito.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar el prerequisito: " + e.getMessage());
 			}
 			break;
 			
@@ -1706,9 +1562,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al añadir la actividad siguiente (exitosa).");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al añadir la actividad siguiente (exitosa): " + e.getMessage());
 			}
 			break;
 			
@@ -1724,9 +1578,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al eliminar la actividad siguiente (exitosa).");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al eliminar la actividad siguiente (exitosa): " + e.getMessage());
 			}
 			break;
 			
@@ -1742,9 +1594,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar el recurso.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar el recurso: " + e.getMessage());
 			}
 			break;
 			
@@ -1761,9 +1611,7 @@ public class MenuEdicionActividad
 			}
 			catch (Exception e)
 			{
-				System.out.println("Ocurrió un error al editar las instrucciones.");
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al editar las instrucciones: " + e.getMessage());
 			}
 			break;
 			

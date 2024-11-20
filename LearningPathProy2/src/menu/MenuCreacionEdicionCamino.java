@@ -41,9 +41,7 @@ public class MenuCreacionEdicionCamino
 		}
 		catch (Exception e)
 		{
-			System.out.println("Ocurrió un error al crear el camino.");
-			e.getMessage();
-			e.printStackTrace();
+			System.out.println("Ocurrió un error al crear el camino: "+ e.getMessage());
 		}
 
 	}
@@ -99,9 +97,7 @@ public class MenuCreacionEdicionCamino
 				}
 				catch (Exception e)
 				{
-					System.out.println("Ocurrió un error al editar el titulo.");
-					e.getMessage();
-					e.printStackTrace();
+					System.out.println("Ocurrió un error al editar el titulo: "+ e.getMessage());
 				}
 				break;
 
@@ -118,9 +114,7 @@ public class MenuCreacionEdicionCamino
 				}
 				catch (Exception e)
 				{
-					System.out.println("Ocurrió un error al editar la descripcion.");
-					e.getMessage();
-					e.printStackTrace();
+					System.out.println("Ocurrió un error al editar la descripcion: "+ e.getMessage());
 				}
 				break;
 
@@ -136,9 +130,7 @@ public class MenuCreacionEdicionCamino
 				}
 				catch (Exception e)
 				{
-					System.out.println("Ocurrió un error al editar la dificultad.");
-					e.getMessage();
-					e.printStackTrace();
+					System.out.println("Ocurrió un error al editar la dificultad: "+ e.getMessage());
 				}
 				break;
 
@@ -154,9 +146,7 @@ public class MenuCreacionEdicionCamino
 				}
 				catch (Exception e)
 				{
-					System.out.println("Ocurrió un error al añadir el objetivo.");
-					e.getMessage();
-					e.printStackTrace();
+					System.out.println("Ocurrió un error al añadir el objetivo: "+ e.getMessage());
 				}
 				break;
 
@@ -172,9 +162,7 @@ public class MenuCreacionEdicionCamino
 				}
 				catch (Exception e)
 				{
-					System.out.println("Ocurrió un error al eliminar el objetivo.");
-					e.getMessage();
-					e.printStackTrace();
+					System.out.println("Ocurrió un error al eliminar el objetivo: "+ e.getMessage());
 				}
 				break;
 
@@ -195,9 +183,7 @@ public class MenuCreacionEdicionCamino
 				}
 				catch (Exception e)
 				{
-					System.out.println("Ocurrió un error al eliminar la actividad.");
-					e.getMessage();
-					e.printStackTrace();
+					System.out.println("Ocurrió un error al eliminar la actividad: "+ e.getMessage());
 				}
 
 			case 8:
@@ -226,9 +212,7 @@ public class MenuCreacionEdicionCamino
 				}
 				catch (Exception e)
 				{
-					System.out.println("Ocurrió un error al mover la actividad.");
-					e.getMessage();
-					e.printStackTrace();
+					System.out.println("Ocurrió un error al mover la actividad: "+ e.getMessage());
 				}
 
 			default:
@@ -238,8 +222,7 @@ public class MenuCreacionEdicionCamino
 		}
 		catch (Exception e)
 		{
-			e.getMessage();
-			e.printStackTrace();
+			System.out.println("Ocurrió un error al ver la información del camino: " + e.getMessage());
 		}
 	}
 

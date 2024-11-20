@@ -3,6 +3,7 @@ package menu;
 import java.util.Scanner;
 import controllers.Autentificador;
 import controllers.LearningPathSystem;
+import persistencia.CentralPersistencia;
 import usuarios.Estudiante;
 import usuarios.Profesor;
 import usuarios.Usuario;
@@ -13,7 +14,16 @@ public class MenuGeneral
 	public static Autentificador autentificador = null;
 
 	public static void main(String[] args)
-	{
+	{	
+		try
+		{
+			CentralPersistencia.cargarTodo(true);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error al cargar los datos: " + e.getMessage());
+		}
+		
 		if (LPS == null)
 			LPS = LearningPathSystem.getInstance();
 
@@ -55,6 +65,14 @@ public class MenuGeneral
 			if (cerrar == 1)
 			{
 				System.out.println("Gracias por usar el sistema. \n¡Hasta luego!");
+				try
+				{
+					CentralPersistencia.guardarTodo(true);
+				}
+				catch (Exception e)
+				{
+					System.out.println("Error al guardar los datos: " + e.getMessage());
+				}
 				System.exit(0);
 			}
 			else if (cerrar == 2)
@@ -110,7 +128,7 @@ public class MenuGeneral
 		}
 		catch (Exception e)
 		{
-			System.out.println(e.getMessage());
+			System.out.println("Ocurrió un error en el proceso de inicio de sesión: " + e.getMessage());
 		}
 
 	}
@@ -162,8 +180,7 @@ public class MenuGeneral
 			}
 			catch (Exception e)
 			{
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error en el proceso de registro: " + e.getMessage());
 			}
 		}
 

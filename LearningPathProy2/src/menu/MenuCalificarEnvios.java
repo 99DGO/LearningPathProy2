@@ -51,7 +51,7 @@ public class MenuCalificarEnvios
 		}
 		catch (Exception e)
 		{
-			e.getMessage();
+			System.out.println("Ocurrió un error al obtener el ID del camino: " + e.getMessage());
 		}
 
 		if (IDCamino != null)
@@ -98,7 +98,7 @@ public class MenuCalificarEnvios
 			}
 			catch (Exception e)
 			{
-				e.getMessage();
+				System.out.println("Ocurrió un error al listar los envíos: " + e.getMessage());
 			}
 		}
 
@@ -125,7 +125,7 @@ public class MenuCalificarEnvios
 		}
 		catch (Exception e)
 		{
-			e.getMessage();
+			System.out.println("Ocurrió un error al obtener la información de la actividad: " + e.getMessage());
 		}
 
 		if (tipoActividad != null)
@@ -138,7 +138,7 @@ public class MenuCalificarEnvios
 			catch (Exception e)
 			{
 
-				e.getMessage();
+				System.out.println("Ocurrió un error al obtener el ID del estudiante: " + e.getMessage());
 			}
 			String idActividad = "";
 			try
@@ -147,7 +147,7 @@ public class MenuCalificarEnvios
 			}
 			catch (Exception e)
 			{
-				e.getMessage();
+				System.out.println("Ocurrió un error al obtener el ID de la actividad: " + e.getMessage());
 			}
 			if (tipoActividad.equals("Examen"))
 			{		
@@ -159,7 +159,7 @@ public class MenuCalificarEnvios
 				}
 				catch (Exception e)
 				{
-					e.getMessage();
+					System.out.println("Ocurrió un error al obtener la información del envío: " + e.getMessage());
 				}
                 envio.forEach(System.out::println);
 				
@@ -173,7 +173,7 @@ public class MenuCalificarEnvios
 				}
 				catch (Exception e)
 				{
-					e.getMessage();
+					System.out.println("Ocurrió un error al calificar el examen: " + e.getMessage());
 				}
 			}
 			else if (tipoActividad.equals("Tarea"))
@@ -186,7 +186,7 @@ public class MenuCalificarEnvios
 				}
 				catch (Exception e)
 				{
-					e.getMessage();
+					System.out.println("Ocurrió un error al obtener la información de la entrega: " + e.getMessage());
 				}
                 System.out.println("Método de entrega: " + metodoEntrega);
 
@@ -198,7 +198,7 @@ public class MenuCalificarEnvios
                 }
 				catch (Exception e)
 				{
-					e.getMessage();
+					System.out.println("Ocurrió un error al calificar la tarea: " + e.getMessage());
 				}
 			}
             else if (tipoActividad.equals("Actividad recurso"))
@@ -216,7 +216,7 @@ public class MenuCalificarEnvios
 				}
 				catch (Exception e)
 				{
-					e.getMessage();
+					System.out.println("Ocurrió un error al marcar la actividad como completada: " + e.getMessage());
 				}
 			}
 			else

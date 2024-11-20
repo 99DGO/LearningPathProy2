@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import controllers.*;
+import persistencia.CentralPersistencia;
 import traductores.*;
 import usuarios.*;
 
@@ -16,6 +17,15 @@ public class MenuEstudiante
 
 	public static void main(String[] args)
 	{
+		try
+		{
+			CentralPersistencia.cargarTodo(true);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error al cargar los datos: " + e.getMessage());
+		}
+		
 		if (LPS == null)
 			LPS = LearningPathSystem.getInstance();
 
@@ -27,10 +37,6 @@ public class MenuEstudiante
 
 	public static void mostrarMenuInicioSesion()
 	{
-		Estudiante testEstudiante = new Estudiante("estudiante", "1234", "Estudiante");
-		LPS.addEstudiante(testEstudiante); // Estudiante de prueba, solo para probar interfaz directa de inicio de sesion
-											// de estudiante
-		
 		System.out.println("Bienvenido al sistema de aprendizaje");
 		System.out.println("Por favor, ingrese su login y contraseña");
 		System.out.println("Login: ");
@@ -48,7 +54,7 @@ public class MenuEstudiante
 		}
 		catch (Exception e)
 		{
-			System.out.println(e.getMessage());
+			System.out.println("Ocurrió un error al iniciar sesión" + e.getMessage());
 		}
 	}
 
@@ -82,6 +88,14 @@ public class MenuEstudiante
 			break;
 		case 0:
 			System.out.println("Gracias por usar el sistema. \n¡Hasta luego!");
+			try
+			{
+				CentralPersistencia.guardarTodo(true);
+			}
+			catch (Exception e)
+			{
+				System.out.println("Error al guardar los datos: " + e.getMessage());
+			}
 			System.exit(0);
 			break;
 		default:
@@ -103,7 +117,7 @@ public class MenuEstudiante
 		}
 		catch (Exception e)
 		{
-			e.getMessage();
+			System.out.println("Ocurrió un error al ver el avance de los caminos: "+ e.getMessage());
 		}
 	}
 
@@ -115,8 +129,7 @@ public class MenuEstudiante
 		{
 			String actividad = TraductorEstudiante.verActividadActiva(idEstudiante);
 			System.out.println("Actividad: " + actividad);
-			// TODO continuar creando envío de una actividad, hay que mostrar los detalles de la act y 
-			// preguntas y todo al estudiante para que sepa qué está respondiendo
+	
 			String[] actividadAll = actividad.split(";");
 			String nombreActividad = actividadAll[0];
 			String nombreCamino = actividadAll[2];
@@ -132,7 +145,7 @@ public class MenuEstudiante
 		}
 		catch (Exception e)
 		{
-			e.getMessage();
+			System.out.println("Ocurrió un error al realizar un envío: " + e.getMessage()); 
 		}
 		
 	}
@@ -150,7 +163,7 @@ public class MenuEstudiante
 		}
 		catch (Exception e)
 		{
-			e.getMessage();
+			System.out.println("Ocurrió un error al ver los caminos: " + e.getMessage());
 		}
 		System.out.println("Desea inscribirse a un camino?");
 		System.out.println("1. Si");
@@ -170,7 +183,7 @@ public class MenuEstudiante
 			}
 			catch (Exception e)
 			{
-				e.getMessage();
+				System.out.println("Ocurrió un error al ver los caminos disponibles: "+ e.getMessage()); 
 			}
 		}
 		
@@ -189,7 +202,7 @@ public class MenuEstudiante
 		} 
 		catch (Exception e)
 		{
-			e.getMessage();
+			System.out.println("Ocurrió un problema con el camino: " + e.getMessage());
 		}
 		
 		try
@@ -214,7 +227,7 @@ public class MenuEstudiante
 		}
 		catch (Exception e)
 		{
-			e.getMessage();
+			System.out.println("Ocurrió un error :" + e.getMessage());
 		}
 		
 		

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import marcadoresActividades.marcadorAR;
 import senders.*;
 import traductores.*;
 
@@ -19,7 +20,7 @@ public class MenuRealizarEnvio
 		}
 		catch (Exception e)
 		{
-			e.getMessage();
+			System.out.println("Error al obtener información de la actividad: " + e.getMessage());
 		}
 
 		String tipoActividad = infoActividad.get("Tipo de actividad: ");
@@ -30,7 +31,7 @@ public class MenuRealizarEnvio
 			break;
 
 		case "Quiz":
-
+			realizarEnvioQuiz(idEstudiante, idCamino, idActividad);
 			break;
 
 		case "Tarea":
@@ -40,6 +41,13 @@ public class MenuRealizarEnvio
 		case "Encuesta":
 			realizarEnvioEncuesta(idEstudiante, idCamino, idActividad);
 			break;
+
+		case "Actividad recurso":
+			marcarActividadRecursoCompletada(idEstudiante, idCamino, idActividad);
+			break;
+
+		default:
+			System.out.println("Tipo de actividad no válido");
 
 		}
 
@@ -72,43 +80,50 @@ public class MenuRealizarEnvio
 			System.out.println("Error al realizar el envío del examen: " + e.getMessage());
 		}
 	}
-	
-	public static void realizarEnvioQuiz(String idEstudiante, String idCamino, String idActividad) {
-        Scanner scanner = new Scanner(System.in);
 
-        try {
-            // Obtener preguntas y opciones del quiz
-            List<String[]> preguntas = TraductorQuiz.retornarPreguntasSinRespuesta(idCamino, idActividad);
+	public static void realizarEnvioQuiz(String idEstudiante, String idCamino, String idActividad)
+	{
+		Scanner scanner = new Scanner(System.in);
 
-            System.out.println("=== Realizar Quiz ===");
-            HashMap<String, Integer> respuestas = new HashMap<>();
+		try
+		{
+			// Obtener preguntas y opciones del quiz
+			List<String[]> preguntas = TraductorQuiz.retornarPreguntasSinRespuesta(idCamino, idActividad);
 
-            for (String[] preguntaConOpciones : preguntas) {
-                System.out.println("Pregunta: " + preguntaConOpciones[0]); 
+			System.out.println("=== Realizar Quiz ===");
+			HashMap<String, Integer> respuestas = new HashMap<>();
 
-                for (int i = 1; i < preguntaConOpciones.length; i++) {
-                    System.out.println(i + ". " + preguntaConOpciones[i]);
-                }
+			for (String[] preguntaConOpciones : preguntas)
+			{
+				System.out.println("Pregunta: " + preguntaConOpciones[0]);
 
-                System.out.print("Seleccione una opción (número): ");
-                int opcionSeleccionada = scanner.nextInt();
-                scanner.nextLine(); 
+				for (int i = 1; i < preguntaConOpciones.length; i++)
+				{
+					System.out.println(i + ". " + preguntaConOpciones[i]);
+				}
 
-                if (opcionSeleccionada < 1 || opcionSeleccionada >= preguntaConOpciones.length) {
-                    System.out.println("Opción inválida. Por favor intente nuevamente.");
-                    break;
-                }
+				System.out.print("Seleccione una opción (número): ");
+				int opcionSeleccionada = scanner.nextInt();
+				scanner.nextLine();
 
-                respuestas.put(preguntaConOpciones[0], opcionSeleccionada);
-            }
+				if (opcionSeleccionada < 1 || opcionSeleccionada >= preguntaConOpciones.length)
+				{
+					System.out.println("Opción inválida. Por favor intente nuevamente.");
+					break;
+				}
 
-            QuizSender.sendEnvioQuiz(idCamino, idActividad, idEstudiante, respuestas);
-            System.out.println("Quiz enviado con éxito");
+				respuestas.put(preguntaConOpciones[0], opcionSeleccionada);
+			}
 
-        } catch (Exception e) {
-            System.out.println("Error al realizar el envío del quiz: " + e.getMessage());
-        }
-    }
+			QuizSender.sendEnvioQuiz(idCamino, idActividad, idEstudiante, respuestas);
+			System.out.println("Quiz enviado con éxito");
+
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error al realizar el envío del quiz: " + e.getMessage());
+		}
+	}
 
 	public static void realizarEnvioTarea(String idEstudiante, String idCamino, String idActividad)
 	{
@@ -159,6 +174,22 @@ public class MenuRealizarEnvio
 		catch (Exception e)
 		{
 			System.out.println("Error al realizar el envío de la encuesta: " + e.getMessage());
+		}
+	}
+
+	public static void marcarActividadRecursoCompletada(String idEstudiante, String idCamino, String idActividad)
+	{
+		try
+		{
+			System.out.println("=== Marcar Recurso Educativo Completad ===");
+			System.out.println("ID del recurso educativo:" + idActividad);
+			marcadorAR.marcarARTerminado(idCamino, idActividad, idEstudiante);
+			System.out.println("Actividad marcada como completada");
+
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error al marcar la actividad: " + e.getMessage());
 		}
 	}
 

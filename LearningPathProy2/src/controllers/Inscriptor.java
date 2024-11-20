@@ -107,7 +107,7 @@ public class Inscriptor {
 		{
 			estudiante.setActividadActiva(true);
 			datoEst.setFechaInicio();
-			estudiante.setNombreCaminoActividadActiva(actividad.getNombre()+" en el camino " +camino.getTitulo());
+			estudiante.setNombreCaminoActividadActiva(actividad.getNombre()+"; en el camino ;" +camino.getTitulo());
 			estudiante.setIdActividadActiva(IDactividad);
 		}
 		else

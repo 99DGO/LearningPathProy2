@@ -60,7 +60,7 @@ public class TareaSender
 			datosEstudiante.setEstado(DatosEstudianteTarea.ENVIADO);
 			
 			estudiante.setActividadActiva(false);
-			estudiante.setNombreCaminoActividadActiva("Ninguna");	
+			estudiante.setNombreCaminoActividadActiva("Ninguna; ; ");	
 		}
 	}
 

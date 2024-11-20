@@ -67,7 +67,7 @@ public class EncuestaSender
 			datosEstudiante.setFechaFinal();
 			
 			estudiante.setActividadActiva(false);
-			estudiante.setNombreCaminoActividadActiva("Ninguna");
+			estudiante.setNombreCaminoActividadActiva("Ninguna; ; ");
 
 		}
 	}

@@ -135,7 +135,7 @@ public class TraductorQuiz
 		return preguntas;
 	}
 
-	public static double retornarCalificacinMin (String idCamino, String idActividad) throws Exception
+	public static double retornarCalificacionMin (String idCamino, String idActividad) throws Exception
 	{
 		LearningPathSystem LPS = LearningPathSystem.getInstance();
 		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);

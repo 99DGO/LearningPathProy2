@@ -41,9 +41,7 @@ public class MenuCreacionEdicionCamino
 		}
 		catch (Exception e)
 		{
-			System.out.println("Ocurrió un error al crear el camino.");
-			e.getMessage();
-			e.printStackTrace();
+			System.out.println("Ocurrió un error al crear el camino: "+ e.getMessage());
 		}
 
 	}
@@ -78,12 +76,11 @@ public class MenuCreacionEdicionCamino
 			System.out.println("1. Editar titulo");
 			System.out.println("2. Editar descripcion");
 			System.out.println("3. Editar dificultad");
-			System.out.println("4. Editar duracion");
-			System.out.println("5. Añadir objetivos");
-			System.out.println("6. Eliminar objetivos");
-			System.out.println("7. Agregar actividad");
-			System.out.println("8. Eliminar actividad");
-			System.out.println("9. Cambiar orden de actividades");
+			System.out.println("4. Añadir objetivos");
+			System.out.println("5. Eliminar objetivos");
+			System.out.println("6. Agregar actividad");
+			System.out.println("7. Eliminar actividad");
+			System.out.println("8. Cambiar orden de actividades");
 			System.out.println("0. Salir");
 			int opcion = scanner.nextInt();
 			switch (opcion)
@@ -100,9 +97,7 @@ public class MenuCreacionEdicionCamino
 				}
 				catch (Exception e)
 				{
-					System.out.println("Ocurrió un error al editar el titulo.");
-					e.getMessage();
-					e.printStackTrace();
+					System.out.println("Ocurrió un error al editar el titulo: "+ e.getMessage());
 				}
 				break;
 
@@ -119,9 +114,7 @@ public class MenuCreacionEdicionCamino
 				}
 				catch (Exception e)
 				{
-					System.out.println("Ocurrió un error al editar la descripcion.");
-					e.getMessage();
-					e.printStackTrace();
+					System.out.println("Ocurrió un error al editar la descripcion: "+ e.getMessage());
 				}
 				break;
 
@@ -137,31 +130,11 @@ public class MenuCreacionEdicionCamino
 				}
 				catch (Exception e)
 				{
-					System.out.println("Ocurrió un error al editar la dificultad.");
-					e.getMessage();
-					e.printStackTrace();
+					System.out.println("Ocurrió un error al editar la dificultad: "+ e.getMessage());
 				}
 				break;
 
 			case 4:
-				// Editar duracion
-				System.out.println("Ingrese la nueva duracion: ");
-				scanner.nextLine();
-				int nuevaDuracion = scanner.nextInt();
-				try
-				{
-					EditorCamino.editDuracion(IDCamino, nuevaDuracion);
-					System.out.println("Duracion editada exitosamente.\nNueva duracion: " + nuevaDuracion + "\n");
-				}
-				catch (Exception e)
-				{
-					System.out.println("Ocurrió un error al editar la duracion.");
-					e.getMessage();
-					e.printStackTrace();
-				}
-				break;
-
-			case 5:
 				// Añadir objetivos
 				System.out.println("Ingrese el nuevo objetivo: ");
 				scanner.nextLine();
@@ -173,13 +146,11 @@ public class MenuCreacionEdicionCamino
 				}
 				catch (Exception e)
 				{
-					System.out.println("Ocurrió un error al añadir el objetivo.");
-					e.getMessage();
-					e.printStackTrace();
+					System.out.println("Ocurrió un error al añadir el objetivo: "+ e.getMessage());
 				}
 				break;
 
-			case 6:
+			case 5:
 				// Eliminar objetivos
 				System.out.println("Ingrese la posición del objetivo que desea eliminar: ");
 				scanner.nextLine();
@@ -191,18 +162,16 @@ public class MenuCreacionEdicionCamino
 				}
 				catch (Exception e)
 				{
-					System.out.println("Ocurrió un error al eliminar el objetivo.");
-					e.getMessage();
-					e.printStackTrace();
+					System.out.println("Ocurrió un error al eliminar el objetivo: "+ e.getMessage());
 				}
 				break;
 
-			case 7:
+			case 6:
 				// TODO Crear y agregar actividad
 				MenuCreacionActividad.mostrarMenuCreacionActividad(profesorID);
 				break;
 
-			case 8:
+			case 7:
 				// Eliminar actividad
 				System.out.println("Ingrese la posicion de la actividad que desea eliminar: ");
 				scanner.nextLine();
@@ -214,12 +183,10 @@ public class MenuCreacionEdicionCamino
 				}
 				catch (Exception e)
 				{
-					System.out.println("Ocurrió un error al eliminar la actividad.");
-					e.getMessage();
-					e.printStackTrace();
+					System.out.println("Ocurrió un error al eliminar la actividad: "+ e.getMessage());
 				}
 
-			case 9:
+			case 8:
 				// Cambiar orden de actividades
 				System.out.println(
 						"Advertencia \nAl cambiar el orden de las actividades, se perderá la información de la actividad en dicha posicion. \nDesea continuar? \n1. Si \n2. No");
@@ -245,9 +212,7 @@ public class MenuCreacionEdicionCamino
 				}
 				catch (Exception e)
 				{
-					System.out.println("Ocurrió un error al mover la actividad.");
-					e.getMessage();
-					e.printStackTrace();
+					System.out.println("Ocurrió un error al mover la actividad: "+ e.getMessage());
 				}
 
 			default:
@@ -257,8 +222,7 @@ public class MenuCreacionEdicionCamino
 		}
 		catch (Exception e)
 		{
-			e.getMessage();
-			e.printStackTrace();
+			System.out.println("Ocurrió un error al ver la información del camino: " + e.getMessage());
 		}
 	}
 

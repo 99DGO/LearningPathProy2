@@ -13,6 +13,7 @@ import usuarios.Profesor;
 import usuarios.Usuario;
 import traductores.*;
 import editores.*;
+import persistencia.CentralPersistencia;
 
 public class MenuProfesor
 {
@@ -22,6 +23,15 @@ public class MenuProfesor
 
 	public static void main(String[] args)
 	{
+		try
+		{
+			CentralPersistencia.cargarTodo(true);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error al cargar los datos: " + e.getMessage());
+		}
+		
 		if (LPS == null)
 			LPS = LearningPathSystem.getInstance();
 
@@ -33,10 +43,6 @@ public class MenuProfesor
 
 	public static void mostrarMenuInicioSesion()
 	{
-		Profesor testProfesor = new Profesor("profesor", "1234", "Profesor");
-		LPS.addProfesor(testProfesor); // Profesor de prueba, solo para probar interfaz directa de inicio de sesion de
-										// profesor
-
 		System.out.println("Bienvenido al sistema de aprendizaje");
 		System.out.println("Por favor, ingrese su login y contraseña");
 		System.out.println("Login: ");
@@ -54,7 +60,7 @@ public class MenuProfesor
 		}
 		catch (Exception e)
 		{
-			System.out.println(e.getMessage());
+			System.out.println("Ocurrio un error al iniciar sesión: "+ e.getMessage());
 		}
 
 	}
@@ -139,9 +145,7 @@ public class MenuProfesor
 					}
 					catch (Exception e)
 					{
-						System.out.println("Ocurrió un error al clonar el camino.");
-						e.getMessage();
-						e.printStackTrace();
+						System.out.println("Ocurrió un error al clonar el camino: "+ e.getMessage());
 					}
 					break;
 
@@ -163,9 +167,7 @@ public class MenuProfesor
 					}
 					catch (Exception e)
 					{
-						System.out.println("Ocurrió un error al clonar la actividad.");
-						e.getMessage();
-						e.printStackTrace();
+						System.out.println("Ocurrió un error al clonar la actividad: "+ e.getMessage());
 					}
 					break;
 
@@ -176,8 +178,7 @@ public class MenuProfesor
 			}
 			catch (Exception e)
 			{
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error al ver los detalles del camino: " + e.getMessage());
 			}
 			break;
 
@@ -193,16 +194,17 @@ public class MenuProfesor
 			break;
 
 		case 6:
-			// TODO Ver envios de actividades
+			// Ver envios de actividades
+			MenuCalificarEnvios.mostrarMenuCalificarEnvios(profesor.getID());
 			break;
 
 		case 7:
 			// Editar un camino de aprendizaje
-			MenuCreacionEdicionCamino.mostrarMenuEdicionCamino(); 
+			MenuCreacionEdicionCamino.mostrarMenuEdicionCamino(profesor.getID()); 
 			break;
 
 		case 8:
-			// TODO Editar una actividad
+			// Editar una actividad
 			MenuEdicionActividad.mostrarMenuEdicionActividad(profesor.getID());
 			break;
 
@@ -215,6 +217,14 @@ public class MenuProfesor
 			if (cerrar == 1)
 			{
 				System.out.println("Gracias por usar el sistema. \n¡Hasta luego!");
+				try
+				{
+					CentralPersistencia.guardarTodo(true);
+				}
+				catch (Exception e)
+				{
+					System.out.println("Error al guardar los datos: " + e.getMessage());
+				}
 				System.exit(0);
 			}
 			else if (cerrar == 2)

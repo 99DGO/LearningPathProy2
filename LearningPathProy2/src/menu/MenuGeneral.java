@@ -3,6 +3,7 @@ package menu;
 import java.util.Scanner;
 import controllers.Autentificador;
 import controllers.LearningPathSystem;
+import persistencia.CentralPersistencia;
 import usuarios.Estudiante;
 import usuarios.Profesor;
 import usuarios.Usuario;
@@ -13,7 +14,16 @@ public class MenuGeneral
 	public static Autentificador autentificador = null;
 
 	public static void main(String[] args)
-	{
+	{	
+		try
+		{
+			CentralPersistencia.cargarTodo(true);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error al cargar los datos: " + e.getMessage());
+		}
+		
 		if (LPS == null)
 			LPS = LearningPathSystem.getInstance();
 
@@ -55,6 +65,14 @@ public class MenuGeneral
 			if (cerrar == 1)
 			{
 				System.out.println("Gracias por usar el sistema. \n¡Hasta luego!");
+				try
+				{
+					CentralPersistencia.guardarTodo(true);
+				}
+				catch (Exception e)
+				{
+					System.out.println("Error al guardar los datos: " + e.getMessage());
+				}
 				System.exit(0);
 			}
 			else if (cerrar == 2)
@@ -99,7 +117,7 @@ public class MenuGeneral
 					System.out.println("Bienvenido Estudiante " + usuario.getNombre() + "\n");
 					while (true)
 					{
-						MenuEstudiante.mostarMenuEstudiante((Estudiante) usuario);
+						MenuEstudiante.mostrarMenuEstudiante((Estudiante) usuario);
 					}
 				}
 				else
@@ -110,14 +128,14 @@ public class MenuGeneral
 		}
 		catch (Exception e)
 		{
-			System.out.println(e.getMessage());
+			System.out.println("Ocurrió un error en el proceso de inicio de sesión: " + e.getMessage());
 		}
 
 	}
 
 	public static void registrarse()
 	{
-		Usuario newUsuario = null;
+		int typeNewUsuario = 0;
 
 		System.out.println("Por favor complete los siguientes campos para registrarse:");
 		System.out.println("Ingrese su nombre:");
@@ -135,21 +153,22 @@ public class MenuGeneral
 		{
 		case 1:
 			// estudiante
-			newUsuario = new Estudiante(login, password, nombre);
+			typeNewUsuario = 1;
 			break;
 		case 2:
 			// profesor
-			newUsuario = new Profesor(login, password, nombre);
+			typeNewUsuario = 2;
 			break;
 		default:
 			System.out.println("Opcion no valida. \n");
 		}
 
-		if (newUsuario != null)
+		if (typeNewUsuario != 0)
 		{
 			try
 			{
-				if (autentificador.registrarUsuario(newUsuario) == true)
+				boolean registro = autentificador.registrarUsuario(nombre, password, login, typeNewUsuario); 
+				if (registro == true)
 				{
 					System.out.println("Usuario registrado exitosamente. \n");
 				}
@@ -161,8 +180,7 @@ public class MenuGeneral
 			}
 			catch (Exception e)
 			{
-				e.getMessage();
-				e.printStackTrace();
+				System.out.println("Ocurrió un error en el proceso de registro: " + e.getMessage());
 			}
 		}
 

@@ -1,0 +1,26 @@
+# Learning Path Management System
+
+## Descripción
+Esta aplicación permite a estudiantes y profesores gestionar caminos de aprendizaje mediante actividades como encuestas, exámenes, tareas, quices y actividades de recurso educativo.
+
+## Ejecución de la Aplicación
+
+### Menú General
+Para iniciar la aplicación desde un punto centralizado, ejecuta la clase `MenuGeneral`. Este menú ofrece las siguientes opciones:
+- Iniciar sesión.
+- Registrarse como estudiante o profesor.
+- Salir de la aplicación.
+
+### Menú Profesor
+Si eres un profesor y deseas acceder directamente a las funcionalidades específicas para la gestión de caminos de aprendizaje y actividades, ejecuta la clase `MenuProfesor`. Este menú incluye:
+- Crear caminos de aprendizaje.
+- Crear actividades (encuestas, exámenes, tareas, etc.).
+- Ver y editar caminos de aprendizaje.
+- Calificar envíos realizados por estudiantes.
+
+### Menú Estudiante
+Los estudiantes pueden iniciar la aplicación directamente desde la clase `MenuEstudiante`. Este menú permite:
+- Ver avances en todos los caminos en los que están inscritos.
+- Ver actividades iniciadas y realizar envíos (quices, encuestas, etc.).
+- Ver y unirse a caminos de aprendizaje disponibles.
+- Iniciar nuevas actividades.

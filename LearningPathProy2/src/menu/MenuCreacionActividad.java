@@ -235,9 +235,7 @@ public class MenuCreacionActividad
 		}
 		catch (Exception e)
 		{
-			System.out.println("Ocurrió un error al crear el quiz.");
-			e.getMessage();
-			e.printStackTrace();
+			System.out.println("Ocurrió un error al crear el quiz: " + e.getMessage());
 		}
 
 	}
@@ -291,9 +289,7 @@ public class MenuCreacionActividad
 		}
 		catch (Exception e)
 		{
-			System.out.println("Ocurrió un error al crear la tarea.");
-			e.getMessage();
-			e.printStackTrace();
+			System.out.println("Ocurrió un error al crear la tarea: "+ e.getMessage());
 		}
 	}
 
@@ -356,9 +352,7 @@ public class MenuCreacionActividad
 		}
 		catch (Exception e)
 		{
-			System.out.println("Ocurrió un error al crear el examen.");
-			e.getMessage();
-			e.printStackTrace();
+			System.out.println("Ocurrió un error al crear el examen: "+ e.getMessage());
 		}
 	}
 
@@ -419,9 +413,7 @@ public class MenuCreacionActividad
 		}
 		catch (Exception e)
 		{
-			System.out.println("Ocurrió un error al crear la encuesta.");
-			e.getMessage();
-			e.printStackTrace();
+			System.out.println("Ocurrió un error al crear la encuesta: "+ e.getMessage());
 		}
 	}
 
@@ -476,9 +468,7 @@ public class MenuCreacionActividad
 		}
 		catch (Exception e)
 		{
-			System.out.println("Ocurrió un error al crear el recurso educativo.");
-			e.getMessage();
-			e.printStackTrace();
+			System.out.println("Ocurrió un error al crear el recurso educativo: "+ e.getMessage());
 		}
 	}
 }

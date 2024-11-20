@@ -7,6 +7,7 @@ import caminosActividades.Actividad;
 import caminosActividades.CaminoAprendizaje;
 import caminosActividades.Quiz;
 import controllers.LearningPathSystem;
+import datosEstudiantes.DatosEstudianteActividad;
 import usuarios.Profesor;
 
 public class TraductorActividad {
@@ -157,5 +158,26 @@ public class TraductorActividad {
 
 		return infoActividad;
 	}
-
+	
+	public static HashMap<String, DatosEstudianteActividad> getDatosEstudiantesActividad(String idCamino, String idActividad)
+	{
+		HashMap<String, DatosEstudianteActividad> datosEstudiantes = new HashMap<String, DatosEstudianteActividad>();
+		LearningPathSystem LPS = LearningPathSystem.getInstance();
+		CaminoAprendizaje camino = LPS.getCaminoIndividual(idCamino);
+		
+		if (camino == null)
+		{
+			throw new IllegalArgumentException("No se encontro el camino");
+		}
+		
+		for (Actividad actividad : camino.getActividades())
+        {
+            if (actividad.getId().equals(idActividad))
+            {
+                datosEstudiantes = actividad.getDatosEstudiantes();
+            }
+        }
+		return datosEstudiantes;
+	
+	}
 }

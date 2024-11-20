@@ -50,17 +50,17 @@ public class Autentificador {
 
 	}
 
-	public boolean registrarUsuario(Usuario usuario) throws Exception
+	public boolean registrarUsuario(String nombreUsuario, String constrasenaUsuario, String loginUsuario, int tipoUsuario) throws Exception
 	{
-		if (usuario.getType() == "Estudiante") 
+		if (tipoUsuario == 1) //Estudiante 
 		{
-			if (LPS.getEstudianteIndividual(usuario.getID()) == null) 
+			String ID = "Estudiante-"+loginUsuario;
+			if (LPS.getEstudianteIndividual(ID) == null) 
 			{
 				try 
 				{
-					CreadorEstudiante.crearEstudiante(usuario.getLogin(), usuario.getPassword(),
-							usuario.getNombre());
-					if (LPS.getEstudianteIndividual(usuario.getID()) != null) 
+					CreadorEstudiante.crearEstudiante(loginUsuario, constrasenaUsuario, nombreUsuario);
+					if (LPS.getEstudianteIndividual(ID) != null) 
 					{
 						return true;
 					} 
@@ -74,14 +74,15 @@ public class Autentificador {
 				}
 			}
 		} 
-		else if (usuario.getType() == "Profesor")
+		else if (tipoUsuario == 2) // Profesor
 		{
-			if (LPS.getProfesorIndividual(usuario.getID()) == null) 
+			String ID = "Profesor-"+loginUsuario;
+			if (LPS.getProfesorIndividual(ID) == null) 
 			{
 				try 
 				{
-					CreadorProfesor.crearProfesor(usuario.getLogin(), usuario.getPassword(), usuario.getNombre());
-					if (LPS.getProfesorIndividual(usuario.getID()) != null)
+					CreadorProfesor.crearProfesor(loginUsuario, constrasenaUsuario,nombreUsuario);
+					if (LPS.getProfesorIndividual(ID) != null)
 					{
 						return true;
 					} else

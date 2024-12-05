@@ -17,7 +17,7 @@ public class MenuGeneral
 	{	
 		try
 		{
-			CentralPersistencia.cargarTodo(true);
+			CentralPersistencia.cargarTodo(false);
 		}
 		catch (Exception e)
 		{
@@ -45,7 +45,18 @@ public class MenuGeneral
 		System.out.println("3. Salir");
 
 		Scanner scanner = new Scanner(System.in);
-		int opcion = scanner.nextInt();
+		
+		int opcion=1;
+		try
+		{
+			opcion = scanner.nextInt();
+		}
+		catch (Exception e)
+		{
+			System.out.println("Opcion no valida ingresada");
+			mostrarMenu();
+		}
+		
 		switch (opcion)
 		{
 		case 1:
@@ -67,7 +78,7 @@ public class MenuGeneral
 				System.out.println("Gracias por usar el sistema. \n¡Hasta luego!");
 				try
 				{
-					CentralPersistencia.guardarTodo(true);
+					CentralPersistencia.guardarTodo(false);
 				}
 				catch (Exception e)
 				{

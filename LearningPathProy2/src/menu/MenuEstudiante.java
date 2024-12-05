@@ -19,7 +19,7 @@ public class MenuEstudiante
 	{
 		try
 		{
-			CentralPersistencia.cargarTodo(true);
+			CentralPersistencia.cargarTodo(false);
 		}
 		catch (Exception e)
 		{
@@ -90,7 +90,7 @@ public class MenuEstudiante
 			System.out.println("Gracias por usar el sistema. \n¡Hasta luego!");
 			try
 			{
-				CentralPersistencia.guardarTodo(true);
+				CentralPersistencia.guardarTodo(false);
 			}
 			catch (Exception e)
 			{

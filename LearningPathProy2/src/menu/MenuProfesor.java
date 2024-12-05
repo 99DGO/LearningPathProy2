@@ -25,7 +25,7 @@ public class MenuProfesor
 	{
 		try
 		{
-			CentralPersistencia.cargarTodo(true);
+			CentralPersistencia.cargarTodo(false);
 		}
 		catch (Exception e)
 		{
@@ -98,7 +98,7 @@ public class MenuProfesor
 			HashMap<String, String> allCaminos = TraductorCamino.verTodosCaminos();
 			for (String ID : allCaminos.keySet())
 			{
-				System.out.println("ID: " + ID + ", Nombre: " + allCaminos.get(ID));
+				System.out.println("Titulo:" + ID + ", Creador: " + allCaminos.get(ID));
 			}
 			break;
 
@@ -219,7 +219,7 @@ public class MenuProfesor
 				System.out.println("Gracias por usar el sistema. \n¡Hasta luego!");
 				try
 				{
-					CentralPersistencia.guardarTodo(true);
+					CentralPersistencia.guardarTodo(false);
 				}
 				catch (Exception e)
 				{

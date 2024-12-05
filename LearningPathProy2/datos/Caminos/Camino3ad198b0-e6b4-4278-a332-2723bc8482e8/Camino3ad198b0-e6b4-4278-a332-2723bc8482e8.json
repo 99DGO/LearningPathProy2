@@ -1,0 +1,16 @@
+{
+ "descripcion": "A course to be a wizard",
+ "numActividadesObligatorias": 0,
+ "fechaModificacion": "Wed Dec 04 19:40:02 COT 2024",
+ "ratingsTotales": 0,
+ "rating": 0,
+ "titulo": "How to be a wizard",
+ "actividades": [],
+ "version": 1,
+ "objetivos": ["Become a wizard"],
+ "duracion": 0,
+ "fechaCreacion": "Wed Dec 04 19:40:02 COT 2024",
+ "creadorID": "Profesor-wizardLady",
+ "id": "Camino3ad198b0-e6b4-4278-a332-2723bc8482e8",
+ "dificultad": 10
+}

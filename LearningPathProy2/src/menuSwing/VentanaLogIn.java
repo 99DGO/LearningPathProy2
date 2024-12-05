@@ -126,7 +126,6 @@ public class VentanaLogIn extends JFrame implements ActionListener
 
     public void mostrarVentanaRegistrarUsuario( )
     {
-        // :) TODO completar mostrarVentanaMapa
         if( ventRegistrar == null || !ventRegistrar.isVisible( ) )
         {
         	ventRegistrar = new VentanaRegistrarUsuario();
@@ -134,6 +133,17 @@ public class VentanaLogIn extends JFrame implements ActionListener
         }
     }
     
+    public void abrirVentanaMenuProfesor()
+    {
+    	VentanaMenuProfesor ventProfesor = new VentanaMenuProfesor();
+    	ventProfesor.setVisible( true );
+    }
+    
+    public void abrirVentanaMenuEstudiante()
+    {
+    	VentanaMenuEstudiante ventEstudiante = new VentanaMenuEstudiante();
+    	ventEstudiante.setVisible( true );
+    }
 
 	@Override
 	public void actionPerformed(ActionEvent e) 
@@ -159,11 +169,24 @@ public class VentanaLogIn extends JFrame implements ActionListener
         	try 
         	{
 				usuario=autentificador.autentificar(txtLogin.getText(), txtPassword.getText());
+				
+	        	if (usuario.getType().equals(Usuario.ESTUDIANTE))
+	        	{
+	        		this.abrirVentanaMenuEstudiante();
+	        		dispose();
+	        	}
+	        	else
+	        	{
+	        		this.abrirVentanaMenuProfesor();
+	        		dispose();
+	        	}
 			} 
         	catch (Exception e2) 
         	{
         		JOptionPane.showMessageDialog(null, e2.getMessage());
 			}
+        	
+
         }
 		
         else if (comando.equals(NUEVOUSUARIO))

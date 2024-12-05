@@ -84,7 +84,6 @@ public class Autentificador {
 				catch (Exception e) 
 				{
 					e.getMessage();
-					e.printStackTrace();
 				}
 
 			}
@@ -102,7 +101,6 @@ public class Autentificador {
 			catch (Exception e) 
 			{
 				e.getMessage();
-				e.printStackTrace();
 			}
 		} 
 		else if (LPS.getProfesorIndividual(ID) != null) 
@@ -114,7 +112,6 @@ public class Autentificador {
 			catch (Exception e) 
 			{
 				e.getMessage();
-				e.printStackTrace();
 			}
 		}
 	}

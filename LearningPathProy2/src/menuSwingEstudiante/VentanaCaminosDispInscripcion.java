@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,12 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controllers.Inscriptor;
-import menuSwing.JLabelCaminosDisponibles;
+import menuSwing.JComponentCaminosDisponibles;
 import traductores.TraductorCamino;
 
 public class VentanaCaminosDispInscripcion extends JFrame implements ActionListener
 {
-	private JLabelCaminosDisponibles lCaminosDisp;
+	private JComponentCaminosDisponibles lCaminosDisp;
 	
 	private JPanel pInscripcion;
 	private JTextField txtNombreCamino;
@@ -39,11 +40,13 @@ public class VentanaCaminosDispInscripcion extends JFrame implements ActionListe
 		this.setLayout(new BorderLayout());
 		
 		//Añado label de los caminos
-		lCaminosDisp= new JLabelCaminosDisponibles();
+		lCaminosDisp= new JComponentCaminosDisponibles();
 		this.add(lCaminosDisp, BorderLayout.CENTER);
+		lCaminosDisp.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		//Añado botones y textField de inscripcion
 		pInscripcion= new JPanel();
+		pInscripcion.setLayout(new BoxLayout(pInscripcion, BoxLayout.Y_AXIS) );
 		
 	    //Nombre de camino 
 		txtNombreCamino = new JTextField( 15 );
@@ -81,7 +84,7 @@ public class VentanaCaminosDispInscripcion extends JFrame implements ActionListe
         // Termina de configurar la ventana
         setTitle( "Learning Path System: Inscribirse a un camino" );
         setDefaultCloseOperation( EXIT_ON_CLOSE );
-        setSize( 400, 400 );
+        setSize( 700, 600 );
         setLocationRelativeTo( null );
         setVisible( true );
         

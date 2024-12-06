@@ -4,15 +4,16 @@ import java.util.HashMap;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 import traductores.TraductorCamino;
 
-public class JLabelCaminosDisponibles extends JLabel
+public class JComponentCaminosDisponibles extends JTextArea
 {
 
 	private String caminosDispString="";
 	
-	public JLabelCaminosDisponibles()
+	public JComponentCaminosDisponibles()
 	{
 		try
 		{
@@ -29,6 +30,7 @@ public class JLabelCaminosDisponibles extends JLabel
 		}
 		
 		this.setText(caminosDispString);
+		this.setEditable(false);
 		this.setVisible(true);
 	}
 }

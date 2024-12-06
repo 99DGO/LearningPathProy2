@@ -34,6 +34,10 @@ public class VentanaMenuEstudiante extends JFrame
         
         setTitle( "Learning Path System: Menu estudiante" );
         setDefaultCloseOperation( EXIT_ON_CLOSE );
+        setSize( 400, 400 );
+        setLocationRelativeTo( null );
+        setVisible( true );
+        
 	}
 
 

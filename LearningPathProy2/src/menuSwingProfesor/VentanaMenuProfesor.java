@@ -1,4 +1,4 @@
-package menuSwing;
+package menuSwingProfesor;
 
 import javax.swing.JFrame;
 

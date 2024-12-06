@@ -10,6 +10,8 @@ import javax.swing.*;
 
 import controllers.Autentificador;
 import controllers.LearningPathSystem;
+import menuSwingEstudiante.VentanaMenuEstudiante;
+import menuSwingProfesor.VentanaMenuProfesor;
 import persistencia.CentralPersistencia;
 import usuarios.Usuario;
 

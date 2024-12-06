@@ -13,6 +13,8 @@ import controllers.LearningPathSystem;
 import menuSwingEstudiante.VentanaMenuEstudiante;
 import menuSwingProfesor.VentanaMenuProfesor;
 import persistencia.CentralPersistencia;
+import traductores.TraductorEstudiante;
+import traductores.TraductorProfesor;
 import usuarios.Usuario;
 
 public class VentanaLogIn extends JFrame implements ActionListener
@@ -135,15 +137,15 @@ public class VentanaLogIn extends JFrame implements ActionListener
         }
     }
     
-    public void abrirVentanaMenuProfesor()
+    public void abrirVentanaMenuProfesor(String idProfesor)
     {
-    	VentanaMenuProfesor ventProfesor = new VentanaMenuProfesor();
+    	VentanaMenuProfesor ventProfesor = new VentanaMenuProfesor(idProfesor);
     	ventProfesor.setVisible( true );
     }
     
-    public void abrirVentanaMenuEstudiante()
+    public void abrirVentanaMenuEstudiante(String idEstudiante)
     {
-    	VentanaMenuEstudiante ventEstudiante = new VentanaMenuEstudiante();
+    	VentanaMenuEstudiante ventEstudiante = new VentanaMenuEstudiante(idEstudiante);
     	ventEstudiante.setVisible( true );
     }
 
@@ -174,12 +176,16 @@ public class VentanaLogIn extends JFrame implements ActionListener
 				
 	        	if (usuario.getType().equals(Usuario.ESTUDIANTE))
 	        	{
-	        		this.abrirVentanaMenuEstudiante();
+	        		String idEstudiante=TraductorEstudiante.getIDfromLogin(txtLogin.getText());
+	        		
+	        		this.abrirVentanaMenuEstudiante(idEstudiante);
 	        		dispose();
 	        	}
 	        	else
 	        	{
-	        		this.abrirVentanaMenuProfesor();
+	        		String idProfesor=TraductorProfesor.getIDfromLogin(txtLogin.getText());
+
+	        		this.abrirVentanaMenuProfesor(idProfesor);
 	        		dispose();
 	        	}
 			} 

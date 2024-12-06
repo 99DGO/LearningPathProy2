@@ -11,18 +11,21 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import menuSwing.VentanaCaminosDisponibles;
 import persistencia.CentralPersistencia;
 
 public class VentanaMenuEstudiante extends JFrame
 {
 	private PanelBotonesMenuEstudiante pBotones;
 
-	private VentanaCaminosDisponibles ventCaminosDisp=null;
+	private VentanaCaminosDispInscripcion ventCaminosDisp=null;
 	private VentanaAvancesEstudiante ventAvances=null;
 	
-	public VentanaMenuEstudiante( )
+	private String idEstudiante;
+	
+	public VentanaMenuEstudiante(String idEstudianteP )
 	{
+		this.idEstudiante=idEstudianteP;
+		
         setLayout( new BorderLayout( ) );
         
         pBotones= new PanelBotonesMenuEstudiante(this);
@@ -38,7 +41,7 @@ public class VentanaMenuEstudiante extends JFrame
     {
         if( ventCaminosDisp == null || !ventCaminosDisp.isVisible( ) )
         {
-        	ventCaminosDisp = new VentanaCaminosDisponibles();
+        	ventCaminosDisp = new VentanaCaminosDispInscripcion(idEstudiante);
         	ventCaminosDisp.setVisible( true );
         }
     }

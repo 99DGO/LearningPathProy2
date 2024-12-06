@@ -4,8 +4,12 @@ import javax.swing.JFrame;
 
 public class VentanaMenuProfesor extends JFrame
 {
-	public VentanaMenuProfesor( )
+	private String idProfesor;
+	
+	public VentanaMenuProfesor( String idProfesorP)
 	{
+		this.idProfesor=idProfesorP;
+		
         setTitle( "Learning Path System: Menu profesor" );
         setDefaultCloseOperation( EXIT_ON_CLOSE );
 

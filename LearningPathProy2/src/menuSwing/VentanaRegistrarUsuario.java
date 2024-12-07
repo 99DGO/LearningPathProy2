@@ -1,6 +1,7 @@
 package menuSwing;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -30,6 +31,7 @@ public class VentanaRegistrarUsuario extends JFrame implements ActionListener
 	private JButton bRegistrar;
 	private JButton bRegresar;
 	
+	private JPanel pTxtFields;
 	private JTextField txtNombre;
 	private JTextField txtLogin;
 	private JTextField txtPassword;
@@ -45,6 +47,9 @@ public class VentanaRegistrarUsuario extends JFrame implements ActionListener
 
         pBotones = new JPanel();
         pBotones.setLayout(new BoxLayout(pBotones, BoxLayout.Y_AXIS) );
+
+        pTxtFields = new JPanel();
+        pTxtFields.setLayout(new BoxLayout(pTxtFields, BoxLayout.Y_AXIS) );
         
         //Nombre 
         txtNombre = new JTextField( 15 );
@@ -57,7 +62,7 @@ public class VentanaRegistrarUsuario extends JFrame implements ActionListener
     	panelNombre.add(nombreLabel);
     	panelNombre.add(txtNombre);
     	
-        pBotones.add(panelNombre);
+    	pTxtFields.add(panelNombre);
         panelNombre.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         
@@ -72,7 +77,7 @@ public class VentanaRegistrarUsuario extends JFrame implements ActionListener
     	panelLogin.add(loginLabel);
     	panelLogin.add(txtLogin);
     	
-        pBotones.add(panelLogin);
+    	pTxtFields.add(panelLogin);
         panelLogin.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         //Password 
@@ -86,7 +91,7 @@ public class VentanaRegistrarUsuario extends JFrame implements ActionListener
     	panelPassword.add(passwrodLabel);
     	panelPassword.add(txtPassword);
     	
-        pBotones.add(panelPassword);
+    	pTxtFields.add(panelPassword);
         panelPassword.setAlignmentX(Component.CENTER_ALIGNMENT);
         
         //Tipo de usuario
@@ -101,9 +106,12 @@ public class VentanaRegistrarUsuario extends JFrame implements ActionListener
        	panelTipoUsuario.add(usuarioLabel);
        	panelTipoUsuario.add(ccbTipoUsuario);
        	
-        pBotones.add(panelTipoUsuario);
+       	pTxtFields.add(panelTipoUsuario);
         panelTipoUsuario.setAlignmentX(Component.CENTER_ALIGNMENT);
        	
+        pTxtFields.setBackground(Color.WHITE);
+        add( pTxtFields, BorderLayout.CENTER );
+        
         //Botones
         bRegistrar = new JButton( "Registrar nuevo usuario" );
         bRegistrar.setActionCommand( REGISTRAR );
@@ -117,7 +125,7 @@ public class VentanaRegistrarUsuario extends JFrame implements ActionListener
         pBotones.add( bRegresar );
         bRegresar.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        add( pBotones, BorderLayout.CENTER );
+        add( pBotones, BorderLayout.SOUTH );
 
 
         // Termina de configurar la ventana

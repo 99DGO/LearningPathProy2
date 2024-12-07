@@ -41,7 +41,7 @@ public class PanelBotonesMenuEstudiante extends JPanel implements ActionListener
 	    this.add( bAvances );
 	    bAvances.setAlignmentX(Component.CENTER_ALIGNMENT);
 	    
-	    bCaminosDisponibles = new JButton( "Ver caminos disponibles" );
+	    bCaminosDisponibles = new JButton( "Ver caminos disponibles e inscribirse" );
 	    bCaminosDisponibles.setActionCommand( CAMINOSDISPONIBLES );
 	    bCaminosDisponibles.addActionListener( this );
 	    this.add( bCaminosDisponibles );

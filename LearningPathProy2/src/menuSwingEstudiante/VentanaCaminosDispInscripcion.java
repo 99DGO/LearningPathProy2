@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import controllers.Inscriptor;
 import menuSwing.JComponentCaminosDisponibles;
@@ -23,7 +25,7 @@ public class VentanaCaminosDispInscripcion extends JFrame implements ActionListe
 	private JComponentCaminosDisponibles lCaminosDisp;
 	
 	private JPanel pInscripcion;
-	private JTextField txtNombreCamino;
+	private JLabel lNombreCamino;
 	
 	private JButton bRegresar;
 	private static final String REGRESAR="regresar";
@@ -40,7 +42,7 @@ public class VentanaCaminosDispInscripcion extends JFrame implements ActionListe
 		this.setLayout(new BorderLayout());
 		
 		//Añado label de los caminos
-		lCaminosDisp= new JComponentCaminosDisponibles();
+		lCaminosDisp= new JComponentCaminosDisponibles(this);
 		this.add(lCaminosDisp, BorderLayout.CENTER);
 		lCaminosDisp.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
@@ -49,15 +51,14 @@ public class VentanaCaminosDispInscripcion extends JFrame implements ActionListe
 		pInscripcion.setLayout(new BoxLayout(pInscripcion, BoxLayout.Y_AXIS) );
 		
 	    //Nombre de camino 
-		txtNombreCamino = new JTextField( 15 );
-		txtNombreCamino.setEditable( true );
+		lNombreCamino = new JLabel("");
     	
-    	JLabel nombreCaminoLabel= new JLabel("Camino que te deseas inscribir: ");
+    	JLabel tagLabel= new JLabel("Camino que te deseas inscribir: ");
 
     	JPanel panelNombreCamino= new JPanel();
     	panelNombreCamino.setLayout(new FlowLayout(FlowLayout.CENTER));
-    	panelNombreCamino.add(nombreCaminoLabel);
-    	panelNombreCamino.add(txtNombreCamino);
+    	panelNombreCamino.add(tagLabel);
+    	panelNombreCamino.add(lNombreCamino);
     	
     	pInscripcion.add(panelNombreCamino);
     	panelNombreCamino.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -102,20 +103,35 @@ public class VentanaCaminosDispInscripcion extends JFrame implements ActionListe
         }
         else if(comando.equals( INSCRIBIR ))
         {
-			try
-			{
-				String idCamino = TraductorCamino.getIDfromNombre(txtNombreCamino.getText());
+        	String idCamino = null;
+        	
+        	if (!(lNombreCamino.getText().equals("")))
+        	{
+    			try
+    			{
+    				idCamino = TraductorCamino.getIDfromNombre(lNombreCamino.getText());
 
-				Inscriptor.inscribirseCamino(idCamino, idEstudiante);
+    				Inscriptor.inscribirseCamino(idCamino, idEstudiante);
 
-				JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente");
-	
-			}
-			catch (Exception e1)
-			{
-        		JOptionPane.showMessageDialog(null, e1.getMessage());
-			}
+    				JOptionPane.showMessageDialog(null, "Usuario inscrito exitosamente");
+    	
+    			}
+    			catch (Exception e1)
+    			{
+            		JOptionPane.showMessageDialog(null, e1.getMessage());
+    			}
+        	}
+        	else
+        	{
+        		JOptionPane.showMessageDialog(null, "No se ha escogido un camino");
+        	}
         }
+		
+	}
+
+	public void changeLblCaminoSeleccionado(String nombreCamino) 
+	{
+		lNombreCamino.setText(nombreCamino);
 		
 	}
 }

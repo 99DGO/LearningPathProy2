@@ -55,7 +55,7 @@ public class VentanaMenuEstudiante extends JFrame
 	{
         if( ventAvances == null || !ventAvances.isVisible( ) )
         {
-        	ventAvances = new VentanaAvancesEstudiante();
+        	ventAvances = new VentanaAvancesEstudiante(idEstudiante);
         	ventAvances.setVisible( true );
         }
 		

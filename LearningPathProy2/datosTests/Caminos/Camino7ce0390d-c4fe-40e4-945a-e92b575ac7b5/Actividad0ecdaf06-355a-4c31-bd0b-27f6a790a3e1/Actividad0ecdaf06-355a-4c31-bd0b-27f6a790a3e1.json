@@ -1,5 +1,33 @@
 {
- "envio": [
+ "descripcion": "Esto es un quiz donde te preguntan que tipo de variable es más indicado",
+ "calificacionMin": 3,
+ "ratingsTotales": 0,
+ "actividadesSigExitoso": [],
+ "actividadesPrereqs": [],
+ "rating": 0,
+ "datosEstudiantes": [
+  "DatoEstudiante_78681b69-168e-44e5-8e57-6704c2e215b1",
+  "DatoEstudiante_9763473f-863d-4932-ab06-225ac053efd2"
+ ],
+ "resenias": [],
+ "type": "Quiz",
+ "nombre": "Quiz de asignación variables",
+ "fechaLim": [
+  0,
+  1,
+  0
+ ],
+ "verdaderoFalso": false,
+ "objetivos": [
+  "Saber que es un int",
+  "Saber que es un double",
+  "Saber que es un float"
+ ],
+ "actividadesSigFracaso": [],
+ "duracion": 15,
+ "obligatoria": false,
+ "creadorID": "Profesor-KakashiCentralPersistenciaTest",
+ "preguntas": [
   {
    "textoPregunta": "Si quiero representar el número de vacas que tengo, que tipo de variable debería usar?",
    "opciones": [
@@ -28,7 +56,6 @@
      "numOpcion": 4
     }
    ],
-   "respuestaUsuario": 4,
    "respuesta": 1,
    "cantidadOpciones": 4
   },
@@ -60,16 +87,10 @@
      "numOpcion": 4
     }
    ],
-   "respuestaUsuario": 2,
    "respuesta": 2,
    "cantidadOpciones": 4
   }
  ],
- "IDEstudiante": "Estudiante-Trey999",
- "estado": "No exitoso",
- "calificacion": 2.5,
- "fechaInicio": "Thu Dec 05 16:55:40 COT 2024",
- "fechaFinal": "Thu Dec 05 16:55:40 COT 2024",
- "id": "DatoEstudiante_70a285eb-4f46-4726-bbc9-bad560e2dfaf",
- "type": "DatosQuiz"
+ "id": "Actividad0ecdaf06-355a-4c31-bd0b-27f6a790a3e1",
+ "dificultad": 1.5
 }

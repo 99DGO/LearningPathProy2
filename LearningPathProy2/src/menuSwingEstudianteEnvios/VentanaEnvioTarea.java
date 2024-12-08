@@ -59,7 +59,7 @@ public class VentanaEnvioTarea extends VentanaRealizarEnvio
 			lblInstrucciones.setText(instrucciones);
 			pActividad.add(lblInstrucciones);	
 						
-
+			//Metodo de entrega
 			txtMetodoEntrega = new JTextField( 15 );
 			txtMetodoEntrega.setEditable( true );
 	    	

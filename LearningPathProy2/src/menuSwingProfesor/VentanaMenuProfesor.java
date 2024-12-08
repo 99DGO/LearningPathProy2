@@ -5,14 +5,15 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 import menuSwingEstudiante.PanelBotonesMenuEstudiante;
+import menuSwingEstudiante.VentanaCaminosDispInscripcion;
 
 public class VentanaMenuProfesor extends JFrame
 {
 	private String idProfesor;
-	
-	private String idEstudiante;
-	
+		
 	private PanelBotonesMenuProfesor pBotones;
+	
+	private VentanaCaminosDisp ventCaminosDisp;
 	
 	public VentanaMenuProfesor( String idProfesorP)
 	{
@@ -30,5 +31,15 @@ public class VentanaMenuProfesor extends JFrame
         setLocationRelativeTo( null );
         setVisible( true );
 
+	}
+
+	public void mostrarVentanaCaminosDisponibles() 
+	{
+		if( ventCaminosDisp == null || !ventCaminosDisp.isVisible( ) )
+        {
+        	ventCaminosDisp = new VentanaCaminosDisp();
+        	ventCaminosDisp.setVisible( true );
+        }
+		
 	}
 }

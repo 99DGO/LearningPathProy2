@@ -41,7 +41,7 @@ public class VentanaCaminosDispInscripcion extends JFrame implements ActionListe
 		
 		this.setLayout(new BorderLayout());
 		
-		//Añado label de los caminos
+		//Añado componente de los caminos
 		lCaminosDisp= new JComponentCaminosDisponibles(this);
 		this.add(lCaminosDisp, BorderLayout.CENTER);
 		lCaminosDisp.setAlignmentX(Component.CENTER_ALIGNMENT);

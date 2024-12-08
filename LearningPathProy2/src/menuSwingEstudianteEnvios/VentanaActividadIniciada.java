@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import caminosActividades.Actividad;
+import menuSwingEstudiante.VentanaAvancesEstudiante;
 
 public class VentanaActividadIniciada extends JFrame implements ActionListener
 {
@@ -28,6 +29,8 @@ public class VentanaActividadIniciada extends JFrame implements ActionListener
 	private String idActividad;
 	private String idEstudiante;
 	
+	private VentanaRealizarEnvio ventRealizarEnvio=null;
+
 	public VentanaActividadIniciada(String idCamino, String idActividad, String idEstudiante)
 	{
 		this.idCamino=idCamino;
@@ -93,7 +96,43 @@ public class VentanaActividadIniciada extends JFrame implements ActionListener
 		
 		if (typeActividad.equals(Actividad.ACTIVIDADRECURSO))
 		{
-			
+	        if( ventRealizarEnvio == null || !ventRealizarEnvio.isVisible( ) )
+	        {
+	        	ventRealizarEnvio = new VentanaEnvioAR(idEstudiante, idActividad, idCamino);
+	        	ventRealizarEnvio.setVisible( true );
+	        }
+		}
+		else if (typeActividad.equals(Actividad.EXAMEN))
+		{
+	        if( ventRealizarEnvio == null || !ventRealizarEnvio.isVisible( ) )
+	        {
+	        	ventRealizarEnvio = new VentanaEnvioExamen(idEstudiante, idActividad, idCamino);
+	        	ventRealizarEnvio.setVisible( true );
+	        }
+		}
+		else if (typeActividad.equals(Actividad.ENCUESTA))
+		{
+	        if( ventRealizarEnvio == null || !ventRealizarEnvio.isVisible( ) )
+	        {
+	        	ventRealizarEnvio = new VentanaEnvioExamen(idEstudiante, idActividad, idCamino);
+	        	ventRealizarEnvio.setVisible( true );
+	        }
+		}
+		else if (typeActividad.equals(Actividad.QUIZ))
+		{
+	        if( ventRealizarEnvio == null || !ventRealizarEnvio.isVisible( ) )
+	        {
+	        	ventRealizarEnvio = new VentanaEnvioQuiz(idEstudiante, idActividad, idCamino);
+	        	ventRealizarEnvio.setVisible( true );
+	        }
+		}
+		else
+		{
+	        if( ventRealizarEnvio == null || !ventRealizarEnvio.isVisible( ) )
+	        {
+	        	ventRealizarEnvio = new VentanaEnvioTarea(idEstudiante, idActividad, idCamino);
+	        	ventRealizarEnvio.setVisible( true );
+	        }
 		}
 		
 	}

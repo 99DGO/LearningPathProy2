@@ -11,7 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import menuSwingEstudianteEnvios.VentanaActividadIniciada;
 import persistencia.CentralPersistencia;
+import traductores.TraductorActividad;
+import traductores.TraductorCamino;
+import traductores.TraductorEstudiante;
 
 public class VentanaMenuEstudiante extends JFrame
 {
@@ -19,6 +23,7 @@ public class VentanaMenuEstudiante extends JFrame
 
 	private VentanaCaminosDispInscripcion ventCaminosDisp=null;
 	private VentanaAvancesEstudiante ventAvances=null;
+	private VentanaActividadIniciada ventActividadIniciada=null;
 	
 	private String idEstudiante;
 	
@@ -64,7 +69,34 @@ public class VentanaMenuEstudiante extends JFrame
 
 	public void mostrarVentanaActividadEnvio() 
 	{
-		// TODO Auto-generated method stub
+		try 
+		{
+			boolean isActActiva=TraductorEstudiante.isActividadActiva(idEstudiante);
+			if (isActActiva)
+			{
+		        if( ventActividadIniciada == null || !ventActividadIniciada.isVisible( ) )
+		        {
+					String actividad = TraductorEstudiante.verActividadActiva(idEstudiante);
+
+		        	String[] actividadAll = actividad.split(";");
+					String nombreActividad = actividadAll[0];
+					String nombreCamino = actividadAll[2];
+					String idCamino = TraductorCamino.getIDfromNombre(nombreCamino);
+					String idActividad = TraductorActividad.getIDfromNombre(idCamino, nombreActividad);
+					
+		        	ventActividadIniciada = new VentanaActividadIniciada(idCamino, idActividad, idEstudiante);
+		        	ventActividadIniciada.setVisible( true );
+		        }
+			}
+			else 
+			{
+	    		JOptionPane.showMessageDialog(null, "No hay una actividad iniciada");
+			}
+		}
+		catch (Exception e)
+		{
+    		JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+		}
 		
 	}
     

@@ -17,10 +17,10 @@ public class VentanaActividadIniciada extends JFrame implements ActionListener
 	private JPanel pBotones;
 	
 	private JButton bRegresar;
-	public static final String REGRESAR="Salir";
+	public static final String REGRESAR="Regresar";
 
 	private JButton bRealizarEnvio;
-	public static final String REALIZARENVIO="Salir";
+	public static final String REALIZARENVIO="Realizar envio";
 
 	private String idCamino;
 	private String idActividad;
@@ -46,22 +46,22 @@ public class VentanaActividadIniciada extends JFrame implements ActionListener
 		pBotones= new JPanel();
 		pBotones.setLayout(new BoxLayout(pBotones, BoxLayout.Y_AXIS ) );
 
-        bRegresar = new JButton( "Regresar" );
-        bRegresar.setActionCommand( REGRESAR );
-        bRegresar.addActionListener( this );
-        pBotones.add( bRegresar );
-        bRegresar.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
         bRealizarEnvio = new JButton( "Realizar envio" );
         bRealizarEnvio.setActionCommand( REALIZARENVIO );
         bRealizarEnvio.addActionListener( this );
         pBotones.add( bRealizarEnvio );
         bRealizarEnvio.setAlignmentX(Component.CENTER_ALIGNMENT);
         
+        bRegresar = new JButton( "Regresar" );
+        bRegresar.setActionCommand( REGRESAR );
+        bRegresar.addActionListener( this );
+        pBotones.add( bRegresar );
+        bRegresar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
         this.add(pBotones, BorderLayout.SOUTH);
 		
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{

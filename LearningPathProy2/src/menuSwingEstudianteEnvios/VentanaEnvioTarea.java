@@ -23,6 +23,9 @@ public class VentanaEnvioTarea extends VentanaRealizarEnvio
 	{
 		super(idEstudiante, idActividad, idCamino);
 		addActividadPanelInfo();
+		
+	    setTitle( "Learning Path System: Completar tarea" );
+        setVisible( true );
 	}
 
 	@Override

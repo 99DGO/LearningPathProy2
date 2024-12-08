@@ -36,6 +36,9 @@ public abstract class VentanaRealizarEnvio extends JFrame implements ActionListe
 		pActividad = new JPanel();
 		pActividad.setLayout(new BoxLayout(pActividad, BoxLayout.Y_AXIS ) );
 		
+        setDefaultCloseOperation( EXIT_ON_CLOSE );
+        setSize( 400, 400 );
+        setLocationRelativeTo( null );		
 	}
 	
 	private void addPBotones()

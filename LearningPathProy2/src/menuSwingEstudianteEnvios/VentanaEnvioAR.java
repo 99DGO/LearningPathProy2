@@ -19,6 +19,9 @@ public class VentanaEnvioAR extends VentanaRealizarEnvio
 	{
 		super(idEstudiante, idActividad, idCamino);
 		addActividadPanelInfo();
+		
+	    setTitle( "Learning Path System: Completar actividad de recurso" );
+        setVisible( true );
 	}
 
 	@Override

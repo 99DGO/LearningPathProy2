@@ -87,7 +87,7 @@ public class PanelActividadInfo extends JPanel
 		}
 	}
 	
-	private String getTipoActividad()
+	public String getTipoActividad()
 	{
 		return infoActividad.get("Tipo de actividad: ");
 	}

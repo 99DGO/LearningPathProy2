@@ -22,6 +22,9 @@ public class VentanaEnvioEncuesta extends VentanaRealizarEnvio
 	{
 		super(idEstudiante, idActividad, idCamino);
 		addActividadPanelInfo();
+		
+	    setTitle( "Learning Path System: Completar encuesta" );
+        setVisible( true );
 	}
 
 	public void guardarRespuestas()

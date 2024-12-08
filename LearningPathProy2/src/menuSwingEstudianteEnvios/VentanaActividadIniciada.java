@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import caminosActividades.Actividad;
+
 public class VentanaActividadIniciada extends JFrame implements ActionListener
 {
 	private PanelActividadInfo pActividad;
@@ -39,6 +41,13 @@ public class VentanaActividadIniciada extends JFrame implements ActionListener
 		this.add(pActividad, BorderLayout.CENTER);
 		
 		addPBotones();
+		
+        // Termina de configurar la ventana
+        setTitle( "Learning Path System: Actividad iniciada" );
+        setDefaultCloseOperation( EXIT_ON_CLOSE );
+        setSize( 400, 400 );
+        setLocationRelativeTo( null );
+        setVisible( true );
 	}
 	
 	private void addPBotones()
@@ -80,7 +89,12 @@ public class VentanaActividadIniciada extends JFrame implements ActionListener
 
 	private void abrirVentanaEnvio() 
 	{
-		// TODO Auto-generated method stub
+		String typeActividad = pActividad.getTipoActividad();
+		
+		if (typeActividad.equals(Actividad.ACTIVIDADRECURSO))
+		{
+			
+		}
 		
 	}
 	

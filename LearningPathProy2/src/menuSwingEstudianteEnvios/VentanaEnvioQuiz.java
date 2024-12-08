@@ -8,7 +8,9 @@ public class VentanaEnvioQuiz extends VentanaRealizarEnvio
 	public VentanaEnvioQuiz(String idEstudiante, String idActividad, String idCamino)
 	{
 		super(idEstudiante, idActividad, idCamino);
-		// TODO Auto-generated constructor stub
+		
+	    setTitle( "Learning Path System: Completar quiz" );
+        setVisible( true );
 	}
 
 	@Override

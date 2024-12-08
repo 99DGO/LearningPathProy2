@@ -1,4 +1,4 @@
-package menuSwingProfesor;
+package menuSwingProfesorCreadores;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 
 import creadores.CreadorCamino;
 
@@ -27,10 +28,10 @@ public class VentanaCreacionCamino extends JFrame implements ActionListener
 	private JPanel pInfoCamino;
 	
 	private JButton bRegresar;
-	private static final String REGRESAR="regresar";
+	public static final String REGRESAR="regresar";
 	
 	private JButton bCrearCamino;
-	private static final String CREARCAMINO="crear camino";
+	public static final String CREARCAMINO="crear camino";
 		
 	private String idProfesor;
 	
@@ -39,9 +40,9 @@ public class VentanaCreacionCamino extends JFrame implements ActionListener
 	private JTextField txtDificultad;
 		
 	private JComboBox<Integer> ccbNumObjetivos;
-	private static final String NUMOBJETIVOS="numero objetivos";
+	public static final String NUMOBJETIVOS="numero objetivos";
 	
-	private JPanel pObjetivos = new JPanel();
+	private PanelObjetivos pObjetivos; 
 	
 	private List<String> lstObjetivos=new LinkedList<String>();
 	
@@ -88,6 +89,7 @@ public class VentanaCreacionCamino extends JFrame implements ActionListener
 	{
 		pInfoCamino = new JPanel();
 		pInfoCamino.setLayout(new BoxLayout(pInfoCamino, BoxLayout.Y_AXIS ) );
+		pInfoCamino.setBorder( new TitledBorder( "Informacion del camino" ) );
         
         //Titulo 
         txtTitulo = new JTextField( 30 );
@@ -131,26 +133,8 @@ public class VentanaCreacionCamino extends JFrame implements ActionListener
     	pInfoCamino.add(pDificultad);
     	pDificultad.setAlignmentX(Component.CENTER_ALIGNMENT);
        	
-    	//Panel numero de objetivos
-    	JPanel pNumObjetivos= new JPanel();
-
-    	JLabel lblObjetivos= new JLabel("Número de objetivos: ");
-
-    	Integer[] numeroObjetivos = new Integer[]{1,2,3,4,5,6,7,8,9,10};
-    	ccbNumObjetivos=new JComboBox<Integer>(numeroObjetivos);
-    	ccbNumObjetivos.setEnabled(true);
-    	ccbNumObjetivos.addActionListener(this);
-    	ccbNumObjetivos.setActionCommand( NUMOBJETIVOS );
-    	
-    	pNumObjetivos.setLayout(new FlowLayout(FlowLayout.CENTER));
-    	pNumObjetivos.add(lblObjetivos);
-    	pNumObjetivos.add(ccbNumObjetivos);
-       	
-    	pInfoCamino.add(pNumObjetivos);
-    	pNumObjetivos.setAlignmentX(Component.CENTER_ALIGNMENT);
-    	
     	//Panel objetivos
-    	pObjetivos.setLayout(new BoxLayout(pObjetivos, BoxLayout.Y_AXIS ) );
+    	pObjetivos= new PanelObjetivos(this);
     	pInfoCamino.add(pObjetivos);
     	
         //Add el panel
@@ -171,7 +155,7 @@ public class VentanaCreacionCamino extends JFrame implements ActionListener
         {
         	try 
         	{
-        		guardarObjetivos();
+        		pObjetivos.guardarObjetivos(lstObjetivos);
 				CreadorCamino.crearCaminoCero(txtTitulo.getText(), txtDescripcion.getText(), lstObjetivos, 
 						Double.valueOf(txtDificultad.getText()), idProfesor);
 				
@@ -185,47 +169,10 @@ public class VentanaCreacionCamino extends JFrame implements ActionListener
         }
         else if (comando.equals(NUMOBJETIVOS))
         {
-        	mostrarPanelObjetivos();
+        	pObjetivos.mostrarPanelObjetivos();
         }
 	}
 
-	private void guardarObjetivos() 
-	{
-		for (Component pObjetivoInd : pObjetivos.getComponents())
-		{
-			Component[] lblObjTxtObjetivo = ((JPanel) pObjetivoInd).getComponents();
-			String strObjetivo = ((JTextField) lblObjTxtObjetivo[1]).getText();
-			
-			lstObjetivos.add(strObjetivo);
-		}
-	}
 
-	private void mostrarPanelObjetivos() 
-	{
-		pObjetivos.setVisible(false);
 
-    	pObjetivos.removeAll();
-
-		Integer numObjetivos=(Integer) ccbNumObjetivos.getSelectedItem();
-		
-		for (int i = 1; i < numObjetivos+1; i++) 
-		{
-			JTextField txtObjetivo = new JTextField( 25 );
-			txtObjetivo.setEditable( true );
-	    	
-	    	JLabel lblObjetivo= new JLabel("Objetivo "+String.valueOf(i)+": ");
-
-	    	JPanel pObjetivoInd= new JPanel();
-	    	pObjetivoInd.setLayout(new FlowLayout(FlowLayout.CENTER));
-	    	pObjetivoInd.add(lblObjetivo);
-	    	pObjetivoInd.add(txtObjetivo);
-	    	
-	    	pObjetivos.add(pObjetivoInd);
-	    	pObjetivoInd.setAlignmentX(Component.CENTER_ALIGNMENT);
-		}
-		
-		pObjetivos.setVisible(true);
-		
-		
-	}
 }

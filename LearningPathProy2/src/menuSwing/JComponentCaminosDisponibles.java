@@ -40,7 +40,7 @@ public class JComponentCaminosDisponibles extends JPanel implements ListSelectio
         setBorder( new TitledBorder( "Caminos Disponibles" ) );
         setLayout( new BorderLayout( ) );
 
-        // Crea la lista con un modelo de datos en el que puede haber sólo restaurantes
+        // Crea la lista con un modelo de datos 
         dataModel = new DefaultListModel<>( );
         dataModel.addAll( crearListStringCaminos() );
         

@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
+import menuSwingProfesorCreadores.VentanaCreacionCamino;
+
 
 public class VentanaMenuProfesor extends JFrame
 {
@@ -13,6 +15,8 @@ public class VentanaMenuProfesor extends JFrame
 	
 	private VentanaCaminosDisp ventCaminosDisp;
 	private VentanaCreacionCamino ventCrearCamino;
+	private VentanaCaminosCreados ventCaminosCreados;
+
 	
 	public VentanaMenuProfesor( String idProfesorP)
 	{
@@ -38,6 +42,16 @@ public class VentanaMenuProfesor extends JFrame
         {
         	ventCaminosDisp = new VentanaCaminosDisp();
         	ventCaminosDisp.setVisible( true );
+        }
+		
+	}
+	
+	public void mostrarVentanaCaminosCreados() 
+	{
+		if( ventCaminosCreados == null || !ventCaminosCreados.isVisible( ) )
+        {
+			ventCaminosCreados = new VentanaCaminosCreados(idProfesor);
+			ventCaminosCreados.setVisible( true );
         }
 		
 	}

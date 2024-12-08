@@ -149,7 +149,6 @@ public class VentanaRegistrarUsuario extends JFrame implements ActionListener
      */
     public int getTipoUsuario( )
     {
-        // TODO completar :)
     	if (ccbTipoUsuario.getSelectedItem( ).equals("Estudiante"))
     	{
     		return 1;

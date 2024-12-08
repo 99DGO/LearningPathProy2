@@ -21,6 +21,9 @@ public class PanelBotonesMenuProfesor extends JPanel implements ActionListener
 	private JButton bSalir;
 	public static final String SALIR="salir";
 	
+	private JButton bCrearCamino;
+	public static final String CREARCAMINO="creacion camino";
+	
 	private VentanaMenuProfesor ventMenuProf;
 
 	public PanelBotonesMenuProfesor(VentanaMenuProfesor ventana)
@@ -35,6 +38,12 @@ public class PanelBotonesMenuProfesor extends JPanel implements ActionListener
 	    bCaminosDisponibles.addActionListener( this );
 	    this.add( bCaminosDisponibles );
 	    bCaminosDisponibles.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    
+	    bCrearCamino = new JButton( "Crear un camino" );
+	    bCrearCamino.setActionCommand( CREARCAMINO );
+	    bCrearCamino.addActionListener( this );
+	    this.add( bCrearCamino );
+	    bCrearCamino.setAlignmentX(Component.CENTER_ALIGNMENT);
 	    
 	    bSalir = new JButton( "Salir" );
 	    bSalir.setActionCommand( SALIR );
@@ -65,6 +74,10 @@ public class PanelBotonesMenuProfesor extends JPanel implements ActionListener
         else if (comando.equals(CAMINOSDISPONIBLES))
         {
         	ventMenuProf.mostrarVentanaCaminosDisponibles();
+        }
+        else if (comando.equals(CREARCAMINO))
+        {
+        	ventMenuProf.mostrarVentanaCreacionCamino();
         }
 
 	}

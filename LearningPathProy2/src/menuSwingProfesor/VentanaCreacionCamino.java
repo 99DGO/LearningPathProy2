@@ -17,12 +17,15 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import creadores.CreadorCamino;
 
 public class VentanaCreacionCamino extends JFrame implements ActionListener
 {
+	private JPanel pInfoCamino;
+	
 	private JButton bRegresar;
 	private static final String REGRESAR="regresar";
 	
@@ -83,11 +86,11 @@ public class VentanaCreacionCamino extends JFrame implements ActionListener
 	
 	private void addPInfoCamino()
 	{
-		JPanel pInfoCamino = new JPanel();
+		pInfoCamino = new JPanel();
 		pInfoCamino.setLayout(new BoxLayout(pInfoCamino, BoxLayout.Y_AXIS ) );
         
         //Titulo 
-        txtTitulo = new JTextField( 15 );
+        txtTitulo = new JTextField( 30 );
         txtTitulo.setEditable( true );
     	
     	JLabel lblTitulo= new JLabel("Titulo: ");
@@ -101,7 +104,7 @@ public class VentanaCreacionCamino extends JFrame implements ActionListener
     	pTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
     	
     	//Descripcion
-        txtDescripcion = new JTextField( 15 );
+        txtDescripcion = new JTextField( 30 );
         txtDescripcion.setEditable( true );
     	
     	JLabel lblDescripcion= new JLabel("Descripcion: ");
@@ -147,6 +150,7 @@ public class VentanaCreacionCamino extends JFrame implements ActionListener
     	pNumObjetivos.setAlignmentX(Component.CENTER_ALIGNMENT);
     	
     	//Panel objetivos
+    	pObjetivos.setLayout(new BoxLayout(pObjetivos, BoxLayout.Y_AXIS ) );
     	pInfoCamino.add(pObjetivos);
     	
         //Add el panel
@@ -167,6 +171,7 @@ public class VentanaCreacionCamino extends JFrame implements ActionListener
         {
         	try 
         	{
+        		guardarObjetivos();
 				CreadorCamino.crearCaminoCero(txtTitulo.getText(), txtDescripcion.getText(), lstObjetivos, 
 						Double.valueOf(txtDificultad.getText()), idProfesor);
 				
@@ -184,9 +189,43 @@ public class VentanaCreacionCamino extends JFrame implements ActionListener
         }
 	}
 
+	private void guardarObjetivos() 
+	{
+		for (Component pObjetivoInd : pObjetivos.getComponents())
+		{
+			Component[] lblObjTxtObjetivo = ((JPanel) pObjetivoInd).getComponents();
+			String strObjetivo = ((JTextField) lblObjTxtObjetivo[1]).getText();
+			
+			lstObjetivos.add(strObjetivo);
+		}
+	}
+
 	private void mostrarPanelObjetivos() 
 	{
+		pObjetivos.setVisible(false);
+
+    	pObjetivos.removeAll();
+
 		Integer numObjetivos=(Integer) ccbNumObjetivos.getSelectedItem();
+		
+		for (int i = 1; i < numObjetivos+1; i++) 
+		{
+			JTextField txtObjetivo = new JTextField( 25 );
+			txtObjetivo.setEditable( true );
+	    	
+	    	JLabel lblObjetivo= new JLabel("Objetivo "+String.valueOf(i)+": ");
+
+	    	JPanel pObjetivoInd= new JPanel();
+	    	pObjetivoInd.setLayout(new FlowLayout(FlowLayout.CENTER));
+	    	pObjetivoInd.add(lblObjetivo);
+	    	pObjetivoInd.add(txtObjetivo);
+	    	
+	    	pObjetivos.add(pObjetivoInd);
+	    	pObjetivoInd.setAlignmentX(Component.CENTER_ALIGNMENT);
+		}
+		
+		pObjetivos.setVisible(true);
+		
 		
 	}
 }
